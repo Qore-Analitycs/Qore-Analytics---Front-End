@@ -1,0 +1,25 @@
+:root {
+    /* CORES */
+    --laranja: #E87A11;
+    --cor-fundo: #E5E8ED;
+    --cinza-escuro: #2D3133;
+    --branco: #FFFFFF;
+    --verde: #2D672D;
+    --vermelho: #FF0000;
+    --btn-login-alternativo: #20262C;
+    --cor-card: linear-gradient(110deg, #E8EAED 0%, #F3F0EF 52%, #FEF7F0 100%);
+
+    /* FONTES */
+    --fonte-pequena: 12px;
+    --fonte-padrao: 16px;
+    --fonte-subtitulo: 24px;
+    --fonte-titulo: 48px;
+
+    /* PESO DAS FONTES */
+    --peso-normal: 400;
+    --peso-semibold: 600;
+    --peso-bold: 700;
+
+    /* SOBRA BOX SHADOW */
+    --sombra: box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.20);
+}
