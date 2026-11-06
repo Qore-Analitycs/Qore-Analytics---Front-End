@@ -1,0 +1,100 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Base de todos os botões: Largura 100% responsiva e Altura fixa de 50px */
+.botao {
+    width: 100%;
+    height: 50px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 6px;
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-subtitulo);
+    font-weight: var(--peso-semibold);
+    cursor: pointer;
+    transition: filter 0.2s ease, transform 0.1s ease, background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 12px;
+}
+
+/* Quando o botão tem ícone (ex: Compartilhar / Vídeo.mp4), posiciona o ícone à esquerda */
+.icone {
+    position: absolute;
+    left: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.botao:hover {
+    filter: brightness(0.95);
+}
+
+.botao:active {
+    transform: scale(0.99);
+}
+
+.botao:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* =========================================================
+   VARIANTES DOS BOTÕES DO SISTEMA (Baseadas nas imagens)
+   ========================================================= */
+
+/* 1. Laranja Sólido ("Entrar", "Nova Execução", "Buscar", "Vídeo.(mp4)") */
+.laranja {
+    background-color: var(--laranja);
+    color: var(--branco);
+    box-shadow: var(--sombra);
+}
+
+/* 2. Branco com Sombra ("Compartilhar", "Gerar Relatório") */
+.branco {
+    background-color: var(--branco);
+    color: var(--cinza-escuro);
+    box-shadow: var(--sombra);
+}
+
+/* 3. Borda Laranja Vazado ("Cancelar") */
+.cancelar {
+    background-color: transparent;
+    color: var(--laranja);
+    border: 2px solid var(--laranja);
+}
+
+/* 4. Laranja Claro com Borda ("Assinar Roteiro") */
+.assinar {
+    background-color: #FFE8CC;
+    color: var(--laranja);
+    border: 2px solid var(--laranja);
+    border-radius: 10px;
+}
+
+/* Outras cores das constantes do projeto caso precise */
+.alternativo {
+    background-color: var(--btn-login-alternativo);
+    color: var(--branco);
+    box-shadow: var(--sombra);
+}
+
+.verde {
+    background-color: var(--verde);
+    color: var(--branco);
+    box-shadow: var(--sombra);
+}
+
+.vermelho {
+    background-color: var(--vermelho);
+    color: var(--branco);
+    box-shadow: var(--sombra);
+}
