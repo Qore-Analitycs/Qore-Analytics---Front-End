@@ -1,4 +1,12 @@
+
+import { useState } from "react";
+import ModalUsuario from "../components/usuario/ModalUsuario";
+
 export default function Home() {
+
+  // Controla se o modal está aberto.
+  const [modalAberto, setModalAberto] = useState(true);
+
   return (
     <main
       style={{
@@ -6,24 +14,30 @@ export default function Home() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "#E5E8ED",
-        fontFamily: "Arial, sans-serif",
+        backgroundColor: "#E99500",
       }}
     >
-      <section style={{ textAlign: "center" }}>
-        <h1 style={{ color: "#2D3133" }}>
-          Qore Analytics
-        </h1>
 
-        <p style={{ color: "#555" }}>
-          Plataforma de monitoramento e análise
-          de qualidade de software.
-        </p>
+      {/* Componente de cadastro de usuário */}
+      <ModalUsuario
+        aberto={modalAberto}
+        onFechar={() => setModalAberto(false)}
+      />
 
-        <p style={{ color: "#2D672D" }}>
-          Front-End iniciado com sucesso!
-        </p>
-      </section>
+      {/* Botão que permite abrir novamente */}
+      {!modalAberto && (
+        <button
+          onClick={() => setModalAberto(true)}
+          style={{
+            padding: "12px 24px",
+            border: "none",
+            cursor: "pointer",
+          }}
+        >
+          Novo usuário
+        </button>
+      )}
+
     </main>
   );
 }
