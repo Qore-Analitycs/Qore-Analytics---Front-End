@@ -1,23 +1,21 @@
-import Botao from '@/components/botao/botao'
-import { faShareNodes, faDownload } from "@fortawesome/free-solid-svg-icons";
-import React from 'react'
-
-
-export default function index() {
+import Input from "@/components/input/input";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+export default function ExemploInputs() {
   return (
-    <>
-        <Botao texto="Entrar" page="/home" />
-      <Botao texto="Buscar" onPress={() => console.log("Buscando...")} />
-      <Botao texto="Nova Execução" />
-      {/* 2. Botões com Ícone à esquerda (Compartilhar / Vídeo.mp4) */}
-      <Botao variante="branco" icone={faShareNodes} texto="Compartilhar" />
-      <Botao variante="laranja" icone={faDownload} texto="Vídeo.(mp4)" />
-      {/* 3. Botão Branco sem ícone (Gerar Relatório) */}
-      <Botao variante="branco" texto="Gerar Relatório" />
-      {/* 4. Botão Vazado (Cancelar) */}
-      <Botao variante="cancelar" texto="Cancelar" />
-      {/* 5. Botão Laranja Claro (Assinar Roteiro) */}
-      <Botao variante="assinar" texto="Assinar Roteiro" />
-    </>
-  )
+    <div style={{ width: "450px", display: "flex", flexDirection: "column", gap: "24px" }}>
+      
+      {/* 1. Imagem 1: Input COM ícone na frente */}
+      <Input
+        label="BUSCA RÁPIDA"
+        placeholder="Buscar..."
+        icone={faMagnifyingGlass}
+      />
+      {/* 2. Imagem 2: Input SEM ícone (basta não passar a prop icone ou usar temIcone={false}) */}
+      <Input
+        label="Url da pull request"
+        placeholder="https://github.com/exemple/Pull...."
+        temIcone={false}
+      />
+    </div>
+  );
 }
