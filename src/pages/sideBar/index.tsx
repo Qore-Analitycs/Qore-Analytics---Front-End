@@ -36,11 +36,15 @@ export default function SideBar() {
             </a>
           </nav>
         </div>
-        <div>
+        <div className={styles.containerPerfil}>
           <hr className={styles.linhaPerfil} />
-          <a href="">
+          <a href="" className={styles.perfilLink}>
             <div className={styles.perfil}>
-              <img src="" alt="" />
+              <img src="" alt="" className={styles.avatarImg}/>
+            </div>
+            <div className={styles.informacoesPerfil}>
+              <h1 className={styles.nomePerfil}>Marina Silva</h1>
+              <h2 className={styles.cargoPerfil}>QA Lead</h2>
             </div>
           </a>
         </div>
