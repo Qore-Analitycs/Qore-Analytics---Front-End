@@ -13,10 +13,13 @@ export type BotaoVariante =
     | "verde"
     | "vermelho";
 
+export type BotaoTamanho = "padrao" | "compacto";
+
 type BotaoProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     page?: string;
     texto?: string;
     variante?: BotaoVariante;
+    tamanho?: BotaoTamanho;
     icone?: IconDefinition;
     onPress?: () => void;
 };
@@ -25,10 +28,12 @@ const Botao = ({
     page,
     texto,
     variante = "laranja",
+    tamanho = "padrao",
     icone,
     onPress,
     onClick,
     children,
+    className,
     ...rest
 }: BotaoProps) => {
     const router = useRouter();
@@ -39,11 +44,13 @@ const Botao = ({
         if (page) router.push(page);
     };
 
+    const classeTamanho = tamanho === "compacto" ? styles.compacto : "";
+
     return (
         <>
             <div className={styles.container}>
                 <button
-                    className={`${styles.botao} ${styles[variante]}`}
+                    className={`${styles.botao} ${styles[variante]} ${classeTamanho} ${className || ""}`}
                     onClick={handleClick}
                     {...rest}
                 >
