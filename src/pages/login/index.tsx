@@ -55,19 +55,28 @@ export default function Login() {
         <section className={styles.ladoEsquerdo}>
           <div className={`${styles.quadrado} ${styles.quadradoLaranja}`}></div>
           <div className={`${styles.quadrado} ${styles.quadradoAzul}`}></div>
-          <div className={styles.superior}>
-            <img src="../imgs/Logo.png" alt="" />
-            <img src="../imgs/NomeCore.png" alt="" />
-          </div>
-          <img src="../imgs/ImagemLogin.png" alt="" />
-          <h1>Automação contínua e inteligência em testes de Web e APIs.</h1>
-          <h2>
-            Orquestração distribuída de suítes ponta a ponta, análise preditiva
-            de flakiness e validação de contratos para equipes de engenharia de
-            missão crítica.
-          </h2>
-        </section>
 
+          <div className={styles.fundoGlass}></div>
+          
+          <div className={styles.superior}>
+            <img src="../imgs/LogoMinimalista.png" alt="Logo QA" />
+            <img src="../imgs/QoreAnalytics.png" alt="Qore Analytics" />
+          </div>
+
+          <div className={styles.conteudoCentro}>
+            <img
+              src="../imgs/ImagemLogin.png"
+              alt="Ilustração de Testes"
+              className={styles.imagemIlustracao}
+            />
+            <h1>Automação contínua e inteligência em testes de Web e APIs.</h1>
+            <h2>
+              Orquestração distribuída de suítes ponta a ponta, análise
+              preditiva de flakiness e validação de contratos para equipes de
+              engenharia de missão crítica.
+            </h2>
+          </div>
+        </section>
         {/* Lado Direito */}
 
         <section className={styles.ladoDireito}>
@@ -86,7 +95,11 @@ export default function Login() {
               onSubmit={loginUsuario}
             >
               <div className={styles.campo}>
-                <Input icone={faEnvelope} label="Email" placeholder="email@email.com" />
+                <Input
+                  icone={faEnvelope}
+                  label="Email"
+                  placeholder="email@email.com"
+                />
                 {erros.email && (
                   <span className={styles.erro}>
                     <i className="fa-solid fa-circle-exclamation"></i>
@@ -96,8 +109,12 @@ export default function Login() {
               </div>
               <div className={styles.campo}>
                 <div>
-
-                  <Input className={styles.inputSenha} icone={faLock} label="Senha" placeholder="••••••••••••••••••••" />
+                  <Input
+                    className={styles.inputSenha}
+                    icone={faLock}
+                    label="Senha"
+                    placeholder="••••••••••••••••••••"
+                  />
                   {erros.senha && (
                     <span className={styles.erro}>
                       <i className="fa-solid fa-circle-exclamation"></i>
