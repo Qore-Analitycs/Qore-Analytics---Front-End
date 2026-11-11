@@ -2,11 +2,20 @@ import React from "react";
 import PromptCenario, {
     DadosPromptCenario,
 } from "@/components/promptCenario/promptCenario";
-import Input from "@/components/input/input";
+import DocumentoGerado from "@/components/documentoGerado/documentoGerado";
+import { PassoValidacao } from "@/components/documentoGerado/types";
 
 export default function TestPage() {
     const handleGerarRoteiro = (dados: DadosPromptCenario) => {
         console.log("Dados enviados pelo PromptCenario:", dados);
+    };
+
+    const handleAssinarRoteiro = (passos: PassoValidacao[]) => {
+        console.log("Roteiro assinado com os passos:", passos);
+    };
+
+    const handleExecutarTesteIA = (passos: PassoValidacao[]) => {
+        console.log("Executando teste com IA usando os passos:", passos);
     };
 
     return (
@@ -20,15 +29,21 @@ export default function TestPage() {
                 alignItems: "center",
             }}
         >
-            <div style={{ width: "100%", maxWidth: "1200px" }}>
-                <PromptCenario onGerarRoteiro={handleGerarRoteiro} />
-                <Input
-                    label="Url da pull request"
-                    placeholder="https://github.com/exemple/Pull...."
-                    temIcone={false}
+            <div
+                style={{
+                    width: "100%",
+                    maxWidth: "1200px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "32px",
+                }}
+            >
+                {/* <PromptCenario onGerarRoteiro={handleGerarRoteiro} /> */}
+                <DocumentoGerado
+                    onAssinarRoteiro={handleAssinarRoteiro}
+                    onExecutarTesteIA={handleExecutarTesteIA}
                 />
             </div>
         </main>
     );
 }
-

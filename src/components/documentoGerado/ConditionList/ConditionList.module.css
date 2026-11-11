@@ -1,0 +1,179 @@
+.secao {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.cabecalhoSecao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.titulo {
+    font-family: "Montserrat", sans-serif;
+    font-size: 22px;
+    font-weight: var(--peso-semibold);
+    color: #0F172A;
+    margin: 0;
+}
+
+.btnAdicionar {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: var(--peso-normal);
+    color: #64748B;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.btnAdicionar:hover {
+    color: var(--laranja);
+    background-color: #FFF4E8;
+}
+
+.listaContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.cartaoItem {
+    width: 100%;
+    background-color: var(--branco);
+    border: 2px solid #D5DCE4;
+    border-radius: 8px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.cartaoItem:hover {
+    background-color: #FAFBFD;
+}
+
+.cartaoEditando {
+    background-color: #FFFBF5 !important;
+    border-color: var(--laranja);
+}
+
+.numero {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: var(--peso-semibold);
+    color: #1E293B;
+    min-width: 20px;
+}
+
+.conteudoCentro {
+    flex: 1;
+}
+
+.textoItem {
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    color: #334155;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.campoEdicaoWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+}
+
+.inputEdicao {
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    color: #1E293B;
+    border: 1.5px solid #CBD5E1;
+    border-radius: 6px;
+    padding: 6px 10px;
+    outline: none;
+    background-color: var(--branco);
+    transition: border-color 0.15s ease;
+}
+
+.inputEdicao:focus {
+    border-color: var(--laranja);
+}
+
+.inputErro {
+    border-color: var(--vermelho);
+}
+
+.textoErro {
+    font-size: var(--fonte-pequena);
+    color: var(--vermelho);
+}
+
+.acoesGrupo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btnIcone {
+    background: transparent;
+    border: none;
+    padding: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #94A3B8;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.btnEditar:hover {
+    color: var(--laranja);
+    background-color: #FFF4E8;
+}
+
+.btnExcluir:hover {
+    color: var(--vermelho);
+    background-color: #FEE2E2;
+}
+
+.btnSalvar {
+    color: var(--verde);
+}
+
+.btnSalvar:hover {
+    background-color: #DCFCE7;
+}
+
+.btnCancelar {
+    color: var(--vermelho);
+}
+
+.btnCancelar:hover {
+    background-color: #FEE2E2;
+}
+
+.estadoVazio {
+    padding: 24px;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    color: #64748B;
+    border: 1px dashed #CBD5E1;
+    border-radius: 8px;
+    background-color: #F8FAFC;
+}
