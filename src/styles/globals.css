@@ -70,6 +70,33 @@ a {
   text-decoration: none;
 }
 
+.assistant-status {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1100;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: #171717;
+  color: #fff;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.22);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.assistant-status__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #41d982;
+  box-shadow: 0 0 0 3px rgba(65, 217, 130, 0.16);
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

@@ -1,0 +1,457 @@
+/* Fundo escurecido atrás do modal */
+.overlay {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 18px;
+
+    background-color: rgba(0, 0, 0, 0.35);
+
+    z-index: 1000;
+}
+
+/* Janela principal */
+.modal {
+    width: min(720px, 100%);
+
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+
+    background-color: #E7E9ED;
+
+    border: 5px solid #F0A000;
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* Coluna esquerda */
+.sidebar {
+    background-color: #D5DAE2;
+
+    padding: 28px 26px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Círculo com a inicial do usuário */
+.avatar {
+    width: 92px;
+    height: 92px;
+
+    border-radius: 50%;
+
+    background-color: #303538;
+    color: #FFFFFF;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 46px;
+    font-weight: 700;
+}
+
+.sidebar h2 {
+    margin: 12px 0 2px;
+
+    font-size: 22px;
+    font-weight: 600;
+
+    color: #000000;
+}
+
+.emailSidebar {
+    margin: 0;
+
+    font-size: 14px;
+    color: #50545A;
+}
+
+/* Identificação e situação do usuário */
+.statusRow {
+    display: flex;
+    gap: 12px;
+
+    margin-top: 14px;
+}
+
+.roleBadge,
+.statusBadge {
+    padding: 5px 12px;
+
+    border-radius: 8px;
+
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.roleBadge {
+    background-color: #FFFFFF;
+    color: #555555;
+
+    border: 1px solid #DDDDDD;
+}
+
+.statusBadge {
+    background-color: transparent;
+    color: #159B50;
+
+    border: 1px solid #159B50;
+}
+
+/* Linha divisória */
+.sidebarDivider {
+    width: 100%;
+
+    margin-top: 20px;
+
+    border-top: 1px solid #A6ADB7;
+}
+
+/* Informações complementares */
+.profileInfo {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    margin-top: 20px;
+}
+
+.metaItem {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.metaItem span {
+    color: #777777;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.metaItem strong {
+    color: #000000;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* Área direita */
+.content {
+    position: relative;
+
+    padding: 26px 26px 22px;
+
+    background-color: #E7E9ED;
+}
+
+/* Botão X */
+.closeButton {
+    position: absolute;
+
+    top: 12px;
+    right: 16px;
+
+    border: none;
+    background: transparent;
+
+    font-size: 30px;
+    font-weight: 600;
+
+    color: #000000;
+
+    cursor: pointer;
+}
+
+/* Pequeno título laranja */
+.eyebrow {
+    margin: 0 0 4px;
+
+    color: #EF7900;
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Título principal */
+.content h1 {
+    margin: 0;
+
+    font-size: 24px;
+    font-weight: 700;
+
+    color: #000000;
+}
+
+/* Formulário */
+.form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin-top: 22px;
+}
+
+/* Agrupamento de label e input */
+.field {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+
+    gap: 5px;
+}
+
+.field label {
+    color: #464646;
+
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* Caixa do input */
+.inputBox {
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 10px;
+
+    background-color: #FFFFFF;
+
+    border: 1px solid #D0D0D0;
+    border-radius: 4px;
+
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+/* Pequeno quadrado colorido */
+.inputMark {
+    width: 13px;
+    height: 13px;
+
+    flex-shrink: 0;
+
+    background-color: #00A6FF;
+}
+
+/* Campo de texto */
+.inputBox input {
+    width: 100%;
+    min-width: 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #333333;
+
+    font-size: 11px;
+}
+
+/* Destaque quando o campo recebe foco */
+.inputBox:focus-within {
+    border-color: #EF7900;
+
+    box-shadow: 0 0 0 2px rgba(239, 121, 0, 0.12);
+}
+
+/* Botão para mostrar ou ocultar senha */
+.passwordToggle {
+    border: none;
+    background: transparent;
+
+    color: #666666;
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+}
+
+/* Título da seção */
+.sectionHeading {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 2px;
+}
+
+.sectionHeading span {
+    color: #777777;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+/* Linha horizontal após o título */
+.sectionHeading::after {
+    content: "";
+
+    flex: 1;
+
+    border-top: 1px solid #B0B0B0;
+}
+
+/* Duas colunas para as novas senhas */
+.twoColumns {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 8px;
+}
+
+/* Texto informativo */
+.formNote {
+    margin: -4px 0 0;
+
+    color: #737373;
+
+    font-size: 10px;
+}
+
+/* Área dos botões */
+.formActions {
+    display: flex;
+
+    gap: 18px;
+
+    margin-top: 2px;
+}
+
+/* Estilo compartilhado */
+.cancelButton,
+.saveButton {
+    flex: 1;
+
+    height: 40px;
+
+    border-radius: 4px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* Cancelar */
+.cancelButton {
+    background-color: transparent;
+
+    border: 1.5px solid #EF7900;
+
+    color: #EF7900;
+}
+
+.cancelButton:hover {
+    background-color: #FFF0E1;
+}
+
+/* Salvar */
+.saveButton {
+    background-color: #EF7900;
+
+    border: 1.5px solid #EF7900;
+
+    color: #FFFFFF;
+}
+
+.saveButton:hover {
+    background-color: #D96800;
+}
+
+/* Mensagens */
+.feedbackError,
+.feedbackSuccess {
+    margin: 0;
+
+    font-size: 11px;
+}
+
+.feedbackError {
+    color: #C62828;
+}
+
+.feedbackSuccess {
+    color: #168344;
+}
+
+@media (max-width: 680px) {
+
+    .overlay {
+        align-items: flex-start;
+
+        overflow-y: auto;
+    }
+
+    .modal {
+        width: 100%;
+        max-width: 500px;
+
+        grid-template-columns: 1fr;
+
+        margin: auto;
+    }
+
+    .sidebar {
+        padding: 22px 20px 16px;
+    }
+
+    .avatar {
+        width: 70px;
+        height: 70px;
+
+        font-size: 36px;
+    }
+
+    .profileInfo {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        margin-top: 16px;
+    }
+
+    .content {
+        padding: 24px 20px 22px;
+    }
+
+}
+
+@media (max-width: 400px) {
+
+    .twoColumns {
+        grid-template-columns: 1fr;
+    }
+
+    .formActions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+}
