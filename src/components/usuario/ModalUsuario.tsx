@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import styles from "./ModalUsuario.module.css";
 
+
 interface ModalUsuarioProps {
     aberto: boolean;
     onFechar: () => void;
