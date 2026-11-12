@@ -28,7 +28,7 @@ const ResultSummary = ({
                             className={`${styles.indicador} ${styles.indicadorLaranja}`}
                             aria-hidden="true"
                         />
-                        <span className={styles.rotulo}>Índice de Execução</span>
+                        <span className={styles.rotulo}>Taxa de Aderência</span>
                     </div>
                     <strong className={styles.valor}>
                         {taxaSucesso}% ({passaram}/{total})
