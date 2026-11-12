@@ -103,31 +103,6 @@ export default function SideBar({
                         />
                     </div>
 
-                    <div className={styles.topoExpandido}>
-                        <span className={styles.marcaTexto}>Qore QA</span>
-                        <button
-                            type="button"
-                            className={styles.btnAlternar}
-                            onClick={handleAlternarFixacao}
-                            title={
-                                fixada
-                                    ? "Recolher barra lateral"
-                                    : "Fixar barra lateral"
-                            }
-                            aria-label={
-                                fixada
-                                    ? "Recolher barra lateral"
-                                    : "Fixar barra lateral"
-                            }
-                            aria-pressed={fixada}
-                        >
-                            {fixada ? (
-                                <PanelLeftClose size={16} />
-                            ) : (
-                                <PanelLeftOpen size={16} />
-                            )}
-                        </button>
-                    </div>
                 </div>
 
                 <nav className={styles.navegacao}>
