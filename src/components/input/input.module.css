@@ -57,6 +57,19 @@
     color: #7A7E82;
 }
 
+/* Variante para textos longos (textarea) mantendo o padrão visual do Input */
+.textareaWrapper {
+    height: auto;
+    min-height: 130px;
+    align-items: flex-start;
+    padding: 14px 16px;
+}
+
+.textarea {
+    resize: none;
+    line-height: 1.5;
+}
+
 /* Estilo caso o Yup retorne erro de validação */
 .inputErro {
     border-color: var(--vermelho);
