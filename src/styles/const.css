@@ -12,10 +12,11 @@
     --fonte-pequena: 12px;
     --fonte-padrao: 16px;
     --fonte-subtitulo: 24px;
-    --fonte-titulo: 48px;
+    --fonte-titulo: 40px;
 
     /* PESO DAS FONTES */
     --peso-normal: 400;
+    --peso-500: 500;
     --peso-semibold: 600;
     --peso-bold: 700;
 

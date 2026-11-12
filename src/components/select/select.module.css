@@ -8,7 +8,7 @@
 .label {
     font-family: "Montserrat", sans-serif;
     font-size: var(--fonte-padrao);
-    font-weight: var(--peso-semibold);
+    font-weight: var(--peso-500);
     color: inherit;
 }
 
@@ -34,7 +34,7 @@
     cursor: pointer;
     font-family: "Montserrat", sans-serif;
     font-size: var(--fonte-padrao);
-    font-weight: var(--peso-semibold);
+    font-weight: var(--peso-500);
     color: var(--cinza-escuro);
     transition: border-radius 0.15s ease;
 }
@@ -45,12 +45,12 @@
 }
 
 .textoSelecionado {
-    font-weight: var(--peso-semibold);
+    font-weight: var(--peso-500);
     color: var(--cinza-escuro);
 }
 
 .placeholder {
-    font-weight: var(--peso-semibold);
+    font-weight: var(--peso-500);
     color: var(--cinza-escuro);
 }
 
@@ -108,7 +108,7 @@
     padding: 12px 18px;
     font-family: "Montserrat", sans-serif;
     font-size: var(--fonte-normal);
-    font-weight: var(--peso-semibold);
+    font-weight: var(--peso-500);
     color: var(--cinza-escuro);
     cursor: pointer;
     transition: background-color 0.15s ease;
@@ -122,5 +122,25 @@
 
 .opcaoSelecionada {
     background-color: var(--cor-fundo);
-    font-weight: var(--peso-semibold);
+    font-weight: var(--peso-500);
+}
+
+/* =========================================================
+   VARIANTE COMPACTA (Para cards, tabelas e barras de ferramentas)
+   ========================================================= */
+
+.triggerCompacto {
+    height: 38px;
+    padding: 0 12px;
+    font-size: 13px;
+    border-radius: 6px;
+}
+
+.triggerCompacto .iconeSeta {
+    font-size: 14px;
+}
+
+.opcaoCompacto {
+    padding: 8px 12px;
+    font-size: 13px;
 }

@@ -15,6 +15,7 @@ type SelectProps = {
     valor?: string;
     onChange?: (novoValor: string) => void;
     disabled?: boolean;
+    tamanho?: "padrao" | "compacto";
 };
 
 const Select = ({
@@ -24,17 +25,14 @@ const Select = ({
     valor,
     onChange,
     disabled = false,
+    tamanho = "padrao",
 }: SelectProps) => {
     const [aberto, setAberto] = useState(false);
-    const [valorInterno, setValorInterno] = useState(valor || "");
+    const [valorInterno, setValorInterno] = useState("");
     const wrapperRef = useRef<HTMLDivElement>(null);
 
-    // Sincroniza caso o valor venha controlado de fora pela página
-    useEffect(() => {
-        if (valor !== undefined) {
-            setValorInterno(valor);
-        }
-    }, [valor]);
+    // Se vier controlado via props 'valor', usa ele; senão usa o estado interno
+    const valorAtual = valor !== undefined ? valor : valorInterno;
 
     // Fecha o dropdown automaticamente se o usuário clicar fora dele
     useEffect(() => {
@@ -53,7 +51,7 @@ const Select = ({
         };
     }, []);
 
-    const opcaoAtual = opcoes.find((op) => op.valor === valorInterno);
+    const opcaoAtual = opcoes.find((op) => op.valor === valorAtual);
 
     const handleSelecionar = (novoValor: string) => {
         setValorInterno(novoValor);
@@ -62,6 +60,11 @@ const Select = ({
         }
         setAberto(false);
     };
+
+    const classeTamanhoTrigger =
+        tamanho === "compacto" ? styles.triggerCompacto : "";
+    const classeTamanhoOpcao =
+        tamanho === "compacto" ? styles.opcaoCompacto : "";
 
     return (
         <>
@@ -75,7 +78,7 @@ const Select = ({
                         disabled={disabled}
                         className={`${styles.selectTrigger} ${
                             aberto ? styles.selectTriggerAberto : ""
-                        }`}
+                        } ${classeTamanhoTrigger}`}
                         onClick={() => setAberto(!aberto)}
                     >
                         <span
@@ -111,7 +114,7 @@ const Select = ({
                                             estaSelecionada
                                                 ? styles.opcaoSelecionada
                                                 : ""
-                                        }`}
+                                        } ${classeTamanhoOpcao}`}
                                         onClick={() =>
                                             handleSelecionar(opcao.valor)
                                         }

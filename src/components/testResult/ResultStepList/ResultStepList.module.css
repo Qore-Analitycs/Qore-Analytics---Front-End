@@ -1,0 +1,196 @@
+.lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.cardPasso {
+    width: 100%;
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.cardSucesso {
+    background-color: var(--branco);
+    border: 2px solid #D5DCE4;
+}
+
+.cardSucesso:hover {
+    background-color: #FAFBFD;
+}
+
+.cardFalha {
+    background-color: #FEF2F2;
+    border: 2px solid #FCA5A5;
+}
+
+.linhaPrincipal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.infoEsquerda {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 220px;
+}
+
+.iconeStatus {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.iconeSucesso {
+    color: #16A34A;
+}
+
+.iconeFalha {
+    color: #DC2626;
+}
+
+.tituloPasso {
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    font-weight: var(--peso-semibold);
+    color: #1E293B;
+    margin: 0;
+    line-height: 1.45;
+}
+
+.infoDireita {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.tempoExecucao {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 13px;
+    color: #64748B;
+    background-color: #F1F5F9;
+    border: 1px solid #E2E8F0;
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
+.cardFalha .tempoExecucao {
+    background-color: #FEE2E2;
+    border-color: #FECACA;
+    color: #991B1B;
+}
+
+.badgeStatus {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: var(--peso-bold);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 999px;
+}
+
+.badgePassou {
+    background-color: #DCFCE7;
+    color: var(--verde);
+}
+
+.badgeNaoPassou {
+    background-color: #FEE2E2;
+    color: #B91C1C;
+    border: 1px solid #FCA5A5;
+}
+
+.detalheFalha {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-left: 32px;
+}
+
+.caixaErro {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background-color: #FEE2E2;
+    border: 1px solid #FCA5A5;
+    border-radius: 8px;
+    padding: 12px 14px;
+}
+
+.iconeErro {
+    color: #DC2626;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.textoErro {
+    margin: 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #991B1B;
+    word-break: break-word;
+}
+
+.tagsRodape {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    font-weight: var(--peso-semibold);
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
+.tagDestaque {
+    background-color: var(--laranja);
+    color: var(--branco);
+}
+
+.tagCritico {
+    background-color: #FFFFFF;
+    color: #991B1B;
+    border: 1px solid #FCA5A5;
+}
+
+.estadoVazio {
+    width: 100%;
+    text-align: center;
+    padding: 32px 20px;
+    color: #64748B;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    border: 2px dashed #D5DCE4;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .detalheFalha {
+        padding-left: 0;
+    }
+}
+

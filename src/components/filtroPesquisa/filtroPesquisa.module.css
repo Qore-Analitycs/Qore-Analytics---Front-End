@@ -1,0 +1,36 @@
+.container {
+    width: 100%;
+    background-color: var(--cinza-escuro);
+    color: var(--branco);
+    border-radius: 10px;
+    padding: 20px 24px;
+    box-shadow: var(--sombra);
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+}
+
+/* Cada campo de input/select divide o espaço igualmente */
+.campo {
+    flex: 1.2;
+    min-width: 160px;
+}
+
+/* Na variante de Cargos/Empresa (3 selects), o input de Busca Rápida é mais largo igual à imagem */
+.campoBuscaLargo {
+    flex: 2.2;
+    min-width: 240px;
+}
+
+/* O botão Buscar tem uma proporção levemente menor, igual à imagem */
+.areaBotao {
+    flex: 0.9;
+    min-width: 140px;
+}
+
+/* Responsividade: em telas menores (tablets/notebooks pequenos), quebra linha sem esmagar os campos */
+@media (max-width: 1100px) {
+    .container {
+        flex-wrap: wrap;
+    }
+}

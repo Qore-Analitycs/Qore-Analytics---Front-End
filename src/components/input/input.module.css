@@ -8,7 +8,7 @@
 .label {
     font-family: "Montserrat", sans-serif;
     font-size: var(--fonte-padrao);
-    font-weight: var(--peso-normal);
+    font-weight: var(--peso-500);
     color: inherit;
 }
 
