@@ -1,0 +1,213 @@
+    .main {
+        display: flex;
+        background-color: var(--cor-fundo);
+    }
+
+    .ladoEsquerdo {
+        position: relative;
+        width: 50vw;
+        min-height: 100vh;
+        background-color: #1a1f24;
+        /* Ajuste para o tom exato do seu tema escuro */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 40px 60px;
+        box-sizing: border-box;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    /* Topo (Logos) */
+    .superior {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .superior img {
+        height: 40px;
+        /* Ajuste a altura ideal dos logos */
+        object-fit: contain;
+    }
+
+    /* Bloco Central Conteúdo */
+    .conteudoCentro {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin: auto 0;
+    }
+
+    .imagemIlustracao {
+        max-width: 320px;
+        width: 100%;
+        height: auto;
+        margin-bottom: 32px;
+    }
+
+    .ladoEsquerdo h1 {
+        font-size: var(--fonte-titulo);
+        font-weight: var(--peso-bold);
+        line-height: 1.3;
+        color: #ffffff;
+        margin-bottom: 16px;
+    }
+
+    .ladoEsquerdo h2 {
+        font-size: var(--fonte-padrao);
+        font-weight: var(--peso-normal);
+        line-height: 1.6;
+        color: #94a3b8;
+    }
+
+    /* Z-Index mostra qual posicao a tag esta */
+    .quadrado {
+        position: absolute;
+        border-radius: 50%;
+        z-index: 1;
+    }
+
+    .quadradoLaranja {
+        top: 5%;
+        left: 60%;
+        width: 250px;
+        height: 250px;
+        background: rgba(249, 115, 22, 0.5);
+        /* Laranja neon com transparência */
+        filter: blur(60px);
+    }
+
+    .quadradoAzul {
+        bottom: 5%;
+        right: 65%;
+        width: 320px;
+        height: 320px;
+        background: rgba(60, 87, 129, 0.67);
+        filter: blur(100px);
+    }
+
+    .fundoGlass {
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        z-index: 2;
+    }
+
+    .superior,
+    .conteudoCentro,
+    .rodapeEsquerdo {
+        position: relative;
+        z-index: 3;
+    }
+
+
+    /* LADO DIREITO */
+
+
+    .ladoDireito {
+        position: relative;
+        width: 50vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .containerDireito {
+        height: 80%;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between
+    }
+
+    .texto {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .titulo {
+        font-size: var(--fonte-titulo);
+        font-weight: var(--peso-bold);
+    }
+
+    .formulario {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .campo {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .erro {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 6px;
+        color: var(--vermelho);
+        font-size: 14px;
+        font-weight: var(--peso-normal);
+        line-height: 1.25;
+    }
+
+    .erro i {
+        flex-shrink: 0;
+    }
+
+    .esqueceuSenha {
+        display: flex;
+        align-self: flex-end;
+        color: var(--laranja);
+        font-weight: var(--peso-semibold);
+    }
+
+    .alternativaLogin {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .botaoAlternativo {
+        width: 45%;
+    }
+
+    .divisorContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        margin: 24px 0;
+        width: 100%;
+    }
+
+    .divisorContainer hr {
+        flex: 1;
+        border: none;
+        border-top: 1px solid var(--cinza-escuro);
+        margin: 0;
+    }
+
+    .divisorContainer p {
+        color: var(--cinza-escuro);
+        font-size: var(--fonte-pequena);
+        font-weight: 500;
+        margin: 0;
+    }
+
+    .inputSenha::placeholder {
+        font-size: 1.2rem;
+        opacity: 1;
+        display: flex;
+        align-self: center;
+    }

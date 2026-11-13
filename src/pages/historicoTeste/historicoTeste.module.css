@@ -1,0 +1,46 @@
+.ladoDireito {
+    width: 100%;
+    background-color: var(--cor-fundo);
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    margin-top: 10px;
+    width: 90%;
+}
+
+.main {
+    display: flex;
+}
+
+.superior {
+    display: flex;
+}
+
+.botoes {
+    display: flex;
+    width: 50%;
+    gap: 30px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.containerBotao {
+    width: 35%;
+}
+
+.titulo {
+    font-weight: var(--peso-bold);
+    font-size: var(--fonte-titulo);
+}
+
+.sidebarContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: var(--largura-sidebar);
+    z-index: 30;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

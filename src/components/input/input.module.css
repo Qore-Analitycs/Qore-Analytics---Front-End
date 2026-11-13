@@ -1,0 +1,110 @@
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.label {
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-padrao);
+    font-weight: var(--peso-500);
+    color: inherit;
+}
+
+/* Caixa branca do input que envolve o ícone (se tiver) e o campo de texto */
+.inputWrapper {
+    width: 100%;
+    height: 50px;
+    background-color: var(--branco);
+    border-radius: 6px;
+    box-shadow: inset 0px 2px 6px rgba(0, 0, 0, 0.22), var(--sombra);
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    gap: 12px;
+    border: 2px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+/* Destaque laranja suave quando o usuário clica para digitar */
+.inputWrapper:focus-within {
+    border-color: var(--laranja);
+}
+
+.icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cinza-escuro);
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-padrao);
+    font-weight: var(--peso-normal);
+    color: var(--cinza-escuro);
+}
+
+.input::placeholder {
+    color: #7A7E82;
+}
+
+/* Variante para textos longos (textarea) mantendo o padrão visual do Input */
+.textareaWrapper {
+    height: auto;
+    min-height: 130px;
+    align-items: flex-start;
+    padding: 14px 16px;
+}
+
+.textarea {
+    resize: none;
+    line-height: 1.5;
+}
+
+/* Estilo caso o Yup retorne erro de validação */
+.inputErro {
+    border-color: var(--vermelho);
+}
+
+.mensagemErro {
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-pequena);
+    color: var(--vermelho);
+}
+
+/* =========================================================
+   VARIANTE COMPACTA (40px de altura para Filtros e Barras)
+   ========================================================= */
+
+.containerCompacto {
+    gap: 6px;
+}
+
+.labelCompacto {
+    font-size: 13px;
+    font-weight: var(--peso-semibold);
+    letter-spacing: 0.02em;
+}
+
+.inputWrapperCompacto {
+    height: 40px;
+    padding: 0 14px;
+    gap: 10px;
+}
+
+.inputWrapperCompacto .icone {
+    font-size: 16px;
+}
+
+.inputWrapperCompacto .input {
+    font-size: 14px;
+}

@@ -18,6 +18,7 @@
 .modal {
   position: relative;
 
+  border-radius: 15px;
   width: 430px;
   min-height: 560px;
 
@@ -39,11 +40,10 @@
 
 .subtitulo {
   display: block;
-  margin-bottom: 7px;
 
   color: #E87A11;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--fonte-padrao);
+  font-weight: var(--peso-semibold  );
 }
 
 .cabecalho h2 {
