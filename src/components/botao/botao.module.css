@@ -99,11 +99,11 @@
     box-shadow: var(--sombra);
 }
 
-/* Variante de tamanho reduzido para rodapés de tabela e ações secundárias */
+/* Variante de tamanho reduzido (40px) para rodapés de tabela, filtros e ações secundárias */
 .compacto {
     height: 40px;
     padding: 0 20px;
     font-size: 14px;
-    border-radius: 8px;
+    border-radius: 6px;
     white-space: nowrap;
 }

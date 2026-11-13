@@ -126,13 +126,23 @@
 }
 
 /* =========================================================
-   VARIANTE COMPACTA (Para cards, tabelas e barras de ferramentas)
+   VARIANTE COMPACTA (40px de altura para Filtros e Barras)
    ========================================================= */
 
-.triggerCompacto {
-    height: 38px;
-    padding: 0 12px;
+.containerCompacto {
+    gap: 6px;
+}
+
+.labelCompacto {
     font-size: 13px;
+    font-weight: var(--peso-semibold);
+    letter-spacing: 0.02em;
+}
+
+.triggerCompacto {
+    height: 40px;
+    padding: 0 14px;
+    font-size: 14px;
     border-radius: 6px;
 }
 
@@ -141,6 +151,6 @@
 }
 
 .opcaoCompacto {
-    padding: 8px 12px;
+    padding: 10px 14px;
     font-size: 13px;
 }
