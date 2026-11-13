@@ -1,0 +1,199 @@
+.cardContainer {
+    width: 100%;
+    height: 540px;
+    background-color: var(--branco);
+    border: 2px solid #D5DCE4;
+    border-radius: 12px;
+    padding: 28px 32px;
+    box-shadow: var(--sombra);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-sizing: border-box;
+}
+
+.cabecalho {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0;
+}
+
+.titulo {
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: var(--peso-semibold, 600);
+    color: #0F172A;
+    margin: 0;
+    line-height: 1.25;
+}
+
+.iconeTopoWrapper {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background-color: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    color: #64748B;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.conteudo {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 0;
+}
+
+/* ==========================================
+   GRÁFICO DE ROSCA (DONUT CHART)
+   ========================================== */
+.graficoWrapper {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.centroRosca {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    gap: 2px;
+}
+
+.valorCentro {
+    font-family: "Montserrat", sans-serif;
+    font-size: 28px;
+    font-weight: var(--peso-bold, 700);
+    color: #0F172A;
+    line-height: 1.1;
+}
+
+.rotuloCentro {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: var(--peso-semibold, 600);
+    color: #64748B;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.tooltipCard {
+    background-color: #1E293B;
+    color: var(--branco);
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 8px 12px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.25);
+    font-family: "Montserrat", sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+}
+
+.tooltipPonto {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.tooltipNome {
+    color: #E2E8F0;
+}
+
+.tooltipPercentual {
+    font-weight: var(--peso-bold, 700);
+    color: var(--branco);
+}
+
+/* ==========================================
+   LEGENDA DETALHADA EM LISTA
+   ========================================== */
+.listaLegenda {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.itemLegenda {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 12px;
+    background-color: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.itemLegenda:hover {
+    background-color: #F1F5F9;
+    border-color: #CBD5E1;
+}
+
+.infoEsquerda {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.marcadorCircular {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.nomeTipo {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13.5px;
+    font-weight: var(--peso-semibold, 600);
+    color: #334155;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.percentualTipo {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: var(--peso-bold, 700);
+    color: #0F172A;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .cardContainer {
+        height: auto;
+        padding: 20px 16px;
+    }
+
+    .graficoWrapper {
+        height: 210px;
+        flex: none;
+    }
+}
+
