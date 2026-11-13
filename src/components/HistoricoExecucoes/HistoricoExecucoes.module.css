@@ -219,6 +219,7 @@
 
     .graficoWrapper {
         height: 250px;
+        flex: none;
     }
 
     .rodape {
