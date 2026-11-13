@@ -132,9 +132,8 @@ export default function CriacaoTestePage() {
             </Head>
 
             <div
-                className={`${styles.layoutShell} ${
-                    sidebarExpandida ? styles.layoutShellExpandido : ""
-                }`}
+                className={`${styles.layoutShell} ${sidebarExpandida ? styles.layoutShellExpandido : ""
+                    }`}
             >
                 <div className={styles.sidebarContainer}>
                     <SideBar

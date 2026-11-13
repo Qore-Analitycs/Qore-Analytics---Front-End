@@ -1,93 +1,55 @@
-import { transferableAbortController } from "util";
-import styles from "./card.module.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
+import React from "react";
+import { Code2, FileText, Shield, Users } from "lucide-react";
+import CardMetrica, { CardMetricaProps } from "./cardMetrica";
 
-export default function Card() {
-  return (
-    <>
-      <section className="cards">
-          <article className="card">
-            <div className="superiorCard">
-              <h1>Total de Testes Executados</h1>
-              <div className="iconeCard">
-                <i
-                  className="fa-solid fa-list-ul"
-                  style={{ color: "rgb(232, 122, 17" }}
-                ></i>
-              </div>
-            </div>
-            <h2 className="valor">19.280</h2>
-            <div className="parametros">
-              <i
-                className="fa-solid fa-arrow-trend-up"
-                style={{ color: "rgb(232, 122, 17" }}
-              ></i>
-              <p>+15%</p>
-              <h3>em relação ao último mês</h3>
-            </div>
-          </article>
-          <article className="card">
-            <div className="superiorCard">
-              <h1>Total de Testes Executados</h1>
-              <div className="iconeCard">
-                <i
-                  className="fa-solid fa-list-ul"
-                  style={{ color: "rgb(232, 122, 17" }}
-                ></i>
-              </div>
-            </div>
-            <h2 className="valor">19.280</h2>
-            <div className="parametros">
-              <i
-                className="fa-solid fa-arrow-trend-up"
-                style={{ color: "rgb(232, 122, 17" }}
-              ></i>
-              <p>+15%</p>
-              <h3>em relação ao último mês</h3>
-            </div>
-          </article>
-          <article className="card">
-            <div className="superiorCard">
-              <h1>Total de Testes Executados</h1>
-              <div className="iconeCard">
-                <i
-                  className="fa-solid fa-list-ul"
-                  style={{ color: "rgb(232, 122, 17" }}
-                ></i>
-              </div>
-            </div>
-            <h2 className="valor">19.280</h2>
-            <div className="parametros">
-              <i
-                className="fa-solid fa-arrow-trend-up"
-                style={{ color: "rgb(232, 122, 17" }}
-              ></i>
-              <p>+15%</p>
-              <h3>em relação ao último mês</h3>
-            </div>
-          </article>
-          <article className="card">
-            <div className="superiorCard">
-              <h1>Total de Testes Executados</h1>
-              <div className="iconeCard">
-                <i
-                  className="fa-solid fa-list-ul"
-                  style={{ color: "rgb(232, 122, 17" }}
-                ></i>
-              </div>
-            </div>
-            <h2 className="valor">19.280</h2>
-            <div className="parametros">
-              <i
-                className="fa-solid fa-arrow-trend-up"
-                style={{ color: "rgb(232, 122, 17" }}
-              ></i>
-              <p>+15%</p>
-              <h3>em relação ao último mês</h3>
-            </div>
-          </article>
-      </section>
-    </>
-  );
+export { CardMetrica };
+export type { CardMetricaProps };
+
+const METRICAS_PADRAO: CardMetricaProps[] = [
+    {
+        title: "TOTAL DE MEMBROS",
+        value: 48,
+        description: "Contas do sistema",
+        icon: <Users size={22} />,
+        variant: "azul",
+    },
+    {
+        title: "ADMINISTRADORES",
+        value: 4,
+        description: "Acesso Irrestrito",
+        icon: <Shield size={22} />,
+        variant: "neutro",
+    },
+    {
+        title: "DEVS VINCULADOS",
+        value: 28,
+        description: "Empresas Matriz",
+        icon: <Code2 size={22} />,
+        variant: "laranja",
+    },
+    {
+        title: "ENGENHEIROS DE QA",
+        value: 16,
+        description: "Contas ativas",
+        icon: <FileText size={22} />,
+        variant: "ciano",
+    },
+];
+
+type CardsMetricasGridProps = {
+    cards?: CardMetricaProps[];
+};
+
+export default function Card({ cards = METRICAS_PADRAO }: CardsMetricasGridProps) {
+    return (
+        /* Reutiliza o container de grade .cards definido em style/const (const.css) */
+        <section className="cards" aria-label="Métricas do Sistema">
+            {cards.map((item, index) => (
+                <CardMetrica
+                    key={`${item.title || item.titulo || "card"}-${index}`}
+                    {...item}
+                />
+            ))}
+        </section>
+    );
 }
-
