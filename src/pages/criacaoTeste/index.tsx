@@ -12,6 +12,7 @@ import {
     ResultadoPasso,
 } from "@/components/testResult/types";
 import styles from "./criacaoTeste.module.css";
+import FiltroPesquisa from "@/components/filtroPesquisa/filtroPesquisa";
 
 const TEMPOS_EXECUCAO_MOCK = [410, 320, 540, 290];
 
@@ -132,9 +133,8 @@ export default function CriacaoTestePage() {
             </Head>
 
             <div
-                className={`${styles.layoutShell} ${
-                    sidebarExpandida ? styles.layoutShellExpandido : ""
-                }`}
+                className={`${styles.layoutShell} ${sidebarExpandida ? styles.layoutShellExpandido : ""
+                    }`}
             >
                 <div className={styles.sidebarContainer}>
                     <SideBar
@@ -166,6 +166,10 @@ export default function CriacaoTestePage() {
                                 erroDescricao={erroDescricao}
                                 onGerarRoteiro={handleGerarRoteiro}
                             />
+
+                            <FiltroPesquisa
+                                variante="usuarios"
+                                tamanho="compacto" />
                         </section>
 
                         {/* Bloco 2: Documento Gerado ("Folha Sulfite") */}
@@ -173,9 +177,7 @@ export default function CriacaoTestePage() {
                             className={styles.blocoSecao}
                             aria-label="Documento gerado"
                         >
-                            <h2 className={styles.tituloSecao}>
-                                Documento gerado
-                            </h2>
+
                             <DocumentoGerado
                                 key={versaoDocumento}
                                 tituloInicial={tituloRoteiro}

@@ -80,3 +80,31 @@
     font-size: var(--fonte-pequena);
     color: var(--vermelho);
 }
+
+/* =========================================================
+   VARIANTE COMPACTA (40px de altura para Filtros e Barras)
+   ========================================================= */
+
+.containerCompacto {
+    gap: 6px;
+}
+
+.labelCompacto {
+    font-size: 13px;
+    font-weight: var(--peso-semibold);
+    letter-spacing: 0.02em;
+}
+
+.inputWrapperCompacto {
+    height: 40px;
+    padding: 0 14px;
+    gap: 10px;
+}
+
+.inputWrapperCompacto .icone {
+    font-size: 16px;
+}
+
+.inputWrapperCompacto .input {
+    font-size: 14px;
+}

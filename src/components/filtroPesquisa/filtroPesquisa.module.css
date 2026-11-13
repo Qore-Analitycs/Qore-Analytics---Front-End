@@ -1,36 +1,42 @@
 .container {
     width: 100%;
+    min-height: 100px;
+    height: 100px;
     background-color: var(--cinza-escuro);
     color: var(--branco);
     border-radius: 10px;
-    padding: 20px 24px;
+    padding: 0 24px 20px 24px;
     box-shadow: var(--sombra);
     display: flex;
     align-items: flex-end;
     gap: 16px;
+    box-sizing: border-box;
 }
 
 /* Cada campo de input/select divide o espaço igualmente */
 .campo {
-    flex: 1.2;
-    min-width: 160px;
+    flex: 1;
+    min-width: 140px;
 }
 
 /* Na variante de Cargos/Empresa (3 selects), o input de Busca Rápida é mais largo igual à imagem */
 .campoBuscaLargo {
-    flex: 2.2;
-    min-width: 240px;
+    flex: 1.8;
+    min-width: 220px;
 }
 
-/* O botão Buscar tem uma proporção levemente menor, igual à imagem */
+/* O botão Buscar fica perfeitamente alinhado na horizontal com inputs e selects */
 .areaBotao {
-    flex: 0.9;
-    min-width: 140px;
+    flex: 0.8;
+    min-width: 120px;
 }
 
 /* Responsividade: em telas menores (tablets/notebooks pequenos), quebra linha sem esmagar os campos */
 @media (max-width: 1100px) {
     .container {
+        height: auto;
+        min-height: 100px;
+        padding: 20px 24px;
         flex-wrap: wrap;
     }
 }

@@ -19,6 +19,7 @@ export type DadosFiltro = {
 
 type FiltroPesquisaProps = {
     variante?: FiltroVariante;
+    tamanho?: "padrao" | "compacto";
     opcoesTipo?: OpcaoSelect[];
     opcoesStatus?: OpcaoSelect[];
     opcoesPeriodo?: OpcaoSelect[];
@@ -30,6 +31,7 @@ type FiltroPesquisaProps = {
 
 const FiltroPesquisa = ({
     variante = "padrao",
+    tamanho = "compacto",
     opcoesTipo = [
         { valor: "todos", texto: "Todos os Tipos" },
         { valor: "web", texto: "Web" },
@@ -103,6 +105,7 @@ const FiltroPesquisa = ({
                         label="BUSCA RÁPIDA"
                         placeholder="Buscar..."
                         icone={faMagnifyingGlass}
+                        tamanho={tamanho}
                         value={busca}
                         onChange={(e) => setBusca(e.target.value)}
                     />
@@ -117,6 +120,7 @@ const FiltroPesquisa = ({
                                 placeholder="Todos os Cargos"
                                 opcoes={opcoesCargo}
                                 valor={cargo}
+                                tamanho={tamanho}
                                 onChange={(valor) => setCargo(valor)}
                             />
                         </div>
@@ -127,6 +131,7 @@ const FiltroPesquisa = ({
                                 placeholder="Todos os status"
                                 opcoes={opcoesStatus}
                                 valor={status}
+                                tamanho={tamanho}
                                 onChange={(valor) => setStatus(valor)}
                             />
                         </div>
@@ -137,6 +142,7 @@ const FiltroPesquisa = ({
                                 placeholder="Nenhuma selecionada"
                                 opcoes={opcoesEmpresa}
                                 valor={empresa}
+                                tamanho={tamanho}
                                 onChange={(valor) => setEmpresa(valor)}
                             />
                         </div>
@@ -150,6 +156,7 @@ const FiltroPesquisa = ({
                                 placeholder="Todos os Tipos"
                                 opcoes={opcoesTipo}
                                 valor={tipo}
+                                tamanho={tamanho}
                                 onChange={(valor) => setTipo(valor)}
                             />
                         </div>
@@ -160,6 +167,7 @@ const FiltroPesquisa = ({
                                 placeholder="Todos os status"
                                 opcoes={opcoesStatus}
                                 valor={status}
+                                tamanho={tamanho}
                                 onChange={(valor) => setStatus(valor)}
                             />
                         </div>
@@ -170,6 +178,7 @@ const FiltroPesquisa = ({
                                 placeholder="Últimos 30 dias"
                                 opcoes={opcoesPeriodo}
                                 valor={periodo}
+                                tamanho={tamanho}
                                 onChange={(valor) => setPeriodo(valor)}
                             />
                         </div>
@@ -180,6 +189,7 @@ const FiltroPesquisa = ({
                                 placeholder="Nenhum selecionado"
                                 opcoes={opcoesResponsavel}
                                 valor={responsavel}
+                                tamanho={tamanho}
                                 onChange={(valor) => setResponsavel(valor)}
                             />
                         </div>
@@ -191,6 +201,7 @@ const FiltroPesquisa = ({
                     <Botao
                         variante="laranja"
                         texto="Buscar"
+                        tamanho={tamanho}
                         onPress={handleBuscar}
                     />
                 </div>
