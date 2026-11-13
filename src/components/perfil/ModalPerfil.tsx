@@ -138,18 +138,33 @@ export default function ModalPerfil({
                     </p>
 
                     {/* Identificação do usuário */}
+<div className={styles.statusRow}>
+    <span className={styles.roleBadge}>
+        <span className={styles.roleIndicator}></span>
+        Funç
+    </span>
 
-                    <div className={styles.statusRow}>
+    <span className={styles.statusBadge}>
+        Ativo
+    </span>
+</div>
 
-                        <span className={styles.roleBadge}>
-                            Função
-                        </span>
+<div className={styles.sidebarDivider}></div>
 
-                        <span className={styles.statusBadge}>
-                            Ativo
-                        </span>
+{/* Informações complementares */}
+<div className={styles.profileInfo}>
 
-                    </div>
+    <div className={styles.metaItem}>
+        <span>Empresa</span>
+        <strong>Nome empresa</strong>
+    </div>
+
+    <div className={styles.metaItem}>
+        <span>Membro desde</span>
+        <strong>05/06/2025</strong>
+    </div>
+
+</div>
 
                     <div className={styles.sidebarDivider}></div>
 
@@ -264,37 +279,51 @@ export default function ModalPerfil({
                         </div>
 
                         {/* Senha atual */}
+<div className={styles.field}>
 
-                        <div className={styles.field}>
+    <label htmlFor="senha-atual">
+        Senha atual
+    </label>
 
-                            <label htmlFor="senha-atual">
-                                Senha atual
-                            </label>
+    <div className={styles.inputBox}>
 
-                            <div className={styles.inputBox}>
+        <span className={styles.inputMark}></span>
 
-                                <span className={styles.inputMark}></span>
+        <input
+            id="senha-atual"
+            type={mostrarSenhas ? "text" : "password"}
+            placeholder="*****************"
+            value={senhaAtual}
+            onChange={(event) => setSenhaAtual(event.target.value)}
+            autoComplete="current-password"
+        />
 
-                                <input
-                                    id="senha-atual"
-                                    type={mostrarSenhas ? "text" : "password"}
-                                    placeholder="Senha atual"
-                                    value={senhaAtual}
-                                    onChange={(event) => setSenhaAtual(event.target.value)}
-                                    autoComplete="current-password"
-                                />
+        {/* Botão de Copiar */}
+        <button
+            type="button"
+            className={styles.iconButton}
+            onClick={() => {
+                navigator.clipboard.writeText(senhaAtual);
+                alert("Senha copiada!");
+            }}
+            title="Copiar senha"
+        >
+           
+        </button>
 
-                                <button
-                                    type="button"
-                                    className={styles.passwordToggle}
-                                    onClick={() => setMostrarSenhas(!mostrarSenhas)}
-                                >
-                                    {mostrarSenhas ? "Ocultar" : "Mostrar"}
-                                </button>
+        {/* Botão de Mostrar/Ocultar */}
+        <button
+            type="button"
+            className={styles.iconButton}
+            onClick={() => setMostrarSenhas(!mostrarSenhas)}
+            title="Mostrar ou ocultar senha"
+        >
+           
+        </button>
 
-                            </div>
+    </div>
 
-                        </div>
+</div>
 
                         {/* Nova senha e confirmação */}
 

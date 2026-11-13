@@ -455,3 +455,30 @@
     }
 
 }
+
+.roleBadge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #FFFFFF;
+    color: #555555;
+    border: 1px solid #DDDDDD;
+}
+
+.roleIndicator {
+    width: 10px;
+    height: 10px;
+    background-color: #EF7900;
+    border-radius: 2px;
+}
+
+.iconButton {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
