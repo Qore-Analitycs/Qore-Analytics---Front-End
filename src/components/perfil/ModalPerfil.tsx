@@ -1,4 +1,3 @@
-
 import { useState, type FormEvent } from "react";
 import styles from "./ModalPerfil.module.css";
 
@@ -138,43 +137,25 @@ export default function ModalPerfil({
                     </p>
 
                     {/* Identificação do usuário */}
-<div className={styles.statusRow}>
-    <span className={styles.roleBadge}>
-        <span className={styles.roleIndicator}></span>
-        Funç
-    </span>
+                    <div className={styles.statusRow}>
+                        <span className={styles.roleBadge}>
+                            <img src="/func.png" alt="" className={styles.inputIcon} />
+                            Funç
+                        </span>
 
-    <span className={styles.statusBadge}>
-        Ativo
-    </span>
-</div>
-
-<div className={styles.sidebarDivider}></div>
-
-{/* Informações complementares */}
-<div className={styles.profileInfo}>
-
-    <div className={styles.metaItem}>
-        <span>Empresa</span>
-        <strong>Nome empresa</strong>
-    </div>
-
-    <div className={styles.metaItem}>
-        <span>Membro desde</span>
-        <strong>05/06/2025</strong>
-    </div>
-
-</div>
+                        <span className={styles.statusBadge}>
+                            Ativo
+                        </span>
+                    </div>
 
                     <div className={styles.sidebarDivider}></div>
 
                     {/* Informações complementares */}
-
                     <div className={styles.profileInfo}>
 
                         <div className={styles.metaItem}>
                             <span>Empresa</span>
-                            <strong>Nome da empresa</strong>
+                            <strong>Nome empresa</strong>
                         </div>
 
                         <div className={styles.metaItem}>
@@ -230,7 +211,7 @@ export default function ModalPerfil({
 
                             <div className={styles.inputBox}>
 
-                                <span className={styles.inputMark}></span>
+                                <img src="/user.png" alt="" className={styles.inputIcon} />
 
                                 <input
                                     id="perfil-nome"
@@ -255,7 +236,7 @@ export default function ModalPerfil({
 
                             <div className={styles.inputBox}>
 
-                                <span className={styles.inputMark}></span>
+                                <img src="/mail.png" alt="" className={styles.inputIcon} />
 
                                 <input
                                     id="perfil-email"
@@ -279,51 +260,51 @@ export default function ModalPerfil({
                         </div>
 
                         {/* Senha atual */}
-<div className={styles.field}>
+                        <div className={styles.field}>
 
-    <label htmlFor="senha-atual">
-        Senha atual
-    </label>
+                            <label htmlFor="senha-atual">
+                                Senha atual
+                            </label>
 
-    <div className={styles.inputBox}>
+                            <div className={styles.inputBox}>
 
-        <span className={styles.inputMark}></span>
+                                <img src="/cadeado.png" alt="" className={styles.inputIcon} />
 
-        <input
-            id="senha-atual"
-            type={mostrarSenhas ? "text" : "password"}
-            placeholder="*****************"
-            value={senhaAtual}
-            onChange={(event) => setSenhaAtual(event.target.value)}
-            autoComplete="current-password"
-        />
+                                <input
+                                    id="senha-atual"
+                                    type={mostrarSenhas ? "text" : "password"}
+                                    placeholder="*****************"
+                                    value={senhaAtual}
+                                    onChange={(event) => setSenhaAtual(event.target.value)}
+                                    autoComplete="current-password"
+                                />
 
-        {/* Botão de Copiar */}
-        <button
-            type="button"
-            className={styles.iconButton}
-            onClick={() => {
-                navigator.clipboard.writeText(senhaAtual);
-                alert("Senha copiada!");
-            }}
-            title="Copiar senha"
-        >
-           
-        </button>
+                                {/* Botão de Copiar */}
+                                <button
+                                    type="button"
+                                    className={styles.iconButton}
+                                    onClick={() => {
+                                        navigator.clipboard.writeText(senhaAtual);
+                                        alert("Senha copiada!");
+                                    }}
+                                    title="Copiar senha"
+                                >
+                                    <img src="/copy.png" alt="" className={styles.inputIcon} />
+                                </button>
 
-        {/* Botão de Mostrar/Ocultar */}
-        <button
-            type="button"
-            className={styles.iconButton}
-            onClick={() => setMostrarSenhas(!mostrarSenhas)}
-            title="Mostrar ou ocultar senha"
-        >
-           
-        </button>
+                                {/* Botão de Mostrar/Ocultar */}
+                                <button
+                                    type="button"
+                                    className={styles.iconButton}
+                                    onClick={() => setMostrarSenhas(!mostrarSenhas)}
+                                    title="Mostrar ou ocultar senha"
+                                >
+                                    <img src="/ve.png" alt="" className={styles.inputIcon} />
+                                </button>
 
-    </div>
+                            </div>
 
-</div>
+                        </div>
 
                         {/* Nova senha e confirmação */}
 
@@ -337,7 +318,7 @@ export default function ModalPerfil({
 
                                 <div className={styles.inputBox}>
 
-                                    <span className={styles.inputMark}></span>
+                                    <img src="/cadeado.png" alt="" className={styles.inputIcon} />
 
                                     <input
                                         id="nova-senha"
@@ -360,7 +341,7 @@ export default function ModalPerfil({
 
                                 <div className={styles.inputBox}>
 
-                                    <span className={styles.inputMark}></span>
+                                    <img src="/cadeado.png" alt="" className={styles.inputIcon} />
 
                                     <input
                                         id="confirmar-senha"
