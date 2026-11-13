@@ -1,0 +1,147 @@
+/* Container principal da tela dividida em duas colunas */
+.container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #E5E8EC;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Barra lateral esquerda (Sidebar) */
+.sidebar {
+  width: 80px;
+  background-color: #2C3034;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 0;
+  gap: 24px;
+  flex-shrink: 0;
+}
+
+/* Blocos vermelhos com margem inferior de 100px */
+.blocoVermelho {
+  background-color: #FF0000;
+  border-radius: 8px;
+  margin-bottom: 100px;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+
+.navGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.navItem {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.footerImg {
+  width: 48px;
+  height: 48px;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Área de conteúdo principal à direita */
+.mainContent {
+  flex: 1;
+  padding: 32px;
+  overflow-y: auto;
+}
+
+/* Cabeçalho superior */
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.subtitulo {
+  font-size: 12px;
+  color: #555555;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.titulo {
+  font-size: 30px;
+  font-weight: 800;
+  color: #111111;
+  margin-top: 4px;
+}
+
+.descricao {
+  font-size: 14px;
+  color: #333333;
+  margin-top: 4px;
+  max-width: 768px;
+}
+
+.actionButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.actionButton {
+  width: 192px;
+  height: 48px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* Container central (Player de vídeo) com margem de 132px (32px padrão + 100px) */
+.videoContainer {
+  width: 100%;
+  height: 420px;
+  border: 2px solid #00A6FF;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  margin-bottom: 132px;
+}
+
+/* Seção inferior dividida em grid */
+.gridInferior {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.cardEsquerdo {
+  grid-column: span 2 / span 2;
+  height: 380px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.cardDireito {
+  height: 380px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* Ajuste responsivo básico para telas menores */
+@media (max-width: 1024px) {
+  .gridInferior {
+    grid-template-columns: 1fr;
+  }
+  .cardEsquerdo {
+    grid-column: span 1 / span 1;
+  }
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import styles from '../styles/detalhes.module.css'; // Importação do arquivo CSS Module
 
 export default function DetalhesPage() {
   return (
@@ -10,30 +11,28 @@ export default function DetalhesPage() {
 
       {/* =====================================================================
           CONTAINER PRINCIPAL DA TELA
-          Divide a tela inteira em duas partes: Barra lateral (esquerda) e Conteúdo (direita)
           ===================================================================== */}
-      <div className="flex min-h-screen bg-[#E5E8EC] font-sans">
+      <div className={styles.container}>
 
         {/* =====================================================================
             SEÇÃO 1: BARRA LATERAL ESQUERDA (SIDEBAR)
-            Contém o logotipo no topo, botões de navegação e ícone inferior
             ===================================================================== */}
-        <aside className="w-20 bg-[#2C3034] flex flex-col items-center py-6 gap-6 shrink-0">
+        <aside className={styles.sidebar}>
           
-          {/* Bloco Vermelho: Logotipo principal */}
-          <div className="w-12 h-12 bg-[#FF0000] flex items-center justify-center text-white font-bold rounded">
+          {/* Logo principal */}
+          <div className={`${styles.blocoVermelho} ${styles.logo}`}>
             Logo
           </div>
 
-          {/* Grupo de botões de navegação da barra lateral */}
-          <div className="flex flex-col gap-4 mt-4">
-            <div className="w-10 h-10 bg-[#FF0000] rounded cursor-pointer"></div>
-            <div className="w-10 h-10 bg-[#FF0000] rounded cursor-pointer"></div>
-            <div className="w-10 h-10 bg-[#FF0000] rounded cursor-pointer"></div>
+          {/* Grupo de botões de navegação */}
+          <div className={styles.navGroup}>
+            <div className={`${styles.blocoVermelho} ${styles.navItem}`}></div>
+            <div className={`${styles.blocoVermelho} ${styles.navItem}`}></div>
+            <div className={`${styles.blocoVermelho} ${styles.navItem}`}></div>
           </div>
 
-          {/* Bloco Vermelho inferior: Ícone ou imagem de rodapé */}
-          <div className="mt-auto w-12 h-12 bg-[#FF0000] flex items-center justify-center text-white font-bold rounded text-xs">
+          {/* Imagem / Ícone de rodapé */}
+          <div className={`${styles.blocoVermelho} ${styles.footerImg}`}>
             img
           </div>
 
@@ -42,56 +41,47 @@ export default function DetalhesPage() {
         {/* =====================================================================
             SEÇÃO 2: ÁREA DE CONTEÚDO PRINCIPAL (DIREITA)
             ===================================================================== */}
-        <main className="flex-1 p-8 overflow-y-auto">
+        <main className={styles.mainContent}>
 
-          {/* -----------------------------------------------------------------
-              2.1 CABEÇALHO DO RELATÓRIO E BOTÕES DE AÇÃO SUPERIORES
-              ----------------------------------------------------------------- */}
-          <div className="flex justify-between items-start mb-6">
+          {/* Cabeçalho do relatório e botões superiores */}
+          <div className={styles.headerRow}>
             
-            {/* Bloco de Títulos e Descrição */}
             <div>
-              <span className="text-xs text-[#555555] font-medium uppercase tracking-wide">
+              <span className={styles.subtitulo}>
                 Detalhe do teste
               </span>
-              <h1 className="text-3xl font-extrabold text-[#111111] mt-1">
+              <h1 className={styles.titulo}>
                 Relatório do fluxo completo de checkout de login
               </h1>
-              <p className="text-sm text-[#333333] mt-1 max-w-3xl">
+              <p className={styles.descricao}>
                 Inspeção detalhada de telemetria visual, rastreamento de interação Playwright e validações de estado do DOM
               </p>
             </div>
 
-            {/* Blocos Vermelhos Superiores (Botões de Ação) */}
-            <div className="flex flex-col gap-3">
-              <div className="w-48 h-12 bg-[#FF0000] rounded shadow-sm"></div>
-              <div className="w-48 h-12 bg-[#FF0000] rounded shadow-sm"></div>
+            {/* Botões de Ação Superiores */}
+            <div className={styles.actionButtons}>
+              <div className={`${styles.blocoVermelho} ${styles.actionButton}`}></div>
+              <div className={`${styles.blocoVermelho} ${styles.actionButton}`}></div>
             </div>
 
           </div>
 
-          {/* -----------------------------------------------------------------
-              2.2 CONTAINER CENTRAL: PLAYER DE VÍDEO / TELEMETRIA VISUAL
-              Este bloco possui uma borda azul marcante como no modelo
-              ----------------------------------------------------------------- */}
-          <div className="w-full h-[420px] bg-[#FF0000] border-2 border-[#00A6FF] rounded-lg shadow-sm mb-8">
-            {/* Espaço reservado para o player de vídeo ou replay da sessão */}
+          {/* Container central do player de vídeo */}
+          <div className={`${styles.blocoVermelho} ${styles.videoContainer}`}>
+            {/* Espaço reservado para o player de vídeo */}
           </div>
 
-          {/* -----------------------------------------------------------------
-              2.3 SEÇÃO INFERIOR: DOIS BLOCOS DE CONTEÚDO LADO A LADO
-              Divisão em duas colunas (Esquerda maior, Direita menor)
-              ----------------------------------------------------------------- */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Seção inferior com dois blocos */}
+          <div className={styles.gridInferior}>
 
-            {/* Coluna Esquerda: Ocupa 2 espaços do grid */}
-            <div className="lg:col-span-2 h-[380px] bg-[#FF0000] rounded-lg shadow-sm">
-              {/* Espaço reservado para a timeline de passos e funcionalidades */}
+            {/* Coluna Esquerda */}
+            <div className={`${styles.blocoVermelho} ${styles.cardEsquerdo}`}>
+              {/* Timeline de passos */}
             </div>
 
-            {/* Coluna Direita: Ocupa 1 espaço do grid */}
-            <div className="h-[380px] bg-[#FF0000] rounded-lg shadow-sm">
-              {/* Espaço reservado para o painel de métricas e status */}
+            {/* Coluna Direita */}
+            <div className={`${styles.blocoVermelho} ${styles.cardDireito}`}>
+              {/* Painel de métricas */}
             </div>
 
           </div>
