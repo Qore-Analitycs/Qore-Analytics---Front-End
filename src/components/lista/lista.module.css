@@ -4,12 +4,13 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin-top: 20px;
 }
 
 .tabelaLista {
     border-collapse: separate;
     border-spacing: 0 5px; 
-    width: 90%;
+    width: 100%;
 }
 
 .tabelaLista th {
