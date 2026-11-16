@@ -2,7 +2,7 @@ import Botao from "@/components/botao/botao";
 import FiltroPesquisa from "@/components/filtroPesquisa/filtroPesquisa";
 import Lista from "@/components/lista/lista";
 import SideBar from "@/components/sideBar/sideBar";
-import styles from "@/pages/historicoTeste/historicoTeste.module.css";
+import styles from "./historicoTeste.module.css";
 import { useState } from "react";
 
 export default function HistoricoTeste() {
