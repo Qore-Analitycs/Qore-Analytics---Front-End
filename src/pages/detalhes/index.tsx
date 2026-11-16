@@ -1,12 +1,14 @@
 
 import React from 'react';
 import Head from 'next/head';
-import styles from '../styles/detalhes.module.css';
+import styles from './detalhes.module.css';
+
+import SideBar from "../../components/sideBar/sideBar";
 // Componente responsável por renderizar os ícones
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { faShareNodes, faDownload, faCalendar, faListCheck, faCircleCheck, faGaugeSimpleHigh, faImage } from '@fortawesome/free-solid-svg-icons';
-import SideBar from '@/components/sideBar/sideBar';
+
 
 
 export default function DetalhesPage() {
