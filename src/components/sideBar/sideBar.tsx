@@ -22,19 +22,19 @@ const ITENS_NAVEGACAO = [
     {
         id: "criacao-teste",
         label: "Criação de Teste",
-        href: "/criacaoTeste",
+        href: "/geracaoDePrompt",
         icone: "fa-solid fa-clipboard",
     },
     {
         id: "historico",
         label: "Histórico",
-        href: "#",
+        href: "/historicoTeste",
         icone: "fa-solid fa-list",
     },
     {
         id: "usuarios",
         label: "Usuários",
-        href: "#",
+        href: "/usuarioPermissoes",
         icone: "fa-solid fa-users",
     },
 ];
