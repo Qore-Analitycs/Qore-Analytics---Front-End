@@ -6,6 +6,7 @@ import styles from '../styles/detalhes.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { faShareNodes, faDownload, faCalendar, faListCheck, faCircleCheck, faGaugeSimpleHigh, faImage } from '@fortawesome/free-solid-svg-icons';
+import SideBar from '@/components/sideBar/sideBar';
 
 
 export default function DetalhesPage() {
@@ -27,69 +28,8 @@ export default function DetalhesPage() {
         {/* ==========================================
             1. BARRA LATERAL
         ========================================== */}
-
-        <aside className={styles.sidebar}>
-
-          <div className={styles.logo}>
-            Logo
-          </div>
-
-          {/* Navegação lateral */}
-
-          <div className={styles.navGroup}>
-
-            <div
-              className={styles.navItem}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#FFFFFF'
-              }}
-            >
-              {/* <FontAwesomeIcon icon={faUser} /> */}
-            </div>
-
-            <div
-              className={styles.navItem}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#FFFFFF'
-              }}
-            >
-              {/* <FontAwesomeIcon icon={faUser} /> */}
-            </div>
-
-            <div
-              className={styles.navItem}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#FFFFFF'
-              }}
-            >
-              {/* <FontAwesomeIcon icon={faUser} /> */}
-            </div>
-
-          </div>
-
-          {/* Ícone de rodapé */}
-
-          <div
-            className={styles.footerImg}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
-            {/* <FontAwesomeIcon icon={faUser} /> */}
-          </div>
-
-        </aside>
+  <SideBar/>
+        
 
 
         {/* ==========================================
