@@ -1,0 +1,38 @@
+.main {
+    display: flex;
+    background-color: var(--cor-fundo);
+}
+
+.conteudo {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 90%;
+}
+
+.containerTexto {
+    display: flex;
+    justify-content: space-between;
+}
+
+.containerBotao {
+    width: 25%;
+    align-self: center;
+}
+
+.texto {
+    width: 50%;
+}
+
+.texto h1 {
+}
+
+.texto h2 {
+    font-size: var(--fonte-titulo);
+    font-weight: var(--peso-bold);
+
+}
