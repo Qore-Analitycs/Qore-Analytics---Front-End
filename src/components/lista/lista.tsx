@@ -77,6 +77,73 @@ export default function Lista({ page }: ListaProps) {
           </table>
         </section>
       )}
+      {page === "usuarioPermissoes" && (
+        <section className={styles.section}>
+          <table className={styles.tabelaLista}>
+            <thead id={styles.thead}>
+              <tr>
+                <th>Usuário</th>
+                <th>Cargo</th>
+                <th>Empresa</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody id={styles.tbody}>
+              {/* Linha Divisória do Cabeçalho */}
+              <tr className={styles.linhaDivisoria}>
+                <td colSpan={6}>
+                  <div className={styles.hrDivisoria}></div>
+                </td>
+              </tr>
+
+              {/* Itens com linha divisória após cada um */}
+              <Item page="UsuarioPermissoes" />
+              <tr className={styles.linhaDivisoria}>
+                <td colSpan={6}>
+                  <div className={styles.hrDivisoria}></div>
+                </td>
+              </tr>
+              <Item page="UsuarioPermissoes" />
+              <tr className={styles.linhaDivisoria}>
+                <td colSpan={6}>
+                  <div className={styles.hrDivisoria}></div>
+                </td>
+              </tr>
+              <Item page="UsuarioPermissoes" />
+              <tr className={styles.linhaDivisoria}>
+                <td colSpan={6}>
+                  <div className={styles.hrDivisoria}></div>
+                </td>
+              </tr>
+              <Item page="UsuarioPermissoes" />
+              <tr className={styles.linhaDivisoria}>
+                <td colSpan={6}>
+                  <div className={styles.hrDivisoria}></div>
+                </td>
+              </tr>
+              <Item page="UsuarioPermissoes" />
+              <tr className={styles.linhaDivisoria}>
+                <td colSpan={6}>
+                  <div className={styles.hrDivisoria}></div>
+                </td>
+              </tr>
+              <Item page="UsuarioPermissoes" />
+              <tr className={styles.linhaDivisoria}>
+                <td colSpan={6}>
+                  <div className={styles.hrDivisoria}></div>
+                </td>
+              </tr>
+              <Item page="UsuarioPermissoes" />
+              <tr className={styles.linhaDivisoria}>
+                <td colSpan={6}>
+                  <div className={styles.hrDivisoria}></div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      )}
     </>
   );
 }
