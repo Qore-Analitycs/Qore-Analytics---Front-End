@@ -166,10 +166,6 @@ export default function CriacaoTestePage() {
                                 erroDescricao={erroDescricao}
                                 onGerarRoteiro={handleGerarRoteiro}
                             />
-
-                            <FiltroPesquisa
-                                variante="usuarios"
-                                tamanho="compacto" />
                         </section>
 
                         {/* Bloco 2: Documento Gerado ("Folha Sulfite") */}
