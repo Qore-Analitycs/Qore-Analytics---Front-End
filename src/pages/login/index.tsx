@@ -7,7 +7,7 @@ import { useState, type FormEvent } from "react";
 import Botao from "@/components/botao/botao";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import Input from "@/components/input/input";
-import { login } from "../api/authService";
+import { login } from "../../services/authService";
 import { useRouter } from "next/router";
 
 export default function Login() {

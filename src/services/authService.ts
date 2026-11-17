@@ -1,5 +1,5 @@
 import secureLocalStorage from "react-secure-storage";
-import { api } from "./api";
+import { api } from "../services/api";
 
 export async function login(email: string, senha: string) {
     try {

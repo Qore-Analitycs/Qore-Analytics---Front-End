@@ -1,5 +1,5 @@
 import { ListarUsuario } from "@/@types/usuario";
-import { api } from "@/pages/api/api";
+import { api } from "@/services/api";
 
 export const UsuarioService = {
     async listar(): Promise<ListarUsuario[]> {
