@@ -1,0 +1,303 @@
+.cardContainer {
+    width: 100%;
+    background-color: var(--branco, #FFFFFF);
+    border: 2px solid #D5DCE4;
+    border-radius: 12px;
+    padding: 24px 28px;
+    box-shadow: var(--sombra);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ==========================================
+   CABEÇALHO E FILTROS POR ABAS
+   ========================================== */
+.cabecalho {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+.titulosWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.titulo {
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: var(--peso-semibold, 600);
+    color: #0F172A;
+    margin: 0;
+    line-height: 1.25;
+}
+
+.subtitulo {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13.5px;
+    font-weight: var(--peso-normal, 400);
+    color: #64748B;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.abasFiltro {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background-color: #F1F5F9;
+    border: 1px solid #E2E8F0;
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.btnAba {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: var(--peso-semibold, 600);
+    color: #475E7C;
+    background: transparent;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.btnAba:hover {
+    color: #0F172A;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.btnAbaAtiva {
+    background-color: #2D3133 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================
+   CONTEÚDO E TABELA DE EXECUÇÕES
+   ========================================== */
+.conteudo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0;
+    width: 100%;
+}
+
+.tabelaWrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.gridCabecalho {
+    display: grid;
+    grid-template-columns: minmax(260px, 2.4fr) minmax(110px, 1fr) minmax(90px, 0.9fr) minmax(90px, 0.9fr) minmax(80px, 0.8fr);
+    align-items: center;
+    gap: 16px;
+    padding: 8px 16px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: var(--peso-semibold, 600);
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.listaExecucoes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.linhaExecucao {
+    display: grid;
+    grid-template-columns: minmax(260px, 2.4fr) minmax(110px, 1fr) minmax(90px, 0.9fr) minmax(90px, 0.9fr) minmax(80px, 0.8fr);
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    background-color: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.linhaExecucao:hover {
+    background-color: #F1F5F9;
+    border-color: #CBD5E1;
+}
+
+/* 1. Coluna SUÍTE */
+.celulaSuite {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.iconeSuiteWrapper {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.iconeAprovada {
+    background-color: #E0EEFA;
+    color: #2563EB;
+}
+
+.iconeFalhou {
+    background-color: #FFEADB;
+    color: #E87A11;
+}
+
+.iconeEmExecucao {
+    background-color: #F1F5F9;
+    color: #475569;
+}
+
+.infoSuite {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.nomeSuite {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: var(--peso-semibold, 600);
+    color: #0F172A;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.subtituloSuite {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    font-weight: var(--peso-normal, 400);
+    color: #64748B;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 2. Coluna STATUS */
+.badgeStatus {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    font-weight: var(--peso-semibold, 600);
+    padding: 4px 10px;
+    border-radius: 6px;
+    width: fit-content;
+    white-space: nowrap;
+}
+
+.badgeAprovada {
+    background-color: #E0EEFA;
+    color: #1D4ED8;
+    border: 1px solid #BFDBFE;
+}
+
+.badgeFalhou {
+    background-color: #FFEADB;
+    color: #C2410C;
+    border: 1px solid #FED7AA;
+}
+
+.badgeEmExecucao {
+    background-color: #F1F5F9;
+    color: #334155;
+    border: 1px solid #E2E8F0;
+}
+
+/* 3. Coluna TESTES */
+.celulaTestes {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13.5px;
+    white-space: nowrap;
+}
+
+.testesPassaram {
+    font-weight: var(--peso-bold, 700);
+    color: #0F172A;
+}
+
+.testesTotal {
+    color: #94A3B8;
+    font-weight: var(--peso-normal, 400);
+}
+
+/* 4. Coluna DURAÇÃO */
+.celulaDuracao {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13.5px;
+    font-weight: var(--peso-semibold, 600);
+    color: #1E293B;
+    white-space: nowrap;
+}
+
+/* 5. Coluna INÍCIO */
+.celulaInicio {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: var(--peso-normal, 400);
+    color: #64748B;
+    white-space: nowrap;
+}
+
+.estadoVazio {
+    padding: 28px 16px;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    color: #64748B;
+    background-color: #F8FAFC;
+    border: 1px dashed #D5DCE4;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .cardContainer {
+        padding: 20px 16px;
+    }
+
+    .cabecalho {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .abasFiltro {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .btnAba {
+        flex: 1;
+        text-align: center;
+    }
+}
+

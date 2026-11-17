@@ -1,5 +1,5 @@
 import Botao from "@/components/botao/botao";
-import Card from "@/components/card/card";
+import Card, { CardMetrica } from "@/components/card/card";
 import FiltroPesquisa from "@/components/filtroPesquisa/filtroPesquisa";
 import Lista from "@/components/lista/lista";
 import SideBar from "@/components/sideBar/sideBar";
@@ -34,9 +34,11 @@ export default function UsuarioPermissoes() {
                 <Botao texto="Criar novo usuário" tamanho="compacto" />
               </div>
             </div>
-
-            <Card />
-            <FiltroPesquisa variante="usuarios" />
+            <aside className={styles.cards}>
+              <Card />
+            </aside>
+            <FiltroPesquisa
+              variante="usuarios" />
             <Lista page="usuarioPermissoes" />
           </div>
         </section>

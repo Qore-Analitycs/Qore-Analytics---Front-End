@@ -4,6 +4,7 @@ import "@fortawesome/free-brands-svg-icons";
 import * as yup from "yup";
 import { userSchema } from "@/hooks/useValidacao";
 import { useState, type FormEvent } from "react";
+import { useRouter } from "next/router";
 import Botao from "@/components/botao/botao";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import Input from "@/components/input/input";
@@ -12,10 +13,6 @@ import { useRouter } from "next/router";
 
 export default function Login() {
   const router = useRouter();
-
-  const [email, setEmail] = useState<string>("");
-  const [senha, setSenha] = useState<string>("");
-
   const [erros, setErros] = useState<{
     email?: string;
     senha?: string;
@@ -27,6 +24,10 @@ export default function Login() {
     try {
       await userSchema.validate({ email, senha }, { abortEarly: false });
       setErros({});
+
+      console.log("Login válido!", formData);
+
+      router.push("/historico");
     } catch (erro) {
       if (erro instanceof yup.ValidationError) {
         const novosErros: { email?: string; senha?: string } = {};
@@ -56,10 +57,18 @@ export default function Login() {
   };
 
   return (
-    <main className={styles.main}>
-      <section className={styles.ladoEsquerdo}>
-        <div className={`${styles.quadrado} ${styles.quadradoLaranja}`}></div>
-        <div className={`${styles.quadrado} ${styles.quadradoAzul}`}></div>
+    <>
+      <main className={styles.main}>
+        <section className={styles.ladoEsquerdo}>
+          <div className={`${styles.quadrado} ${styles.quadradoLaranja}`}></div>
+          <div className={`${styles.quadrado} ${styles.quadradoAzul}`}></div>
+
+          <div className={styles.fundoGlass}></div>
+
+          <div className={styles.superior}>
+            <img src="../imgs/LogoMinimalista.png" alt="Logo QA" />
+            <img src="../imgs/QoreAnalytics.png" alt="Qore Analytics" />
+          </div>
 
         <div className={styles.fundoGlass}></div>
 
@@ -118,13 +127,11 @@ export default function Login() {
             <div className={styles.campo}>
               <div>
                 <Input
-                  className={styles.inputSenha}
-                  icone={faLock}
-                  label="Senha"
-                  type="password"
-                  placeholder="••••••••••••••••••••"
-                  value={senha}
-                  onChange={(event) => setSenha(event.target.value)}
+                  name="email"
+                  type="email"
+                  icone={faEnvelope}
+                  label="Email"
+                  placeholder="email@email.com"
                 />
                 {erros.senha && (
                   <span className={styles.erro}>
@@ -133,21 +140,32 @@ export default function Login() {
                   </span>
                 )}
               </div>
-              <p className={styles.esqueceuSenha}>esqueceu sua senha ?</p>
-            </div>
-
-            <div className={styles.botaoEntrar}>
-              <Botao texto="Entrar" type="submit" />
-            </div>
-          </form>
-
-          <div>
-            <div className={styles.divisorContainer}>
-              <hr /> <p>OU</p> <hr />
-            </div>
-            <div className={styles.alternativaLogin}>
-              <div className={styles.botaoAlternativo}>
-                <Botao variante="alternativo" texto="Google" />
+              <div className={styles.campo}>
+                <div>
+                  <Input
+                    name="senha"
+                    type="password"
+                    className={styles.inputSenha}
+                    icone={faLock}
+                    label="Senha"
+                    placeholder="••••••••••••••••••••"
+                  />
+                  {erros.senha && (
+                    <span className={styles.erro}>
+                      <i className="fa-solid fa-circle-exclamation"></i>
+                      {erros.senha}
+                    </span>
+                  )}
+                </div>
+                <p className={styles.esqueceuSenha}>esqueceu sua senha ?</p>
+              </div>
+              <div className={styles.botaoEntrar}>
+                <Botao page="/historico" texto="Entrar" />
+              </div>
+            </form>
+            <div>
+              <div className={styles.divisorContainer}>
+                <hr /> <p>OU</p> <hr />
               </div>
               <div className={styles.botaoAlternativo}>
                 <Botao variante="alternativo" texto="GitHub" />
