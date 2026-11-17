@@ -16,25 +16,25 @@ const ITENS_NAVEGACAO = [
     {
         id: "painel",
         label: "Painel",
-        href: "#",
+        href: "/dashboard",
         icone: "fa-solid fa-chart-line",
     },
     {
-        id: "criacao-teste",
+        id: "criacaoDeTeste",
         label: "Criação de Teste",
-        href: "/criacaoTeste",
+        href: "/criacaoDeTeste",
         icone: "fa-solid fa-clipboard",
     },
     {
         id: "historico",
         label: "Histórico",
-        href: "#",
+        href: "/historico",
         icone: "fa-solid fa-list",
     },
     {
-        id: "usuarios",
-        label: "Usuários",
-        href: "#",
+        id: "usuarioPermissoes",
+        label: "Usuário / Permissões",
+        href: "/usuarioPermissoes",
         icone: "fa-solid fa-users",
     },
 ];

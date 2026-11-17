@@ -4,11 +4,13 @@ import "@fortawesome/free-brands-svg-icons";
 import * as yup from "yup";
 import { userSchema } from "@/hooks/useValidacao";
 import { useState, type FormEvent } from "react";
+import { useRouter } from "next/router";
 import Botao from "@/components/botao/botao";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import Input from "@/components/input/input";
 
 export default function Login() {
+  const router = useRouter();
   const [erros, setErros] = useState<{
     email?: string;
     senha?: string;
@@ -33,7 +35,7 @@ export default function Login() {
 
       console.log("Login válido!", formData);
 
-      // Aqui você poderá chamar sua API de autenticação.
+      router.push("/historico");
     } catch (erro) {
       if (erro instanceof yup.ValidationError) {
         const novosErros: { email?: string; senha?: string } = {};
@@ -57,7 +59,7 @@ export default function Login() {
           <div className={`${styles.quadrado} ${styles.quadradoAzul}`}></div>
 
           <div className={styles.fundoGlass}></div>
-          
+
           <div className={styles.superior}>
             <img src="../imgs/LogoMinimalista.png" alt="Logo QA" />
             <img src="../imgs/QoreAnalytics.png" alt="Qore Analytics" />
@@ -96,6 +98,8 @@ export default function Login() {
             >
               <div className={styles.campo}>
                 <Input
+                  name="email"
+                  type="email"
                   icone={faEnvelope}
                   label="Email"
                   placeholder="email@email.com"
@@ -110,6 +114,8 @@ export default function Login() {
               <div className={styles.campo}>
                 <div>
                   <Input
+                    name="senha"
+                    type="password"
                     className={styles.inputSenha}
                     icone={faLock}
                     label="Senha"
@@ -125,7 +131,7 @@ export default function Login() {
                 <p className={styles.esqueceuSenha}>esqueceu sua senha ?</p>
               </div>
               <div className={styles.botaoEntrar}>
-                <Botao texto="Entrar" />
+                <Botao page="/historico" texto="Entrar" />
               </div>
             </form>
             <div>
