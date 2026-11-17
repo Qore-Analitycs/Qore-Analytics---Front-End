@@ -13,6 +13,10 @@ export default function Document() {
       </Head>
       <body>
         <Main />
+        <div className="assistant-status" role="status" aria-label="Assistente ativo">
+          <span className="assistant-status__dot" aria-hidden="true" />
+          <span>Assistente ativo</span>
+        </div>
         <NextScript />
       </body>
     </Html>
