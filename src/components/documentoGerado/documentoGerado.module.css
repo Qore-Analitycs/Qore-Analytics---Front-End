@@ -1,0 +1,17 @@
+.folhaSulfite {
+    width: 100%;
+    background-color: var(--branco);
+    border-radius: 12px;
+    padding: 40px 44px;
+    box-shadow: var(--sombra);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+@media (max-width: 768px) {
+    .folhaSulfite {
+        padding: 24px 16px;
+        gap: 24px;
+    }
+}

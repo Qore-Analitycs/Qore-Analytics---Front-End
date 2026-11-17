@@ -1,0 +1,333 @@
+.cardTabela {
+    width: 100%;
+    background-color: var(--branco);
+    border: 2px solid #D5DCE4;
+    border-radius: 12px;
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.titulo {
+    font-family: "Montserrat", sans-serif;
+    font-size: 22px;
+    font-weight: var(--peso-semibold);
+    color: #0F172A;
+    margin: 0;
+}
+
+.tabelaWrapper {
+    width: 100%;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+.tabela {
+    width: 100%;
+    min-width: 780px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.tabela thead {
+    background-color: #F3F5F8;
+    border-bottom: 1px solid #E2E8F0;
+}
+
+.tabela th {
+    padding: 14px 18px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: var(--peso-semibold);
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.colNumero {
+    width: 60px;
+    text-align: center;
+}
+
+.colAcao {
+    width: 34%;
+}
+
+.colDado {
+    width: 22%;
+}
+
+.colResultado {
+    width: 32%;
+}
+
+.colAcoes {
+    width: 96px;
+    text-align: center;
+}
+
+.tabela tbody tr {
+    border-bottom: 1px solid #EDF2F7;
+    transition: background-color 0.15s ease;
+}
+
+.tabela tbody tr:last-child {
+    border-bottom: none;
+}
+
+.tabela tbody tr:hover {
+    background-color: #FAFBFD;
+}
+
+.linhaEditando {
+    background-color: #FFFBF5 !important;
+}
+
+.tabela td {
+    padding: 20px 18px;
+    vertical-align: middle;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.celulaNumero {
+    font-size: 16px;
+    font-weight: var(--peso-semibold);
+    color: #1E293B;
+    text-align: center;
+}
+
+.celulaAcaoConteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.textoAcao {
+    margin: 0;
+    color: #475569;
+    font-weight: var(--peso-normal);
+}
+
+.badgeFocoDiff {
+    display: inline-block;
+    background-color: var(--laranja);
+    color: var(--branco);
+    font-size: 11px;
+    font-weight: var(--peso-bold);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+.badgeDadoEntrada {
+    display: inline-block;
+    background-color: #F1F5F9;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #475569;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.dadoVazio {
+    color: #94A3B8;
+}
+
+.textoResultado {
+    margin: 0;
+    color: #64748B;
+}
+
+/* ==========================================
+   MODO DE EDIÇÃO INLINE
+   ========================================== */
+.campoEdicaoStack {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.textareaInline {
+    width: 100%;
+    min-height: 70px;
+    padding: 8px 10px;
+    border: 1.5px solid #CBD5E1;
+    border-radius: 6px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--cinza-escuro);
+    background-color: var(--branco);
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.15s ease;
+}
+
+.textareaInline:focus {
+    border-color: var(--laranja);
+}
+
+.textareaCodigo {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 12px;
+}
+
+.textareaErro {
+    border-color: var(--vermelho);
+}
+
+.textoErro {
+    font-size: var(--fonte-pequena);
+    color: var(--vermelho);
+}
+
+.checkboxFoco {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #475569;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkboxFoco input {
+    accent-color: var(--laranja);
+    cursor: pointer;
+}
+
+/* ==========================================
+   BOTÕES DE AÇÃO DA LINHA
+   ========================================== */
+.acoesGrupo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btnIcone {
+    background: transparent;
+    border: none;
+    padding: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #94A3B8;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.btnEditar:hover {
+    color: var(--laranja);
+    background-color: #FFF4E8;
+}
+
+.btnExcluir:hover {
+    color: var(--vermelho);
+    background-color: #FEE2E2;
+}
+
+.btnSalvar {
+    color: var(--verde);
+}
+
+.btnSalvar:hover {
+    background-color: #DCFCE7;
+}
+
+.btnCancelar {
+    color: var(--vermelho);
+}
+
+.btnCancelar:hover {
+    color: var(--vermelho);
+    background-color: #FEE2E2;
+}
+
+.estadoVazio {
+    text-align: center;
+    padding: 36px 20px !important;
+    color: #64748B;
+    font-size: 14px;
+}
+
+/* ==========================================
+   RODAPÉ DA TABELA
+   ========================================== */
+.rodapeTabela {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+.btnAdicionarPasso {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 18px;
+    background-color: #E8EEF3;
+    color: #334155;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: var(--peso-semibold);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.btnAdicionarPasso:hover {
+    background-color: #DCE5EE;
+}
+
+.botoesAcao {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.botaoWrapper {
+    width: auto;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .cardTabela {
+        padding: 18px 16px;
+    }
+
+    .rodapeTabela {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btnAdicionarPasso {
+        justify-content: center;
+    }
+
+    .botoesAcao {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .botaoWrapper {
+        width: 100%;
+    }
+}

@@ -14,6 +14,11 @@
     z-index: 1000;
 }
 
+.containerBotao {
+    width: 50%;
+    display: flex;
+}
+
 /* Janela principal */
 .modal {
     width: min(720px, 100%);
@@ -23,7 +28,6 @@
 
     background-color: #E7E9ED;
 
-    border: 5px solid #F0A000;
     border-radius: 14px;
 
     overflow: hidden;
@@ -336,9 +340,8 @@
 /* Área dos botões */
 .formActions {
     display: flex;
-
     gap: 18px;
-
+    justify-content: space-between;
     margin-top: 2px;
 }
 

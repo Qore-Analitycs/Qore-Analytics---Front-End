@@ -1,0 +1,38 @@
+.container {
+    width: 100%;
+    min-height: 100px;
+    height: 100px;
+    background-color: var(--cinza-escuro);
+    color: var(--branco);
+    border-radius: 10px;
+    padding: 0 24px 20px 24px;
+    box-shadow: var(--sombra);
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    box-sizing: border-box;
+}
+
+.campo {
+    flex: 1;
+    min-width: 140px;
+}
+
+.campoBuscaLargo {
+    flex: 1.8;
+    min-width: 220px;
+}
+
+.areaBotao {
+    flex: 0.8;
+    min-width: 120px;
+}
+
+@media (max-width: 1100px) {
+    .container {
+        height: auto;
+        min-height: 100px;
+        padding: 20px 24px;
+        flex-wrap: wrap;
+    }
+}

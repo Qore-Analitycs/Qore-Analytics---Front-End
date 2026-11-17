@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ModalPerfil from "../components/perfil/ModalPerfil";
+import ModalPerfil from "../components/ModalPerfil/ModalPerfil";
 
 export default function Index() {
 
