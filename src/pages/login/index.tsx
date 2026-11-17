@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 import Botao from "@/components/botao/botao";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import Input from "@/components/input/input";
+import { login } from "../../services/authService";
+import { useRouter } from "next/router";
 
 export default function Login() {
   const router = useRouter();
@@ -19,18 +21,8 @@ export default function Login() {
   const loginUsuario = async (evento: FormEvent<HTMLFormElement>) => {
     evento.preventDefault();
 
-    const dados = new FormData(evento.currentTarget);
-
-    const formData = {
-      email: String(dados.get("email") ?? ""),
-      senha: String(dados.get("senha") ?? ""),
-    };
-
     try {
-      await userSchema.validate(formData, {
-        abortEarly: false,
-      });
-
+      await userSchema.validate({ email, senha }, { abortEarly: false });
       setErros({});
 
       console.log("Login válido!", formData);
@@ -48,6 +40,19 @@ export default function Login() {
 
         setErros(novosErros);
       }
+      return;
+    }
+
+    try {
+      const resposta = await login(email, senha);
+      console.log(resposta);
+      alert("Login bem sucedido!");
+      router.push("/historicoTeste");
+    } catch (error: any) {
+      setErros({
+        email: "email ou senha incorretos",
+        senha: "email ou senha incorretos"
+      });
     }
   };
 
@@ -65,38 +70,62 @@ export default function Login() {
             <img src="../imgs/QoreAnalytics.png" alt="Qore Analytics" />
           </div>
 
-          <div className={styles.conteudoCentro}>
-            <img
-              src="../imgs/ImagemLogin.png"
-              alt="Ilustração de Testes"
-              className={styles.imagemIlustracao}
-            />
-            <h1>Automação contínua e inteligência em testes de Web e APIs.</h1>
-            <h2>
-              Orquestração distribuída de suítes ponta a ponta, análise
-              preditiva de flakiness e validação de contratos para equipes de
-              engenharia de missão crítica.
-            </h2>
-          </div>
-        </section>
-        {/* Lado Direito */}
+        <div className={styles.fundoGlass}></div>
 
-        <section className={styles.ladoDireito}>
-          <div className={styles.containerDireito}>
-            <div className={styles.texto}>
-              <h1 className={styles.titulo}>Acesse sua conta corporativa</h1>
-              <p>
-                Insira suas credenciais corporativas para gerenciar seus
-                clusters, suítes de teste e integrações CI/CD.
-              </p>
+        <div className={styles.superior}>
+          <img src="../imgs/LogoMinimalista.png" alt="Logo QA" />
+          <img src="../imgs/QoreAnalytics.png" alt="Qore Analytics" />
+        </div>
+
+        <div className={styles.conteudoCentro}>
+          <img
+            src="../imgs/ImagemLogin.png"
+            alt="Ilustração de Testes"
+            className={styles.imagemIlustracao}
+          />
+          <h1>Automação contínua e inteligência em testes de Web e APIs.</h1>
+          <h2>
+            Orquestração distribuída de suítes ponta a ponta, análise predditiva
+            de flakiness e validação de contratos para equipes de engenharia de
+            missão crítica.
+          </h2>
+        </div>
+      </section>
+
+      {/* Lado Direito */}
+      <section className={styles.ladoDireito}>
+        <div className={styles.containerDireito}>
+          <div className={styles.texto}>
+            <h1 className={styles.titulo}>Acesse sua conta corporativa</h1>
+            <p>
+              Insira suas credenciais corporativas para gerenciar seus clusters,
+              suítes de teste e integrações CI/CD.
+            </p>
+          </div>
+
+          <form
+            className={styles.formulario}
+            onSubmit={loginUsuario}
+            noValidate
+          >
+            <div className={styles.campo}>
+              <Input
+                icone={faEnvelope}
+                label="Email"
+                placeholder="email@email.com"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+              />
+              {erros.email && (
+                <span className={styles.erro}>
+                  <i className="fa-solid fa-circle-exclamation"></i>
+                  {erros.email}
+                </span>
+              )}
             </div>
-            {/* Formulario  */}
-            <form
-              action=""
-              className={styles.formulario}
-              onSubmit={loginUsuario}
-            >
-              <div className={styles.campo}>
+
+            <div className={styles.campo}>
+              <div>
                 <Input
                   name="email"
                   type="email"
@@ -104,10 +133,10 @@ export default function Login() {
                   label="Email"
                   placeholder="email@email.com"
                 />
-                {erros.email && (
+                {erros.senha && (
                   <span className={styles.erro}>
                     <i className="fa-solid fa-circle-exclamation"></i>
-                    {erros.email}
+                    {erros.senha}
                   </span>
                 )}
               </div>
@@ -138,18 +167,13 @@ export default function Login() {
               <div className={styles.divisorContainer}>
                 <hr /> <p>OU</p> <hr />
               </div>
-              <div className={styles.alternativaLogin}>
-                <div className={styles.botaoAlternativo}>
-                  <Botao variante="alternativo" texto="Google" />
-                </div>
-                <div className={styles.botaoAlternativo}>
-                  <Botao variante="alternativo" texto="GitHub" />
-                </div>
+              <div className={styles.botaoAlternativo}>
+                <Botao variante="alternativo" texto="GitHub" />
               </div>
             </div>
           </div>
-        </section>
-      </main>
-    </>
+        </div>
+      </section>
+    </main>
   );
 }

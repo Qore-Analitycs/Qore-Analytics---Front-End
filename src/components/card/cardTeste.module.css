@@ -1,0 +1,63 @@
+.superiorCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.titulo {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.iconeCard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cor-destaque, rgb(232, 122, 17));
+}
+
+.valor {
+    display: block;
+    font-size: 1.85rem;
+    font-weight: 700;
+    margin: 12px 0;
+}
+
+.parametros {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+}
+
+.iconeTendencia,
+.porcentagem {
+    color: var(--cor-destaque, rgb(232, 122, 17));
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+}
+
+.comparacao {
+    opacity: 0.8;
+    font-weight: 400;
+}
+
+/* Variantes de Cor */
+.varianteLaranja {
+    --cor-destaque: rgb(232, 122, 17);
+}
+
+.varianteVerde {
+    --cor-destaque: rgb(22, 163, 74);
+}
+
+.varianteVermelho {
+    --cor-destaque: rgb(220, 38, 38);
+}
+
+.varianteAzul {
+    --cor-destaque: rgb(37, 99, 235);
+}

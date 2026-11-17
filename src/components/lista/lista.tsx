@@ -1,12 +1,19 @@
+import { useUsuario } from "@/hooks/useUsuario";
 import Card from "../card/card";
 import Item from "../item/item";
 import styles from "./lista.module.css";
+import { Fragment } from "react/jsx-runtime";
 
 type ListaProps = {
   page?: string;
 };
 
 export default function Lista({ page }: ListaProps) {
+
+  const {u} = useUsuario();
+
+  console.log("usuarios recebidos", u)
+
   return (
     <>
       {page === "listaHistorico" && (
@@ -91,55 +98,28 @@ export default function Lista({ page }: ListaProps) {
 
             <tbody id={styles.tbody}>
               {/* Linha Divisória do Cabeçalho */}
-              <tr className={styles.linhaDivisoria}>
-                <td colSpan={6}>
+             <tr className={styles.linhaDivisoria}>
+                <td colSpan={4}>
                   <div className={styles.hrDivisoria}></div>
                 </td>
               </tr>
 
-              {/* Itens com linha divisória após cada um */}
-              <Item page="UsuarioPermissoes" />
-              <tr className={styles.linhaDivisoria}>
-                <td colSpan={6}>
-                  <div className={styles.hrDivisoria}></div>
-                </td>
-              </tr>
-              <Item page="UsuarioPermissoes" />
-              <tr className={styles.linhaDivisoria}>
-                <td colSpan={6}>
-                  <div className={styles.hrDivisoria}></div>
-                </td>
-              </tr>
-              <Item page="UsuarioPermissoes" />
-              <tr className={styles.linhaDivisoria}>
-                <td colSpan={6}>
-                  <div className={styles.hrDivisoria}></div>
-                </td>
-              </tr>
-              <Item page="UsuarioPermissoes" />
-              <tr className={styles.linhaDivisoria}>
-                <td colSpan={6}>
-                  <div className={styles.hrDivisoria}></div>
-                </td>
-              </tr>
-              <Item page="UsuarioPermissoes" />
-              <tr className={styles.linhaDivisoria}>
-                <td colSpan={6}>
-                  <div className={styles.hrDivisoria}></div>
-                </td>
-              </tr>
-              <Item page="UsuarioPermissoes" />
-              <tr className={styles.linhaDivisoria}>
-                <td colSpan={6}>
-                  <div className={styles.hrDivisoria}></div>
-                </td>
-              </tr>
-              <Item page="UsuarioPermissoes" />
-              <tr className={styles.linhaDivisoria}>
-                <td colSpan={6}>
-                  <div className={styles.hrDivisoria}></div>
-                </td>
-              </tr>
+              {u.map((usuario) => (
+                <Fragment key={usuario.id}>
+                  <Item
+                    page="usuarioPermissoes"
+                    usuario={usuario}
+                  />
+
+                  <tr className={styles.linhaDivisoria}>
+                    <td colSpan={4}>
+                      <div className={styles.hrDivisoria}></div>
+                    </td>
+                  </tr>
+                </Fragment>
+              ))}
+
+            
             </tbody>
           </table>
         </section>
