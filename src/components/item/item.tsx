@@ -1,10 +1,10 @@
 import { useUsuario } from "@/hooks/useUsuario";
 import styles from "./item.module.css";
-import { ListarUsuario } from "@/@types/usuario";
+import { Usuario } from "@/@types/usuario";
 
 type ItemProps = {
   page?: string;
-  usuario?: ListarUsuario;
+  usuario?: Usuario;
 };
 
 const Item = ({ page, usuario }: ItemProps) => {

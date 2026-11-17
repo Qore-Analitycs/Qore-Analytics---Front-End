@@ -1,9 +1,9 @@
-import { ListarUsuario } from "@/@types/usuario";
+import { Usuario } from "@/@types/usuario";
 import { UsuarioService } from "@/services/usuarioService";
 import { useEffect, useState } from "react";
 
 export function useUsuario() {
-    const [u, setU] = useState<ListarUsuario[]>([]);
+    const [u, setU] = useState<Usuario[]>([]);
 
     async function listarU() {
         try {
