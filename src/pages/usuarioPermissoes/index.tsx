@@ -4,10 +4,25 @@ import FiltroPesquisa from "@/components/filtroPesquisa/filtroPesquisa";
 import Lista from "@/components/lista/lista";
 import SideBar from "@/components/sideBar/sideBar";
 import styles from "@/pages/usuarioPermissoes/usuarioPermissoes.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function UsuarioPermissoes() {
   const [sidebarExpandida, setSidebarExpandida] = useState(false);
+  const [usuarios, setUsuarios] = useState([]);
+
+  // Busca os dados da API do C# assim que a página abre
+  useEffect(() => {
+    async function carregarUsuarios() {
+      try {
+        const resposta = await fetch("http://172.16.24.23:5044/api/usuarios");
+        const dados = await resposta.json();
+        setUsuarios(dados);
+      } catch (erro) {
+        console.error("Erro ao carregar usuários:", erro);
+      }
+    }
+    carregarUsuarios();
+  }, []);
 
   return (
     <main className={styles.main}>
@@ -37,7 +52,7 @@ export default function UsuarioPermissoes() {
 
             <Card />
             <FiltroPesquisa variante="usuarios" />
-            <Lista page="usuarioPermissoes" />
+            <Lista page="usuarioPermissoes" usuarios={usuarios} />
           </div>
         </section>
       </div> 

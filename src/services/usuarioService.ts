@@ -4,8 +4,6 @@ import { api } from "./api";
 import type {
   Usuario,
   Perfil,
-  CriarUsuarioDTO,
-  FiltroUsuario
 } from "@/types/usuario";
 
 // Serviço responsável pelas operações de usuários.
@@ -26,14 +24,6 @@ export const usuarioService = {
     return api<Perfil[]>("/api/perfis");
   },
 
-  // 4. Cadastrar um novo usuário.
-  criar: (dados: CriarUsuarioDTO) => {
-    return api<Usuario>("/api/usuarios", {
-      method: "POST",
-      body: JSON.stringify(dados),
-    });
-  },
-
   // 5. Atualizar um usuário.
   atualizar: (id: string, dados: Partial<Usuario>) => {
     return api<Usuario>(`/api/usuarios/${id}`, {
@@ -50,29 +40,29 @@ export const usuarioService = {
     });
   },
 
-  // 7. Pesquisar usuários.
-  filtrar: (filtros: FiltroUsuario) => {
+  // // 7. Pesquisar usuários.
+  // filtrar: (filtros: FiltroUsuario) => {
 
-    const parametros = new URLSearchParams();
+  //   const parametros = new URLSearchParams();
 
-    if (filtros.busca) {
-      parametros.set("busca", filtros.busca);
-    }
+  //   if (filtros.busca) {
+  //     parametros.set("busca", filtros.busca);
+  //   }
 
-    if (filtros.perfilId !== undefined) {
-      parametros.set("perfilId", String(filtros.perfilId));
-    }
+  //   if (filtros.perfilId !== undefined) {
+  //     parametros.set("perfilId", String(filtros.perfilId));
+  //   }
 
-    if (filtros.estaAtivo !== undefined) {
-      parametros.set("estaAtivo", String(filtros.estaAtivo));
-    }
+  //   if (filtros.estaAtivo !== undefined) {
+  //     parametros.set("estaAtivo", String(filtros.estaAtivo));
+  //   }
 
-    if (filtros.projetoId !== undefined) {
-      parametros.set("projetoId", String(filtros.projetoId));
-    }
+  //   if (filtros.projetoId !== undefined) {
+  //     parametros.set("projetoId", String(filtros.projetoId));
+  //   }
 
-    return api<Usuario[]>(
-      `/api/usuarios?${parametros.toString()}`
-    );
-  },
+  //   return api<Usuario[]>(
+  //     `/api/usuarios?${parametros.toString()}`
+  //   );
+  // },
 };
