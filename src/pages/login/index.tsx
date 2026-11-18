@@ -8,6 +8,7 @@ import Botao from "@/components/botao/botao";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import Input from "@/components/input/input";
 import { login } from "../../services/authService";
+import { toastErro, toastSucesso } from "@/utils/toast";
 
 export default function Login() {
   const router = useRouter();
@@ -38,19 +39,19 @@ export default function Login() {
             novosErros[item.path as "email" | "senha"] = item.message;
           }
         });
-
         setErros(novosErros);
       }
       return;
     }
     try {
+      toastSucesso("Login bem sucedido")
       const resposta = await login(email, senha);
-      alert("Login bem sucedido!");
       await router.push("/historicoTeste");
-    } catch (error) {
+    } catch (error) { 
       setErros({
         email: "Email ou senha incorretos",
         senha: "Email ou senha incorretos",
+        
       });
     }
   };

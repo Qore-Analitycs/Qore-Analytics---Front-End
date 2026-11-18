@@ -1,5 +1,6 @@
 import { Usuario } from "@/@types/usuario";
 import { UsuarioService } from "@/services/usuarioService";
+import { toastErro } from "@/utils/toast";
 import { useEffect, useState } from "react";
 
 export function useUsuario() {
@@ -13,7 +14,7 @@ export function useUsuario() {
 
             setU(dados);
         }catch(error) {
-            // alert("Deu merda");
+            toastErro("Deu merda");
         }
     }
 

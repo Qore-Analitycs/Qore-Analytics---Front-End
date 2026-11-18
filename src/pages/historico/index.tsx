@@ -5,6 +5,7 @@ import Lista from "@/components/lista/lista";
 import SideBar from "@/components/sideBar/sideBar";
 import styles from "./historicoTeste.module.css";
 import { useState } from "react";
+import ModalPerfil from "@/components/ModalPerfil/ModalPerfil";
 
 export default function HistoricoTeste() {
   const [sidebarExpandida, setSidebarExpandida] = useState(false);
@@ -55,6 +56,7 @@ export default function HistoricoTeste() {
           </section>
         </div>
       </main>
+      
     </>
   );
 }

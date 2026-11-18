@@ -169,3 +169,33 @@ a {
     @apply font-sans;
   }
 }
+
+.Toastify__toast--success {
+  & svg {
+    fill: var(--verde)
+  }
+}
+
+.Toastify__toast--error {
+  & svg {
+    fill: var(--destructive)
+  }
+}
+
+/* Barrinha de progresso */
+.Toastify__progress-bar--success {
+  background: color-mix(in srgb, var(--verde) 100%, transparent 0%) !important;
+}
+
+.Toastify__progress-bar--error {
+  background: color-mix(in srgb, var(--destructive) 100%, transparent 0%) !important;
+}
+
+/* Toast */
+.Toastify__toast {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  border-radius: var(--border-lg);
+}
