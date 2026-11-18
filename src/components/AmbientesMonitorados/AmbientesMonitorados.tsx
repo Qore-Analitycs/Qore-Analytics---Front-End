@@ -3,7 +3,6 @@ import { Server } from "lucide-react";
 import styles from "./AmbientesMonitorados.module.css";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
-
 export type VarianteStatusAmbiente = "saudavel" | "alerta" | "operacional";
 
 export type AmbienteMonitorado = {
@@ -49,31 +48,22 @@ const AMBIENTES_PADRAO: AmbienteMonitorado[] = [
         variante: "operacional",
     },
     {
-        id: "staging-sa-east-1",
-        titulo: "Staging / Homologação - sa-east-1",
-        subtitulo: "184 endpoints ativos",
-        statusTexto: "98.8% Saudável",
-        exibirPonto: false,
-        detalheSecundario: "1 alerta menor",
-        variante: "alerta",
+        id: "api-gateway",
+        titulo: "API Gateway / Edge - global",
+        subtitulo: "32 rotas autenticadas",
+        statusTexto: "100% Saudável",
+        exibirPonto: true,
+        detalheSecundario: "latência: 28ms",
+        variante: "saudavel",
     },
     {
-        id: "staging-sa-east-1",
-        titulo: "Staging / Homologação - sa-east-1",
-        subtitulo: "184 endpoints ativos",
-        statusTexto: "98.8% Saudável",
-        exibirPonto: false,
-        detalheSecundario: "1 alerta menor",
-        variante: "alerta",
-    },
-    {
-        id: "staging-sa-east-1",
-        titulo: "Staging / Homologação - sa-east-1",
-        subtitulo: "184 endpoints ativos",
-        statusTexto: "98.8% Saudável",
-        exibirPonto: false,
-        detalheSecundario: "1 alerta menor",
-        variante: "alerta",
+        id: "qa-regression",
+        titulo: "Cluster Regressão E2E - us-west-2",
+        subtitulo: "112 workers paralelos",
+        statusTexto: "Operacional",
+        exibirPonto: true,
+        detalheSecundario: "latência: 84ms",
+        variante: "operacional",
     },
 ];
 
@@ -103,50 +93,41 @@ export default function AmbientesMonitorados({
 
             <CardContent className={styles.conteudo}>
                 <ul className={styles.listaAmbientes}>
-                    {ambientes.map((ambiente) => {
-                        const classeBadge =
-                            MAPA_CLASSES_BADGE[ambiente.variante] ||
-                            styles.badgeOperacional;
+                    {ambientes.map((item) => (
+                        <li key={item.id} className={styles.subCardAmbiente}>
+                            <div className={styles.infoEsquerda}>
+                                <h3 className={styles.tituloAmbiente}>
+                                    {item.titulo}
+                                </h3>
+                                <span className={styles.subtituloAmbiente}>
+                                    {item.subtitulo}
+                                </span>
+                            </div>
 
-                        return (
-                            <li
-                                key={ambiente.id}
-                                className={styles.subCardAmbiente}
-                            >
-                                <div className={styles.infoEsquerda}>
-                                    <h4 className={styles.tituloAmbiente}>
-                                        {ambiente.titulo}
-                                    </h4>
-                                    <p className={styles.subtituloAmbiente}>
-                                        {ambiente.subtitulo}
-                                    </p>
-                                </div>
-
-                                <div className={styles.infoDireita}>
-                                    <span
-                                        className={`${styles.badgeStatus} ${classeBadge}`}
-                                    >
-                                        {ambiente.exibirPonto && (
-                                            <span
-                                                className={styles.pontoStatus}
-                                                aria-hidden="true"
-                                            >
-                                                ●
-                                            </span>
-                                        )}
-                                        <span>{ambiente.statusTexto}</span>
-                                    </span>
-
-                                    <span className={styles.detalheStatus}>
-                                        {ambiente.detalheSecundario}
-                                    </span>
-                                </div>
-                            </li>
-                        );
-                    })}
+                            <div className={styles.infoDireita}>
+                                <span
+                                    className={`${styles.badgeStatus} ${
+                                        MAPA_CLASSES_BADGE[item.variante]
+                                    }`}
+                                >
+                                    {item.exibirPonto && (
+                                        <span
+                                            className={styles.pontoStatus}
+                                            aria-hidden="true"
+                                        >
+                                            ●
+                                        </span>
+                                    )}
+                                    {item.statusTexto}
+                                </span>
+                                <span className={styles.detalheStatus}>
+                                    {item.detalheSecundario}
+                                </span>
+                            </div>
+                        </li>
+                    ))}
                 </ul>
             </CardContent>
         </Card>
     );
 }
-

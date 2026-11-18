@@ -1,19 +1,20 @@
 .cardTabela {
     width: 100%;
-    background-color: var(--branco);
+    background-color: var(--branco, #FFFFFF);
     border: 2px solid #D5DCE4;
     border-radius: 12px;
-    padding: 24px 28px;
+    padding: 28px 32px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    box-sizing: border-box;
 }
 
 .titulo {
     font-family: "Montserrat", sans-serif;
     font-size: 22px;
-    font-weight: var(--peso-semibold);
-    color: #0F172A;
+    font-weight: var(--peso-semibold, 600);
+    color: #2D3133;
     margin: 0;
 }
 
@@ -40,7 +41,7 @@
     padding: 14px 18px;
     font-family: "Montserrat", sans-serif;
     font-size: 13px;
-    font-weight: var(--peso-semibold);
+    font-weight: var(--peso-semibold, 600);
     color: #64748B;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -56,7 +57,7 @@
 }
 
 .colDado {
-    width: 22%;
+    width: 24%;
 }
 
 .colResultado {
@@ -86,17 +87,18 @@
 }
 
 .tabela td {
-    padding: 20px 18px;
+    padding: 20px 22px;
     vertical-align: middle;
     font-family: "Montserrat", sans-serif;
     font-size: 15px;
     line-height: 1.55;
+    color: #3C3F40;
 }
 
 .celulaNumero {
     font-size: 16px;
-    font-weight: var(--peso-semibold);
-    color: #1E293B;
+    font-weight: var(--peso-semibold, 600);
+    color: #2D3133;
     text-align: center;
 }
 
@@ -109,16 +111,16 @@
 
 .textoAcao {
     margin: 0;
-    color: #475569;
-    font-weight: var(--peso-normal);
+    color: #3C3F40;
+    font-weight: var(--peso-normal, 400);
 }
 
 .badgeFocoDiff {
     display: inline-block;
-    background-color: var(--laranja);
-    color: var(--branco);
+    background-color: var(--laranja, #E87A11);
+    color: var(--branco, #FFFFFF);
     font-size: 11px;
-    font-weight: var(--peso-bold);
+    font-weight: var(--peso-bold, 700);
     letter-spacing: 0.04em;
     text-transform: uppercase;
     padding: 4px 10px;
@@ -134,7 +136,7 @@
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 13px;
     line-height: 1.5;
-    color: #475569;
+    color: #475E7C;
     white-space: pre-wrap;
     word-break: break-word;
 }
@@ -145,7 +147,7 @@
 
 .textoResultado {
     margin: 0;
-    color: #64748B;
+    color: #475E7C;
 }
 
 /* ==========================================
@@ -166,15 +168,15 @@
     font-family: "Montserrat", sans-serif;
     font-size: 13px;
     line-height: 1.45;
-    color: var(--cinza-escuro);
-    background-color: var(--branco);
+    color: #2D3133;
+    background-color: var(--branco, #FFFFFF);
     resize: vertical;
     outline: none;
     transition: border-color 0.15s ease;
 }
 
 .textareaInline:focus {
-    border-color: var(--laranja);
+    border-color: var(--laranja, #E87A11);
 }
 
 .textareaCodigo {
@@ -183,12 +185,12 @@
 }
 
 .textareaErro {
-    border-color: var(--vermelho);
+    border-color: var(--vermelho, #FF0000);
 }
 
 .textoErro {
-    font-size: var(--fonte-pequena);
-    color: var(--vermelho);
+    font-size: var(--fonte-pequena, 12px);
+    color: var(--vermelho, #FF0000);
 }
 
 .checkboxFoco {
@@ -196,13 +198,13 @@
     align-items: center;
     gap: 6px;
     font-size: 12px;
-    color: #475569;
+    color: #475E7C;
     cursor: pointer;
     user-select: none;
 }
 
 .checkboxFoco input {
-    accent-color: var(--laranja);
+    accent-color: var(--laranja, #E87A11);
     cursor: pointer;
 }
 
@@ -230,17 +232,17 @@
 }
 
 .btnEditar:hover {
-    color: var(--laranja);
+    color: var(--laranja, #E87A11);
     background-color: #FFF4E8;
 }
 
 .btnExcluir:hover {
-    color: var(--vermelho);
+    color: var(--vermelho, #FF0000);
     background-color: #FEE2E2;
 }
 
 .btnSalvar {
-    color: var(--verde);
+    color: var(--verde, #2D672D);
 }
 
 .btnSalvar:hover {
@@ -248,11 +250,11 @@
 }
 
 .btnCancelar {
-    color: var(--vermelho);
+    color: var(--vermelho, #FF0000);
 }
 
 .btnCancelar:hover {
-    color: var(--vermelho);
+    color: var(--vermelho, #FF0000);
     background-color: #FEE2E2;
 }
 
@@ -282,18 +284,19 @@
     height: 40px;
     padding: 0 18px;
     background-color: #E8EEF3;
-    color: #334155;
+    color: #475E7C;
     border: 1px solid transparent;
     border-radius: 6px;
     font-family: "Montserrat", sans-serif;
     font-size: 14px;
-    font-weight: var(--peso-semibold);
+    font-weight: var(--peso-semibold, 600);
     cursor: pointer;
-    transition: background-color 0.15s ease;
+    transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .btnAdicionarPasso:hover {
     background-color: #DCE5EE;
+    color: #2D3133;
 }
 
 .botoesAcao {

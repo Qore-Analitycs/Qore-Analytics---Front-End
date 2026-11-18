@@ -1,6 +1,6 @@
 .container {
     width: 100%;
-    background-color: var(--cinza-escuro);
+    background-color: var(--cinza-escuro, #2D3133);
     border-radius: 10px;
     padding: 32px 48px;
     box-shadow: var(--sombra);
@@ -8,13 +8,14 @@
     flex-direction: column;
     gap: 20px;
     color: #9CA3AF;
+    box-sizing: border-box;
 }
 
 .titulo {
     font-family: "Montserrat", sans-serif;
-    font-size: var(--fonte-subtitulo);
-    font-weight: var(--peso-semibold);
-    color: #9CA3AF;
+    font-size: var(--fonte-subtitulo, 24px);
+    font-weight: var(--peso-semibold, 600);
+    color: #FFFFFF;
     margin: 0;
 }
 
@@ -46,4 +47,3 @@
         width: 100%;
     }
 }
-
