@@ -53,5 +53,3 @@ export default function Card({ cards = METRICAS_PADRAO }: CardsMetricasGridProps
         </section>
     );
 }
-
-
