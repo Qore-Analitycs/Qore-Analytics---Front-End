@@ -22,6 +22,7 @@ export type AmbienteMonitorado = {
 
 export type AmbientesMonitoradosProps = {
     ambientes?: AmbienteMonitorado[];
+    limite?: number;
 };
 
 const AMBIENTES_PADRAO: AmbienteMonitorado[] = [
@@ -53,31 +54,22 @@ const AMBIENTES_PADRAO: AmbienteMonitorado[] = [
         variante: "operacional",
     },
     {
-        id: "staging-sa-east-1",
-        titulo: "Staging / Homologação - sa-east-1",
-        subtitulo: "184 endpoints ativos",
-        statusTexto: "98.8% Saudável",
-        exibirPonto: false,
-        detalheSecundario: "1 alerta menor",
-        variante: "alerta",
+        id: "gateway-us-east-2",
+        titulo: "Gateway Pagamentos - us-east-2",
+        subtitulo: "62 endpoints ativos",
+        statusTexto: "100% Saudável",
+        exibirPonto: true,
+        detalheSecundario: "latência: 88ms",
+        variante: "saudavel",
     },
     {
-        id: "staging-sa-east-1",
-        titulo: "Staging / Homologação - sa-east-1",
-        subtitulo: "184 endpoints ativos",
-        statusTexto: "98.8% Saudável",
-        exibirPonto: false,
-        detalheSecundario: "1 alerta menor",
-        variante: "alerta",
-    },
-    {
-        id: "staging-sa-east-1",
-        titulo: "Staging / Homologação - sa-east-1",
-        subtitulo: "184 endpoints ativos",
-        statusTexto: "98.8% Saudável",
-        exibirPonto: false,
-        detalheSecundario: "1 alerta menor",
-        variante: "alerta",
+        id: "auth-sa-east-1",
+        titulo: "Cluster Autenticação & SSO",
+        subtitulo: "48 endpoints ativos",
+        statusTexto: "Operacional",
+        exibirPonto: true,
+        detalheSecundario: "latência: 54ms",
+        variante: "operacional",
     },
 ];
 
@@ -89,7 +81,10 @@ const MAPA_CLASSES_BADGE: Record<VarianteStatusAmbiente, string> = {
 
 export default function AmbientesMonitorados({
     ambientes = AMBIENTES_PADRAO,
+    limite = 5,
 }: AmbientesMonitoradosProps) {
+    const listaExibida = limite ? ambientes.slice(0, limite) : ambientes;
+
     return (
         <Card className={styles.cardContainer}>
             <CardHeader className={styles.cabecalho}>
@@ -107,7 +102,7 @@ export default function AmbientesMonitorados({
 
             <CardContent className={styles.conteudo}>
                 <ul className={styles.listaAmbientes}>
-                    {ambientes.map((ambiente) => {
+                    {listaExibida.map((ambiente) => {
                         const classeBadge =
                             MAPA_CLASSES_BADGE[ambiente.variante] ||
                             styles.badgeOperacional;
@@ -153,4 +148,3 @@ export default function AmbientesMonitorados({
         </Card>
     );
 }
-
