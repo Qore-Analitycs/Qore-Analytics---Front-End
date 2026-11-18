@@ -13,7 +13,7 @@ export function useUsuario() {
 
             setU(dados);
         }catch(error) {
-            alert("Deu merda");
+            // alert("Deu merda");
         }
     }
 
