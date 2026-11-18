@@ -7,7 +7,8 @@
     box-shadow: var(--sombra);
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
+    box-sizing: border-box;
 }
 
 .cabecalho {
@@ -45,10 +46,12 @@
     display: flex;
     flex-direction: column;
     padding: 0;
+    min-height: 0;
 }
 
 /* ==========================================
    LISTA DE SUB-CARDS DE AMBIENTES
+   (max-height + scrollbar sutil)
    ========================================== */
 .listaAmbientes {
     list-style: none;
@@ -56,7 +59,30 @@
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
+    max-height: 385px;
+    overflow-y: auto;
+    padding-right: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: #CBD5E1 transparent;
+}
+
+/* Barra de rolagem sutil e moderna */
+.listaAmbientes::-webkit-scrollbar {
+    width: 5px;
+}
+
+.listaAmbientes::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.listaAmbientes::-webkit-scrollbar-thumb {
+    background-color: #CBD5E1;
+    border-radius: 999px;
+}
+
+.listaAmbientes::-webkit-scrollbar-thumb:hover {
+    background-color: #94A3B8;
 }
 
 .subCardAmbiente {
@@ -64,7 +90,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    padding: 14px 16px;
+    padding: 12px 16px;
     background-color: #F8FAFC;
     border: 1px solid #E2E8F0;
     border-radius: 10px;
@@ -129,21 +155,21 @@
     line-height: 1;
 }
 
-/* 1. Verde / Azul claro (Produção) */
+/* 1. Verde / Produção */
 .badgeSaudavel {
     background-color: #DCFCE7;
     color: #15803D;
     border: 1px solid #BBF7D0;
 }
 
-/* 2. Laranja suave (Staging) */
+/* 2. Laranja suave / Staging */
 .badgeAlerta {
     background-color: #FFEDD5;
     color: #C2410C;
     border: 1px solid #FED7AA;
 }
 
-/* 3. Cinza neutro (Sandbox) */
+/* 3. Cinza neutro / Sandbox */
 .badgeOperacional {
     background-color: #E2E8F0;
     color: #334155;
