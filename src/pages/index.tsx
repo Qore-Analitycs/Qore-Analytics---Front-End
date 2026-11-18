@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import ModalUsuario from "../components/usuarioModal/ModalUsuario";
+import ModalUsuario from "../components/modalUsuario/ModalUsuario";
 
 export default function Home() {
 

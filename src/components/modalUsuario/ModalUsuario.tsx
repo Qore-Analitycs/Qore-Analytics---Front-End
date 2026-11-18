@@ -2,7 +2,14 @@ import { useState, type FormEvent } from "react";
 import styles from "./ModalUsuario.module.css";
 import Botao from "../botao/botao";
 import Input from "../input/input";
-import { faEnvelope, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEnvelope,
+  faLock,
+  faShield,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import SelecaoCargo from "../selecaoCargo/selecaoCargo";
+import SelecoesCargos from "../selecaoCargo/selecoesCargo";
 
 interface ModalUsuarioProps {
   aberto: boolean;
@@ -68,38 +75,7 @@ export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
             placeholder="email@email.com"
           />
 
-          <div className={styles.campo}>
-            <span>Cargo</span>
-
-            <div
-              className={styles.cargos}
-              role="group"
-              aria-label="Selecionar cargo"
-            >
-              {cargos.map((opcao) => (
-                <button
-                  key={opcao.nome}
-                  type="button"
-                  className={
-                    cargoSelecionado === opcao.nome
-                      ? styles.cargoSelecionado
-                      : styles.cargo
-                  }
-                  onClick={() => setCargoSelecionado(opcao.nome)}
-                  aria-pressed={cargoSelecionado === opcao.nome}
-                >
-                  <img
-                    src={opcao.icone}
-                    alt=""
-                    width={16}
-                    height={16}
-                    aria-hidden="true"
-                  />
-                  <span>{opcao.nome}</span>
-                </button>
-              ))}
-            </div>
-          </div>
+           <SelecoesCargos/>
 
           <Input
             className={styles.inputSenha}
