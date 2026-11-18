@@ -22,6 +22,7 @@
     justify-content: center;
     margin-left: var(--largura-sidebar);
     transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100vh;
 }
 
 .container {
@@ -34,16 +35,21 @@
 }
 
 .containerBotao {
-    width: 25%;
+    width: 20%;
     align-self: center;
 }
 
 .texto {
-    width: 50%;
+    width: 55%;
+}
+
+.texto h1 {
+    color: black;
 }
 
 .texto h2 {
     font-size: var(--fonte-titulo);
+    color: black;
     font-weight: var(--peso-bold);
 }
 

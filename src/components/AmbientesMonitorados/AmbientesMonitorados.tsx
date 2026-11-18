@@ -1,12 +1,8 @@
 import React from "react";
 import { Server } from "lucide-react";
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
 import styles from "./AmbientesMonitorados.module.css";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+
 
 export type VarianteStatusAmbiente = "saudavel" | "alerta" | "operacional";
 

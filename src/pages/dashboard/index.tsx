@@ -17,9 +17,8 @@ export default function DashboardPage() {
             </Head>
 
             <div
-                className={`${styles.layoutShell} ${
-                    sidebarExpandida ? styles.layoutShellExpandido : ""
-                }`}
+                className={`${styles.layoutShell} ${sidebarExpandida ? styles.layoutShellExpandido : ""
+                    }`}
             >
                 {/* 1. Barra Lateral Fixa */}
                 <div className={styles.sidebarContainer}>
