@@ -33,7 +33,7 @@ const Item = ({ page, usuario, itemHistorico }: ItemProps) => {
     status: "Sucesso",
   };
 
-  const classeBadge =
+  const classeBadgeHistorico =
     MAPA_CLASSES_STATUS[dadosHistorico.status] || styles.badgeSucesso;
 
   return (
@@ -59,7 +59,7 @@ const Item = ({ page, usuario, itemHistorico }: ItemProps) => {
           </td>
           <td className={styles.celulaData}>{dadosHistorico.data}</td>
           <td>
-            <span className={`${styles.badgeStatus} ${classeBadge}`}>
+            <span className={`${styles.badgeStatus} ${classeBadgeHistorico}`}>
               {dadosHistorico.status}
             </span>
           </td>
@@ -68,13 +68,20 @@ const Item = ({ page, usuario, itemHistorico }: ItemProps) => {
 
       {page === "usuarioPermissoes" && usuario && (
         <tr className={styles.trCard}>
-          <td className={styles.celulaCasoTeste}>{usuario.nome}</td>
-          <td className={styles.celulaResponsavel}>{usuario.cargo}</td>
-          <td className={styles.celulaResponsavel}>Empresa Matriz</td>
+          <td className={styles.celulaUsuario}>
+            <div className={styles.infoUsuario}>
+              <span className={styles.nomeUsuario}>{usuario.nome}</span>
+              {usuario.email && (
+                <span className={styles.emailUsuario}>{usuario.email}</span>
+              )}
+            </div>
+          </td>
+          <td className={styles.celulaCargo}>{usuario.cargo}</td>
+          <td className={styles.celulaEmpresa}>Empresa Matriz</td>
           <td>
             <span
               className={`${styles.badgeStatus} ${
-                usuario.ativo ? styles.badgeSucesso : styles.badgeFalha
+                usuario.ativo ? styles.badgeSucesso : styles.badgeInativo
               }`}
             >
               {usuario.ativo ? "Ativo" : "Inativo"}

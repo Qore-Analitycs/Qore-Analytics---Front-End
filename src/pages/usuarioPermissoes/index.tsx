@@ -17,14 +17,18 @@ export default function UsuarioPermissoes() {
         <title>Usuário e Permissões | Qore Analytics</title>
       </Head>
 
-      <AppLayout maxWidth="1520px">
-        {/* Cabeçalho da Página com Título e Botão de Criação */}
+      <AppLayout maxWidth="1520px" containerClassName={styles.container}>
+        {/* 1. Cabeçalho da Página com Título, Subtítulo e Botão de Ação */}
         <header className={styles.containerTexto}>
           <div className={styles.texto}>
             <span className={styles.categoriaMenor}>Usuário e Permissões</span>
             <h1 className={styles.titulo}>
               Gerenciamento de Usuário &amp; Controle de Acesso
             </h1>
+            <p className={styles.descricaoPagina}>
+              Administração centralizada de acessos, papéis corporativos e
+              atribuição de privilégios de auditoria e execução.
+            </p>
           </div>
           <div
             className={styles.containerBotao}
@@ -34,13 +38,13 @@ export default function UsuarioPermissoes() {
           </div>
         </header>
 
-        {/* Cards de Métricas de Membros */}
+        {/* 2. Cards de Métricas de Membros (4 Colunas Fluidas) */}
         <Card />
 
-        {/* Filtro de Pesquisa de Usuários */}
+        {/* 3. Filtro de Pesquisa de Usuários (Barra 100px, controles 40px) */}
         <FiltroPesquisa variante="usuarios" />
 
-        {/* Listagem de Usuários e Permissões */}
+        {/* 4. Listagem de Usuários e Permissões */}
         <Lista page="usuarioPermissoes" />
       </AppLayout>
 

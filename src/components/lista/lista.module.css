@@ -32,8 +32,8 @@
     border-bottom: 2px solid #E2E8F0;
 }
 
-.tabelaLista th:nth-child(2) {
-    text-align: left;
+.thAlinhadoEsquerda {
+    text-align: left !important;
 }
 
 .tabelaLista td {

@@ -7,10 +7,18 @@ import styles from "./testResult.module.css";
 
 export type TestResultProps = {
     resultado: DadosResultadoTeste;
+    readOnly?: boolean;
+    mode?: "edit" | "view";
     onExportarRelatorio?: (resultado: DadosResultadoTeste) => void;
 };
 
-const TestResult = ({ resultado, onExportarRelatorio }: TestResultProps) => {
+const TestResult = ({
+    resultado,
+    readOnly = false,
+    mode = "edit",
+    onExportarRelatorio,
+}: TestResultProps) => {
+    const isReadOnly = readOnly || mode === "view";
     const [filtroAtivo, setFiltroAtivo] = useState<FiltroResultado>("TODOS");
 
     const total = resultado.passos.length;
@@ -34,9 +42,8 @@ const TestResult = ({ resultado, onExportarRelatorio }: TestResultProps) => {
                     type="button"
                     role="tab"
                     aria-selected={filtroAtivo === "TODOS"}
-                    className={`${styles.aba} ${
-                        filtroAtivo === "TODOS" ? styles.abaAtiva : ""
-                    }`}
+                    className={`${styles.aba} ${filtroAtivo === "TODOS" ? styles.abaAtiva : ""
+                        }`}
                     onClick={() => setFiltroAtivo("TODOS")}
                 >
                     Todos ({total})
@@ -46,9 +53,8 @@ const TestResult = ({ resultado, onExportarRelatorio }: TestResultProps) => {
                     type="button"
                     role="tab"
                     aria-selected={filtroAtivo === "PASSOU"}
-                    className={`${styles.aba} ${
-                        filtroAtivo === "PASSOU" ? styles.abaAtiva : ""
-                    }`}
+                    className={`${styles.aba} ${filtroAtivo === "PASSOU" ? styles.abaAtiva : ""
+                        }`}
                     onClick={() => setFiltroAtivo("PASSOU")}
                 >
                     Passaram ({passaram})
@@ -58,9 +64,8 @@ const TestResult = ({ resultado, onExportarRelatorio }: TestResultProps) => {
                     type="button"
                     role="tab"
                     aria-selected={filtroAtivo === "NAO_PASSOU"}
-                    className={`${styles.aba} ${
-                        filtroAtivo === "NAO_PASSOU" ? styles.abaAtiva : ""
-                    }`}
+                    className={`${styles.aba} ${filtroAtivo === "NAO_PASSOU" ? styles.abaAtiva : ""
+                        }`}
                     onClick={() => setFiltroAtivo("NAO_PASSOU")}
                 >
                     Não Passaram ({naoPassaram})
@@ -72,20 +77,21 @@ const TestResult = ({ resultado, onExportarRelatorio }: TestResultProps) => {
                 filtroAtivo={filtroAtivo}
             />
 
-            <footer className={styles.rodape}>
-                <div className={styles.botaoWrapper}>
-                    <Botao
-                        type="button"
-                        texto="Exportar Relatório"
-                        variante="laranja"
-                        tamanho="compacto"
-                        onPress={() => onExportarRelatorio?.(resultado)}
-                    />
-                </div>
-            </footer>
+            {!isReadOnly && (
+                <footer className={styles.rodape}>
+                    <div className={styles.botaoWrapper}>
+                        <Botao
+                            type="button"
+                            texto="Exportar Relatório"
+                            variante="laranja"
+                            tamanho="compacto"
+                            onPress={() => onExportarRelatorio?.(resultado)}
+                        />
+                    </div>
+                </footer>
+            )}
         </section>
     );
 };
 
 export default TestResult;
-

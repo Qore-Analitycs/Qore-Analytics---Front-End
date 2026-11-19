@@ -1,0 +1,548 @@
+.cardPlayer {
+    width: 100%;
+    background-color: var(--branco, #FFFFFF);
+    border: 2px solid #D5DCE4;
+    border-radius: 12px;
+    padding: 20px 24px 24px;
+    box-shadow: var(--sombra);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-sizing: border-box;
+}
+
+/* ==========================================
+   TOPO DO CARD (METADADOS DA SESSÃO)
+   ========================================== */
+.topoPlayer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.infoSessaoEsquerda {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pontoGravacao {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background-color: var(--laranja, #E87A11);
+    flex-shrink: 0;
+}
+
+.tituloSessao {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: var(--peso-semibold, 600);
+    color: #1E293B;
+}
+
+.badgeQualidade {
+    background-color: #475E7C;
+    color: #FFFFFF;
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    font-weight: var(--peso-bold, 700);
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.infoDataDireita {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: var(--peso-semibold, 600);
+    color: #475E7C;
+}
+
+.iconeCalendario {
+    color: #475E7C;
+}
+
+/* ==========================================
+   MOLDURA DO NAVEGADOR E VIEWPORT
+   ========================================== */
+.molduraViewport {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #1E293B;
+    background-color: #0F172A;
+    display: flex;
+    flex-direction: column;
+}
+
+.barraNavegador {
+    background-color: #0F172A;
+    padding: 8px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 1px solid #1E293B;
+}
+
+.controlesJanela {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.bolinhaJanela {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}
+
+.bolinhaVermelha {
+    background-color: #EF4444;
+}
+
+.bolinhaAmarela {
+    background-color: #F59E0B;
+}
+
+.bolinhaVerde {
+    background-color: #22C55E;
+}
+
+.barraEndereco {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #1E293B;
+    border: 1px solid #334155;
+    border-radius: 4px;
+    padding: 3px 12px;
+    max-width: 440px;
+    flex: 1;
+}
+
+.iconeCadeado {
+    color: #10B981;
+    flex-shrink: 0;
+}
+
+.textoUrl {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 11px;
+    color: #94A3B8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.infoRunner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 10.5px;
+}
+
+.pontoRunner {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #10B981;
+}
+
+.textoRunner {
+    color: #10B981;
+    font-weight: 600;
+}
+
+.textoResolucao {
+    color: #64748B;
+}
+
+/* ==========================================
+   PALCO VISUAL DA GRAVAÇÃO (CANVAS MOCK)
+   ========================================== */
+.palcoGravacao {
+    position: relative;
+    width: 100%;
+    min-height: 290px;
+    background-color: #EEF2F6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 24px;
+    box-sizing: border-box;
+}
+
+.checkoutFundo {
+    width: 68%;
+    max-width: 640px;
+    min-height: 210px;
+    background-color: #BEC8D4;
+    border-radius: 10px;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.08);
+    user-select: none;
+}
+
+.checkoutTopoFundo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #334155;
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: var(--peso-semibold, 600);
+}
+
+.marcaCheckoutFundo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.iconeSacola {
+    color: var(--laranja, #E87A11);
+}
+
+.pedidoFundo {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 11px;
+    color: #475569;
+}
+
+.skeletonGridFundo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.skeletonBloco {
+    height: 68px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.35);
+}
+
+/* Modal Centralizado */
+.modalCapturado {
+    position: absolute;
+    width: 340px;
+    max-width: 90%;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 22px 24px 20px;
+    box-shadow: 0 20px 35px -10px rgba(15, 23, 42, 0.35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    z-index: 2;
+}
+
+.iconeSucessoWrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ECFDF5;
+    color: #10B981;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2px;
+}
+
+.tituloModal {
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    font-weight: var(--peso-bold, 700);
+    color: #0F172A;
+    margin: 0;
+}
+
+.descricaoModal {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11.5px;
+    color: #64748B;
+    margin: 0;
+}
+
+.badgeTransacao {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--laranja, #E87A11);
+    background-color: #FFF7ED;
+    border: 1px solid #FFEDD5;
+    padding: 2px 10px;
+    border-radius: 4px;
+}
+
+.botoesModal {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.btnModalSecundario {
+    background-color: #F1F5F9;
+    color: #334155;
+    border: 1px solid #E2E8F0;
+    border-radius: 6px;
+    padding: 7px 12px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 11.5px;
+    font-weight: var(--peso-semibold, 600);
+    cursor: default;
+}
+
+.wrapperBotaoInspecionado {
+    position: relative;
+    width: 100%;
+}
+
+.btnModalPrimario {
+    width: 100%;
+    background-color: var(--laranja, #E87A11);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    padding: 7px 12px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 11.5px;
+    font-weight: var(--peso-semibold, 600);
+    cursor: default;
+}
+
+.tooltipTelemetria {
+    position: absolute;
+    top: 50%;
+    left: 68%;
+    transform: translateY(-50%);
+    background-color: #0F172A;
+    color: #F8FAFC;
+    border: 1px solid #334155;
+    border-radius: 4px;
+    padding: 4px 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 10px;
+    white-space: nowrap;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+    z-index: 5;
+}
+
+.pontoTooltip {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--laranja, #E87A11);
+    flex-shrink: 0;
+}
+
+/* ==========================================
+   PAINEL INFERIOR DE CONTROLES E TIMELINE
+   ========================================== */
+.painelControles {
+    background-color: #0F172A;
+    padding: 14px 18px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-top: 1px solid #1E293B;
+}
+
+.timelineContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.trilhaProgresso {
+    width: 100%;
+    height: 5px;
+    background-color: #334155;
+    border-radius: 999px;
+    position: relative;
+}
+
+.preenchimentoProgresso {
+    height: 100%;
+    background: linear-gradient(90deg, #475E7C 0%, #E87A11 100%);
+    border-radius: 999px;
+    position: relative;
+}
+
+.cursorTimeline {
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    border: 2px solid var(--laranja, #E87A11);
+}
+
+.marcadoresLista {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 10.5px;
+}
+
+.marcadorItem {
+    color: #64748B;
+    background: transparent;
+    border: none;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    transition: color 0.15s ease;
+}
+
+.marcadorItem:hover {
+    color: #CBD5E1;
+}
+
+.marcadorItemAtivo {
+    color: var(--laranja, #E87A11);
+    font-weight: 700;
+}
+
+.barraBotoesInferior {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.controlesEsquerda {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btnPlayPrincipal {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background-color: var(--laranja, #E87A11);
+    color: #FFFFFF;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.btnControleIcone {
+    background: transparent;
+    border: none;
+    color: #94A3B8;
+    padding: 4px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: color 0.15s ease;
+}
+
+.btnControleIcone:hover {
+    color: #FFFFFF;
+}
+
+.visorTempo {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 12px;
+    margin-left: 4px;
+}
+
+.tempoAtual {
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+.tempoSeparador,
+.tempoTotal {
+    color: #64748B;
+}
+
+.controlesDireita {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.seletorVelocidade {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    background-color: #1E293B;
+    border: 1px solid #334155;
+    padding: 2px;
+    border-radius: 6px;
+}
+
+.btnVelocidade {
+    background: transparent;
+    border: none;
+    color: #94A3B8;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btnVelocidadeAtiva {
+    background-color: var(--laranja, #E87A11);
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .cardPlayer {
+        padding: 16px;
+    }
+
+    .infoRunner {
+        display: none;
+    }
+
+    .checkoutFundo {
+        width: 92%;
+    }
+
+    .tooltipTelemetria {
+        left: 0;
+        top: 115%;
+        transform: none;
+    }
+}

@@ -10,6 +10,11 @@ export type AppLayoutProps = {
    */
   maxWidth?: string | number;
   /**
+   * Espaçamento customizado entre a SideBar colapsada e o conteúdo principal (ex: "14px", "16px").
+   * Padrão via CSS: "14px" (reduzido de ~32px para a faixa de 12px–16px)
+   */
+  espacamentoSidebarColapsada?: string | number;
+  /**
    * Classe CSS adicional aplicada à tag <main>
    */
   className?: string;
@@ -34,6 +39,7 @@ export type AppLayoutProps = {
 export default function AppLayout({
   children,
   maxWidth = "1520px",
+  espacamentoSidebarColapsada,
   className = "",
   containerClassName = "",
   semContainerInterno = false,
@@ -41,11 +47,22 @@ export default function AppLayout({
 }: AppLayoutProps) {
   const [sidebarExpandida, setSidebarExpandida] = useState(false);
 
+  const estiloCustomizado =
+    espacamentoSidebarColapsada && !sidebarExpandida
+      ? ({
+          "--espacamento-sidebar-conteudo":
+            typeof espacamentoSidebarColapsada === "number"
+              ? `${espacamentoSidebarColapsada}px`
+              : espacamentoSidebarColapsada,
+        } as React.CSSProperties)
+      : undefined;
+
   return (
     <div
       className={`${styles.layoutShell} ${
         sidebarExpandida ? styles.layoutShellExpandido : ""
       }`}
+      style={estiloCustomizado}
     >
       {/* 1. Barra Lateral Fixa com estado controlado */}
       <div className={styles.sidebarContainer}>

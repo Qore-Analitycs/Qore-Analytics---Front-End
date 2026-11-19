@@ -47,11 +47,11 @@ export default function Login() {
       toastSucesso("Login bem sucedido")
       const resposta = await login(email, senha);
       await router.push("/historicoTeste");
-    } catch (error) { 
+    } catch (error) {
       setErros({
         email: "Email ou senha incorretos",
         senha: "Email ou senha incorretos",
-        
+
       });
     }
   };
