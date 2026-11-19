@@ -13,40 +13,36 @@ export default function UsuarioPermissoes() {
 
   return (
     <>
-      <Head>
-        <title>Usuário e Permissões | Qore Analytics</title>
-      </Head>
+      <main className={`${styles.main} ${modalAberto ? styles.mainBlur : ""}`}>
 
-      <AppLayout maxWidth="1520px" containerClassName={styles.container}>
-        {/* 1. Cabeçalho da Página com Título, Subtítulo e Botão de Ação */}
-        <header className={styles.containerTexto}>
-          <div className={styles.texto}>
-            <span className={styles.categoriaMenor}>Usuário e Permissões</span>
-            <h1 className={styles.titulo}>
-              Gerenciamento de Usuário &amp; Controle de Acesso
-            </h1>
-            <p className={styles.descricaoPagina}>
-              Administração centralizada de acessos, papéis corporativos e
-              atribuição de privilégios de auditoria e execução.
-            </p>
-          </div>
-          <div
-            className={styles.containerBotao}
-            onClick={() => setModalAberto(true)}
-          >
-            <Botao texto="Criar novo usuário" tamanho="compacto" />
-          </div>
-        </header>
+        <Head>
+          <title>Usuário e Permissões | Qore Analytics</title>
+        </Head>
 
-        {/* 2. Cards de Métricas de Membros (4 Colunas Fluidas) */}
-        <Card />
-
-        {/* 3. Filtro de Pesquisa de Usuários (Barra 100px, controles 40px) */}
-        <FiltroPesquisa variante="usuarios" />
-
-        {/* 4. Listagem de Usuários e Permissões */}
-        <Lista page="usuarioPermissoes" />
-      </AppLayout>
+        <AppLayout maxWidth="1520px" containerClassName={styles.container}>
+          <header className={styles.containerTexto}>
+            <div className={styles.texto}>
+              <span className={styles.categoriaMenor}>Usuário e Permissões</span>
+              <h1 className={styles.titulo}>
+                Gerenciamento de Usuário &amp; Controle de Acesso
+              </h1>
+              <p className={styles.descricaoPagina}>
+                Administração centralizada de acessos, papéis corporativos e
+                atribuição de privilégios de auditoria e execução.
+              </p>
+            </div>
+            <div
+              className={styles.containerBotao}
+              onClick={() => setModalAberto(true)}
+            >
+              <Botao texto="Criar novo usuário" tamanho="compacto" />
+            </div>
+          </header>
+          <Card />
+          <FiltroPesquisa variante="usuarios" />
+          <Lista page="usuarioPermissoes" />
+        </AppLayout>
+      </main>
 
       <ModalUsuario aberto={modalAberto} onFechar={() => setModalAberto(false)} />
     </>

@@ -4,6 +4,10 @@ import Input from "../input/input";
 import { faEnvelope, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import Botao from "../botao/botao";
 import { createPortal } from "react-dom";
+import { logout } from "@/services/authService";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
+import secureLocalStorage from "react-secure-storage";
 
 // Propriedades recebidas pelo componente
 interface ModalPerfilProps {
@@ -12,6 +16,8 @@ interface ModalPerfilProps {
 }
 
 export default function ModalPerfil({ aberto, onFechar }: ModalPerfilProps) {
+  const router = useRouter();
+
   const [nome, setNome] = useState("Nome completo");
   const [email, setEmail] = useState("nome@email.com");
 
@@ -24,54 +30,27 @@ export default function ModalPerfil({ aberto, onFechar }: ModalPerfilProps) {
   const [erro, setErro] = useState("");
   const [sucesso, setSucesso] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    setErro("");
-    setSucesso("");
-
-    if (!nome.trim() || !email.trim()) {
-      setErro("Preencha o nome e o email.");
-      return;
+  const logoutUsuario = () => {
+    try{
+      const resposta = logout();
+      router.push("/login");
+    } catch (error) {
+      toast("Erro ao fazer logout");
     }
 
-    const desejaTrocarSenha = Boolean(
-      senhaAtual || novaSenha || confirmarNovaSenha,
-    );
-
-    if (desejaTrocarSenha) {
-      if (!senhaAtual) {
-        setErro("Informe a senha atual.");
-        return;
-      }
-
-      if (novaSenha.length < 8) {
-        setErro("A nova senha precisa ter pelo menos 8 caracteres.");
-        return;
-      }
-
-      if (novaSenha !== confirmarNovaSenha) {
-        setErro("As senhas não correspondem.");
-        return;
-      }
-    }
-
-    setSucesso(
-      "Dados validados! A integração com a API ainda precisa ser implementada.",
-    );
   }
-  
-    useEffect(() => {
-      if (aberto) {
-        document.body.dataset.modalAberto = "true";
-      } else {
-        delete document.body.dataset.modalAberto;
-      }
-  
-      return () => {
-        delete document.body.dataset.modalAberto;
-      };
-    }, [aberto]);
+
+  useEffect(() => {
+    if (aberto) {
+      document.body.dataset.modalAberto = "true";
+    } else {
+      delete document.body.dataset.modalAberto;
+    }
+
+    return () => {
+      delete document.body.dataset.modalAberto;
+    };
+  }, [aberto]);
 
   if (!aberto) {
     return null;
@@ -125,6 +104,9 @@ export default function ModalPerfil({ aberto, onFechar }: ModalPerfilProps) {
               <strong>05/06/2025</strong>
             </div>
           </div>
+          <div className={styles.containerLogout} onClick={logoutUsuario}>
+            <Botao tamanho="compacto" texto="Logout" variante="alternativo" />
+          </div>
         </aside>
 
         {/* ==================================
@@ -151,7 +133,7 @@ export default function ModalPerfil({ aberto, onFechar }: ModalPerfilProps) {
                         FORMULÁRIO
                     ================================== */}
 
-          <form className={styles.form} onSubmit={handleSubmit}>
+          <form className={styles.form}>
             {/* Campo nome */}
 
             <div className={styles.field}>

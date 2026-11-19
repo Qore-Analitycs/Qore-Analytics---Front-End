@@ -42,8 +42,9 @@
 .sidebar {
     background-color: #D5DAE2;
 
-    padding: 28px 26px;
-
+    padding: 14px 26px;
+    height: 100%;
+    justify-content: space-around;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -127,11 +128,11 @@
 /* Informações complementares */
 .profileInfo {
     width: 100%;
-
     display: flex;
     flex-direction: column;
-    gap: 16px;
-
+    
+    gap: 20px;
+    justify-content: center;
     margin-top: 20px;
 }
 
@@ -155,6 +156,10 @@
     font-weight: 600;
 }
 
+.containerLogout{
+    margin-top: 10px;
+    width: 100%;
+}
 /* Área direita */
 .content {
     position: relative;
