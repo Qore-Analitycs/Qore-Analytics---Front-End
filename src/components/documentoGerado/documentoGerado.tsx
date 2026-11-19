@@ -70,6 +70,8 @@ type DocumentoGeradoProps = {
     criteriosIniciais?: ItemCondicao[];
     passosIniciais?: PassoValidacao[];
     carregandoIA?: boolean;
+    readOnly?: boolean;
+    mode?: "edit" | "view";
     onAssinarRoteiro?: (passos: PassoValidacao[]) => void;
     onExecutarTesteIA?: (passos: PassoValidacao[]) => void;
 };
@@ -84,14 +86,27 @@ const DocumentoGerado = ({
     criteriosIniciais = MOCK_CRITERIOS_ACEITACAO,
     passosIniciais = PASSOS_MOCK_INICIAIS,
     carregandoIA = false,
+    readOnly = false,
+    mode = "edit",
     onAssinarRoteiro,
     onExecutarTesteIA,
 }: DocumentoGeradoProps) => {
+    const isReadOnly = readOnly || mode === "view";
     const [titulo, setTitulo] = useState(tituloInicial);
     const [resumo, setResumo] = useState<ResumoRoteiro>(resumoInicial);
     const [preCondicoes, setPreCondicoes] = useState<ItemCondicao[]>(preCondicoesIniciais);
     const [criterios, setCriterios] = useState<ItemCondicao[]>(criteriosIniciais);
     const [passos, setPassos] = useState<PassoValidacao[]>(passosIniciais);
+
+    if (isReadOnly) {
+        return (
+            <ValidationTable
+                passos={passos}
+                readOnly
+                mode="view"
+            />
+        );
+    }
 
     return (
         <article className={styles.folhaSulfite}>
@@ -131,6 +146,8 @@ const DocumentoGerado = ({
                 passos={passos}
                 onChangePassos={setPassos}
                 carregandoIA={carregandoIA}
+                readOnly={isReadOnly}
+                mode={mode}
                 onAssinarRoteiro={() => onAssinarRoteiro?.(passos)}
                 onExecutarTesteIA={() => onExecutarTesteIA?.(passos)}
             />

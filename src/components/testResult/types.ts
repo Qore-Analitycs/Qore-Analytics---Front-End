@@ -6,8 +6,10 @@ export type ResultadoPasso = {
     id: string;
     numero: number;
     titulo: string;
+    descricao?: string;
     status: StatusResultadoPasso;
     tempoExecucaoMs: number;
+    tempoExecucaoLabel?: string;
     erroDetalhe?: string;
     tags?: string[];
 };

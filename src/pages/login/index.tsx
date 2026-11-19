@@ -4,7 +4,6 @@ import "@fortawesome/free-brands-svg-icons";
 import * as yup from "yup";
 import { userSchema } from "@/hooks/useValidacao";
 import { useState, type FormEvent } from "react";
-import { useRouter } from "next/router";
 import Botao from "@/components/botao/botao";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import Input from "@/components/input/input";
@@ -70,85 +69,68 @@ export default function Login() {
             <img src="../imgs/QoreAnalytics.png" alt="Qore Analytics" />
           </div>
 
-        <div className={styles.fundoGlass}></div>
+          <div className={styles.fundoGlass}></div>
 
-        <div className={styles.superior}>
-          <img src="../imgs/LogoMinimalista.png" alt="Logo QA" />
-          <img src="../imgs/QoreAnalytics.png" alt="Qore Analytics" />
-        </div>
-
-        <div className={styles.conteudoCentro}>
-          <img
-            src="../imgs/ImagemLogin.png"
-            alt="Ilustração de Testes"
-            className={styles.imagemIlustracao}
-          />
-          <h1>Automação contínua e inteligência em testes de Web e APIs.</h1>
-          <h2>
-            Orquestração distribuída de suítes ponta a ponta, análise predditiva
-            de flakiness e validação de contratos para equipes de engenharia de
-            missão crítica.
-          </h2>
-        </div>
-      </section>
-
-      {/* Lado Direito */}
-      <section className={styles.ladoDireito}>
-        <div className={styles.containerDireito}>
-          <div className={styles.texto}>
-            <h1 className={styles.titulo}>Acesse sua conta corporativa</h1>
-            <p>
-              Insira suas credenciais corporativas para gerenciar seus clusters,
-              suítes de teste e integrações CI/CD.
-            </p>
+          <div className={styles.superior}>
+            <img src="../imgs/LogoMinimalista.png" alt="Logo QA" />
+            <img src="../imgs/QoreAnalytics.png" alt="Qore Analytics" />
           </div>
 
-          <form
-            className={styles.formulario}
-            onSubmit={loginUsuario}
-            noValidate
-          >
-            <div className={styles.campo}>
-              <Input
-                icone={faEnvelope}
-                label="Email"
-                placeholder="email@email.com"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-              />
-              {erros.email && (
-                <span className={styles.erro}>
-                  <i className="fa-solid fa-circle-exclamation"></i>
-                  {erros.email}
-                </span>
-              )}
+          <div className={styles.conteudoCentro}>
+            <img
+              src="../imgs/ImagemLogin.png"
+              alt="Ilustração de Testes"
+              className={styles.imagemIlustracao}
+            />
+            <h1>Automação contínua e inteligência em testes de Web e APIs.</h1>
+            <h2>
+              Orquestração distribuída de suítes ponta a ponta, análise predditiva
+              de flakiness e validação de contratos para equipes de engenharia de
+              missão crítica.
+            </h2>
+          </div>
+        </section>
+
+        {/* Lado Direito */}
+        <section className={styles.ladoDireito}>
+          <div className={styles.containerDireito}>
+            <div className={styles.texto}>
+              <h1 className={styles.titulo}>Acesse sua conta corporativa</h1>
+              <p>
+                Insira suas credenciais corporativas para gerenciar seus clusters,
+                suítes de teste e integrações CI/CD.
+              </p>
             </div>
 
-            <div className={styles.campo}>
-              <div>
+            <form
+              className={styles.formulario}
+              onSubmit={loginUsuario}
+              noValidate
+            >
+              <div className={styles.campo}>
                 <Input
-                  name="email"
-                  type="email"
                   icone={faEnvelope}
                   label="Email"
                   placeholder="email@email.com"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
                 />
-                {erros.senha && (
+                {erros.email && (
                   <span className={styles.erro}>
                     <i className="fa-solid fa-circle-exclamation"></i>
-                    {erros.senha}
+                    {erros.email}
                   </span>
                 )}
               </div>
+
               <div className={styles.campo}>
                 <div>
                   <Input
-                    name="senha"
-                    type="password"
-                    className={styles.inputSenha}
-                    icone={faLock}
-                    label="Senha"
-                    placeholder="••••••••••••••••••••"
+                    name="email"
+                    type="email"
+                    icone={faEnvelope}
+                    label="Email"
+                    placeholder="email@email.com"
                   />
                   {erros.senha && (
                     <span className={styles.erro}>
@@ -157,11 +139,28 @@ export default function Login() {
                     </span>
                   )}
                 </div>
-                <p className={styles.esqueceuSenha}>esqueceu sua senha ?</p>
-              </div>
-              <div className={styles.botaoEntrar}>
-                <Botao page="/historico" texto="Entrar" />
-              </div>
+                <div className={styles.campo}>
+                  <div>
+                    <Input
+                      name="senha"
+                      type="password"
+                      className={styles.inputSenha}
+                      icone={faLock}
+                      label="Senha"
+                      placeholder="••••••••••••••••••••"
+                    />
+                    {erros.senha && (
+                      <span className={styles.erro}>
+                        <i className="fa-solid fa-circle-exclamation"></i>
+                        {erros.senha}
+                      </span>
+                    )}
+                  </div>
+                  <p className={styles.esqueceuSenha}>esqueceu sua senha ?</p>
+                </div>
+                <div className={styles.botaoEntrar}>
+                  <Botao page="/historico" texto="Entrar" />
+                </div>
             </form>
             <div>
               <div className={styles.divisorContainer}>
@@ -174,6 +173,6 @@ export default function Login() {
           </div>
         </div>
       </section>
-    </main>
+    </main >
   );
 }

@@ -72,6 +72,21 @@
     line-height: 1.45;
 }
 
+.textosPassoWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.descricaoPasso {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: var(--peso-normal, 400);
+    color: #64748B;
+    margin: 0;
+    line-height: 1.4;
+}
+
 .infoDireita {
     display: flex;
     align-items: center;

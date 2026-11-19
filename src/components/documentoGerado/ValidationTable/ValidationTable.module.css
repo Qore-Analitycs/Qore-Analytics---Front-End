@@ -9,6 +9,11 @@
     gap: 20px;
 }
 
+.cardTabelaReadOnly {
+    padding: 36px 40px;
+    box-shadow: var(--sombra);
+}
+
 .titulo {
     font-family: "Montserrat", sans-serif;
     font-size: 22px;

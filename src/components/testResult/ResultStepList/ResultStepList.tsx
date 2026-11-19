@@ -52,15 +52,25 @@ const ResultStepList = ({ passos, filtroAtivo }: ResultStepListProps) => {
                                     )}
                                 </span>
 
-                                <h3 className={styles.tituloPasso}>
-                                    #{numeroFormatado} - {passo.titulo}
-                                </h3>
+                                <div className={styles.textosPassoWrapper}>
+                                    <h3 className={styles.tituloPasso}>
+                                        #{numeroFormatado} - {passo.titulo}
+                                    </h3>
+                                    {passo.descricao && (
+                                        <p className={styles.descricaoPasso}>
+                                            {passo.descricao}
+                                        </p>
+                                    )}
+                                </div>
                             </div>
 
                             <div className={styles.infoDireita}>
                                 <span className={styles.tempoExecucao}>
                                     <Clock size={13} aria-hidden="true" />
-                                    <span>{passo.tempoExecucaoMs}ms</span>
+                                    <span>
+                                        {passo.tempoExecucaoLabel ||
+                                            `${passo.tempoExecucaoMs}ms`}
+                                    </span>
                                 </span>
 
                                 <span
