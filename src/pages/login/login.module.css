@@ -216,3 +216,26 @@
         display: flex;
         justify-content: space-between;
     }
+
+@media (max-width: 480px) {
+    .main {
+        grid-template-columns: 1fr;
+        display: block;
+    }
+
+    .main img {
+        display: none;
+    }
+
+    .conteudoCentro {
+        display: none;
+    }
+
+    .texto p {
+        display: none;
+    }
+
+    .fundoGlass {
+        
+    }
+}
