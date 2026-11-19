@@ -6,10 +6,12 @@ import styles from "./ValidationTable.module.css";
 
 export type ValidationTableProps = {
     passos: PassoValidacao[];
-    onChangePassos: (novosPassos: PassoValidacao[]) => void;
+    onChangePassos?: (novosPassos: PassoValidacao[]) => void;
     onAssinarRoteiro?: () => void;
     onExecutarTesteIA?: () => void;
     carregandoIA?: boolean;
+    readOnly?: boolean;
+    mode?: "edit" | "view";
 };
 
 type RascunhoPasso = {
@@ -32,13 +34,17 @@ const ValidationTable = ({
     onAssinarRoteiro,
     onExecutarTesteIA,
     carregandoIA = false,
+    readOnly = false,
+    mode = "edit",
 }: ValidationTableProps) => {
+    const isReadOnly = readOnly || mode === "view";
     const [idEmEdicao, setIdEmEdicao] = useState<string | null>(null);
     const [isNovoPasso, setIsNovoPasso] = useState(false);
     const [rascunho, setRascunho] = useState<RascunhoPasso>(RASCUNHO_VAZIO);
     const [erroAcao, setErroAcao] = useState(false);
 
     const iniciarEdicao = (passo: PassoValidacao) => {
+        if (isReadOnly) return;
         setIdEmEdicao(passo.id);
         setIsNovoPasso(false);
         setErroAcao(false);
@@ -51,6 +57,7 @@ const ValidationTable = ({
     };
 
     const salvarEdicao = (id: string) => {
+        if (isReadOnly) return;
         if (!rascunho.acao.trim()) {
             setErroAcao(true);
             return;
@@ -59,16 +66,16 @@ const ValidationTable = ({
         const passosAtualizados = passos.map((passo) =>
             passo.id === id
                 ? {
-                      ...passo,
-                      acao: rascunho.acao.trim(),
-                      dadoEntrada: rascunho.dadoEntrada.trim(),
-                      resultadoEsperado: rascunho.resultadoEsperado.trim(),
-                      focoDiff: rascunho.focoDiff,
-                  }
+                    ...passo,
+                    acao: rascunho.acao.trim(),
+                    dadoEntrada: rascunho.dadoEntrada.trim(),
+                    resultadoEsperado: rascunho.resultadoEsperado.trim(),
+                    focoDiff: rascunho.focoDiff,
+                }
                 : passo
         );
 
-        onChangePassos(passosAtualizados);
+        onChangePassos?.(passosAtualizados);
         setIdEmEdicao(null);
         setIsNovoPasso(false);
         setErroAcao(false);
@@ -76,7 +83,7 @@ const ValidationTable = ({
 
     const cancelarEdicao = (id: string) => {
         if (isNovoPasso) {
-            onChangePassos(passos.filter((passo) => passo.id !== id));
+            onChangePassos?.(passos.filter((passo) => passo.id !== id));
         }
 
         setIdEmEdicao(null);
@@ -86,16 +93,18 @@ const ValidationTable = ({
     };
 
     const excluirPasso = (id: string) => {
+        if (isReadOnly) return;
         if (idEmEdicao === id) {
             setIdEmEdicao(null);
             setIsNovoPasso(false);
             setErroAcao(false);
         }
 
-        onChangePassos(passos.filter((passo) => passo.id !== id));
+        onChangePassos?.(passos.filter((passo) => passo.id !== id));
     };
 
     const adicionarPassoManual = () => {
+        if (isReadOnly) return;
         if (isNovoPasso && idEmEdicao) {
             return;
         }
@@ -109,7 +118,7 @@ const ValidationTable = ({
             focoDiff: false,
         };
 
-        onChangePassos([...passos, novoPasso]);
+        onChangePassos?.([...passos, novoPasso]);
         setIdEmEdicao(novoId);
         setIsNovoPasso(true);
         setErroAcao(false);
@@ -126,7 +135,10 @@ const ValidationTable = ({
     };
 
     return (
-        <section className={styles.cardTabela}>
+        <section
+            className={`${styles.cardTabela} ${isReadOnly ? styles.cardTabelaReadOnly : ""
+                }`}
+        >
             <h2 className={styles.titulo}>
                 Roteiro Detalhado de Validação Manual
             </h2>
@@ -141,22 +153,36 @@ const ValidationTable = ({
                             <th className={styles.colResultado}>
                                 RESULTADO ESPERADO
                             </th>
-                            <th className={styles.colAcoes}>AÇÕES</th>
+                            {!isReadOnly && (
+                                <th className={styles.colAcoes}>AÇÕES</th>
+                            )}
                         </tr>
                     </thead>
 
                     <tbody>
                         {passos.length === 0 ? (
                             <tr>
-                                <td colSpan={5} className={styles.estadoVazio}>
-                                    Nenhum passo cadastrado. Clique em{" "}
-                                    <strong>Adicionar Passo Manualmente</strong>{" "}
-                                    para incluir uma etapa de validação.
+                                <td
+                                    colSpan={isReadOnly ? 4 : 5}
+                                    className={styles.estadoVazio}
+                                >
+                                    Nenhum passo cadastrado.
+                                    {!isReadOnly && (
+                                        <>
+                                            {" "}
+                                            Clique em{" "}
+                                            <strong>
+                                                Adicionar Passo Manualmente
+                                            </strong>{" "}
+                                            para incluir uma etapa de validação.
+                                        </>
+                                    )}
                                 </td>
                             </tr>
                         ) : (
                             passos.map((passo, index) => {
-                                const estaEditando = idEmEdicao === passo.id;
+                                const estaEditando =
+                                    !isReadOnly && idEmEdicao === passo.id;
 
                                 return (
                                     <tr
@@ -324,69 +350,81 @@ const ValidationTable = ({
                                             )}
                                         </td>
 
-                                        <td>
-                                            <div className={styles.acoesGrupo}>
-                                                {estaEditando ? (
-                                                    <>
-                                                        <button
-                                                            type="button"
-                                                            className={`${styles.btnIcone} ${styles.btnSalvar}`}
-                                                            onClick={() =>
-                                                                salvarEdicao(
-                                                                    passo.id
-                                                                )
-                                                            }
-                                                            title="Salvar alterações"
-                                                            aria-label="Salvar alterações"
-                                                        >
-                                                            <Check size={16} />
-                                                        </button>
-                                                        <button
-                                                            type="button"
-                                                            className={`${styles.btnIcone} ${styles.btnCancelar}`}
-                                                            onClick={() =>
-                                                                cancelarEdicao(
-                                                                    passo.id
-                                                                )
-                                                            }
-                                                            title="Cancelar edição"
-                                                            aria-label="Cancelar edição"
-                                                        >
-                                                            <X size={16} />
-                                                        </button>
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <button
-                                                            type="button"
-                                                            className={`${styles.btnIcone} ${styles.btnEditar}`}
-                                                            onClick={() =>
-                                                                iniciarEdicao(
-                                                                    passo
-                                                                )
-                                                            }
-                                                            title="Editar passo"
-                                                            aria-label="Editar passo"
-                                                        >
-                                                            <Pencil size={15} />
-                                                        </button>
-                                                        <button
-                                                            type="button"
-                                                            className={`${styles.btnIcone} ${styles.btnExcluir}`}
-                                                            onClick={() =>
-                                                                excluirPasso(
-                                                                    passo.id
-                                                                )
-                                                            }
-                                                            title="Excluir passo"
-                                                            aria-label="Excluir passo"
-                                                        >
-                                                            <Trash2 size={15} />
-                                                        </button>
-                                                    </>
-                                                )}
-                                            </div>
-                                        </td>
+                                        {!isReadOnly && (
+                                            <td>
+                                                <div
+                                                    className={
+                                                        styles.acoesGrupo
+                                                    }
+                                                >
+                                                    {estaEditando ? (
+                                                        <>
+                                                            <button
+                                                                type="button"
+                                                                className={`${styles.btnIcone} ${styles.btnSalvar}`}
+                                                                onClick={() =>
+                                                                    salvarEdicao(
+                                                                        passo.id
+                                                                    )
+                                                                }
+                                                                title="Salvar alterações"
+                                                                aria-label="Salvar alterações"
+                                                            >
+                                                                <Check
+                                                                    size={16}
+                                                                />
+                                                            </button>
+                                                            <button
+                                                                type="button"
+                                                                className={`${styles.btnIcone} ${styles.btnCancelar}`}
+                                                                onClick={() =>
+                                                                    cancelarEdicao(
+                                                                        passo.id
+                                                                    )
+                                                                }
+                                                                title="Cancelar edição"
+                                                                aria-label="Cancelar edição"
+                                                            >
+                                                                <X size={16} />
+                                                            </button>
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <button
+                                                                type="button"
+                                                                className={`${styles.btnIcone} ${styles.btnEditar}`}
+                                                                onClick={() =>
+                                                                    iniciarEdicao(
+                                                                        passo
+                                                                    )
+                                                                }
+                                                                title="Editar passo"
+                                                                aria-label="Editar passo"
+                                                            >
+                                                                <Pencil
+                                                                    size={15}
+                                                                />
+                                                            </button>
+                                                            <button
+                                                                type="button"
+                                                                className={`${styles.btnIcone} ${styles.btnExcluir}`}
+                                                                onClick={() =>
+                                                                    excluirPasso(
+                                                                        passo.id
+                                                                    )
+                                                                }
+                                                                title="Excluir passo"
+                                                                aria-label="Excluir passo"
+                                                            >
+                                                                <Trash2
+                                                                    size={15}
+                                                                />
+                                                            </button>
+                                                        </>
+                                                    )}
+                                                </div>
+                                            </td>
+                                        )}
                                     </tr>
                                 );
                             })
@@ -395,46 +433,47 @@ const ValidationTable = ({
                 </table>
             </div>
 
-            <div className={styles.rodapeTabela}>
-                <button
-                    type="button"
-                    className={styles.btnAdicionarPasso}
-                    onClick={adicionarPassoManual}
-                >
-                    <PlusCircle size={15} />
-                    <span>Adicionar Passo Manualmente</span>
-                </button>
+            {!isReadOnly && (
+                <div className={styles.rodapeTabela}>
+                    <button
+                        type="button"
+                        className={styles.btnAdicionarPasso}
+                        onClick={adicionarPassoManual}
+                    >
+                        <PlusCircle size={15} />
+                        <span>Adicionar Passo Manualmente</span>
+                    </button>
 
-                <div className={styles.botoesAcao}>
-                    <div className={styles.botaoWrapper}>
-                        <Botao
-                            type="button"
-                            texto="Assinar Roteiro"
-                            variante="assinar"
-                            tamanho="compacto"
-                            onPress={onAssinarRoteiro}
-                        />
-                    </div>
+                    <div className={styles.botoesAcao}>
+                        <div className={styles.botaoWrapper}>
+                            <Botao
+                                type="button"
+                                texto="Assinar Roteiro"
+                                variante="assinar"
+                                tamanho="compacto"
+                                onPress={onAssinarRoteiro}
+                            />
+                        </div>
 
-                    <div className={styles.botaoWrapper}>
-                        <Botao
-                            type="button"
-                            texto={
-                                carregandoIA
-                                    ? "Executando..."
-                                    : "Executar Teste com IA"
-                            }
-                            variante="laranja"
-                            tamanho="compacto"
-                            disabled={carregandoIA}
-                            onPress={onExecutarTesteIA}
-                        />
+                        <div className={styles.botaoWrapper}>
+                            <Botao
+                                type="button"
+                                texto={
+                                    carregandoIA
+                                        ? "Executando..."
+                                        : "Executar Teste com IA"
+                                }
+                                variante="laranja"
+                                tamanho="compacto"
+                                disabled={carregandoIA}
+                                onPress={onExecutarTesteIA}
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
         </section>
     );
 };
 
 export default ValidationTable;
-

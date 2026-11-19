@@ -23,8 +23,8 @@
 .titulo {
     font-family: "Montserrat", sans-serif;
     font-size: 32px;
-    font-weight: var(--peso-bold);
-    color: #0F172A;
+    font-weight: var(--peso-bold, 700);
+    color: #2D3133;
     margin: 0;
 }
 
@@ -38,15 +38,15 @@
 .inputTitulo {
     font-family: "Montserrat", sans-serif;
     font-size: 28px;
-    font-weight: var(--peso-bold);
-    color: #0F172A;
-    border: 1.5px solid var(--laranja);
+    font-weight: var(--peso-bold, 700);
+    color: #2D3133;
+    border: 1.5px solid var(--laranja, #E87A11);
     border-radius: 6px;
     padding: 4px 12px;
     outline: none;
     width: 100%;
-    max-width: 650px;
-    background-color: var(--branco);
+    max-width: 800px;
+    background-color: var(--branco, #FFFFFF);
 }
 
 .btnIconeEditar {
@@ -63,7 +63,7 @@
 }
 
 .btnIconeEditar:hover {
-    color: var(--laranja);
+    color: var(--laranja, #E87A11);
     background-color: #FFF4E8;
 }
 
@@ -79,7 +79,7 @@
 }
 
 .btnSalvar {
-    color: var(--verde);
+    color: var(--verde, #2D672D);
 }
 
 .btnSalvar:hover {
@@ -87,7 +87,7 @@
 }
 
 .btnCancelar {
-    color: var(--vermelho);
+    color: var(--vermelho, #FF0000);
 }
 
 .btnCancelar:hover {
@@ -101,16 +101,17 @@
     flex-wrap: wrap;
     font-family: "Montserrat", sans-serif;
     font-size: 15px;
-    color: #1E293B;
+    color: #3C3F40;
 }
 
 .metaItem strong {
-    font-weight: var(--peso-semibold);
+    font-weight: var(--peso-semibold, 600);
+    color: #2D3133;
 }
 
 .metaValor {
-    color: #64748B;
-    font-weight: var(--peso-normal);
+    color: #475E7C;
+    font-weight: var(--peso-normal, 400);
 }
 
 .divisor {

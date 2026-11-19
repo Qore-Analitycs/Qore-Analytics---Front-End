@@ -8,6 +8,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    box-sizing: border-box;
 }
 
 /* ==========================================
@@ -32,7 +33,7 @@
     font-family: "Montserrat", sans-serif;
     font-size: 20px;
     font-weight: var(--peso-semibold, 600);
-    color: #0F172A;
+    color: #2D3133;
     margin: 0;
     line-height: 1.25;
 }
@@ -41,7 +42,7 @@
     font-family: "Montserrat", sans-serif;
     font-size: 13.5px;
     font-weight: var(--peso-normal, 400);
-    color: #64748B;
+    color: #475E7C;
     margin: 0;
     line-height: 1.4;
 }
@@ -70,7 +71,7 @@
 }
 
 .btnAba:hover {
-    color: #0F172A;
+    color: #2D3133;
     background-color: rgba(255, 255, 255, 0.6);
 }
 
@@ -105,7 +106,7 @@
     font-family: "Montserrat", sans-serif;
     font-size: 11px;
     font-weight: var(--peso-semibold, 600);
-    color: #64748B;
+    color: #475E7C;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -163,7 +164,7 @@
 
 .iconeFalhou {
     background-color: #FFEADB;
-    color: #E87A11;
+    color: var(--laranja, #E87A11);
 }
 
 .iconeEmExecucao {
@@ -182,7 +183,7 @@
     font-family: "Montserrat", sans-serif;
     font-size: 14px;
     font-weight: var(--peso-semibold, 600);
-    color: #0F172A;
+    color: #2D3133;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
@@ -223,7 +224,7 @@
 
 .badgeFalhou {
     background-color: #FFEADB;
-    color: #C2410C;
+    color: var(--laranja, #E87A11);
     border: 1px solid #FED7AA;
 }
 
@@ -242,7 +243,7 @@
 
 .testesPassaram {
     font-weight: var(--peso-bold, 700);
-    color: #0F172A;
+    color: #2D3133;
 }
 
 .testesTotal {
@@ -255,7 +256,7 @@
     font-family: "Montserrat", sans-serif;
     font-size: 13.5px;
     font-weight: var(--peso-semibold, 600);
-    color: #1E293B;
+    color: #3C3F40;
     white-space: nowrap;
 }
 
@@ -300,4 +301,3 @@
         text-align: center;
     }
 }
-
