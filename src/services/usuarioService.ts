@@ -1,5 +1,8 @@
-import { ListarUsuario } from "@/@types/usuario";
+import { ListarUsuario, UsuarioEdicao, UsuarioListagem } from "@/@types/usuario";
 import { api } from "@/services/api";
+
+
+interface RedefinirSenha {}
 
 export const UsuarioService = {
     async listar(): Promise<ListarUsuario[]> {
@@ -9,23 +12,42 @@ export const UsuarioService = {
     }
 }
 
-// export async function editarProduto(produtoId: number, dados: ProdutoFormulario) {
+export async function editarUsuario(usuarioId: number, dados: UsuarioEdicao) {
+    try {
+        const formData = new FormData();
+
+        formData.append("nome", dados.nome);
+        formData.append("email", dados.email);
+
+        await api.put("Usuario/" + usuarioId, formData)
+
+    } catch (error: any) {
+        throw new Error(error.response.data);
+    }
+}
+
+// export async function redefinirSenha(usuarioId: number, dados: RedefinirSenha) {
 //     try {
 //         const formData = new FormData();
 
-//         formData.append("nome", dados.nome);
-//         formData.append("descricao", dados.descricao);
-//         formData.append("preco", dados.preco);
-//         if (dados.imagem) {
-//             formData.append("imagem", dados.imagem);
-//         }
-//         dados.categoriasId.forEach((id) => {
-//             formData.append("categoriaIds", id.toString());
-//         })
+//         formData.append("senhaAtual", dados.senhaAtual);
+//         formData.append("novaSenha", dados.novaSenha);
+//         formData.append("confirmarNovaSenha", dados.confirmarNovaSenha);
 
-//         await api.put("Produto/" + produtoId, formData)
+//         await api.put("Usuario/" + usuarioId, formData)
 
 //     } catch (error: any) {
 //         throw new Error(error.response.data);
 //     }
+// }
+
+// export interface UsuarioEdicao {
+//     nome: string,
+//     email: string,
+// }
+
+// export interface RedefinirSenha {
+//     senhaAtual: string,
+//     novaSenha: string,
+//     confirmarNovaSenha: string
 // }
