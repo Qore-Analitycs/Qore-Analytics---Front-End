@@ -157,14 +157,14 @@
     border: 1px solid #BBF7D0;
 }
 
-/* 2. Laranja suave (Staging) */
+/* 2. Laranja suave / Staging */
 .badgeAlerta {
     background-color: #FFEDD5;
     color: var(--laranja, #E87A11);
     border: 1px solid #FED7AA;
 }
 
-/* 3. Cinza neutro (Sandbox) */
+/* 3. Cinza neutro / Sandbox */
 .badgeOperacional {
     background-color: #E2E8F0;
     color: #334155;

@@ -8,7 +8,7 @@ import Botao from "@/components/botao/botao";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import Input from "@/components/input/input";
 import { login } from "../../services/authService";
-import { toastErro, toastSucesso } from "@/utils/toast";
+import { toastErro, toastInfo, toastSucesso } from "@/utils/toast";
 
 export default function Login() {
   const router = useRouter();
@@ -44,7 +44,6 @@ export default function Login() {
       return;
     }
     try {
-      toastSucesso("Login bem sucedido")
       const resposta = await login(email, senha);
       await router.push("/historicoTeste");
     } catch (error) {
@@ -132,7 +131,6 @@ export default function Login() {
               <Input
                 name="senha"
                 type="password"
-                className={styles.inputSenha}
                 icone={faLock}
                 label="Senha"
                 placeholder="Digite sua senha"

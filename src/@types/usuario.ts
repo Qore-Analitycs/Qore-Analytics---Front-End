@@ -10,5 +10,5 @@ export interface CriarUsuario {
     nome: string,
     email: string,
     senha: string,
-    perfilId: 1
+    perfilId: number
 }

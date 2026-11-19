@@ -1,6 +1,6 @@
-import { Usuario } from "@/@types/usuario";
+import { CriarUsuario, Usuario } from "@/@types/usuario";
 import { UsuarioService } from "@/services/usuarioService";
-import { toastErro } from "@/utils/toast";
+import { toastErro, toastSucesso } from "@/utils/toast";
 import { useEffect, useState } from "react";
 
 export function useUsuario() {
@@ -14,7 +14,18 @@ export function useUsuario() {
 
             setU(dados);
         }catch(error) {
-            toastErro("Deu merda");
+        }
+    }
+
+    async function cadastrarU(dados: CriarUsuario) {
+        try {
+            const novoU = await UsuarioService.cadastrar(dados);
+
+            toastSucesso("Usuário cadastrado com sucesso")
+            setU((antigos) => [novoU, ...antigos])
+            return novoU
+        } catch (error) {
+            toastErro("Deu erro, problema ao cadastrar")
         }
     }
 
@@ -23,6 +34,7 @@ export function useUsuario() {
     }, [])
 
     return {
-        u
+        u,
+        cadastrarU
     };
 }

@@ -17,6 +17,7 @@ export type AmbienteMonitorado = {
 
 export type AmbientesMonitoradosProps = {
     ambientes?: AmbienteMonitorado[];
+    limite?: number;
 };
 
 const AMBIENTES_PADRAO: AmbienteMonitorado[] = [
@@ -75,7 +76,10 @@ const MAPA_CLASSES_BADGE: Record<VarianteStatusAmbiente, string> = {
 
 export default function AmbientesMonitorados({
     ambientes = AMBIENTES_PADRAO,
+    limite = 5,
 }: AmbientesMonitoradosProps) {
+    const listaExibida = limite ? ambientes.slice(0, limite) : ambientes;
+
     return (
         <Card className={styles.cardContainer}>
             <CardHeader className={styles.cabecalho}>

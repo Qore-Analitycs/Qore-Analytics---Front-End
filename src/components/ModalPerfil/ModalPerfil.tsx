@@ -1,8 +1,9 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import styles from "./ModalPerfil.module.css";
 import Input from "../input/input";
 import { faEnvelope, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import Botao from "../botao/botao";
+import { createPortal } from "react-dom";
 
 // Propriedades recebidas pelo componente
 interface ModalPerfilProps {
@@ -11,98 +12,73 @@ interface ModalPerfilProps {
 }
 
 export default function ModalPerfil({ aberto, onFechar }: ModalPerfilProps) {
-  // ==========================================
-  // 1. ESTADOS DO USUÁRIO
-  // ==========================================
-
   const [nome, setNome] = useState("Nome completo");
   const [email, setEmail] = useState("nome@email.com");
-
-  // ==========================================
-  // 2. ESTADOS DAS SENHAS
-  // ==========================================
 
   const [senhaAtual, setSenhaAtual] = useState("");
   const [novaSenha, setNovaSenha] = useState("");
   const [confirmarNovaSenha, setConfirmarNovaSenha] = useState("");
 
-  // Controla a visualização das senhas
   const [mostrarSenhas, setMostrarSenhas] = useState(false);
-
-  // ==========================================
-  // 3. MENSAGENS DO FORMULÁRIO
-  // ==========================================
 
   const [erro, setErro] = useState("");
   const [sucesso, setSucesso] = useState("");
 
-  // ==========================================
-  // 4. FUNÇÃO DE VALIDAÇÃO
-  // ==========================================
-
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    // Impede o recarregamento da página
     event.preventDefault();
 
-    // Limpa mensagens anteriores
     setErro("");
     setSucesso("");
 
-    // Verifica nome e email
     if (!nome.trim() || !email.trim()) {
       setErro("Preencha o nome e o email.");
       return;
     }
 
-    // Verifica se o usuário deseja alterar a senha
     const desejaTrocarSenha = Boolean(
       senhaAtual || novaSenha || confirmarNovaSenha,
     );
 
     if (desejaTrocarSenha) {
-      // Verifica a senha atual
       if (!senhaAtual) {
         setErro("Informe a senha atual.");
         return;
       }
 
-      // Verifica o tamanho da nova senha
       if (novaSenha.length < 8) {
         setErro("A nova senha precisa ter pelo menos 8 caracteres.");
         return;
       }
 
-      // Verifica se as senhas são iguais
       if (novaSenha !== confirmarNovaSenha) {
         setErro("As senhas não correspondem.");
         return;
       }
     }
 
-    // Dados validados
     setSucesso(
       "Dados validados! A integração com a API ainda precisa ser implementada.",
     );
   }
+  
+    useEffect(() => {
+      if (aberto) {
+        document.body.dataset.modalAberto = "true";
+      } else {
+        delete document.body.dataset.modalAberto;
+      }
+  
+      return () => {
+        delete document.body.dataset.modalAberto;
+      };
+    }, [aberto]);
 
-  // ==========================================
-  // 5. CONTROLE DE ABERTURA
-  // ==========================================
-
-  // Se estiver fechado, não exibe o modal
   if (!aberto) {
     return null;
   }
 
-  // ==========================================
-  // 6. ESTRUTURA VISUAL DO MODAL
-  // ==========================================
-
-  return (
-    // Fundo do modal
+  return createPortal(
     <div className={styles.overlay} onClick={onFechar}>
-      {/* Janela principal */}
-
       <section
         className={styles.modal}
         onClick={(event) => event.stopPropagation()}
@@ -233,7 +209,7 @@ export default function ModalPerfil({ aberto, onFechar }: ModalPerfilProps) {
                 <Input
                   label="Confirmar nova senha"
                   tamanho="compacto"
-                  placeholder="repita a senha"
+                  placeholder="Repita a senha"
                   icone={faLock}
                 />
               </div>
@@ -263,15 +239,24 @@ export default function ModalPerfil({ aberto, onFechar }: ModalPerfilProps) {
 
             <div className={styles.formActions}>
               <div className={styles.containerBotao} onClick={onFechar}>
-                <Botao variante="cancelar" texto="Cancelar" tamanho="compacto"/>
+                <Botao
+                  variante="cancelar"
+                  texto="Cancelar"
+                  tamanho="compacto"
+                />
               </div>
-              <div className={styles.containerBotao} >
-                <Botao variante="laranja" texto="Salvar alterações" tamanho="compacto"/>
+              <div className={styles.containerBotao}>
+                <Botao
+                  variante="laranja"
+                  texto="Salvar alterações"
+                  tamanho="compacto"
+                />
               </div>
             </div>
           </form>
         </div>
       </section>
-    </div>
+    </div>,
+    document.body,
   );
 }
