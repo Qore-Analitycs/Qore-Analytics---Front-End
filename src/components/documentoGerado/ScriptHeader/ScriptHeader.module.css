@@ -1,0 +1,136 @@
+.cabecalho {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tituloLinha {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.tituloExibicao {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.titulo {
+    font-family: "Montserrat", sans-serif;
+    font-size: 32px;
+    font-weight: var(--peso-bold, 700);
+    color: #2D3133;
+    margin: 0;
+}
+
+.edicaoTituloWrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.inputTitulo {
+    font-family: "Montserrat", sans-serif;
+    font-size: 28px;
+    font-weight: var(--peso-bold, 700);
+    color: #2D3133;
+    border: 1.5px solid var(--laranja, #E87A11);
+    border-radius: 6px;
+    padding: 4px 12px;
+    outline: none;
+    width: 100%;
+    max-width: 800px;
+    background-color: var(--branco, #FFFFFF);
+}
+
+.btnIconeEditar {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #94A3B8;
+    padding: 6px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.btnIconeEditar:hover {
+    color: var(--laranja, #E87A11);
+    background-color: #FFF4E8;
+}
+
+.btnIcone {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnSalvar {
+    color: var(--verde, #2D672D);
+}
+
+.btnSalvar:hover {
+    background-color: #DCFCE7;
+}
+
+.btnCancelar {
+    color: var(--vermelho, #FF0000);
+}
+
+.btnCancelar:hover {
+    background-color: #FFF5F5;
+}
+
+.metadadosSecundarios {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    color: #3C3F40;
+}
+
+.metaItem strong {
+    font-weight: var(--peso-semibold, 600);
+    color: #2D3133;
+}
+
+.metaValor {
+    color: #475E7C;
+    font-weight: var(--peso-normal, 400);
+}
+
+.divisor {
+    border: none;
+    border-top: 1px solid #E2E8F0;
+    margin: 8px 0 0 0;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .titulo {
+        font-size: 24px;
+    }
+
+    .inputTitulo {
+        font-size: 20px;
+    }
+
+    .metadadosSecundarios {
+        gap: 14px;
+    }
+}

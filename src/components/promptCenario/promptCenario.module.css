@@ -1,0 +1,49 @@
+.container {
+    width: 100%;
+    background-color: var(--cinza-escuro, #2D3133);
+    border-radius: 10px;
+    padding: 32px 48px;
+    box-shadow: var(--sombra);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: #9CA3AF;
+    box-sizing: border-box;
+}
+
+.titulo {
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-subtitulo, 24px);
+    font-weight: var(--peso-semibold, 600);
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.camposContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+}
+
+.rodapeBotao {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 4px;
+}
+
+/* Controla a largura do Botao (que ocupa 100% do pai por padrão) */
+.botaoWrapper {
+    width: 240px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 24px 20px;
+    }
+
+    .botaoWrapper {
+        width: 100%;
+    }
+}
