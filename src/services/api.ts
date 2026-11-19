@@ -1,7 +1,7 @@
 import axios from "axios";
 import secureLocalStorage from "react-secure-storage";
 
-const apiLocal = "http://172.16.24.23:5044/api/";
+const apiLocal = "http://172.16.24.26:5044/api/";
 
 const apiRemota = "";
 

@@ -14,7 +14,7 @@ export default function UsuarioPermissoes() {
 
   return (
     <>
-      <main className={styles.main}>
+      <main className={`${styles.main} ${modalAberto ? styles.comBlur : ""}`}>
         <div
           className={`${styles.layoutShell} ${
             sidebarExpandida ? styles.layoutShellExpandido : ""

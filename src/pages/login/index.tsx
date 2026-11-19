@@ -44,8 +44,8 @@ export default function Login() {
       return;
     }
     try {
-      toastSucesso("Login bem sucedido")
       const resposta = await login(email, senha);
+      toastSucesso("Login bem sucedido")
       await router.push("/historicoTeste");
     } catch (error) { 
       setErros({
@@ -132,7 +132,6 @@ export default function Login() {
               <Input
                 name="senha"
                 type="password"
-                className={styles.inputSenha}
                 icone={faLock}
                 label="Senha"
                 placeholder="Digite sua senha"

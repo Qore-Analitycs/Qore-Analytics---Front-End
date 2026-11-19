@@ -54,7 +54,7 @@ body {
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: var(--cor-fundo);
   color: black;
 }
 
@@ -172,7 +172,7 @@ a {
 
 .Toastify__toast--success {
   & svg {
-    fill: var(--verde)
+    fill: var(--laranja)
   }
 }
 
@@ -184,7 +184,7 @@ a {
 
 /* Barrinha de progresso */
 .Toastify__progress-bar--success {
-  background: color-mix(in srgb, var(--verde) 100%, transparent 0%) !important;
+  background: color-mix(in srgb, var(--laranja) 100%, transparent 0%) !important;
 }
 
 .Toastify__progress-bar--error {
@@ -193,9 +193,18 @@ a {
 
 /* Toast */
 .Toastify__toast {
-  font-family: var(--font-inter), sans-serif;
   font-size: 1rem;
   font-weight: 600;
-  box-shadow: var(--shadow);
-  border-radius: var(--border-lg);
+  box-shadow: var(--sombra);
+  border-radius: 7px;
+  background-color: var(--branco)
+}
+
+.main {
+  transition: filter 0.25s ease-in-out;
+}
+
+body[data-modal-aberto="true"] #__next {
+  filter: blur(5px);
+  transition: filter 0.2s ease;
 }
