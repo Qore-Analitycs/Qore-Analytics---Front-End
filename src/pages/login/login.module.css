@@ -235,7 +235,14 @@
         display: none;
     }
 
-    .fundoGlass {
-        
+    .ladoEsquerdo {
+        width: 100%;
+        height: 1px;
+        position: static;
+    }
+
+    .ladoDireito {
+        position: absolute;
+        width: 100%;
     }
 }
