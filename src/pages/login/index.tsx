@@ -8,7 +8,7 @@ import Botao from "@/components/botao/botao";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import Input from "@/components/input/input";
 import { login } from "../../services/authService";
-import { toastErro, toastSucesso } from "@/utils/toast";
+import { toastErro, toastInfo, toastSucesso } from "@/utils/toast";
 
 export default function Login() {
   const router = useRouter();
@@ -45,13 +45,12 @@ export default function Login() {
     }
     try {
       const resposta = await login(email, senha);
-      toastSucesso("Login bem sucedido")
-      await router.push("/historicoTeste");
+      toastInfo("Login bem sucedido")
+      await router.push("/historico");
     } catch (error) { 
       setErros({
         email: "Email ou senha incorretos",
         senha: "Email ou senha incorretos",
-        
       });
     }
   };

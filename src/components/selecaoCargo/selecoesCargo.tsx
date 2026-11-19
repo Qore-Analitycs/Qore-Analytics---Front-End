@@ -22,19 +22,19 @@ export type CargoItem = Omit<
 
 const CARGOS_PADRAO: CargoItem[] = [
     {
-        id: "root",
-        texto: "Root",
+        id: "3",
+        texto: "Admin",
         icone: <i className="fa-solid fa-shield" />,
         variante: "branco",
     },
     {
-        id: "dev",
+        id: "1",
         texto: "Dev",
         icone: <i className="fa-solid fa-code" />,
         variante: "branco",
     },
     {
-        id: "qa",
+        id: "2",
         texto: "QA",
         icone: <i className="fa-solid fa-file-lines" />,
         variante: "branco",
@@ -56,7 +56,7 @@ export default function SelecoesCargos({
     label = "Cargo",
     cargos = CARGOS_PADRAO,
     cargoSelecionado,
-    defaultSelecionado = "qa",
+    defaultSelecionado = "1",
     variante,
     tamanho,
     onSelect,

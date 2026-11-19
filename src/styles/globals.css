@@ -172,6 +172,12 @@ a {
 
 .Toastify__toast--success {
   & svg {
+    fill: var(--verde)
+  }
+}
+
+.Toastify__toast--info{
+  & svg {
     fill: var(--laranja)
   }
 }
@@ -183,7 +189,7 @@ a {
 }
 
 /* Barrinha de progresso */
-.Toastify__progress-bar--success {
+.Toastify__progress-bar--info {
   background: color-mix(in srgb, var(--laranja) 100%, transparent 0%) !important;
 }
 

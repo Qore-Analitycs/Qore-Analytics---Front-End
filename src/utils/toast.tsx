@@ -16,3 +16,5 @@ export const toastErro = (msg: string) =>
 
 export const toastInfo = (msg: string) =>
   toast.info(msg, { ...defaultOptions });
+
+
