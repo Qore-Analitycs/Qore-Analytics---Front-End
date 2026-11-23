@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Calendar,
     CheckCircle2,
     Lock,
     Maximize2,
     Pause,
+    Play,
     RotateCcw,
     RotateCw,
     ShoppingBag,
@@ -25,10 +26,10 @@ export type VideoPlayerMockProps = {
 };
 
 const MARCADORES_TIMELINE = [
-    { id: "m1", tempo: "0:01", rotulo: "Navegação", ativo: false },
-    { id: "m2", tempo: "0:02", rotulo: "Formulário", ativo: false },
-    { id: "m3", tempo: "0:03", rotulo: "Clique", ativo: true },
-    { id: "m4", tempo: "0:04", rotulo: "Confirmação", ativo: false },
+    { id: "m1", tempo: "0:01", rotulo: "Navegação" },
+    { id: "m2", tempo: "0:02", rotulo: "Formulário" },
+    { id: "m3", tempo: "0:03", rotulo: "Clique" },
+    { id: "m4", tempo: "0:04", rotulo: "Confirmação" },
 ];
 
 const VELOCIDADES = ["0.5x", "1x", "1.5x", "2x"];
@@ -43,6 +44,10 @@ export default function VideoPlayerMock({
     tempoAtual = "00:03.2",
     tempoTotal = "00:04.8",
 }: VideoPlayerMockProps) {
+    const [estaReproduzindo, setEstaReproduzindo] = useState(false);
+    const [velocidadeAtiva, setVelocidadeAtiva] = useState("1x");
+    const [marcadorAtivo, setMarcadorAtivo] = useState("m3");
+
     return (
         <section
             className={styles.cardPlayer}
@@ -191,16 +196,17 @@ export default function VideoPlayerMock({
                         {/* Marcadores de Eventos da Sessão */}
                         <div className={styles.marcadoresLista}>
                             {MARCADORES_TIMELINE.map((item) => (
-                                <span
+                                <button
                                     key={item.id}
-                                    className={`${styles.marcadorItem} ${
-                                        item.ativo
+                                    type="button"
+                                    className={`${styles.marcadorItem} ${marcadorAtivo === item.id
                                             ? styles.marcadorItemAtivo
                                             : ""
-                                    }`}
+                                        }`}
+                                    onClick={() => setMarcadorAtivo(item.id)}
                                 >
                                     {item.tempo} {item.rotulo}
-                                </span>
+                                </button>
                             ))}
                         </div>
                     </div>
@@ -211,9 +217,20 @@ export default function VideoPlayerMock({
                             <button
                                 type="button"
                                 className={styles.btnPlayPrincipal}
-                                aria-label="Pausar reprodução"
+                                onClick={() =>
+                                    setEstaReproduzindo((prev) => !prev)
+                                }
+                                aria-label={
+                                    estaReproduzindo
+                                        ? "Pausar reprodução"
+                                        : "Iniciar reprodução"
+                                }
                             >
-                                <Pause size={14} />
+                                {estaReproduzindo ? (
+                                    <Pause size={14} />
+                                ) : (
+                                    <Play size={13} fill="currentColor" />
+                                )}
                             </button>
 
                             <button
@@ -253,11 +270,11 @@ export default function VideoPlayerMock({
                                     <button
                                         key={vel}
                                         type="button"
-                                        className={`${styles.btnVelocidade} ${
-                                            vel === "1x"
+                                        className={`${styles.btnVelocidade} ${vel === velocidadeAtiva
                                                 ? styles.btnVelocidadeAtiva
                                                 : ""
-                                        }`}
+                                            }`}
+                                        onClick={() => setVelocidadeAtiva(vel)}
                                     >
                                         {vel}
                                     </button>
@@ -294,4 +311,3 @@ export default function VideoPlayerMock({
         </section>
     );
 }
-

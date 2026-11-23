@@ -412,6 +412,18 @@
 
 .marcadorItem {
     color: #64748B;
+    background: transparent;
+    border: none;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    transition: color 0.15s ease;
+}
+
+.marcadorItem:hover {
+    color: #CBD5E1;
 }
 
 .marcadorItemAtivo {

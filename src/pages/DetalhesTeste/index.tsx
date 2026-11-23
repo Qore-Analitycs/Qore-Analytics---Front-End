@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import Head from "next/head";
 import { Download, Share2 } from "lucide-react";
-import SideBar from "@/components/sideBar/sideBar";
-import VideoPlayerMock from "@/components/VideoPlayerMock/VideoPlayerMock";
+import AppLayout from "@/components/layout/AppLayout";
+import VideoSessionPlayer, {
+    MARCADORES_SESSAO_PADRAO,
+    MarcadorEventoSessao,
+} from "@/components/VideoSessionPlayer/VideoSessionPlayer";
 import ValidationTable from "@/components/documentoGerado/ValidationTable/ValidationTable";
 import { PassoValidacao } from "@/components/documentoGerado/types";
 import TestResult from "@/components/testResult/testResult";
 import { DadosResultadoTeste } from "@/components/testResult/types";
 import styles from "./detalhesTeste.module.css";
 
-const PASSOS_ROTEIRO_DETALHE: PassoValidacao[] = [
+export const PASSOS_ROTEIRO_DETALHE: PassoValidacao[] = [
     {
         id: "passo-1",
         acao: "Navegar até a tela de Checkout e avançar para etapa de Pagamento",
@@ -41,7 +44,7 @@ const PASSOS_ROTEIRO_DETALHE: PassoValidacao[] = [
     },
 ];
 
-const RESULTADO_TESTE_DETALHE: DadosResultadoTeste = {
+export const RESULTADO_TESTE_DETALHE: DadosResultadoTeste = {
     passos: [
         {
             id: "res-1",
@@ -89,95 +92,92 @@ const RESULTADO_TESTE_DETALHE: DadosResultadoTeste = {
     ],
 };
 
-export default function DetalhesTestePage() {
-    const [sidebarExpandida, setSidebarExpandida] = useState(false);
+export interface DetalheTesteProps {
+    /** URL do vídeo da sessão E2E (.mp4 / .webm). Se ausente ou indisponível, o player exibe "Vídeo não encontrado". */
+    videoSrc?: string;
+    /** Lista de eventos/marcadores da linha do tempo */
+    events?: MarcadorEventoSessao[];
+    /** Título exibido no cabeçalho do player de vídeo */
+    sessionTitle?: string;
+    /** Badge técnico de resolução/FPS */
+    resolutionBadge?: string;
+    /** Data/hora formatada da sessão gravada */
+    timestampLabel?: string;
+    /** Metadados do runner Playwright exibidos na barra do navegador */
+    runnerInfo?: {
+        version?: string;
+        resolution?: string;
+        url?: string;
+    };
+    /** Passos do Roteiro Detalhado de Validação Manual */
+    passosRoteiro?: PassoValidacao[];
+    /** Dados de resultado dos passos executados */
+    resultadoTeste?: DadosResultadoTeste;
+}
 
+export default function DetalhesTestePage({
+    videoSrc,
+    events = MARCADORES_SESSAO_PADRAO,
+    sessionTitle = "Gravação Contínua da Sessão Web",
+    resolutionBadge = "HD • 60FPS",
+    timestampLabel = "17 de Outubro 2018, 09 : 41 BRT",
+    runnerInfo = {
+        version: "PLAYWRIGHT_RUNNER_v1.42",
+        resolution: "1280x720",
+        url: "https://app.empresa.com.br/checkout/pagamento-seguro",
+    },
+    passosRoteiro = PASSOS_ROTEIRO_DETALHE,
+    resultadoTeste = RESULTADO_TESTE_DETALHE,
+}: DetalheTesteProps) {
     return (
         <>
             <Head>
-                <title>Detalhe do Teste | Qore Analytics</title>
+                <title>Detalhes do Teste | Qore Analytics</title>
             </Head>
 
-            <div
-                className={`${styles.layoutShell} ${
-                    sidebarExpandida ? styles.layoutShellExpandido : ""
-                }`}
-            >
-                {/* Barra Lateral Fixa */}
-                <div className={styles.sidebarContainer}>
-                    <SideBar
-                        expandida={sidebarExpandida}
-                        onExpandidaChange={setSidebarExpandida}
-                    />
-                </div>
-
-                {/* Container Principal */}
-                <main className={styles.conteudoPrincipal}>
-                    <div className={styles.conteudoLimitado}>
-                        {/* 1. Cabeçalho da Página */}
-                        <header className={styles.cabecalhoPagina}>
-                            <div className={styles.textosCabecalho}>
-                                <span className={styles.categoriaPagina}>
-                                    Detalhe do teste
-                                </span>
-                                <h1 className={styles.tituloRelatorio}>
-                                    Relatório do fluxo completo de checkout de
-                                    login
-                                </h1>
-                                <p className={styles.descricaoRelatorio}>
-                                    Inspeção detalhada de telemetria visual,
-                                    rastreamento de interação Playwright e
-                                    validações de estado do DOM
-                                </p>
-                            </div>
-
-                            <div className={styles.acoesCabecalho}>
-                                <button
-                                    type="button"
-                                    className={styles.btnCompartilhar}
-                                >
-                                    <Share2
-                                        size={16}
-                                        className={styles.iconeCompartilhar}
-                                        aria-hidden="true"
-                                    />
-                                    <span>Compartilhar</span>
-                                </button>
-
-                                <button
-                                    type="button"
-                                    className={styles.btnVideo}
-                                >
-                                    <Download
-                                        size={16}
-                                        className={styles.iconeVideo}
-                                        aria-hidden="true"
-                                    />
-                                    <span>Vídeo (.mp4)</span>
-                                </button>
-                            </div>
-                        </header>
-
-                        {/* 2. Player de Vídeo e Telemetria (Placeholder Estrutural) */}
-                        <VideoPlayerMock />
-
-                        {/* 3. Roteiro Detalhado de Validação Manual (Read-Only) */}
-                        <ValidationTable
-                            passos={PASSOS_ROTEIRO_DETALHE}
-                            readOnly
-                            mode="view"
-                        />
-
-                        {/* 4. Resultado do Teste (Read-Only) */}
-                        <TestResult
-                            resultado={RESULTADO_TESTE_DETALHE}
-                            readOnly
-                            mode="view"
-                        />
+            <AppLayout maxWidth="1520px" containerClassName={styles.container}>
+                {/* 1. Cabeçalho da Página e Ações Superiores */}
+                <header className={styles.cabecalhoPagina}>
+                    <div className={styles.textosCabecalho}>
+                        <span className={styles.categoriaPagina}>
+                            Detalhe do teste
+                        </span>
+                        <h1 className={styles.tituloRelatorio}>
+                            Relatório do fluxo completo de checkout de login
+                        </h1>
+                        <p className={styles.descricaoRelatorio}>
+                            Inspeção detalhada de telemetria visual,
+                            rastreamento de interação Playwright e validações de
+                            estado do DOM
+                        </p>
                     </div>
-                </main>
-            </div>
+
+                </header>
+
+                {/* 2. Player de Sessão de Vídeo e Telemetria */}
+                <VideoSessionPlayer
+                    src={videoSrc}
+                    events={events}
+                    sessionTitle={sessionTitle}
+                    resolutionBadge={resolutionBadge}
+                    timestampLabel={timestampLabel}
+                    runnerInfo={runnerInfo}
+                />
+
+                {/* 3. Roteiro Detalhado de Validação Manual (Modo Leitura) */}
+                <ValidationTable
+                    passos={passosRoteiro}
+                    readOnly
+                    mode="view"
+                />
+
+                {/* 4. Resultado do Teste (Modo Leitura com indicador Taxa de Aderência) */}
+                <TestResult
+                    resultado={resultadoTeste}
+                    readOnly
+                    mode="view"
+                />
+            </AppLayout>
         </>
     );
 }
-
