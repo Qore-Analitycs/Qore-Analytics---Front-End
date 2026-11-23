@@ -147,7 +147,9 @@ const ValidationTable = ({
                 <table className={styles.tabela}>
                     <thead>
                         <tr>
-                            <th className={styles.colNumero}>Nº</th>
+                            {!isReadOnly && (
+                                <th className={styles.colNumero}>Nº</th>
+                            )}
                             <th className={styles.colAcao}>AÇÃO / INSTRUÇÃO</th>
                             <th className={styles.colDado}>DADO DE ENTRADA</th>
                             <th className={styles.colResultado}>
@@ -163,7 +165,7 @@ const ValidationTable = ({
                         {passos.length === 0 ? (
                             <tr>
                                 <td
-                                    colSpan={isReadOnly ? 4 : 5}
+                                    colSpan={isReadOnly ? 3 : 5}
                                     className={styles.estadoVazio}
                                 >
                                     Nenhum passo cadastrado.
@@ -197,9 +199,11 @@ const ValidationTable = ({
                                             handleKeyDownLinha(e, passo.id)
                                         }
                                     >
-                                        <td className={styles.celulaNumero}>
-                                            {index + 1}.
-                                        </td>
+                                        {!isReadOnly && (
+                                            <td className={styles.celulaNumero}>
+                                                {index + 1}.
+                                            </td>
+                                        )}
 
                                         <td>
                                             {estaEditando ? (
