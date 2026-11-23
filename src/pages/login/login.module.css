@@ -299,10 +299,10 @@
 /*                                  ESCONDENDO EFEITOS PARA ESTRUTURAR LAYOUT por enquanto
 
 /*==================================================================================================================*/
-    .quadrado,
-    .quadradoLaranja,
-    .quadradoAzul,
-    .fundoGlass,
+    /* .quadrado, */
+    /* .quadradoLaranja, */
+    /* .quadradoAzul, */
+    /* .fundoGlass, */
     .conteudoCentro {
         display: none; /* Elementos da tela no celular somem aqui */
     }
