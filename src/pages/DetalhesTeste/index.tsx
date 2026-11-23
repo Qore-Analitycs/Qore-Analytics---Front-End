@@ -119,7 +119,6 @@ export default function DetalhesTestePage({
     videoSrc,
     events = MARCADORES_SESSAO_PADRAO,
     sessionTitle = "Gravação Contínua da Sessão Web",
-    resolutionBadge = "HD • 60FPS",
     timestampLabel = "17 de Outubro 2018, 09 : 41 BRT",
     runnerInfo = {
         version: "PLAYWRIGHT_RUNNER_v1.42",
@@ -139,17 +138,9 @@ export default function DetalhesTestePage({
                 {/* 1. Cabeçalho da Página e Ações Superiores */}
                 <header className={styles.cabecalhoPagina}>
                     <div className={styles.textosCabecalho}>
-                        <span className={styles.categoriaPagina}>
-                            Detalhe do teste
-                        </span>
                         <h1 className={styles.tituloRelatorio}>
-                            Relatório do fluxo completo de checkout de login
+                            Detalhes do Teste
                         </h1>
-                        <p className={styles.descricaoRelatorio}>
-                            Inspeção detalhada de telemetria visual,
-                            rastreamento de interação Playwright e validações de
-                            estado do DOM
-                        </p>
                     </div>
 
                 </header>
@@ -159,7 +150,6 @@ export default function DetalhesTestePage({
                     src={videoSrc}
                     events={events}
                     sessionTitle={sessionTitle}
-                    resolutionBadge={resolutionBadge}
                     timestampLabel={timestampLabel}
                     runnerInfo={runnerInfo}
                 />

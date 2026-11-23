@@ -141,13 +141,9 @@ export default function VideoSessionPlayer({
     poster,
     sessionTitle,
     tituloSessao = "Gravação Contínua da Sessão Web",
-    resolutionBadge,
-    qualidadeBadge = "HD • 60FPS",
     timestampLabel,
     dataExecucao = "17 de Outubro 2018, 09 : 41 BRT",
     runnerInfo,
-    urlGravada = "https://app.empresa.com.br/checkout/pagamento-seguro",
-    runnerVersao = "PLAYWRIGHT_RUNNER_v1.42",
     resolucao = "1280x720",
     events,
     marcadores = MARCADORES_SESSAO_PADRAO,
@@ -157,10 +153,7 @@ export default function VideoSessionPlayer({
     const possuiSrcValido = srcNormalizado.length > 0;
 
     const tituloFinal = sessionTitle ?? tituloSessao;
-    const badgeFinal = resolutionBadge ?? qualidadeBadge;
     const dataFinal = timestampLabel ?? dataExecucao;
-    const urlFinal = runnerInfo?.url ?? urlGravada;
-    const versaoRunnerFinal = runnerInfo?.version ?? runnerVersao;
     const resolucaoProp = runnerInfo?.resolution ?? resolucao;
     const listaMarcadores = events ?? marcadores;
 
@@ -480,7 +473,6 @@ export default function VideoSessionPlayer({
                     <span className={styles.tituloSessao}>
                         {tituloFinal} ({duracaoTotalFormatada})
                     </span>
-                    <span className={styles.badgeQualidade}>{badgeFinal}</span>
                 </div>
 
                 <div className={styles.infoDataDireita}>
@@ -512,37 +504,13 @@ export default function VideoSessionPlayer({
                             className={`${styles.bolinhaJanela} ${styles.bolinhaVerde}`}
                         />
                     </div>
-
-                    <div className={styles.barraEndereco}>
-                        <Lock
-                            size={11}
-                            className={styles.iconeCadeado}
-                            aria-hidden="true"
-                        />
-                        <span className={styles.textoUrl}>{urlFinal}</span>
-                    </div>
-
-                    <div className={styles.infoRunner}>
-                        <span
-                            className={`${styles.pontoRunner} ${videoNaoEncontrado
-                                    ? styles.pontoRunnerInativo
-                                    : ""
-                                }`}
-                        />
-                        <span className={styles.textoRunner}>
-                            {versaoRunnerFinal}
-                        </span>
-                        <span className={styles.textoResolucao}>
-                            {resolucaoExibida}
-                        </span>
-                    </div>
                 </div>
 
                 {/* Palco 16:9 (1280x720) com Estado Dedicado de "Vídeo não encontrado" */}
                 <div
                     className={`${styles.palcoVideoWrapper} ${videoNaoEncontrado
-                            ? styles.palcoVideoWrapperIndisponivel
-                            : ""
+                        ? styles.palcoVideoWrapperIndisponivel
+                        : ""
                         }`}
                     onClick={
                         !controlesDesabilitados ? alternarReproducao : undefined
@@ -553,8 +521,8 @@ export default function VideoSessionPlayer({
                         <video
                             ref={videoRef}
                             className={`${styles.elementoVideo} ${videoNaoEncontrado
-                                    ? styles.elementoVideoOculto
-                                    : ""
+                                ? styles.elementoVideoOculto
+                                : ""
                                 }`}
                             src={srcNormalizado}
                             poster={poster}
@@ -576,8 +544,8 @@ export default function VideoSessionPlayer({
                     {eventoContextual && (
                         <div
                             className={`${styles.hudEventoContextual} ${marcadorEmHover
-                                    ? styles.hudEventoContextualPreview
-                                    : ""
+                                ? styles.hudEventoContextualPreview
+                                : ""
                                 }`}
                             aria-live="polite"
                         >
@@ -659,8 +627,8 @@ export default function VideoSessionPlayer({
                         <div
                             ref={trilhaRef}
                             className={`${styles.areaCliqueScrubber} ${controlesDesabilitados
-                                    ? styles.areaCliqueScrubberDesabilitada
-                                    : ""
+                                ? styles.areaCliqueScrubberDesabilitada
+                                : ""
                                 }`}
                             role="slider"
                             tabIndex={controlesDesabilitados ? -1 : 0}
@@ -687,47 +655,6 @@ export default function VideoSessionPlayer({
                             </div>
                         </div>
 
-                        {/* Lista de Marcadores na Linha do Tempo */}
-                        <div className={styles.marcadoresLista}>
-                            {listaMarcadores.map((item) => {
-                                const ehAtivo =
-                                    !controlesDesabilitados &&
-                                    marcadorAtivo?.id === item.id;
-                                const labelTempo =
-                                    item.tempoLabel ??
-                                    formatarTempoCurto(item.timestamp);
-
-                                return (
-                                    <button
-                                        key={item.id}
-                                        type="button"
-                                        disabled={controlesDesabilitados}
-                                        className={`${styles.marcadorItem} ${ehAtivo
-                                                ? styles.marcadorItemAtivo
-                                                : ""
-                                            }`}
-                                        onClick={() =>
-                                            irParaTempo(item.timestamp)
-                                        }
-                                        onMouseEnter={() =>
-                                            setMarcadorEmHover(item)
-                                        }
-                                        onMouseLeave={() =>
-                                            setMarcadorEmHover(null)
-                                        }
-                                        onFocus={() => setMarcadorEmHover(item)}
-                                        onBlur={() => setMarcadorEmHover(null)}
-                                        title={`${labelTempo} ${item.rotulo}${item.resumoContextual
-                                                ? ` — ${item.resumoContextual}`
-                                                : ""
-                                            }`}
-                                    >
-                                        <span>{labelTempo}</span>{" "}
-                                        <span>{item.rotulo}</span>
-                                    </button>
-                                );
-                            })}
-                        </div>
                     </div>
 
                     {/* Controles Principais: Play/Pause, Tempo, PlaybackRate e Fullscreen */}
@@ -808,8 +735,8 @@ export default function VideoSessionPlayer({
                                         disabled={controlesDesabilitados}
                                         aria-pressed={velocidade === opcao}
                                         className={`${styles.btnVelocidade} ${velocidade === opcao
-                                                ? styles.btnVelocidadeAtiva
-                                                : ""
+                                            ? styles.btnVelocidadeAtiva
+                                            : ""
                                             }`}
                                         onClick={() => alterarVelocidade(opcao)}
                                     >
@@ -850,8 +777,8 @@ export default function VideoSessionPlayer({
                             <button
                                 type="button"
                                 className={`${styles.btnControleIcone} ${emTelaCheia
-                                        ? styles.btnControleIconeAtivo
-                                        : ""
+                                    ? styles.btnControleIconeAtivo
+                                    : ""
                                     }`}
                                 onClick={alternarTelaCheia}
                                 aria-label={
