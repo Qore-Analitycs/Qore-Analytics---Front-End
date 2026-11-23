@@ -1,10 +1,13 @@
+import { useUsuario } from "@/hooks/useUsuario";
 import styles from "./item.module.css";
+import { Usuario } from "@/@types/usuario";
 
 type ItemProps = {
   page?: string;
+  usuario?: Usuario;
 };
 
-const Item = ({ page }: ItemProps) => {
+const Item = ({ page, usuario }: ItemProps) => {
   return (
     <>
       {page === "listaHistorico" && (
@@ -23,12 +26,12 @@ const Item = ({ page }: ItemProps) => {
           <td>Sucesso</td>
         </tr>
       )}
-      {page === "UsuarioPermissoes" && (
+       {page === "usuarioPermissoes" && usuario && (
         <tr className={styles.trCard}>
-          <td>Rodrigo Alcantara</td>
-          <td>Root</td>
-          <td>Vektor Tech</td>
-          <td>Ativo</td>
+          <td>{usuario.nome}</td>
+          <td>{usuario.cargo}</td>
+          <td>Empresa</td>
+          <td>{usuario.ativo ? "Ativo" : "Inativo"}</td>
         </tr>
       )}
     </>

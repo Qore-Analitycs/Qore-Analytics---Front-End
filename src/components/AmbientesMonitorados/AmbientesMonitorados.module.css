@@ -56,7 +56,7 @@
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
 }
 
 .subCardAmbiente {
@@ -172,4 +172,3 @@
         align-items: flex-start;
     }
 }
-

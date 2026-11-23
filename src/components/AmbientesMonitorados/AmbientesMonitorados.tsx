@@ -52,6 +52,33 @@ const AMBIENTES_PADRAO: AmbienteMonitorado[] = [
         detalheSecundario: "latência: 45ms",
         variante: "operacional",
     },
+    {
+        id: "staging-sa-east-1",
+        titulo: "Staging / Homologação - sa-east-1",
+        subtitulo: "184 endpoints ativos",
+        statusTexto: "98.8% Saudável",
+        exibirPonto: false,
+        detalheSecundario: "1 alerta menor",
+        variante: "alerta",
+    },
+    {
+        id: "staging-sa-east-1",
+        titulo: "Staging / Homologação - sa-east-1",
+        subtitulo: "184 endpoints ativos",
+        statusTexto: "98.8% Saudável",
+        exibirPonto: false,
+        detalheSecundario: "1 alerta menor",
+        variante: "alerta",
+    },
+    {
+        id: "staging-sa-east-1",
+        titulo: "Staging / Homologação - sa-east-1",
+        subtitulo: "184 endpoints ativos",
+        statusTexto: "98.8% Saudável",
+        exibirPonto: false,
+        detalheSecundario: "1 alerta menor",
+        variante: "alerta",
+    },
 ];
 
 const MAPA_CLASSES_BADGE: Record<VarianteStatusAmbiente, string> = {
