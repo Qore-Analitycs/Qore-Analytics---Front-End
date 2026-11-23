@@ -28,21 +28,21 @@ export default function DetalhesPage() {
       <div className={styles.container}>
 
         {/* ==========================================
-            1. BARRA LATERAL
+           BARRA LATERAL
         ========================================== */}
   <SideBar/>
         
 
 
         {/* ==========================================
-            2. CONTEÚDO PRINCIPAL
+             CONTEÚDO PRINCIPAL
         ========================================== */}
 
         <main className={styles.mainContent}>
 
 
           {/* ==========================================
-              2.1 CABEÇALHO
+               HEADER
           ========================================== */}
 
           <div className={styles.headerRow}>
@@ -65,7 +65,7 @@ export default function DetalhesPage() {
             </div>
 
 
-            {/* Botões superiores */}
+            {/* Botões de cima*/}
 
             <div className={styles.actionButtons}>
 
@@ -100,7 +100,7 @@ export default function DetalhesPage() {
 
 
           {/* ==========================================
-              2.2 PLAYER DE VÍDEO
+                PLAYER DE VÍDEO
           ========================================== */}
 
           <div className={styles.videoContainer}>
@@ -142,7 +142,7 @@ export default function DetalhesPage() {
             </div>
 
 
-            {/* Área de exibição do vídeo */}
+            {/* Área pra ver vídeo */}
 
             <div className={styles.videoScreen}>
               [Simulação do Replay do Teste E2E]
@@ -152,14 +152,14 @@ export default function DetalhesPage() {
 
 
           {/* ==========================================
-              2.3 TIMELINE E MÉTRICAS
+              Linha do tempo e metricas
           ========================================== */}
 
           <div className={styles.gridInferior}>
 
 
             {/* ==========================================
-                COLUNA ESQUERDA: TIMELINE
+                COLUNA ESQUERDA: linha do tempo
             ========================================== */}
 
             <div className={styles.timelineCard}>
@@ -188,7 +188,6 @@ export default function DetalhesPage() {
               </div>
 
 
-              {/* Bloco de passo número 1 */}
 
               <div className={styles.stepBox}>
 
@@ -349,7 +348,7 @@ export default function DetalhesPage() {
               </div>
 
 
-              {/* Métrica 1: Taxa de sucesso */}
+           
 
               <div className={styles.metricCardBox}>
 
@@ -386,7 +385,7 @@ export default function DetalhesPage() {
 
 
 
-              {/* Métrica 2: Duração */}
+  
 
               <div className={styles.metricCardBox}>
 
@@ -423,7 +422,7 @@ export default function DetalhesPage() {
 
 
 
-              {/* Métrica 3: Taxa de erro */}
+      
 
               <div className={styles.metricCardBox}>
 
@@ -460,7 +459,7 @@ export default function DetalhesPage() {
 
 
 
-              {/* Métrica 4: Quantidade de requisições */}
+
 
               <div className={styles.metricCardBox}>
 
