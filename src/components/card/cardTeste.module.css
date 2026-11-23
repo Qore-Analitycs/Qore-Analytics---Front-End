@@ -51,23 +51,6 @@
     letter-spacing: -0.02em;
 }
 
-.parametros {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-family: "Montserrat", sans-serif;
-    font-size: 12.5px;
-}
-
-.iconeTendencia,
-.porcentagem {
-    color: var(--cor-destaque, var(--laranja, #E87A11));
-    font-weight: var(--peso-semibold, 600);
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-}
-
 .comparacao {
     color: #64748B;
     font-weight: var(--peso-normal, 400);

@@ -31,10 +31,7 @@ export default function DashboardPage() {
                     </p>
                 </header>
 
-                {/* 2. Cards de Métricas Superiores (Total de Testes, Aprovados, Falhas, Cobertura) */}
-                <CardsTestes />
-
-                {/* 3. Grid Principal de Monitoramento (Coluna Esquerda 2/3 + Coluna Direita 1/3) */}
+                {/* 2. Grid Principal de Monitoramento (Coluna Esquerda 2/3 + Coluna Direita 1/3) */}
                 <section
                     className={styles.gridMonitoramento}
                     aria-label="Monitoramento em Tempo Real"

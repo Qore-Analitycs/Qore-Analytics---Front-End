@@ -26,13 +26,6 @@ export default function HistoricoTeste() {
           </div>
           <div className={styles.botoes}>
             <div className={styles.containerBotao}>
-              <Botao
-                texto="Gerar Relatório"
-                tamanho="compacto"
-                variante="branco"
-              />
-            </div>
-            <div className={styles.containerBotao}>
               <Botao texto="Nova Execução" tamanho="compacto" />
             </div>
           </div>
