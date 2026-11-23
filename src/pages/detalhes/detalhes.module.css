@@ -1,5 +1,5 @@
 /* =====================================================================
-   ESTILOS GLOBAIS DA TELA
+   GLOBAIS
    ===================================================================== */
 .container {
   display: flex;
@@ -9,7 +9,7 @@
 }
 
 /* =====================================================================
-   BARRA LATERAL ESQUERDA (SIDEBAR)
+   SIDEBAR Esquerda
    ===================================================================== */
 .sidebar {
   width: 80px;
@@ -64,7 +64,7 @@
 }
 
 /* =====================================================================
-   ÁREA DE CONTEÚDO PRINCIPAL
+   PRINCIPAL
    ===================================================================== */
 .mainContent {
   flex: 1;
@@ -72,7 +72,7 @@
   overflow-y: auto;
 }
 
-/* Cabeçalho superior */
+/* HEADER */
 .headerRow {
   display: flex;
   justify-content: space-between;
@@ -102,7 +102,7 @@
   max-width: 768px;
 }
 
-/* Botões do Topo */
+/* Botões de cima */
 .actionButtons {
   display: flex;
   flex-direction: column;
@@ -156,7 +156,7 @@
 }
 
 /* =====================================================================
-   CONTAINER DE VÍDEO E TELEMETRIA
+   ESPAçO DE VÍDEO 
    ===================================================================== */
 .videoContainer {
   background-color: #FFFFFF;
@@ -254,7 +254,7 @@
 }
 
 /* =====================================================================
-   SEÇÃO INFERIOR (TIMELINE E MÉTRICAS)
+  Parte inferior -- timeline e metricas
    ===================================================================== */
 .gridInferior {
   display: grid;
@@ -531,5 +531,9 @@
   }
   .metricsBar {
     grid-template-columns: 1fr;
+  }
+
+  .sideBarResponsa {
+    display: none;
   }
 }

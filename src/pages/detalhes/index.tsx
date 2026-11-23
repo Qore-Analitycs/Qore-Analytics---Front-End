@@ -30,7 +30,8 @@ export default function DetalhesPage() {
         {/* ==========================================
            BARRA LATERAL
         ========================================== */}
-  <SideBar/>
+      <div className={styles.sideBarResponsa}  ><SideBar/></div>
+      
         
 
 
