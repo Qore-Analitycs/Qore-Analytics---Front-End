@@ -94,7 +94,7 @@ export default function Login() {
           <div className={styles.texto}>
             <h1 className={styles.titulo}>Acesse sua conta corporativa</h1>
 
-            <p>
+             <p className={styles.subtituloTexto}>
               Insira suas credenciais corporativas para gerenciar seus clusters,
               suítes de teste e integrações CI/CD.
             </p>
