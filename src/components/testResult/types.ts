@@ -17,4 +17,3 @@ export type ResultadoPasso = {
 export type DadosResultadoTeste = {
     passos: ResultadoPasso[];
 };
-

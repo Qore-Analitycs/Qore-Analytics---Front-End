@@ -29,23 +29,46 @@
     --cor-card3: #FEF7F0;
 }
 
-/* CARD */
-
+/* ==========================================
+   CARDS GRID CONTAINER (ESTRUTURA FLUIDA 1920PX)
+   ========================================== */
 .cards {
-    display: flex;
-    margin: 30 auto;
-    gap: 30px;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@media (max-width: 1100px) {
+    .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
 }
 
 .card {
-    padding: 10px;
-    width: 25%;
+    width: 100%;
+    padding: 18px 22px;
     background: linear-gradient(110deg, var(--cor-card1) 0%, var(--cor-card2) 52%, var(--cor-card3) 100%);
-    border-radius: 5px;
+    border: 1.5px solid #D5DCE4;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
     box-shadow: var(--sombra);
+    box-sizing: border-box;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 .superiorCard {

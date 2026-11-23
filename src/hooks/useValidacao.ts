@@ -4,10 +4,10 @@ export const userSchema = yup.object().shape({
   email: yup
     .string()
     .required("O e-mail é obrigatório")
-    .email("Informe um e-mail válido"),
+    .email("Email ou senha incorretos"),
 
   senha: yup
     .string()
     .required("A senha é obrigatória")
-    .min(8, "A senha deve ter no mínimo 8 caracteres"),
+    .min(8, "Email ou senha incorretos"),
 });

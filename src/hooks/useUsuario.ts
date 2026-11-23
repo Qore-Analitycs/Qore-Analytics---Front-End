@@ -1,9 +1,10 @@
-import { ListarUsuario } from "@/@types/usuario";
+import { CriarUsuario, Usuario } from "@/@types/usuario";
 import { UsuarioService } from "@/services/usuarioService";
+import { toastErro, toastSucesso } from "@/utils/toast";
 import { useEffect, useState } from "react";
 
 export function useUsuario() {
-    const [u, setU] = useState<ListarUsuario[]>([]);
+    const [u, setU] = useState<Usuario[]>([]);
 
     async function listarU() {
         try {
@@ -13,7 +14,17 @@ export function useUsuario() {
 
             setU(dados);
         }catch(error) {
-            alert("Deu merda");
+        }
+    }
+
+    async function cadastrarU(dados: CriarUsuario) {
+        try {
+            const novoU = await UsuarioService.cadastrar(dados);
+
+            setU((antigos) => [novoU, ...antigos])
+            return novoU
+        } catch (error) {
+            toastErro("Deu erro, problema ao cadastrar")
         }
     }
 
@@ -22,6 +33,7 @@ export function useUsuario() {
     }, [])
 
     return {
-        u
+        u,
+        cadastrarU
     };
 }

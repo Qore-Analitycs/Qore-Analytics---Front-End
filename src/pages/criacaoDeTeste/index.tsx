@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Head from "next/head";
-import SideBar from "@/components/sideBar/sideBar";
+import AppLayout from "@/components/layout/AppLayout";
 import PromptCenario, {
     DadosPromptCenario,
 } from "@/components/promptCenario/promptCenario";
@@ -12,7 +12,6 @@ import {
     ResultadoPasso,
 } from "@/components/testResult/types";
 import styles from "./criacaoTeste.module.css";
-import FiltroPesquisa from "@/components/filtroPesquisa/filtroPesquisa";
 
 const TEMPOS_EXECUCAO_MOCK = [410, 320, 540, 290];
 
@@ -39,7 +38,6 @@ const simularResultadoIA = (passos: PassoValidacao[]): DadosResultadoTeste => {
 };
 
 export default function CriacaoTestePage() {
-    const [sidebarExpandida, setSidebarExpandida] = useState(false);
     const [gerandoRoteiro, setGerandoRoteiro] = useState(false);
     const [executandoIA, setExecutandoIA] = useState(false);
     const [erroUrl, setErroUrl] = useState<string | undefined>(undefined);
@@ -132,75 +130,57 @@ export default function CriacaoTestePage() {
                 <title>Criação de Teste E2E | Qore Analytics</title>
             </Head>
 
-            <div
-                className={`${styles.layoutShell} ${sidebarExpandida ? styles.layoutShellExpandido : ""
-                    }`}
-            >
-                <div className={styles.sidebarContainer}>
-                    <SideBar
-                        expandida={sidebarExpandida}
-                        onExpandidaChange={setSidebarExpandida}
+            <AppLayout maxWidth="1520px" containerClassName={styles.conteudoLimitado}>
+                {/* Topo da Página */}
+                <header className={styles.topoPagina}>
+                    <p className={styles.tituloPagina}>
+                        Criação e execução de teste
+                    </p>
+                    <h1 className={styles.tituloSecaoPrincipal}>
+                        Criação de Teste E2E
+                    </h1>
+                </header>
+
+                {/* Bloco 1: Prompt de Geração de Cenários */}
+                <section
+                    className={styles.blocoSecao}
+                    aria-label="Prompt de Geração de Cenários"
+                >
+                    <PromptCenario
+                        carregando={gerandoRoteiro}
+                        erroUrl={erroUrl}
+                        erroDescricao={erroDescricao}
+                        onGerarRoteiro={handleGerarRoteiro}
                     />
-                </div>
+                </section>
 
-                <main className={styles.conteudoPrincipal}>
-                    <div className={styles.conteudoLimitado}>
-                        {/* Topo da Página */}
-                        <header className={styles.topoPagina}>
-                            <p className={styles.tituloPagina}>
-                                Criação e execução de teste
-                            </p>
-                            <h1 className={styles.tituloSecaoPrincipal}>
-                                Criação de Teste E2E
-                            </h1>
-                        </header>
+                {/* Bloco 2: Documento Gerado ("Folha Sulfite") */}
+                <section
+                    className={styles.blocoSecao}
+                    aria-label="Documento gerado"
+                >
+                    <DocumentoGerado
+                        key={versaoDocumento}
+                        tituloInicial={tituloRoteiro}
+                        carregandoIA={executandoIA}
+                        onAssinarRoteiro={handleAssinarRoteiro}
+                        onExecutarTesteIA={handleExecutarTesteIA}
+                    />
+                </section>
 
-                        {/* Bloco 1: Prompt de Geração de Cenários */}
-                        <section
-                            className={styles.blocoSecao}
-                            aria-label="Prompt de Geração de Cenários"
-                        >
-                            <PromptCenario
-                                carregando={gerandoRoteiro}
-                                erroUrl={erroUrl}
-                                erroDescricao={erroDescricao}
-                                onGerarRoteiro={handleGerarRoteiro}
-                            />
-                        </section>
-
-                        {/* Bloco 2: Documento Gerado ("Folha Sulfite") */}
-                        <section
-                            className={styles.blocoSecao}
-                            aria-label="Documento gerado"
-                        >
-
-                            <DocumentoGerado
-                                key={versaoDocumento}
-                                tituloInicial={tituloRoteiro}
-                                carregandoIA={executandoIA}
-                                onAssinarRoteiro={handleAssinarRoteiro}
-                                onExecutarTesteIA={handleExecutarTesteIA}
-                            />
-                        </section>
-
-                        {/* Bloco 3: Resultado do Teste (Condicional após execução da IA) */}
-                        {resultadoTeste && (
-                            <section
-                                className={styles.blocoSecao}
-                                aria-label="Resultado do teste"
-                            >
-                                <TestResult
-                                    resultado={resultadoTeste}
-                                    onExportarRelatorio={
-                                        handleExportarRelatorio
-                                    }
-                                />
-                            </section>
-                        )}
-                    </div>
-                </main>
-            </div>
+                {/* Bloco 3: Resultado do Teste (Condicional após execução da IA) */}
+                {resultadoTeste && (
+                    <section
+                        className={styles.blocoSecao}
+                        aria-label="Resultado do teste"
+                    >
+                        <TestResult
+                            resultado={resultadoTeste}
+                            onExportarRelatorio={handleExportarRelatorio}
+                        />
+                    </section>
+                )}
+            </AppLayout>
         </>
     );
 }
-

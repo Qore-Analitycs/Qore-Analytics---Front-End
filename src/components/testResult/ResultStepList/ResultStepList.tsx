@@ -31,18 +31,16 @@ const ResultStepList = ({ passos, filtroAtivo }: ResultStepListProps) => {
                 return (
                     <li
                         key={passo.id}
-                        className={`${styles.cardPasso} ${
-                            passou ? styles.cardSucesso : styles.cardFalha
-                        }`}
+                        className={`${styles.cardPasso} ${passou ? styles.cardSucesso : styles.cardFalha
+                            }`}
                     >
                         <div className={styles.linhaPrincipal}>
                             <div className={styles.infoEsquerda}>
                                 <span
-                                    className={`${styles.iconeStatus} ${
-                                        passou
+                                    className={`${styles.iconeStatus} ${passou
                                             ? styles.iconeSucesso
                                             : styles.iconeFalha
-                                    }`}
+                                        }`}
                                     aria-hidden="true"
                                 >
                                     {passou ? (
@@ -74,11 +72,10 @@ const ResultStepList = ({ passos, filtroAtivo }: ResultStepListProps) => {
                                 </span>
 
                                 <span
-                                    className={`${styles.badgeStatus} ${
-                                        passou
+                                    className={`${styles.badgeStatus} ${passou
                                             ? styles.badgePassou
                                             : styles.badgeNaoPassou
-                                    }`}
+                                        }`}
                                 >
                                     {passou ? "PASSOU" : "NÃO PASSOU"}
                                 </span>
@@ -105,11 +102,10 @@ const ResultStepList = ({ passos, filtroAtivo }: ResultStepListProps) => {
                                         {passo.tags.map((tag, index) => (
                                             <span
                                                 key={`${passo.id}-tag-${index}`}
-                                                className={`${styles.tag} ${
-                                                    index === 0
+                                                className={`${styles.tag} ${index === 0
                                                         ? styles.tagDestaque
                                                         : styles.tagCritico
-                                                }`}
+                                                    }`}
                                             >
                                                 {tag}
                                             </span>
@@ -126,4 +122,3 @@ const ResultStepList = ({ passos, filtroAtivo }: ResultStepListProps) => {
 };
 
 export default ResultStepList;
-

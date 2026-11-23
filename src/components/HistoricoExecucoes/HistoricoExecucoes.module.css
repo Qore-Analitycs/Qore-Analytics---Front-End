@@ -1,7 +1,7 @@
 .cardContainer {
     width: 100%;
     height: 540px;
-    background-color: var(--branco);
+    background-color: var(--branco, #FFFFFF);
     border: 2px solid #D5DCE4;
     border-radius: 12px;
     padding: 28px 32px;
@@ -29,7 +29,7 @@
     font-family: "Montserrat", sans-serif;
     font-size: 22px;
     font-weight: var(--peso-semibold, 600);
-    color: #0F172A;
+    color: #2D3133;
     margin: 0;
     line-height: 1.25;
 }
@@ -38,7 +38,7 @@
     font-family: "Montserrat", sans-serif;
     font-size: 14px;
     font-weight: var(--peso-normal, 400);
-    color: #64748B;
+    color: #475E7C;
     margin: 0;
     line-height: 1.4;
 }
@@ -72,11 +72,11 @@
     font-family: "Montserrat", sans-serif;
     font-size: 13px;
     font-weight: var(--peso-semibold, 600);
-    color: #334155;
+    color: #3C3F40;
 }
 
 .valorDestaque {
-    color: #0F172A;
+    color: #2D3133;
     font-weight: var(--peso-bold, 700);
 }
 
@@ -104,7 +104,7 @@
     font-family: "Montserrat", sans-serif;
     font-size: 13px;
     font-weight: var(--peso-semibold, 600);
-    color: #475569;
+    color: #475E7C;
 }
 
 .linhaTracejadaIcone {
@@ -135,7 +135,7 @@
 
 .tooltipCard {
     background-color: #1E293B;
-    color: var(--branco);
+    color: var(--branco, #FFFFFF);
     border: 1px solid #334155;
     border-radius: 8px;
     padding: 10px 14px;
@@ -172,7 +172,7 @@
 
 .tooltipValor {
     font-weight: var(--peso-bold, 700);
-    color: var(--branco);
+    color: var(--branco, #FFFFFF);
 }
 
 /* ==========================================
@@ -197,7 +197,7 @@
 
 .destaqueRodape {
     font-weight: var(--peso-semibold, 600);
-    color: #334155;
+    color: #2D3133;
 }
 
 @media (max-width: 768px) {
@@ -228,4 +228,3 @@
         gap: 6px;
     }
 }
-

@@ -1,12 +1,13 @@
 .folhaSulfite {
     width: 100%;
-    background-color: var(--branco);
+    background-color: var(--branco, #FFFFFF);
     border-radius: 12px;
-    padding: 40px 44px;
+    padding: 44px 52px;
     box-shadow: var(--sombra);
     display: flex;
     flex-direction: column;
     gap: 24px;
+    box-sizing: border-box;
 }
 
 .abasFiltro {
@@ -21,8 +22,8 @@
 .aba {
     font-family: "Montserrat", sans-serif;
     font-size: 14px;
-    font-weight: var(--peso-semibold);
-    color: #64748B;
+    font-weight: var(--peso-semibold, 600);
+    color: #475E7C;
     background-color: #F1F5F9;
     border: 1px solid #E2E8F0;
     border-radius: 8px;
@@ -33,13 +34,13 @@
 
 .aba:hover {
     background-color: #E2E8F0;
-    color: #1E293B;
+    color: #2D3133;
 }
 
 .abaAtiva {
     background-color: #FFE8CC;
-    color: var(--laranja-);
-    border: 2px solid var(--laranja);
+    color: var(--laranja, #E87A11);
+    border: 2px solid var(--laranja, #E87A11);
 }
 
 .abaAtiva:hover {

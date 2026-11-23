@@ -66,12 +66,12 @@ const ValidationTable = ({
         const passosAtualizados = passos.map((passo) =>
             passo.id === id
                 ? {
-                      ...passo,
-                      acao: rascunho.acao.trim(),
-                      dadoEntrada: rascunho.dadoEntrada.trim(),
-                      resultadoEsperado: rascunho.resultadoEsperado.trim(),
-                      focoDiff: rascunho.focoDiff,
-                  }
+                    ...passo,
+                    acao: rascunho.acao.trim(),
+                    dadoEntrada: rascunho.dadoEntrada.trim(),
+                    resultadoEsperado: rascunho.resultadoEsperado.trim(),
+                    focoDiff: rascunho.focoDiff,
+                }
                 : passo
         );
 
@@ -136,9 +136,8 @@ const ValidationTable = ({
 
     return (
         <section
-            className={`${styles.cardTabela} ${
-                isReadOnly ? styles.cardTabelaReadOnly : ""
-            }`}
+            className={`${styles.cardTabela} ${isReadOnly ? styles.cardTabelaReadOnly : ""
+                }`}
         >
             <h2 className={styles.titulo}>
                 Roteiro Detalhado de Validação Manual
@@ -482,4 +481,3 @@ const ValidationTable = ({
 };
 
 export default ValidationTable;
-

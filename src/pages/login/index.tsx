@@ -1,6 +1,5 @@
 import styles from "./login.module.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import "@fortawesome/free-brands-svg-icons";
 import * as yup from "yup";
 import { userSchema } from "@/hooks/useValidacao";
 import { useState, type FormEvent } from "react";
@@ -8,10 +7,14 @@ import Botao from "@/components/botao/botao";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import Input from "@/components/input/input";
 import { login } from "../../services/authService";
-import { useRouter } from "next/router";
+import { toastErro, toastInfo, toastSucesso } from "@/utils/toast";
 
 export default function Login() {
   const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+
   const [erros, setErros] = useState<{
     email?: string;
     senha?: string;
@@ -19,55 +22,47 @@ export default function Login() {
 
   const loginUsuario = async (evento: FormEvent<HTMLFormElement>) => {
     evento.preventDefault();
-
     try {
       await userSchema.validate({ email, senha }, { abortEarly: false });
       setErros({});
-
-      console.log("Login válido!", formData);
-
-      router.push("/historico");
     } catch (erro) {
-      if (erro instanceof yup.ValidationError) {
-        const novosErros: { email?: string; senha?: string } = {};
+      const mensagemPadrao = "Email ou senha incorretos";
+      const novosErros: { email?: string; senha?: string } = {
+        email: mensagemPadrao,
+        senha: mensagemPadrao,
+      };
 
+      if (erro instanceof yup.ValidationError) {
         erro.inner.forEach((item) => {
-          if (item.path) {
-            novosErros[item.path as "email" | "senha"] = item.message;
+          if (item.path === "email" || item.path === "senha") {
+            novosErros[item.path] = item.message || mensagemPadrao;
           }
         });
-
-        setErros(novosErros);
       }
+
+      setErros(novosErros);
       return;
     }
-
     try {
       const resposta = await login(email, senha);
-      console.log(resposta);
-      alert("Login bem sucedido!");
-      router.push("/historicoTeste");
-    } catch (error: any) {
+      toastInfo("Login realizado com sucesso!");
+      await router.push("/historico");
+    } catch (error) {
       setErros({
-        email: "email ou senha incorretos",
-        senha: "email ou senha incorretos"
+        email: "Email ou senha incorretos",
+        senha: "Email ou senha incorretos",
+
       });
     }
   };
 
   return (
-    <>
-      <main className={styles.main}>
-        <section className={styles.ladoEsquerdo}>
-          <div className={`${styles.quadrado} ${styles.quadradoLaranja}`}></div>
-          <div className={`${styles.quadrado} ${styles.quadradoAzul}`}></div>
+    <main className={styles.main}>
+      {/* Lado Esquerdo */}
+      <section className={styles.ladoEsquerdo}>
+        <div className={`${styles.quadrado} ${styles.quadradoLaranja}`} />
 
-          <div className={styles.fundoGlass}></div>
-
-          <div className={styles.superior}>
-            <img src="../imgs/LogoMinimalista.png" alt="Logo QA" />
-            <img src="../imgs/QoreAnalytics.png" alt="Qore Analytics" />
-          </div>
+        <div className={`${styles.quadrado} ${styles.quadradoAzul}`} />
 
           <div className={styles.fundoGlass}></div>
 

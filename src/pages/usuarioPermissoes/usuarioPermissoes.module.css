@@ -1,58 +1,75 @@
-.main {
-    display: flex;
-    background-color: var(--cor-fundo);
-}
-
-.layoutShell {
-    --largura-sidebar: 64px;
-    min-height: 100vh;
-    width: 100%;
-    background-color: var(--cor-fundo);
-    display: flex;
-}
-
-.layoutShellExpandido {
-    --largura-sidebar: 220px;
-}
-
-.conteudo {
-    margin-top: 10px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-left: var(--largura-sidebar);
-    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.mainBlur{
+    filter: blur(5px);
 }
 
 .container {
-    width: 90%;
+    width: 100%;
+    max-width: 1520px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
 }
 
 .containerTexto {
     display: flex;
     justify-content: space-between;
-}
-
-.containerBotao {
-    width: 25%;
-    align-self: center;
+    align-items: flex-start;
+    gap: 24px;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
 .texto {
-    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 280px;
 }
 
-.texto h2 {
-    font-size: var(--fonte-titulo);
-    font-weight: var(--peso-bold);
+.categoriaMenor {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: var(--peso-semibold, 600);
+    color: #475E7C;
+    margin: 0;
 }
 
-.sidebarContainer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: var(--largura-sidebar);
-    z-index: 30;
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.titulo {
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-titulo, 40px);
+    color: #2D3133;
+    font-weight: var(--peso-bold, 700);
+    margin: 0;
+    line-height: 1.15;
+}
+
+.descricaoPagina {
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    font-weight: var(--peso-normal, 400);
+    color: #475569;
+    margin: 0;
+    line-height: 1.5;
+    max-width: 800px;
+}
+
+.containerBotao {
+    min-width: 180px;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .containerTexto {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .titulo {
+        font-size: 28px;
+    }
+
+    .containerBotao {
+        width: 100%;
+    }
 }

@@ -211,3 +211,8 @@
         display: flex;
         align-self: center;
     }
+
+    .botoes {
+        display: flex;
+        justify-content: space-between;
+    }
