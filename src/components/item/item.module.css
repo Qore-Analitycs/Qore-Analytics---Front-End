@@ -42,7 +42,8 @@
 .celulaData {
     color: #64748B;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 13px;
+    font-size: var(--fonte-compacta);
+    line-height: var(--lh-compacto);
 }
 
 /* 2. Colunas Usuário e Permissões */
@@ -53,20 +54,22 @@
 .infoUsuario {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 3px;
     align-items: flex-start;
 }
 
 .nomeUsuario {
     font-family: "Montserrat", sans-serif;
-    font-size: 14px;
+    font-size: var(--fonte-corpo);
     font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
     color: #2D3133;
 }
 
 .emailUsuario {
     font-family: "Montserrat", sans-serif;
-    font-size: 12px;
+    font-size: var(--fonte-pequena);
+    line-height: var(--lh-compacto);
     color: #64748B;
 }
 
@@ -87,10 +90,11 @@
     align-items: center;
     justify-content: center;
     gap: 5px;
-    padding: 4px 12px;
+    padding: 5px 14px;
     border-radius: 999px;
-    font-size: 12px;
+    font-size: var(--fonte-pequena);
     font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
     white-space: nowrap;
 }
 

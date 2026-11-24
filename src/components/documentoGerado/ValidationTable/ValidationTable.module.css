@@ -16,8 +16,9 @@
 
 .titulo {
     font-family: "Montserrat", sans-serif;
-    font-size: 22px;
+    font-size: var(--fonte-card-titulo);
     font-weight: var(--peso-semibold);
+    line-height: var(--lh-titulo);
     color: #0F172A;
     margin: 0;
 }
@@ -31,7 +32,7 @@
 
 .tabela {
     width: 100%;
-    min-width: 780px;
+    min-width: 820px;
     border-collapse: collapse;
     text-align: left;
 }
@@ -44,15 +45,16 @@
 .tabela th {
     padding: 14px 18px;
     font-family: "Montserrat", sans-serif;
-    font-size: 13px;
+    font-size: var(--fonte-pequena);
     font-weight: var(--peso-semibold);
+    line-height: var(--lh-compacto);
     color: #64748B;
     text-transform: uppercase;
     letter-spacing: 0.04em;
 }
 
 .colNumero {
-    width: 60px;
+    width: 68px;
     text-align: center;
 }
 
@@ -69,7 +71,7 @@
 }
 
 .colAcoes {
-    width: 96px;
+    width: 108px;
     text-align: center;
 }
 
@@ -94,12 +96,12 @@
     padding: 20px 18px;
     vertical-align: middle;
     font-family: "Montserrat", sans-serif;
-    font-size: 15px;
-    line-height: 1.55;
+    font-size: var(--fonte-corpo);
+    line-height: var(--lh-corpo);
 }
 
 .celulaNumero {
-    font-size: 16px;
+    font-size: var(--fonte-padrao);
     font-weight: var(--peso-semibold);
     color: #1E293B;
     text-align: center;
@@ -122,8 +124,9 @@
     display: inline-block;
     background-color: var(--laranja);
     color: var(--branco);
-    font-size: 11px;
+    font-size: var(--fonte-micro);
     font-weight: var(--peso-bold);
+    line-height: var(--lh-compacto);
     letter-spacing: 0.04em;
     text-transform: uppercase;
     padding: 4px 10px;
@@ -137,8 +140,8 @@
     border-radius: 6px;
     padding: 8px 12px;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 13px;
-    line-height: 1.5;
+    font-size: var(--fonte-pequena);
+    line-height: var(--lh-corpo);
     color: #475569;
     white-space: pre-wrap;
     word-break: break-word;
@@ -169,8 +172,8 @@
     border: 1.5px solid #CBD5E1;
     border-radius: 6px;
     font-family: "Montserrat", sans-serif;
-    font-size: 13px;
-    line-height: 1.45;
+    font-size: var(--fonte-pequena);
+    line-height: var(--lh-compacto);
     color: var(--cinza-escuro);
     background-color: var(--branco);
     resize: vertical;
@@ -184,7 +187,7 @@
 
 .textareaCodigo {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 12px;
+    font-size: var(--fonte-pequena);
 }
 
 .textareaErro {
@@ -193,6 +196,7 @@
 
 .textoErro {
     font-size: var(--fonte-pequena);
+    line-height: var(--lh-compacto);
     color: var(--vermelho);
 }
 
@@ -200,7 +204,8 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 12px;
+    font-size: var(--fonte-pequena);
+    line-height: var(--lh-compacto);
     color: #475569;
     cursor: pointer;
     user-select: none;
@@ -265,7 +270,8 @@
     text-align: center;
     padding: 36px 20px !important;
     color: #64748B;
-    font-size: 14px;
+    font-size: var(--fonte-corpo);
+    line-height: var(--lh-corpo);
 }
 
 /* ==========================================
@@ -284,15 +290,16 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    height: 40px;
-    padding: 0 18px;
+    min-height: 42px;
+    padding: 8px 18px;
     background-color: #E8EEF3;
     color: #334155;
     border: 1px solid transparent;
     border-radius: 6px;
     font-family: "Montserrat", sans-serif;
-    font-size: 14px;
+    font-size: var(--fonte-compacta);
     font-weight: var(--peso-semibold);
+    line-height: var(--lh-compacto);
     cursor: pointer;
     transition: background-color 0.15s ease;
 }

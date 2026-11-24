@@ -65,11 +65,11 @@
 
 .tituloPasso {
     font-family: "Montserrat", sans-serif;
-    font-size: 15px;
+    font-size: var(--fonte-corpo);
     font-weight: var(--peso-semibold);
     color: #1E293B;
     margin: 0;
-    line-height: 1.45;
+    line-height: var(--lh-compacto);
 }
 
 .textosPassoWrapper {
@@ -80,11 +80,11 @@
 
 .descricaoPasso {
     font-family: "Montserrat", sans-serif;
-    font-size: 13px;
+    font-size: var(--fonte-pequena);
     font-weight: var(--peso-normal, 400);
     color: #64748B;
     margin: 0;
-    line-height: 1.4;
+    line-height: var(--lh-compacto);
 }
 
 .infoDireita {
@@ -99,7 +99,8 @@
     align-items: center;
     gap: 5px;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 13px;
+    font-size: var(--fonte-pequena);
+    line-height: var(--lh-compacto);
     color: #64748B;
     background-color: #F1F5F9;
     border: 1px solid #E2E8F0;
@@ -115,8 +116,9 @@
 
 .badgeStatus {
     font-family: "Montserrat", sans-serif;
-    font-size: 11px;
+    font-size: var(--fonte-micro);
     font-weight: var(--peso-bold);
+    line-height: var(--lh-compacto);
     letter-spacing: 0.04em;
     text-transform: uppercase;
     padding: 5px 12px;
@@ -160,8 +162,8 @@
 .textoErro {
     margin: 0;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 13px;
-    line-height: 1.5;
+    font-size: var(--fonte-pequena);
+    line-height: var(--lh-corpo);
     color: #991B1B;
     word-break: break-word;
 }
@@ -175,8 +177,9 @@
 
 .tag {
     font-family: "Montserrat", sans-serif;
-    font-size: 12px;
+    font-size: var(--fonte-pequena);
     font-weight: var(--peso-semibold);
+    line-height: var(--lh-compacto);
     padding: 4px 10px;
     border-radius: 6px;
 }
@@ -198,7 +201,8 @@
     padding: 32px 20px;
     color: #64748B;
     font-family: "Montserrat", sans-serif;
-    font-size: 14px;
+    font-size: var(--fonte-corpo);
+    line-height: var(--lh-corpo);
     border: 2px dashed #D5DCE4;
     border-radius: 10px;
 }

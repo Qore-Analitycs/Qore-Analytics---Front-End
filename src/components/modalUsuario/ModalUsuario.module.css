@@ -1,4 +1,3 @@
-
 /* Fundo externo do modal */
 .fundo {
   position: fixed;
@@ -16,9 +15,9 @@
   border: solid 2px var(--laranja);
   position: relative;
   border-radius: 15px;
-  width: 430px;
-  min-height: 560px;
-  padding: 30px 28px;
+  width: min(460px, 100%);
+  min-height: 580px;
+  padding: 32px;
   display: flex;
   flex-direction: column;
   background-color: var(--cor-fundo);
@@ -36,20 +35,22 @@
 
   color: var(--laranja);
   font-size: var(--fonte-padrao);
-  font-weight: var(--peso-semibold  );
+  font-weight: var(--peso-semibold);
+  line-height: var(--lh-compacto);
 }
 
 .cabecalho h2 {
   margin-bottom: 4px;
 
-  font-size: 23px;
+  font-size: var(--fonte-subtitulo);
   font-weight: 700;
+  line-height: var(--lh-titulo);
 }
 
 .cabecalho p {
   color: #666666;
-  font-size: 12px;
-  line-height: 1.4;
+  font-size: var(--fonte-pequena);
+  line-height: var(--lh-compacto);
 }
 
 /* Botão de fechar */
@@ -61,7 +62,8 @@
   border: none;
   background: transparent;
 
-  font-size: 30px;
+  font-size: var(--fonte-metrica);
+  line-height: 1;
   cursor: pointer;
 }
 
@@ -82,18 +84,20 @@
 }
 
 .campo label,
-.campo > span {
-  font-size: 12px;
+.campo>span {
+  font-size: var(--fonte-pequena);
+  line-height: var(--lh-compacto);
   color: #222222;
 }
 
 .campo input {
   width: 100%;
-  height: 38px;
-  padding: 0 10px;
+  height: 42px;
+  padding: 0 12px;
   border: 1px solid #BBBBBB;
   background-color: #FFFFFF;
-  font-size: 13px;
+  font-size: var(--fonte-compacta);
+  line-height: var(--lh-compacto);
 }
 
 .campo input:focus {
@@ -110,12 +114,14 @@
 
 .cargo,
 .cargoSelecionado {
-  height: 38px;
+  min-height: 40px;
+  padding: 6px 8px;
 
   border: 1px solid #BBBBBB;
   cursor: pointer;
 
-  font-size: 11px;
+  font-size: var(--fonte-pequena);
+  line-height: var(--lh-compacto);
 }
 
 .cargo {
@@ -141,13 +147,15 @@
 
 .botaoCancelar,
 .botaoCriar {
-  height: 42px;
+  min-height: 44px;
+  padding: 8px 14px;
 
   border: none;
   cursor: pointer;
 
-  font-size: 13px;
+  font-size: var(--fonte-compacta);
   font-weight: 600;
+  line-height: var(--lh-compacto);
 }
 
 .botaoCancelar {
@@ -174,6 +182,6 @@
 
   .cargo,
   .cargoSelecionado {
-    font-size: 10px;
+    font-size: var(--fonte-micro);
   }
 }

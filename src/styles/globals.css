@@ -3,6 +3,7 @@
 @import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
+
 :root {
   /* SHADCN UI VARIABLES */
   --background: oklch(1 0 0);
@@ -163,10 +164,13 @@ a {
 
   body {
     @apply bg-background text-foreground;
+    font-size: var(--fonte-corpo, 1rem);
+    line-height: var(--lh-corpo, 1.55);
   }
 
   html {
     @apply font-sans;
+    font-size: 16px;
   }
 }
 
@@ -176,7 +180,7 @@ a {
   }
 }
 
-.Toastify__toast--info{
+.Toastify__toast--info {
   & svg {
     fill: var(--laranja)
   }

@@ -14,7 +14,7 @@
 }
 
 .expandida {
-    width: 220px;
+    width: 240px;
 }
 
 /* ==========================================
@@ -73,8 +73,9 @@
 
 .marcaTexto {
     font-family: "Montserrat", sans-serif;
-    font-size: 15px;
+    font-size: var(--fonte-corpo);
     font-weight: var(--peso-bold);
+    line-height: var(--lh-titulo);
     color: var(--branco);
     letter-spacing: 0.02em;
 }
@@ -112,7 +113,7 @@
     display: flex;
     align-items: center;
     width: 100%;
-    height: 44px;
+    height: 46px;
     text-decoration: none;
     color: #D8DADC;
     position: relative;
@@ -143,17 +144,18 @@
 .iconeWrapper {
     width: 64px;
     min-width: 64px;
-    height: 44px;
+    height: 46px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    font-size: 1.15rem;
+    font-size: var(--fonte-botao);
 }
 
 .span {
-    font-size: 14px;
+    font-size: var(--fonte-compacta);
     font-weight: var(--peso-500);
+    line-height: var(--lh-compacto);
     white-space: nowrap;
     opacity: 0;
     transform: translateX(-6px);
@@ -217,8 +219,9 @@
     border-radius: 50%;
     background-color: var(--laranja);
     color: var(--branco);
-    font-size: 13px;
+    font-size: var(--fonte-pequena);
     font-weight: var(--peso-bold);
+    line-height: 1;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -244,15 +247,15 @@
 
 .nomePerfil {
     color: #D8DADC;
-    font-size: 13.5px;
+    font-size: var(--fonte-compacta);
     font-weight: var(--peso-semibold);
     margin: 0;
-    line-height: 1.25;
+    line-height: var(--lh-compacto);
 }
 
 .cargoPerfil {
     color: var(--laranja);
-    font-size: 12px;
+    font-size: var(--fonte-pequena);
     font-weight: var(--peso-normal);
-    line-height: 1.25;
+    line-height: var(--lh-compacto);
 }

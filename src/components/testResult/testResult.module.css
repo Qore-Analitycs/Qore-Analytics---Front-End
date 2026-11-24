@@ -21,8 +21,9 @@
 
 .aba {
     font-family: "Montserrat", sans-serif;
-    font-size: 14px;
+    font-size: var(--fonte-compacta);
     font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
     color: #475E7C;
     background-color: #F1F5F9;
     border: 1px solid #E2E8F0;

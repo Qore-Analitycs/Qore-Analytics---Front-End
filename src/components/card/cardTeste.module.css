@@ -27,8 +27,9 @@
 .titulo {
     margin: 0;
     font-family: "Montserrat", sans-serif;
-    font-size: 13.5px;
+    font-size: var(--fonte-compacta);
     font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
     color: #475E7C;
 }
 
@@ -37,21 +38,23 @@
     align-items: center;
     justify-content: center;
     color: var(--cor-destaque, var(--laranja, #E87A11));
-    font-size: 15px;
+    font-size: var(--fonte-padrao);
 }
 
 .valor {
     display: block;
     font-family: "Montserrat", sans-serif;
-    font-size: 30px;
+    font-size: var(--fonte-metrica);
     font-weight: var(--peso-bold, 700);
     color: #2D3133;
-    line-height: 1.15;
+    line-height: var(--lh-justo);
     margin: 4px 0;
     letter-spacing: -0.02em;
 }
 
 .comparacao {
+    font-size: var(--fonte-pequena);
+    line-height: var(--lh-compacto);
     color: #64748B;
     font-weight: var(--peso-normal, 400);
 }

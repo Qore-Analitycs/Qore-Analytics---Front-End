@@ -13,8 +13,9 @@
 
 .titulo {
     font-family: "Montserrat", sans-serif;
-    font-size: var(--fonte-subtitulo, 24px);
+    font-size: var(--fonte-subtitulo);
     font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-titulo);
     color: #FFFFFF;
     margin: 0;
 }
@@ -35,7 +36,7 @@
 
 /* Controla a largura do Botao (que ocupa 100% do pai por padrão) */
 .botaoWrapper {
-    width: 240px;
+    width: 260px;
 }
 
 @media (max-width: 768px) {

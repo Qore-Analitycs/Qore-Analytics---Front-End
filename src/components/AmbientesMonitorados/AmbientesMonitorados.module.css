@@ -1,6 +1,6 @@
 .cardContainer {
     width: 100%;
-    min-height: 540px;
+    min-height: 560px;
     background-color: var(--branco, #FFFFFF);
     border: 2px solid #D5DCE4;
     border-radius: 12px;
@@ -23,11 +23,11 @@
 
 .titulo {
     font-family: "Montserrat", sans-serif;
-    font-size: 20px;
+    font-size: var(--fonte-card-titulo);
     font-weight: var(--peso-semibold, 600);
     color: #2D3133;
     margin: 0;
-    line-height: 1.25;
+    line-height: var(--lh-titulo);
 }
 
 .iconeTopoWrapper {
@@ -60,7 +60,7 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
-    max-height: 420px;
+    max-height: 440px;
     overflow-y: auto;
     padding-right: 4px;
     scrollbar-width: thin;
@@ -106,20 +106,20 @@
 
 .tituloAmbiente {
     font-family: "Montserrat", sans-serif;
-    font-size: 13.5px;
+    font-size: var(--fonte-compacta);
     font-weight: var(--peso-semibold, 600);
     color: #2D3133;
     margin: 0;
-    line-height: 1.3;
+    line-height: var(--lh-compacto);
 }
 
 .subtituloAmbiente {
     font-family: "Montserrat", sans-serif;
-    font-size: 12px;
+    font-size: var(--fonte-pequena);
     font-weight: var(--peso-normal, 400);
     color: #475E7C;
     margin: 0;
-    line-height: 1.3;
+    line-height: var(--lh-compacto);
 }
 
 /* ==========================================
@@ -129,7 +129,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 3px;
+    gap: 4px;
     flex-shrink: 0;
 }
 
@@ -138,15 +138,16 @@
     align-items: center;
     gap: 5px;
     font-family: "Montserrat", sans-serif;
-    font-size: 11.5px;
+    font-size: var(--fonte-pequena);
     font-weight: var(--peso-semibold, 600);
-    padding: 3px 9px;
+    line-height: var(--lh-compacto);
+    padding: 4px 10px;
     border-radius: 999px;
     white-space: nowrap;
 }
 
 .pontoStatus {
-    font-size: 8px;
+    font-size: 0.625rem;
     line-height: 1;
 }
 
@@ -173,7 +174,8 @@
 
 .detalheStatus {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 11.5px;
+    font-size: var(--fonte-pequena);
+    line-height: var(--lh-compacto);
     color: #64748B;
     white-space: nowrap;
 }
