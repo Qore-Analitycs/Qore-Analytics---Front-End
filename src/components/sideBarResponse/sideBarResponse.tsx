@@ -8,9 +8,17 @@ import styles from "./sideBarResponse.module.css";
 export default function SideBarResponse() {
   return (
     <div className={styles.container}>
-      <div className={styles.leftSquare}></div>
+      <div className={styles.menu}>
 
-      <div className={styles.rightSquare}></div>
+            <img src="" alt="" />
+
+      </div>
+
+      <div className={styles.logoResponse}>
+
+            <img src="../public/side-list.png" alt="" />
+
+      </div>
     </div>
   );
 }
