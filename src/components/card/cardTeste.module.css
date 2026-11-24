@@ -1,3 +1,22 @@
+.card {
+    width: 100%;
+    background: linear-gradient(110deg, var(--cor-card1, #E8EAED) 0%, var(--cor-card2, #F3F0EF) 52%, var(--cor-card3, #FEF7F0) 100%);
+    border: 1.5px solid #D5DCE4;
+    border-radius: 10px;
+    padding: 18px 22px;
+    box-shadow: var(--sombra);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-sizing: border-box;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
 .superiorCard {
     display: flex;
     justify-content: space-between;
@@ -7,57 +26,52 @@
 
 .titulo {
     margin: 0;
-    font-size: 0.95rem;
-    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-compacta);
+    font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
+    color: #475E7C;
 }
 
 .iconeCard {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--cor-destaque, rgb(232, 122, 17));
+    color: var(--cor-destaque, var(--laranja, #E87A11));
+    font-size: var(--fonte-padrao);
 }
 
 .valor {
     display: block;
-    font-size: 1.85rem;
-    font-weight: 700;
-    margin: 12px 0;
-}
-
-.parametros {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.85rem;
-}
-
-.iconeTendencia,
-.porcentagem {
-    color: var(--cor-destaque, rgb(232, 122, 17));
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-metrica);
+    font-weight: var(--peso-bold, 700);
+    color: #2D3133;
+    line-height: var(--lh-justo);
+    margin: 4px 0;
+    letter-spacing: -0.02em;
 }
 
 .comparacao {
-    opacity: 0.8;
-    font-weight: 400;
+    font-size: var(--fonte-pequena);
+    line-height: var(--lh-compacto);
+    color: #64748B;
+    font-weight: var(--peso-normal, 400);
 }
 
 /* Variantes de Cor */
 .varianteLaranja {
-    --cor-destaque: rgb(232, 122, 17);
+    --cor-destaque: var(--laranja, #E87A11);
 }
 
 .varianteVerde {
-    --cor-destaque: rgb(22, 163, 74);
+    --cor-destaque: var(--verde, #16A34A);
 }
 
 .varianteVermelho {
-    --cor-destaque: rgb(220, 38, 38);
+    --cor-destaque: var(--vermelho, #DC2626);
 }
 
 .varianteAzul {
-    --cor-destaque: rgb(37, 99, 235);
+    --cor-destaque: #2563EB;
 }

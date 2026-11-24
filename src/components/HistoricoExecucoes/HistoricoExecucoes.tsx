@@ -257,7 +257,7 @@ export default function HistoricoExecucoes({
                                 tickLine={false}
                                 tick={{
                                     fill: "#64748B",
-                                    fontSize: 12,
+                                    fontSize: 13,
                                     fontFamily: "Montserrat, sans-serif",
                                 }}
                                 dy={8}
@@ -271,7 +271,7 @@ export default function HistoricoExecucoes({
                                 tickLine={false}
                                 tick={{
                                     fill: "#64748B",
-                                    fontSize: 12,
+                                    fontSize: 13,
                                     fontFamily: "Montserrat, sans-serif",
                                 }}
                             />

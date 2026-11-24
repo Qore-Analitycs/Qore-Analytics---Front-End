@@ -70,7 +70,7 @@ export default function CardTeste({
 
     return (
         /* Reutiliza o container base .card de style/const (const.css) */
-        <article className={`card ${classeVariante} ${className}`.trim()}>
+        <article className={`${styles.card} ${classeVariante} ${className}`.trim()}>
             <div className={styles.superiorCard}>
                 <h3 className={styles.titulo}>{tituloFinal}</h3>
 
@@ -82,22 +82,6 @@ export default function CardTeste({
             </div>
 
             <strong className={styles.valor}>{valorFinal}</strong>
-
-            {(porcentagemFinal || comparacaoFinal) && (
-                <div className={styles.parametros}>
-                    {iconeTendenciaFinal && (
-                        <span className={styles.iconeTendencia} aria-hidden="true">
-                            {iconeTendenciaFinal}
-                        </span>
-                    )}
-                    {porcentagemFinal && (
-                        <span className={styles.porcentagem}>{porcentagemFinal}</span>
-                    )}
-                    {comparacaoFinal && (
-                        <span className={styles.comparacao}>{comparacaoFinal}</span>
-                    )}
-                </div>
-            )}
         </article>
     );
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import CardTeste, { CardTesteProps } from "./cardTeste";
+import styles from "./card2.module.css";
 
 export { CardTeste };
 export type { CardTesteProps };
@@ -45,12 +46,18 @@ const TESTES_PADRAO: CardTesteProps[] = [
 
 type CardsTestesGridProps = {
     cards?: CardTesteProps[];
+    className?: string;
 };
 
-export default function CardsTestes({ cards = TESTES_PADRAO }: CardsTestesGridProps) {
+export default function CardsTestes({
+    cards = TESTES_PADRAO,
+    className = "",
+}: CardsTestesGridProps) {
     return (
-        /* Reutiliza o container de grade .cards definido em style/const (const.css) */
-        <section className="cards" aria-label="Indicadores de Testes">
+        <section
+            className={`${styles.gradeCards} ${className}`.trim()}
+            aria-label="Indicadores de Testes"
+        >
             {cards.map((item, index) => (
                 <CardTeste
                     key={`${item.title || item.titulo || "card-teste"}-${index}`}

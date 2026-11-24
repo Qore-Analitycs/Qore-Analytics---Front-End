@@ -14,9 +14,10 @@
 
 .titulo {
     font-family: "Montserrat", sans-serif;
-    font-size: 22px;
-    font-weight: var(--peso-semibold);
-    color: #0F172A;
+    font-size: var(--fonte-card-titulo);
+    font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-titulo);
+    color: #2D3133;
     margin: 0;
 }
 
@@ -25,9 +26,10 @@
     border: none;
     cursor: pointer;
     font-family: "Montserrat", sans-serif;
-    font-size: 14px;
-    font-weight: var(--peso-normal);
-    color: #64748B;
+    font-size: var(--fonte-compacta);
+    font-weight: var(--peso-normal, 400);
+    line-height: var(--lh-compacto);
+    color: #475E7C;
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -37,7 +39,7 @@
 }
 
 .btnAdicionar:hover {
-    color: var(--laranja);
+    color: var(--laranja, #E87A11);
     background-color: #FFF4E8;
 }
 
@@ -50,13 +52,14 @@
 
 .cartaoItem {
     width: 100%;
-    background-color: var(--branco);
+    background-color: var(--branco, #FFFFFF);
     border: 2px solid #D5DCE4;
     border-radius: 8px;
-    padding: 14px 20px;
+    padding: 16px 24px;
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 16px;
+    box-sizing: border-box;
     transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
@@ -66,15 +69,16 @@
 
 .cartaoEditando {
     background-color: #FFFBF5 !important;
-    border-color: var(--laranja);
+    border-color: var(--laranja, #E87A11);
 }
 
 .numero {
     font-family: "Montserrat", sans-serif;
-    font-size: 16px;
-    font-weight: var(--peso-semibold);
-    color: #1E293B;
-    min-width: 20px;
+    font-size: var(--fonte-corpo);
+    font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
+    color: #2D3133;
+    min-width: 28px;
 }
 
 .conteudoCentro {
@@ -83,10 +87,10 @@
 
 .textoItem {
     font-family: "Montserrat", sans-serif;
-    font-size: 15px;
-    color: #334155;
+    font-size: var(--fonte-corpo);
+    color: #3C3F40;
     margin: 0;
-    line-height: 1.6;
+    line-height: var(--lh-corpo);
 }
 
 .campoEdicaoWrapper {
@@ -99,27 +103,29 @@
 .inputEdicao {
     width: 100%;
     font-family: "Montserrat", sans-serif;
-    font-size: 15px;
-    color: #1E293B;
+    font-size: var(--fonte-corpo);
+    line-height: var(--lh-corpo);
+    color: #2D3133;
     border: 1.5px solid #CBD5E1;
     border-radius: 6px;
     padding: 6px 10px;
     outline: none;
-    background-color: var(--branco);
+    background-color: var(--branco, #FFFFFF);
     transition: border-color 0.15s ease;
 }
 
 .inputEdicao:focus {
-    border-color: var(--laranja);
+    border-color: var(--laranja, #E87A11);
 }
 
 .inputErro {
-    border-color: var(--vermelho);
+    border-color: var(--vermelho, #FF0000);
 }
 
 .textoErro {
     font-size: var(--fonte-pequena);
-    color: var(--vermelho);
+    line-height: var(--lh-compacto);
+    color: var(--vermelho, #FF0000);
 }
 
 .acoesGrupo {
@@ -142,17 +148,17 @@
 }
 
 .btnEditar:hover {
-    color: var(--laranja);
+    color: var(--laranja, #E87A11);
     background-color: #FFF4E8;
 }
 
 .btnExcluir:hover {
-    color: var(--vermelho);
+    color: var(--vermelho, #FF0000);
     background-color: #FEE2E2;
 }
 
 .btnSalvar {
-    color: var(--verde);
+    color: var(--verde, #2D672D);
 }
 
 .btnSalvar:hover {
@@ -160,7 +166,7 @@
 }
 
 .btnCancelar {
-    color: var(--vermelho);
+    color: var(--vermelho, #FF0000);
 }
 
 .btnCancelar:hover {
@@ -171,7 +177,8 @@
     padding: 24px;
     text-align: center;
     font-family: "Montserrat", sans-serif;
-    font-size: 13px;
+    font-size: var(--fonte-pequena);
+    line-height: var(--lh-compacto);
     color: #64748B;
     border: 1px dashed #CBD5E1;
     border-radius: 8px;
