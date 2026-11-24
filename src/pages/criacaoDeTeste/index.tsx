@@ -41,6 +41,8 @@ export default function CriacaoTestePage() {
     const [gerandoRoteiro, setGerandoRoteiro] = useState(false);
     const [executandoIA, setExecutandoIA] = useState(false);
     const [erroUrl, setErroUrl] = useState<string | undefined>(undefined);
+    const [erroBranch, setErroBranch] = useState<string | undefined>(undefined);
+    const [erroCommit, setErroCommit] = useState<string | undefined>(undefined);
     const [erroDescricao, setErroDescricao] = useState<string | undefined>(
         undefined
     );
@@ -67,20 +69,41 @@ export default function CriacaoTestePage() {
         };
     }, []);
 
+    const validarCampoObrigatorio = (
+        valor: string,
+        mensagem: string,
+        setErro: (erro: string | undefined) => void
+    ) => {
+        const vazio = !valor.trim();
+        setErro(vazio ? mensagem : undefined);
+        return vazio;
+    };
+
     const handleGerarRoteiro = (dados: DadosPromptCenario) => {
-        const urlVazia = !dados.urlPullRequest.trim();
-        const descricaoVazia = !dados.descricaoFluxo.trim();
+        const camposInvalidos = [
+            validarCampoObrigatorio(
+                dados.urlPullRequest,
+                "Informe a URL da pull request para gerar o roteiro.",
+                setErroUrl
+            ),
+            validarCampoObrigatorio(
+                dados.branch,
+                "Informe a branch para gerar o roteiro.",
+                setErroBranch
+            ),
+            validarCampoObrigatorio(
+                dados.commit,
+                "Informe o commit para gerar o roteiro.",
+                setErroCommit
+            ),
+            validarCampoObrigatorio(
+                dados.descricaoFluxo,
+                "Descreva o fluxo ou regra de negócio.",
+                setErroDescricao
+            ),
+        ].some(Boolean);
 
-        setErroUrl(
-            urlVazia ? "Informe a URL da pull request para gerar o roteiro." : undefined
-        );
-        setErroDescricao(
-            descricaoVazia
-                ? "Descreva o fluxo ou regra de negócio."
-                : undefined
-        );
-
-        if (urlVazia || descricaoVazia) {
+        if (camposInvalidos) {
             return;
         }
 
@@ -149,6 +172,8 @@ export default function CriacaoTestePage() {
                     <PromptCenario
                         carregando={gerandoRoteiro}
                         erroUrl={erroUrl}
+                        erroBranch={erroBranch}
+                        erroCommit={erroCommit}
                         erroDescricao={erroDescricao}
                         onGerarRoteiro={handleGerarRoteiro}
                     />

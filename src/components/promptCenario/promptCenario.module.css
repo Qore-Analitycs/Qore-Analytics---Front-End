@@ -28,14 +28,19 @@
 }
 
 .inputUrlGroup {
-    display: flex;
-    gap: 25px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
+    width: 100%;
 }
 
 .containerInputUrl {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 20px;
+    align-items: start;
     width: 100%;
-    gap: 25px;
 }
 
 .rodapeBotao {
@@ -50,9 +55,21 @@
     width: 260px;
 }
 
+@media (max-width: 1024px) {
+    .inputUrlGroup {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 24px 20px;
+    }
+
+    .containerInputUrl {
+        grid-template-columns: 1fr;
+        gap: 18px;
     }
 
     .botaoWrapper {
