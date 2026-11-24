@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 import styles from "./item.module.css";
 import { Usuario } from "@/@types/usuario";
 
@@ -23,7 +24,17 @@ const MAPA_CLASSES_STATUS: Record<string, string> = {
   "Em execução": styles.badgeEmExecucao,
 };
 
+/**
+ * Normaliza o identificador do item (ex: "#01" -> "01") para uso seguro na URL dinâmica.
+ */
+const normalizarIdRota = (idBruto?: string): string => {
+  if (!idBruto) return "";
+  return idBruto.replace(/^#+/, "").trim();
+};
+
 const Item = ({ page, usuario, itemHistorico }: ItemProps) => {
+  const router = useRouter();
+
   const dadosHistorico: ItemHistorico = itemHistorico ?? {
     id: "#01",
     casoTeste: "Teste Front-end Commit #003",
@@ -36,10 +47,57 @@ const Item = ({ page, usuario, itemHistorico }: ItemProps) => {
   const classeBadgeHistorico =
     MAPA_CLASSES_STATUS[dadosHistorico.status] || styles.badgeSucesso;
 
+  const ehListaHistorico = page === "listaHistorico";
+  const idRota = ehListaHistorico ? normalizarIdRota(dadosHistorico.id) : "";
+  const podeNavegarParaDetalhe = ehListaHistorico && idRota.length > 0;
+
+  const navegarParaDetalheTeste = () => {
+    if (!podeNavegarParaDetalhe) return;
+    router.push(`/DetalhesTeste/${encodeURIComponent(idRota)}`);
+  };
+
+  const handleRowClick = (e: React.MouseEvent<HTMLTableRowElement>) => {
+    if (!podeNavegarParaDetalhe) return;
+
+    // Evita interceptar cliques em botões, links ou controles internos caso existam na linha
+    const alvo = e.target as HTMLElement | null;
+    if (
+      alvo?.closest(
+        "a, button, input, select, textarea, [role='button'], [data-no-row-nav='true']"
+      )
+    ) {
+      return;
+    }
+
+    navegarParaDetalheTeste();
+  };
+
+  const handleRowKeyDown = (e: React.KeyboardEvent<HTMLTableRowElement>) => {
+    if (!podeNavegarParaDetalhe) return;
+
+    if (e.target !== e.currentTarget) return;
+
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      navegarParaDetalheTeste();
+    }
+  };
+
   return (
     <>
       {page === "listaHistorico" && (
-        <tr className={styles.trCard}>
+        <tr
+          className={`${styles.trCard} ${podeNavegarParaDetalhe ? styles.trCardClicavel : ""
+            }`}
+          onClick={podeNavegarParaDetalhe ? handleRowClick : undefined}
+          onKeyDown={podeNavegarParaDetalhe ? handleRowKeyDown : undefined}
+          tabIndex={podeNavegarParaDetalhe ? 0 : undefined}
+          aria-label={
+            podeNavegarParaDetalhe
+              ? `Abrir detalhes do teste ${dadosHistorico.casoTeste} (${dadosHistorico.id})`
+              : undefined
+          }
+        >
           <td className={styles.celulaId}>{dadosHistorico.id}</td>
           <td className={styles.celulaCasoTeste}>
             {dadosHistorico.casoTeste}
@@ -80,9 +138,8 @@ const Item = ({ page, usuario, itemHistorico }: ItemProps) => {
           <td className={styles.celulaEmpresa}>Empresa Matriz</td>
           <td>
             <span
-              className={`${styles.badgeStatus} ${
-                usuario.ativo ? styles.badgeSucesso : styles.badgeInativo
-              }`}
+              className={`${styles.badgeStatus} ${usuario.ativo ? styles.badgeSucesso : styles.badgeInativo
+                }`}
             >
               {usuario.ativo ? "Ativo" : "Inativo"}
             </span>
