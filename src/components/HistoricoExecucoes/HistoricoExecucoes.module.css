@@ -1,7 +1,7 @@
 .cardContainer {
     width: 100%;
-    height: 540px;
-    background-color: var(--branco);
+    height: 560px;
+    background-color: var(--branco, #FFFFFF);
     border: 2px solid #D5DCE4;
     border-radius: 12px;
     padding: 28px 32px;
@@ -27,20 +27,20 @@
 
 .titulo {
     font-family: "Montserrat", sans-serif;
-    font-size: 22px;
+    font-size: var(--fonte-card-titulo);
     font-weight: var(--peso-semibold, 600);
-    color: #0F172A;
+    color: #2D3133;
     margin: 0;
-    line-height: 1.25;
+    line-height: var(--lh-titulo);
 }
 
 .subtitulo {
     font-family: "Montserrat", sans-serif;
-    font-size: 14px;
+    font-size: var(--fonte-compacta);
     font-weight: var(--peso-normal, 400);
-    color: #64748B;
+    color: #475E7C;
     margin: 0;
-    line-height: 1.4;
+    line-height: var(--lh-compacto);
 }
 
 /* ==========================================
@@ -70,13 +70,14 @@
     align-items: center;
     gap: 8px;
     font-family: "Montserrat", sans-serif;
-    font-size: 13px;
+    font-size: var(--fonte-pequena);
     font-weight: var(--peso-semibold, 600);
-    color: #334155;
+    line-height: var(--lh-compacto);
+    color: #3C3F40;
 }
 
 .valorDestaque {
-    color: #0F172A;
+    color: #2D3133;
     font-weight: var(--peso-bold, 700);
 }
 
@@ -102,9 +103,10 @@
     align-items: center;
     gap: 8px;
     font-family: "Montserrat", sans-serif;
-    font-size: 13px;
+    font-size: var(--fonte-pequena);
     font-weight: var(--peso-semibold, 600);
-    color: #475569;
+    line-height: var(--lh-compacto);
+    color: #475E7C;
 }
 
 .linhaTracejadaIcone {
@@ -135,7 +137,7 @@
 
 .tooltipCard {
     background-color: #1E293B;
-    color: var(--branco);
+    color: var(--branco, #FFFFFF);
     border: 1px solid #334155;
     border-radius: 8px;
     padding: 10px 14px;
@@ -147,8 +149,9 @@
 }
 
 .tooltipHorario {
-    font-size: 12px;
+    font-size: var(--fonte-pequena);
     font-weight: var(--peso-bold, 700);
+    line-height: var(--lh-compacto);
     color: #94A3B8;
     border-bottom: 1px solid rgba(148, 163, 184, 0.2);
     padding-bottom: 4px;
@@ -160,7 +163,8 @@
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    font-size: 12px;
+    font-size: var(--fonte-pequena);
+    line-height: var(--lh-compacto);
 }
 
 .tooltipRotulo {
@@ -172,7 +176,7 @@
 
 .tooltipValor {
     font-weight: var(--peso-bold, 700);
-    color: var(--branco);
+    color: var(--branco, #FFFFFF);
 }
 
 /* ==========================================
@@ -190,14 +194,15 @@
 
 .textoRodape {
     font-family: "Montserrat", sans-serif;
-    font-size: 12.5px;
+    font-size: var(--fonte-pequena);
     font-weight: var(--peso-normal, 400);
+    line-height: var(--lh-compacto);
     color: #64748B;
 }
 
 .destaqueRodape {
     font-weight: var(--peso-semibold, 600);
-    color: #334155;
+    color: #2D3133;
 }
 
 @media (max-width: 768px) {
@@ -228,4 +233,3 @@
         gap: 6px;
     }
 }
-

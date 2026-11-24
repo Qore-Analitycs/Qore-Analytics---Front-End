@@ -25,32 +25,34 @@ export default function Login() {
     evento.preventDefault();
     try {
       await userSchema.validate({ email, senha }, { abortEarly: false });
-
       setErros({});
     } catch (erro) {
-      if (erro instanceof yup.ValidationError) {
-        const novosErros: {
-          email?: string;
-          senha?: string;
-        } = {};
+      const mensagemPadrao = "Email ou senha incorretos";
+      const novosErros: { email?: string; senha?: string } = {
+        email: mensagemPadrao,
+        senha: mensagemPadrao,
+      };
 
+      if (erro instanceof yup.ValidationError) {
         erro.inner.forEach((item) => {
-          if (item.path) {
-            novosErros[item.path as "email" | "senha"] = item.message;
+          if (item.path === "email" || item.path === "senha") {
+            novosErros[item.path] = item.message || mensagemPadrao;
           }
         });
-        setErros(novosErros);
       }
+
+      setErros(novosErros);
       return;
     }
     try {
       const resposta = await login(email, senha);
-      toastInfo("Login bem sucedido")
+      toastInfo("Login realizado com sucesso!");
       await router.push("/historico");
-    } catch (error) { 
+    } catch (error) {
       setErros({
         email: "Email ou senha incorretos",
         senha: "Email ou senha incorretos",
+
       });
     }
   };
@@ -133,6 +135,7 @@ export default function Login() {
                 type="password"
                 icone={faLock}
                 label="Senha"
+                tamanho="padrao"
                 placeholder="Digite sua senha"
                 value={senha}
                 onChange={(event) => setSenha(event.target.value)}
@@ -164,7 +167,7 @@ export default function Login() {
 
             <div className={styles.botoes}>
               <div className={styles.botaoAlternativo}>
-                <Botao variante="alternativo" texto="GitHub" />
+                <Botao variante="alternativo" texto="Google" />
               </div>
               <div className={styles.botaoAlternativo}>
                 <Botao variante="alternativo" texto="GitHub" />

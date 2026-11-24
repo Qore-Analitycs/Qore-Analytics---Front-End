@@ -1,37 +1,158 @@
-import { useUsuario } from "@/hooks/useUsuario";
+import React from "react";
+import { useRouter } from "next/router";
 import styles from "./item.module.css";
 import { Usuario } from "@/@types/usuario";
+
+export type ItemHistorico = {
+  id: string;
+  casoTeste: string;
+  tipo: "Web" | "API";
+  responsavel: string;
+  data: string;
+  status: "Sucesso" | "Falha" | "Em execução";
+};
 
 type ItemProps = {
   page?: string;
   usuario?: Usuario;
+  itemHistorico?: ItemHistorico;
 };
 
-const Item = ({ page, usuario }: ItemProps) => {
+const MAPA_CLASSES_STATUS: Record<string, string> = {
+  Sucesso: styles.badgeSucesso,
+  Falha: styles.badgeFalha,
+  "Em execução": styles.badgeEmExecucao,
+};
+
+/**
+ * Normaliza o identificador do item (ex: "#01" -> "01") para uso seguro na URL dinâmica.
+ */
+const normalizarIdRota = (idBruto?: string): string => {
+  if (!idBruto) return "";
+  return idBruto.replace(/^#+/, "").trim();
+};
+
+const formatarCargo = (cargo: unknown): string => {
+  if (!cargo) return "Não informado";
+  if (typeof cargo === "object" && "nome" in cargo) {
+    return String((cargo as { nome?: string }).nome || "Não informado");
+  }
+  return String(cargo);
+};
+
+const Item = ({ page, usuario, itemHistorico }: ItemProps) => {
+  const router = useRouter();
+
+  const dadosHistorico: ItemHistorico = itemHistorico ?? {
+    id: "#01",
+    casoTeste: "Teste Front-end Commit #003",
+    tipo: "Web",
+    responsavel: "Raphael - Dev",
+    data: "20/10/2026",
+    status: "Sucesso",
+  };
+
+  const classeBadgeHistorico =
+    MAPA_CLASSES_STATUS[dadosHistorico.status] || styles.badgeSucesso;
+
+  const ehListaHistorico = page === "listaHistorico";
+  const idRota = ehListaHistorico ? normalizarIdRota(dadosHistorico.id) : "";
+  const podeNavegarParaDetalhe = ehListaHistorico && idRota.length > 0;
+
+  const navegarParaDetalheTeste = () => {
+    if (!podeNavegarParaDetalhe) return;
+    router.push(`/DetalhesTeste/${encodeURIComponent(idRota)}`);
+  };
+
+  const handleRowClick = (e: React.MouseEvent<HTMLTableRowElement>) => {
+    if (!podeNavegarParaDetalhe) return;
+
+    const alvo = e.target as HTMLElement | null;
+    if (
+      alvo?.closest(
+        "a, button, input, select, textarea, [role='button'], [data-no-row-nav='true']"
+      )
+    ) {
+      return;
+    }
+
+    navegarParaDetalheTeste();
+  };
+
+  const handleRowKeyDown = (e: React.KeyboardEvent<HTMLTableRowElement>) => {
+    if (!podeNavegarParaDetalhe) return;
+
+    if (e.target !== e.currentTarget) return;
+
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      navegarParaDetalheTeste();
+    }
+  };
+
   return (
     <>
       {page === "listaHistorico" && (
-        <tr className={styles.trCard}>
-          <td>#01</td>
-          <td>Teste Front-end Commit #003</td>
-          <td>
-            <i
-              className="fa-solid fa-desktop"
-              style={{ color: "rgb(232, 122, 17" }}
-            ></i>
-            Web
+        <tr
+          className={`${styles.trCard} ${
+            podeNavegarParaDetalhe ? styles.trCardClicavel : ""
+          }`}
+          onClick={podeNavegarParaDetalhe ? handleRowClick : undefined}
+          onKeyDown={podeNavegarParaDetalhe ? handleRowKeyDown : undefined}
+          tabIndex={podeNavegarParaDetalhe ? 0 : undefined}
+          aria-label={
+            podeNavegarParaDetalhe
+              ? `Abrir detalhes do teste ${dadosHistorico.casoTeste} (${dadosHistorico.id})`
+              : undefined
+          }
+        >
+          <td className={styles.celulaId}>{dadosHistorico.id}</td>
+          <td className={styles.celulaCasoTeste}>
+            {dadosHistorico.casoTeste}
           </td>
-          <td>Raphael - Dev</td>
-          <td>16/10/2001</td>
-          <td>Sucesso</td>
+          <td>
+            <span className={styles.celulaTipo}>
+              {dadosHistorico.tipo === "Web" ? (
+                <i className={`fa-solid fa-desktop ${styles.iconeWeb}`} />
+              ) : (
+                <i className={`fa-solid fa-network-wired ${styles.iconeApi}`} />
+              )}
+              {dadosHistorico.tipo}
+            </span>
+          </td>
+          <td className={styles.celulaResponsavel}>
+            {dadosHistorico.responsavel}
+          </td>
+          <td className={styles.celulaData}>{dadosHistorico.data}</td>
+          <td>
+            <span className={`${styles.badgeStatus} ${classeBadgeHistorico}`}>
+              {dadosHistorico.status}
+            </span>
+          </td>
         </tr>
       )}
-       {page === "usuarioPermissoes" && usuario && (
+
+      {page === "usuarioPermissoes" && usuario && (
         <tr className={styles.trCard}>
-          <td>{usuario.nome}</td>
-          <td>{usuario.cargo}</td>
-          <td>Empresa</td>
-          <td>{usuario.ativo ? "Ativo" : "Inativo"}</td>
+          <td className={styles.celulaUsuario}>
+            <div className={styles.infoUsuario}>
+              <span className={styles.nomeUsuario}>{usuario.nome}</span>
+              {usuario.email && (
+                <span className={styles.emailUsuario}>{usuario.email}</span>
+              )}
+            </div>
+          </td>
+          <td className={styles.celulaCargo}>{formatarCargo(usuario.cargo)}</td>
+          <td className={styles.celulaEmpresa}>Empresa Matriz</td>
+          <td>
+            <span
+              className={`${styles.badgeStatus} ${
+                usuario.ativo ? styles.badgeSucesso : styles.badgeInativo
+              }`}
+            >
+              {usuario.ativo ? "Ativo" : "Inativo"}
+            </span>
+          </td>
         </tr>
       )}
     </>

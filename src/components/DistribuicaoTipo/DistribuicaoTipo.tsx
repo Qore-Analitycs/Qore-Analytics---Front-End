@@ -45,7 +45,7 @@ const DADOS_PADRAO: ItemDistribuicaoTipo[] = [
         id: "por-commit",
         nome: "Testes Por Commit",
         percentual: 6,
-        cor: "#334155",
+        cor: "#3C3F40",
     },
 ];
 

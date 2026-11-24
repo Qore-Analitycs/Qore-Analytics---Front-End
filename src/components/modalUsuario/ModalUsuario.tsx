@@ -63,13 +63,14 @@ export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
 
     const sucesso = await cadastrarU(novoU);
 
+    toastSucesso("Cadastro de Usuário realizado com sucesso");
+
     if (sucesso) {
       setNomeUsuario("");
       setCargoSelecionado(0);
       setEmail("");
       setSenha("");
 
-      toastSucesso("Cadastro de Usuário realizado com sucesso");
     }
   }
 

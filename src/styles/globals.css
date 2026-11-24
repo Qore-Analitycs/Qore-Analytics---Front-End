@@ -3,6 +3,7 @@
 @import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
+
 :root {
   /* SHADCN UI VARIABLES */
   --background: oklch(1 0 0);
@@ -163,10 +164,13 @@ a {
 
   body {
     @apply bg-background text-foreground;
+    font-size: var(--fonte-corpo, 1rem);
+    line-height: var(--lh-corpo, 1.55);
   }
 
   html {
     @apply font-sans;
+    font-size: 16px;
   }
 }
 
@@ -176,7 +180,7 @@ a {
   }
 }
 
-.Toastify__toast--info{
+.Toastify__toast--info {
   & svg {
     fill: var(--laranja)
   }
@@ -184,7 +188,7 @@ a {
 
 .Toastify__toast--error {
   & svg {
-    fill: var(--destructive)
+    fill: var(--destructive);
   }
 }
 
@@ -195,6 +199,23 @@ a {
 
 .Toastify__progress-bar--error {
   background: color-mix(in srgb, var(--destructive) 100%, transparent 0%) !important;
+}
+
+body[data-modal-aberto="true"] .app-wrapper {
+  filter: blur(5px);
+  transition: filter 0.2s ease;
+}
+
+:root {
+  --toastify-z-index: 99999;
+}
+
+.Toastify__toast-container,
+.Toastify__toast-container--top-right,
+.Toastify__toast-container--info,
+.Toastify__toast-container--success,
+.Toastify__toast-container--error {
+  z-index: 99999 !important;
 }
 
 /* Toast */

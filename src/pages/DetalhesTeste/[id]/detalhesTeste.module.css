@@ -1,0 +1,149 @@
+.container {
+    width: 100%;
+    max-width: 1520px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    box-sizing: border-box;
+}
+
+/* ==========================================
+   CABEÇALHO DA PÁGINA E BOTÕES DE AÇÃO
+   ========================================== */
+.cabecalhoPagina {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.textosCabecalho {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 840px;
+    flex: 1;
+    min-width: 300px;
+}
+
+.categoriaPagina {
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-compacta);
+    font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
+    color: #475E7C;
+    margin: 0;
+}
+
+.tituloRelatorio {
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-titulo);
+    font-weight: var(--peso-bold, 700);
+    color: #2D3133;
+    margin: 0;
+    line-height: var(--lh-justo);
+}
+
+.descricaoRelatorio {
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-padrao);
+    font-weight: var(--peso-normal, 400);
+    color: #475569;
+    margin: 0;
+    line-height: var(--lh-corpo);
+}
+
+.acoesCabecalho {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+}
+
+.btnCompartilhar {
+    min-height: 42px;
+    background-color: var(--branco, #FFFFFF);
+    color: #2D3133;
+    border: 1.5px solid #D5DCE4;
+    border-radius: 8px;
+    padding: 8px 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-compacta);
+    font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btnCompartilhar:hover {
+    background-color: #F8FAFC;
+    border-color: #CBD5E1;
+    color: #0F172A;
+}
+
+.iconeCompartilhar {
+    color: #475E7C;
+    flex-shrink: 0;
+}
+
+.btnVideo {
+    min-height: 42px;
+    background-color: var(--laranja, #E87A11);
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-compacta);
+    font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
+    box-shadow: 0 2px 6px rgba(232, 122, 17, 0.25);
+    cursor: pointer;
+    transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+.btnVideo:hover {
+    filter: brightness(0.93);
+}
+
+.btnVideo:active {
+    transform: translateY(1px);
+}
+
+.iconeVideo {
+    color: #FFFFFF;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .cabecalhoPagina {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .acoesCabecalho {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .btnCompartilhar,
+    .btnVideo {
+        width: 100%;
+    }
+
+    .tituloRelatorio {
+        font-size: 1.875rem;
+    }
+}

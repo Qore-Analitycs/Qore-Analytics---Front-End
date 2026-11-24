@@ -1,11 +1,11 @@
 .container {
     width: 100%;
-    min-height: 100px;
-    height: 100px;
+    min-height: 108px;
+    height: auto;
     background-color: var(--cinza-escuro);
     color: var(--branco);
     border-radius: 10px;
-    padding: 0 24px 20px 24px;
+    padding: 18px 24px 20px 24px;
     box-shadow: var(--sombra);
     display: flex;
     align-items: flex-end;

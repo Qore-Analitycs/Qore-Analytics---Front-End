@@ -8,6 +8,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    box-sizing: border-box;
 }
 
 /* ==========================================
@@ -30,20 +31,20 @@
 
 .titulo {
     font-family: "Montserrat", sans-serif;
-    font-size: 20px;
+    font-size: var(--fonte-card-titulo);
     font-weight: var(--peso-semibold, 600);
-    color: #0F172A;
+    color: #2D3133;
     margin: 0;
-    line-height: 1.25;
+    line-height: var(--lh-titulo);
 }
 
 .subtitulo {
     font-family: "Montserrat", sans-serif;
-    font-size: 13.5px;
+    font-size: var(--fonte-compacta);
     font-weight: var(--peso-normal, 400);
-    color: #64748B;
+    color: #475E7C;
     margin: 0;
-    line-height: 1.4;
+    line-height: var(--lh-compacto);
 }
 
 .abasFiltro {
@@ -58,8 +59,9 @@
 
 .btnAba {
     font-family: "Montserrat", sans-serif;
-    font-size: 13px;
+    font-size: var(--fonte-compacta);
     font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
     color: #475E7C;
     background: transparent;
     border: none;
@@ -70,7 +72,7 @@
 }
 
 .btnAba:hover {
-    color: #0F172A;
+    color: #2D3133;
     background-color: rgba(255, 255, 255, 0.6);
 }
 
@@ -98,14 +100,15 @@
 
 .gridCabecalho {
     display: grid;
-    grid-template-columns: minmax(260px, 2.4fr) minmax(110px, 1fr) minmax(90px, 0.9fr) minmax(90px, 0.9fr) minmax(80px, 0.8fr);
+    grid-template-columns: minmax(260px, 2.3fr) minmax(130px, 1fr) minmax(96px, 0.9fr) minmax(96px, 0.9fr) minmax(90px, 0.8fr);
     align-items: center;
     gap: 16px;
     padding: 8px 16px;
     font-family: "Montserrat", sans-serif;
-    font-size: 11px;
+    font-size: var(--fonte-pequena);
     font-weight: var(--peso-semibold, 600);
-    color: #64748B;
+    line-height: var(--lh-compacto);
+    color: #475E7C;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -122,7 +125,7 @@
 
 .linhaExecucao {
     display: grid;
-    grid-template-columns: minmax(260px, 2.4fr) minmax(110px, 1fr) minmax(90px, 0.9fr) minmax(90px, 0.9fr) minmax(80px, 0.8fr);
+    grid-template-columns: minmax(260px, 2.3fr) minmax(130px, 1fr) minmax(96px, 0.9fr) minmax(96px, 0.9fr) minmax(90px, 0.8fr);
     align-items: center;
     gap: 16px;
     padding: 12px 16px;
@@ -163,7 +166,7 @@
 
 .iconeFalhou {
     background-color: #FFEADB;
-    color: #E87A11;
+    color: var(--laranja, #E87A11);
 }
 
 .iconeEmExecucao {
@@ -180,9 +183,10 @@
 
 .nomeSuite {
     font-family: "Montserrat", sans-serif;
-    font-size: 14px;
+    font-size: var(--fonte-corpo);
     font-weight: var(--peso-semibold, 600);
-    color: #0F172A;
+    line-height: var(--lh-compacto);
+    color: #2D3133;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
@@ -191,8 +195,9 @@
 
 .subtituloSuite {
     font-family: "Montserrat", sans-serif;
-    font-size: 12px;
+    font-size: var(--fonte-pequena);
     font-weight: var(--peso-normal, 400);
+    line-height: var(--lh-compacto);
     color: #64748B;
     margin: 0;
     white-space: nowrap;
@@ -207,9 +212,10 @@
     justify-content: center;
     gap: 6px;
     font-family: "Montserrat", sans-serif;
-    font-size: 12px;
+    font-size: var(--fonte-pequena);
     font-weight: var(--peso-semibold, 600);
-    padding: 4px 10px;
+    line-height: var(--lh-compacto);
+    padding: 5px 12px;
     border-radius: 6px;
     width: fit-content;
     white-space: nowrap;
@@ -223,7 +229,7 @@
 
 .badgeFalhou {
     background-color: #FFEADB;
-    color: #C2410C;
+    color: var(--laranja, #E87A11);
     border: 1px solid #FED7AA;
 }
 
@@ -236,13 +242,14 @@
 /* 3. Coluna TESTES */
 .celulaTestes {
     font-family: "Montserrat", sans-serif;
-    font-size: 13.5px;
+    font-size: var(--fonte-compacta);
+    line-height: var(--lh-compacto);
     white-space: nowrap;
 }
 
 .testesPassaram {
     font-weight: var(--peso-bold, 700);
-    color: #0F172A;
+    color: #2D3133;
 }
 
 .testesTotal {
@@ -253,17 +260,19 @@
 /* 4. Coluna DURAÇÃO */
 .celulaDuracao {
     font-family: "Montserrat", sans-serif;
-    font-size: 13.5px;
+    font-size: var(--fonte-compacta);
     font-weight: var(--peso-semibold, 600);
-    color: #1E293B;
+    line-height: var(--lh-compacto);
+    color: #3C3F40;
     white-space: nowrap;
 }
 
 /* 5. Coluna INÍCIO */
 .celulaInicio {
     font-family: "Montserrat", sans-serif;
-    font-size: 13px;
+    font-size: var(--fonte-compacta);
     font-weight: var(--peso-normal, 400);
+    line-height: var(--lh-compacto);
     color: #64748B;
     white-space: nowrap;
 }
@@ -272,7 +281,8 @@
     padding: 28px 16px;
     text-align: center;
     font-family: "Montserrat", sans-serif;
-    font-size: 14px;
+    font-size: var(--fonte-corpo);
+    line-height: var(--lh-corpo);
     color: #64748B;
     background-color: #F8FAFC;
     border: 1px dashed #D5DCE4;
@@ -300,4 +310,3 @@
         text-align: center;
     }
 }
-
