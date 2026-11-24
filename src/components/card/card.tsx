@@ -1,6 +1,9 @@
 import React from "react";
 import { Code2, FileText, Shield, Users } from "lucide-react";
+
 import CardMetrica, { CardMetricaProps } from "./cardMetrica";
+import { useUsuario } from "@/hooks/useUsuario";
+import type { Usuario } from "@/@types/usuario";
 
 export { CardMetrica };
 export type { CardMetricaProps };

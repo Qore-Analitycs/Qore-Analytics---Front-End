@@ -130,7 +130,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    
+
     gap: 20px;
     justify-content: center;
     margin-top: 20px;
@@ -156,10 +156,11 @@
     font-weight: 600;
 }
 
-.containerLogout{
+.containerLogout {
     margin-top: 10px;
     width: 100%;
 }
+
 /* Área direita */
 .content {
     position: relative;
