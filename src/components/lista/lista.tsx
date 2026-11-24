@@ -1,7 +1,7 @@
+
 import { useUsuario } from "@/hooks/useUsuario";
 import Item, { ItemHistorico } from "../item/item";
 import styles from "./lista.module.css";
-import { Fragment } from "react";
 import { Usuario } from "@/@types/usuario";
 
 type ListaProps = {
@@ -65,36 +65,41 @@ const USUARIOS_PADRAO: Usuario[] = [
     id: "usr-1",
     nome: "Marina Silva",
     email: "marina.silva@qore.io",
-    cargo: "QA Lead",
+    cargo: { id: 1, nome: "QA Lead" },
     ativo: true,
+    imagem: "",
   },
   {
     id: "usr-2",
     nome: "Allan Barbosa",
     email: "allan.barbosa@qore.io",
-    cargo: "Tech Lead",
+    cargo: { id: 2, nome: "Tech Lead" },
     ativo: true,
+    imagem: "",
   },
   {
     id: "usr-3",
     nome: "Raphael Oliveira",
     email: "raphael.dev@qore.io",
-    cargo: "Desenvolvedor",
+    cargo: { id: 3, nome: "Desenvolvedor" },
     ativo: true,
+    imagem: "",
   },
   {
     id: "usr-4",
     nome: "Lucas Andrade",
     email: "lucas.andrade@qore.io",
-    cargo: "Engenheiro de QA",
+    cargo: { id: 4, nome: "Engenheiro de QA" },
     ativo: true,
+    imagem: "",
   },
   {
     id: "usr-5",
     nome: "Beatriz Santos",
     email: "beatriz.santos@qore.io",
-    cargo: "Desenvolvedor",
+    cargo: { id: 3, nome: "Desenvolvedor" },
     ativo: false,
+    imagem: "",
   },
 ];
 
@@ -103,7 +108,9 @@ export default function Lista({
   itensHistorico = ITENS_HISTORICO_PADRAO,
 }: ListaProps) {
   const { u } = useUsuario();
-  const listaUsuarios = u && u.length > 0 ? u : USUARIOS_PADRAO;
+
+  const listaUsuarios =
+    u && u.length > 0 ? u : USUARIOS_PADRAO;
 
   return (
     <>
@@ -114,7 +121,9 @@ export default function Lista({
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th className={styles.thAlinhadoEsquerda}>Case de Teste</th>
+                  <th className={styles.thAlinhadoEsquerda}>
+                    Case de Teste
+                  </th>
                   <th>Tipo</th>
                   <th>Responsável</th>
                   <th>Data</th>
@@ -142,8 +151,12 @@ export default function Lista({
             <table className={styles.tabelaLista}>
               <thead>
                 <tr>
-                  <th className={styles.thAlinhadoEsquerda}>Usuário</th>
-                  <th className={styles.thAlinhadoEsquerda}>Cargo</th>
+                  <th className={styles.thAlinhadoEsquerda}>
+                    Usuário
+                  </th>
+                  <th className={styles.thAlinhadoEsquerda}>
+                    Cargo
+                  </th>
                   <th>Empresa</th>
                   <th>Status</th>
                 </tr>
@@ -151,12 +164,11 @@ export default function Lista({
 
               <tbody>
                 {listaUsuarios.map((usuario) => (
-                  <Fragment key={usuario.id}>
-                    <Item
-                      page="usuarioPermissoes"
-                      usuario={usuario}
-                    />
-                  </Fragment>
+                  <Item
+                    key={usuario.id}
+                    page="usuarioPermissoes"
+                    usuario={usuario}
+                  />
                 ))}
               </tbody>
             </table>

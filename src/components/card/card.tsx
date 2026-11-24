@@ -1,15 +1,13 @@
-import React, { useMemo } from "react";
+
+import React from "react";
 import { Code2, FileText, Shield, Users } from "lucide-react";
+
 import CardMetrica, { CardMetricaProps } from "./cardMetrica";
 import { useUsuario } from "@/hooks/useUsuario";
+import type { Usuario } from "@/@types/usuario";
 
 export { CardMetrica };
 export type { CardMetricaProps };
-
-type MembroApi = {
-    id: string | number;
-    cargo?: string;
-};
 
 type TotaisCalculados = {
     totalMembros: number;
@@ -49,23 +47,27 @@ const METRICAS_PADRAO: CardMetricaProps[] = [
     },
 ];
 
-function calcularTotais(membros: MembroApi[]): TotaisCalculados {
+function calcularTotais(membros: Usuario[]): TotaisCalculados {
     return membros.reduce<TotaisCalculados>(
         (acc, membro) => {
-            const cargo = (membro.cargo ?? "").toUpperCase();
+            const cargo: string = String(
+                membro.cargo?.nome ?? ""
+            )
+                .trim()
+                .toUpperCase();
 
-            acc.totalMembros += 1;
+            acc.totalMembros++;
 
-            if (cargo === "ADMIN" || cargo === "ADMINISTRADOR") {
-                acc.administradores += 1;
+            if (["ADMIN", "ADMINISTRADOR"].includes(cargo)) {
+                acc.administradores++;
             }
 
-            if (cargo === "DEV" || cargo === "DEVELOPER") {
-                acc.devsVinculados += 1;
+            if (["DEV", "DEVELOPER"].includes(cargo)) {
+                acc.devsVinculados++;
             }
 
-            if (cargo === "QA" || cargo === "ENGENHEIRO_QA") {
-                acc.engenheirosQa += 1;
+            if (["QA", "ENGENHEIRO_QA"].includes(cargo)) {
+                acc.engenheirosQa++;
             }
 
             return acc;
@@ -79,12 +81,26 @@ function calcularTotais(membros: MembroApi[]): TotaisCalculados {
     );
 }
 
-function montarCardsComTotais(totais: TotaisCalculados): CardMetricaProps[] {
+function montarCardsComTotais(
+    totais: TotaisCalculados
+): CardMetricaProps[] {
     return [
-        { ...METRICAS_PADRAO[0], value: totais.totalMembros },
-        { ...METRICAS_PADRAO[1], value: totais.administradores },
-        { ...METRICAS_PADRAO[2], value: totais.devsVinculados },
-        { ...METRICAS_PADRAO[3], value: totais.engenheirosQa },
+        {
+            ...METRICAS_PADRAO[0],
+            value: totais.totalMembros,
+        },
+        {
+            ...METRICAS_PADRAO[1],
+            value: totais.administradores,
+        },
+        {
+            ...METRICAS_PADRAO[2],
+            value: totais.devsVinculados,
+        },
+        {
+            ...METRICAS_PADRAO[3],
+            value: totais.engenheirosQa,
+        },
     ];
 }
 
@@ -95,20 +111,19 @@ type CardsMetricasGridProps = {
 export default function Card({ cards }: CardsMetricasGridProps) {
     const { u } = useUsuario();
 
-    const items = useMemo(() => {
-        if (cards) return cards;
-        if (!Array.isArray(u) || u.length === 0) {
-            return METRICAS_PADRAO;
-        }
-        const totais = calcularTotais(u);
-        return montarCardsComTotais(totais);
-    }, [cards, u]);
+    const items =
+        cards && cards.length > 0
+            ? cards
+            : montarCardsComTotais(calcularTotais(u));
 
     return (
-        <section className="cards" aria-label="Métricas do Sistema">
+        <section
+            className="cards"
+            aria-label="Métricas do Sistema"
+        >
             {items.map((item, index) => (
                 <CardMetrica
-                    key={`${item.title || item.titulo || "card"}-${index}`}
+                    key={`${item.title || "card"}-${index}`}
                     {...item}
                 />
             ))}

@@ -76,7 +76,7 @@ const Item = ({ page, usuario, itemHistorico }: ItemProps) => {
               )}
             </div>
           </td>
-          <td className={styles.celulaCargo}>{usuario.cargo}</td>
+          <td className={styles.celulaCargo}>{usuario.cargo?.nome}</td>
           <td className={styles.celulaEmpresa}>Empresa Matriz</td>
           <td>
             <span
