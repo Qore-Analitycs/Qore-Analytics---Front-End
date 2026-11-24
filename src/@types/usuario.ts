@@ -15,6 +15,7 @@ export type Usuario = {
 export type CriarUsuario = {
     nome: string;
     email: string;
+    empresa?: string;
     senha: string;
     perfilId: number;
 };
