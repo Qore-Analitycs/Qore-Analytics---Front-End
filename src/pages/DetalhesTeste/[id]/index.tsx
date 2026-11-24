@@ -1,6 +1,5 @@
 import React from "react";
 import Head from "next/head";
-import { Download, Share2 } from "lucide-react";
 import AppLayout from "@/components/layout/AppLayout";
 import VideoSessionPlayer, {
     MARCADORES_SESSAO_PADRAO,
@@ -93,6 +92,10 @@ export const RESULTADO_TESTE_DETALHE: DadosResultadoTeste = {
 };
 
 export interface DetalheTesteProps {
+    /** Identificador do teste selecionado na listagem de histórico */
+    testeId?: string;
+    /** Título opcional do caso de teste */
+    tituloTeste?: string;
     /** URL do vídeo da sessão E2E (.mp4 / .webm). Se ausente ou indisponível, o player exibe "Vídeo não encontrado". */
     videoSrc?: string;
     /** Lista de eventos/marcadores da linha do tempo */
@@ -116,6 +119,8 @@ export interface DetalheTesteProps {
 }
 
 export default function DetalhesTestePage({
+    testeId,
+    tituloTeste,
     videoSrc,
     events = MARCADORES_SESSAO_PADRAO,
     sessionTitle = "Gravação Contínua da Sessão Web",
@@ -128,21 +133,28 @@ export default function DetalhesTestePage({
     passosRoteiro = PASSOS_ROTEIRO_DETALHE,
     resultadoTeste = RESULTADO_TESTE_DETALHE,
 }: DetalheTesteProps) {
+    const sufixoId = testeId ? ` #${testeId.replace(/^#+/, "")}` : "";
+
     return (
         <>
             <Head>
-                <title>Detalhes do Teste | Qore Analytics</title>
+                <title>{`Detalhes do Teste${sufixoId} | Qore Analytics`}</title>
             </Head>
 
             <AppLayout maxWidth="1520px" containerClassName={styles.container}>
-                {/* 1. Cabeçalho da Página e Ações Superiores */}
+                {/* 1. Cabeçalho da Página */}
                 <header className={styles.cabecalhoPagina}>
                     <div className={styles.textosCabecalho}>
+                        {testeId && (
+                            <span className={styles.categoriaPagina}>
+                                Execução #{testeId.replace(/^#+/, "")}
+                                {tituloTeste ? ` • ${tituloTeste}` : ""}
+                            </span>
+                        )}
                         <h1 className={styles.tituloRelatorio}>
                             Detalhes do Teste
                         </h1>
                     </div>
-
                 </header>
 
                 {/* 2. Player de Sessão de Vídeo e Telemetria */}

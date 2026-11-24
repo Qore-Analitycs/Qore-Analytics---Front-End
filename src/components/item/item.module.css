@@ -7,6 +7,20 @@
     background-color: #FAFBFD;
 }
 
+.trCardClicavel {
+    cursor: pointer;
+}
+
+.trCardClicavel:hover {
+    background-color: #F4F7FA;
+}
+
+.trCardClicavel:focus-visible {
+    outline: 2px solid var(--laranja, #E87A11);
+    outline-offset: -2px;
+    background-color: #FFF9F2;
+}
+
 /* 1. Colunas Histórico de Testes */
 .celulaId {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
