@@ -1,0 +1,685 @@
+.cardPlayer {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    background-color: var(--branco, #FFFFFF);
+    border: 2px solid #D5DCE4;
+    border-radius: 12px;
+    padding: 20px 24px 24px;
+    box-shadow: var(--sombra);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* ==========================================
+   TOPO DO CARD (METADADOS DA SESSÃO)
+   ========================================== */
+.topoPlayer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    min-width: 0;
+}
+
+.infoSessaoEsquerda {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    min-width: 0;
+}
+
+.pontoGravacao {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background-color: var(--laranja, #E87A11);
+    flex-shrink: 0;
+    transition: box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.pontoGravacaoAtivo {
+    box-shadow: 0 0 0 4px rgba(232, 122, 17, 0.22);
+}
+
+.pontoGravacaoInativo {
+    background-color: #94A3B8;
+}
+
+.tituloSessao {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13.5px;
+    font-weight: var(--peso-semibold, 600);
+    color: #2D3133;
+}
+
+.badgeQualidade {
+    background-color: #475E7C;
+    color: #FFFFFF;
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    font-weight: var(--peso-bold, 700);
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+}
+
+.infoDataDireita {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: var(--peso-semibold, 600);
+    color: #475E7C;
+    flex-shrink: 0;
+}
+
+.iconeCalendario {
+    color: #475E7C;
+    flex-shrink: 0;
+}
+
+/* ==========================================
+   MOLDURA DO NAVEGADOR E VIEWPORT (16:9 / 1280x720)
+   ========================================== */
+.molduraViewport {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #2D3133;
+    background-color: #2D3133;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.molduraViewportFullscreen {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    border-radius: 0;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #2D3133;
+}
+
+.molduraViewportFullscreen .palcoVideoWrapper {
+    flex: 1;
+    height: 100%;
+    max-height: none;
+    min-height: 0;
+    aspect-ratio: auto;
+}
+
+.molduraViewportFullscreen .elementoVideo {
+    max-height: 100%;
+    height: 100%;
+}
+
+.barraNavegador {
+    background-color: #2D3133;
+    padding: 9px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 1px solid #3C3F40;
+    flex-shrink: 0;
+    min-width: 0;
+}
+
+.controlesJanela {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.bolinhaJanela {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}
+
+.bolinhaVermelha {
+    background-color: #EF4444;
+}
+
+.bolinhaAmarela {
+    background-color: #F59E0B;
+}
+
+.bolinhaVerde {
+    background-color: #22C55E;
+}
+
+.barraEndereco {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #3C3F40;
+    border: 1px solid rgba(229, 232, 237, 0.14);
+    border-radius: 4px;
+    padding: 4px 12px;
+    max-width: 520px;
+    min-width: 0;
+    flex: 1;
+}
+
+.iconeCadeado {
+    color: #10B981;
+    flex-shrink: 0;
+}
+
+.textoUrl {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 11px;
+    color: #E5E8ED;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.infoRunner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 10.5px;
+    flex-shrink: 0;
+}
+
+.pontoRunner {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #10B981;
+    flex-shrink: 0;
+}
+
+.pontoRunnerInativo {
+    background-color: #94A3B8;
+}
+
+.textoRunner {
+    color: #10B981;
+    font-weight: 600;
+}
+
+.textoResolucao {
+    color: #94A3B8;
+}
+
+/* ==========================================
+   CONTAINER DO ELEMENTO <VIDEO> 1280x720 (16:9), HUD E ESTADO "VÍDEO NÃO ENCONTRADO"
+   ========================================== */
+.palcoVideoWrapper {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    aspect-ratio: 16 / 9;
+    max-height: 520px;
+    min-height: 320px;
+    background-color: #2D3133;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.palcoVideoWrapperIndisponivel {
+    background-color: #EEF2F6;
+    cursor: default;
+}
+
+.elementoVideo {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    min-width: 0;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+    background-color: #2D3133;
+}
+
+.elementoVideoOculto {
+    display: none;
+}
+
+/* Indicador Contextual Discreto do Evento Ativo (Contido dentro do Viewport) */
+.hudEventoContextual {
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    max-width: calc(100% - 32px);
+    z-index: 4;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background-color: rgba(45, 49, 51, 0.88);
+    backdrop-filter: blur(4px);
+    color: #E5E8ED;
+    border: 1px solid rgba(71, 94, 124, 0.45);
+    border-radius: 6px;
+    padding: 5px 11px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 11.5px;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.14);
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.hudEventoContextualPreview {
+    border-color: var(--laranja, #E87A11);
+    background-color: rgba(45, 49, 51, 0.95);
+}
+
+.iconeHudEvento {
+    color: var(--laranja, #E87A11);
+    flex-shrink: 0;
+}
+
+.tempoHudEvento {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 11px;
+    color: var(--laranja, #E87A11);
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.rotuloHudEvento {
+    color: #FFFFFF;
+    font-weight: var(--peso-semibold, 600);
+    flex-shrink: 0;
+}
+
+.separadorHudEvento {
+    color: #94A3B8;
+    flex-shrink: 0;
+}
+
+.resumoHudEvento {
+    color: #CBD5E1;
+    font-weight: var(--peso-normal, 400);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+/* Estado Dedicado de Vídeo Não Encontrado */
+.estadoVideoNaoEncontrado {
+    width: 100%;
+    max-width: 440px;
+    background-color: var(--branco, #FFFFFF);
+    border: 1.5px dashed #CBD5E1;
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    box-shadow: 0 10px 25px -8px rgba(15, 23, 42, 0.12);
+    box-sizing: border-box;
+    z-index: 2;
+}
+
+.iconeNaoEncontradoWrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #FFF7ED;
+    border: 1px solid #FFEDD5;
+    color: var(--laranja, #E87A11);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2px;
+    flex-shrink: 0;
+}
+
+.tituloNaoEncontrado {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: var(--peso-bold, 700);
+    color: #2D3133;
+    margin: 0;
+}
+
+.descricaoNaoEncontrado {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: var(--peso-normal, 400);
+    color: #475E7C;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.btnTentarNovamente {
+    margin-top: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 36px;
+    padding: 0 16px;
+    background-color: #2D3133;
+    color: #FFFFFF;
+    border: 1px solid #3C3F40;
+    border-radius: 6px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 12.5px;
+    font-weight: var(--peso-semibold, 600);
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.btnTentarNovamente:hover {
+    background-color: #475E7C;
+    border-color: #475E7C;
+}
+
+/* ==========================================
+   PAINEL INFERIOR DE CONTROLES E TIMELINE
+   ========================================== */
+.painelControles {
+    background-color: #2D3133;
+    padding: 14px 18px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-top: 1px solid #3C3F40;
+    flex-shrink: 0;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.timelineContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    min-width: 0;
+}
+
+.areaCliqueScrubber {
+    width: 100%;
+    padding: 6px 0;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+}
+
+.areaCliqueScrubberDesabilitada {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.areaCliqueScrubber:focus-visible .trilhaProgresso {
+    box-shadow: 0 0 0 2px rgba(232, 122, 17, 0.45);
+}
+
+.trilhaProgresso {
+    width: 100%;
+    height: 5px;
+    background-color: #3C3F40;
+    border-radius: 999px;
+    position: relative;
+    transition: height 0.15s ease;
+}
+
+.areaCliqueScrubber:not(.areaCliqueScrubberDesabilitada):hover .trilhaProgresso {
+    height: 7px;
+}
+
+.preenchimentoProgresso {
+    height: 100%;
+    background-color: var(--laranja, #E87A11);
+    background-image: linear-gradient(90deg, #475E7C 0%, #E87A11 65%, #E87A11 100%);
+    border-radius: 999px;
+    position: relative;
+}
+
+.cursorTimeline {
+    position: absolute;
+    right: -7px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    border: 2px solid var(--laranja, #E87A11);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    transition: transform 0.15s ease;
+}
+
+.areaCliqueScrubber:not(.areaCliqueScrubberDesabilitada):hover .cursorTimeline {
+    transform: translateY(-50%) scale(1.12);
+}
+
+.marcadoresLista {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 0 4px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 10.5px;
+    flex-wrap: wrap;
+    min-width: 0;
+}
+
+.marcadorItem {
+    color: #94A3B8;
+    background: transparent;
+    border: none;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.marcadorItem:hover:not(:disabled),
+.marcadorItem:focus-visible:not(:disabled) {
+    color: #E5E8ED;
+    background-color: rgba(255, 255, 255, 0.06);
+    outline: none;
+}
+
+.marcadorItem:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.marcadorItemAtivo {
+    color: var(--laranja, #E87A11);
+    font-weight: 700;
+}
+
+.barraBotoesInferior {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    min-width: 0;
+}
+
+.controlesEsquerda {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.btnPlayPrincipal {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    background-color: var(--laranja, #E87A11);
+    color: #FFFFFF;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: filter 0.15s ease, transform 0.1s ease, opacity 0.15s ease;
+}
+
+.btnPlayPrincipal:hover:not(:disabled) {
+    filter: brightness(1.08);
+}
+
+.btnPlayPrincipal:focus-visible:not(:disabled) {
+    outline: 2px solid #FFFFFF;
+    outline-offset: 2px;
+}
+
+.btnPlayPrincipal:active:not(:disabled) {
+    transform: scale(0.96);
+}
+
+.btnPlayPrincipal:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btnControleIcone {
+    background: transparent;
+    border: none;
+    color: #94A3B8;
+    padding: 5px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: color 0.15s ease, background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.btnControleIcone:hover:not(:disabled),
+.btnControleIcone:focus-visible:not(:disabled) {
+    color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0.08);
+    outline: none;
+}
+
+.btnControleIcone:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.btnControleIconeAtivo {
+    color: var(--laranja, #E87A11);
+    background-color: rgba(232, 122, 17, 0.14);
+}
+
+.visorTempo {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 12px;
+    margin-left: 4px;
+    white-space: nowrap;
+}
+
+.tempoAtual {
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+.tempoSeparador,
+.tempoTotal {
+    color: #94A3B8;
+}
+
+.controlesDireita {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.seletorVelocidade {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    background-color: #3C3F40;
+    border: 1px solid rgba(229, 232, 237, 0.14);
+    padding: 2px;
+    border-radius: 6px;
+}
+
+.btnVelocidade {
+    background: transparent;
+    border: none;
+    color: #E5E8ED;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+
+.btnVelocidade:hover:not(:disabled),
+.btnVelocidade:focus-visible:not(:disabled) {
+    color: #FFFFFF;
+    outline: none;
+}
+
+.btnVelocidade:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btnVelocidadeAtiva {
+    background-color: var(--laranja, #E87A11);
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .cardPlayer {
+        padding: 16px;
+    }
+
+    .infoRunner,
+    .resumoHudEvento,
+    .separadorHudEvento {
+        display: none;
+    }
+
+    .estadoVideoNaoEncontrado {
+        padding: 20px 16px;
+        margin: 16px;
+    }
+}

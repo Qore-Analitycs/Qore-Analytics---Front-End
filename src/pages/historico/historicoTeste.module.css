@@ -1,0 +1,85 @@
+.container {
+    width: 100%;
+    max-width: 1520px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.superiorTexto {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 280px;
+}
+
+.categoriaMenor {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: var(--peso-semibold, 600);
+    color: #475E7C;
+    margin: 0;
+}
+
+.titulo {
+    font-family: "Montserrat", sans-serif;
+    font-weight: var(--peso-bold, 700);
+    font-size: var(--fonte-titulo, 40px);
+    color: #2D3133;
+    margin: 0;
+    line-height: 1.15;
+}
+
+.descricaoPagina {
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    font-weight: var(--peso-normal, 400);
+    color: #475569;
+    margin: 0;
+    line-height: 1.5;
+    max-width: 800px;
+}
+
+.botoes {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: flex-end;
+    flex-shrink: 0;
+}
+
+.containerBotao {
+    min-width: 160px;
+}
+
+@media (max-width: 768px) {
+    .superior {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .titulo {
+        font-size: 28px;
+    }
+
+    .botoes {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .containerBotao {
+        flex: 1;
+        min-width: 140px;
+    }
+}

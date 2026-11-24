@@ -8,7 +8,7 @@
 .label {
     font-family: "Montserrat", sans-serif;
     font-size: var(--fonte-padrao);
-    font-weight: var(--peso-normal);
+    font-weight: var(--peso-500);
     color: inherit;
 }
 
@@ -57,6 +57,19 @@
     color: #7A7E82;
 }
 
+/* Variante para textos longos (textarea) mantendo o padrão visual do Input */
+.textareaWrapper {
+    height: auto;
+    min-height: 130px;
+    align-items: flex-start;
+    padding: 14px 16px;
+}
+
+.textarea {
+    resize: none;
+    line-height: 1.5;
+}
+
 /* Estilo caso o Yup retorne erro de validação */
 .inputErro {
     border-color: var(--vermelho);
@@ -66,4 +79,32 @@
     font-family: "Montserrat", sans-serif;
     font-size: var(--fonte-pequena);
     color: var(--vermelho);
+}
+
+/* =========================================================
+   VARIANTE COMPACTA (40px de altura para Filtros e Barras)
+   ========================================================= */
+
+.containerCompacto {
+    gap: 6px;
+}
+
+.labelCompacto {
+    font-size: 13px;
+    font-weight: var(--peso-semibold);
+    letter-spacing: 0.02em;
+}
+
+.inputWrapperCompacto {
+    height: 40px;
+    padding: 0 14px;
+    gap: 10px;
+}
+
+.inputWrapperCompacto .icone {
+    font-size: 16px;
+}
+
+.inputWrapperCompacto .input {
+    font-size: 14px;
 }
