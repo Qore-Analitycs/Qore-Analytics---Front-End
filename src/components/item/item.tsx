@@ -32,6 +32,14 @@ const normalizarIdRota = (idBruto?: string): string => {
   return idBruto.replace(/^#+/, "").trim();
 };
 
+const formatarCargo = (cargo: unknown): string => {
+  if (!cargo) return "Não informado";
+  if (typeof cargo === "object" && "nome" in cargo) {
+    return String((cargo as { nome?: string }).nome || "Não informado");
+  }
+  return String(cargo);
+};
+
 const Item = ({ page, usuario, itemHistorico }: ItemProps) => {
   const router = useRouter();
 
@@ -59,7 +67,6 @@ const Item = ({ page, usuario, itemHistorico }: ItemProps) => {
   const handleRowClick = (e: React.MouseEvent<HTMLTableRowElement>) => {
     if (!podeNavegarParaDetalhe) return;
 
-    // Evita interceptar cliques em botões, links ou controles internos caso existam na linha
     const alvo = e.target as HTMLElement | null;
     if (
       alvo?.closest(
@@ -87,8 +94,9 @@ const Item = ({ page, usuario, itemHistorico }: ItemProps) => {
     <>
       {page === "listaHistorico" && (
         <tr
-          className={`${styles.trCard} ${podeNavegarParaDetalhe ? styles.trCardClicavel : ""
-            }`}
+          className={`${styles.trCard} ${
+            podeNavegarParaDetalhe ? styles.trCardClicavel : ""
+          }`}
           onClick={podeNavegarParaDetalhe ? handleRowClick : undefined}
           onKeyDown={podeNavegarParaDetalhe ? handleRowKeyDown : undefined}
           tabIndex={podeNavegarParaDetalhe ? 0 : undefined}
@@ -134,12 +142,13 @@ const Item = ({ page, usuario, itemHistorico }: ItemProps) => {
               )}
             </div>
           </td>
-          <td className={styles.celulaCargo}>{usuario.cargo}</td>
+          <td className={styles.celulaCargo}>{formatarCargo(usuario.cargo)}</td>
           <td className={styles.celulaEmpresa}>Empresa Matriz</td>
           <td>
             <span
-              className={`${styles.badgeStatus} ${usuario.ativo ? styles.badgeSucesso : styles.badgeInativo
-                }`}
+              className={`${styles.badgeStatus} ${
+                usuario.ativo ? styles.badgeSucesso : styles.badgeInativo
+              }`}
             >
               {usuario.ativo ? "Ativo" : "Inativo"}
             </span>
