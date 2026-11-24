@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import styles from "./input.module.css";
 
+export type InputTamanho = "padrao" | "compacto";
+
 type BaseInputProps = {
     label?: string;
     placeholder?: string;
@@ -11,6 +13,7 @@ type BaseInputProps = {
     erro?: string;
     multiline?: boolean;
     rows?: number;
+    tamanho?: InputTamanho;
 };
 
 type InputProps = BaseInputProps &
@@ -24,21 +27,33 @@ const Input = ({
     erro,
     multiline = false,
     rows = 4,
+    tamanho = "padrao",
     id,
     ...rest
 }: InputProps) => {
+    const classeTamanhoWrapper =
+        tamanho === "compacto" ? styles.inputWrapperCompacto : "";
+    const classeTamanhoContainer =
+        tamanho === "compacto" ? styles.containerCompacto : "";
+    const classeTamanhoLabel =
+        tamanho === "compacto" ? styles.labelCompacto : "";
+
     return (
         <>
-            <div className={styles.container}>
+            <div className={`${styles.container} ${classeTamanhoContainer}`}>
                 {label && (
-                    <label htmlFor={id} className={styles.label}>
+                    <label
+                        htmlFor={id}
+                        className={`${styles.label} ${classeTamanhoLabel}`}
+                    >
                         {label}
                     </label>
                 )}
 
                 <div
-                    className={`${styles.inputWrapper} ${multiline ? styles.textareaWrapper : ""
-                        } ${erro ? styles.inputErro : ""}`}
+                    className={`${styles.inputWrapper} ${
+                        multiline ? styles.textareaWrapper : ""
+                    } ${classeTamanhoWrapper} ${erro ? styles.inputErro : ""}`}
                 >
                     {temIcone && icone && (
                         <span className={styles.icone}>

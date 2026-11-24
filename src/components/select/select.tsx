@@ -65,11 +65,19 @@ const Select = ({
         tamanho === "compacto" ? styles.triggerCompacto : "";
     const classeTamanhoOpcao =
         tamanho === "compacto" ? styles.opcaoCompacto : "";
+    const classeTamanhoContainer =
+        tamanho === "compacto" ? styles.containerCompacto : "";
+    const classeTamanhoLabel =
+        tamanho === "compacto" ? styles.labelCompacto : "";
 
     return (
         <>
-            <div className={styles.container}>
-                {label && <label className={styles.label}>{label}</label>}
+            <div className={`${styles.container} ${classeTamanhoContainer}`}>
+                {label && (
+                    <label className={`${styles.label} ${classeTamanhoLabel}`}>
+                        {label}
+                    </label>
+                )}
 
                 <div className={styles.selectWrapper} ref={wrapperRef}>
                     {/* Botão principal do Select */}

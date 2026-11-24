@@ -1,0 +1,58 @@
+.conteudoLimitado {
+    width: 100%;
+    max-width: 1520px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.topoPagina {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.tituloPagina {
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-compacta);
+    font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
+    color: #475E7C;
+    margin: 0;
+}
+
+.tituloSecaoPrincipal {
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-titulo);
+    font-weight: var(--peso-bold, 700);
+    color: #2D3133;
+    margin: 0;
+    line-height: var(--lh-justo);
+}
+
+.blocoSecao {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.tituloSecao {
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-card-titulo);
+    font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-titulo);
+    color: #2D3133;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .conteudoLimitado {
+        gap: 24px;
+    }
+
+    .tituloSecaoPrincipal {
+        font-size: 1.875rem;
+    }
+}

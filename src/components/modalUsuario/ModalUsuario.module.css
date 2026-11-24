@@ -1,0 +1,187 @@
+/* Fundo externo do modal */
+.fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Caixa principal */
+.modal {
+  border: solid 2px var(--laranja);
+  position: relative;
+  border-radius: 15px;
+  width: min(460px, 100%);
+  min-height: 580px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--cor-fundo);
+  color: #111111;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.20);
+}
+
+/* Cabeçalho */
+.cabecalho {
+  position: relative;
+}
+
+.subtitulo {
+  display: block;
+
+  color: var(--laranja);
+  font-size: var(--fonte-padrao);
+  font-weight: var(--peso-semibold);
+  line-height: var(--lh-compacto);
+}
+
+.cabecalho h2 {
+  margin-bottom: 4px;
+
+  font-size: var(--fonte-subtitulo);
+  font-weight: 700;
+  line-height: var(--lh-titulo);
+}
+
+.cabecalho p {
+  color: #666666;
+  font-size: var(--fonte-pequena);
+  line-height: var(--lh-compacto);
+}
+
+/* Botão de fechar */
+.fechar {
+  position: absolute;
+  top: -8px;
+  right: -5px;
+
+  border: none;
+  background: transparent;
+
+  font-size: var(--fonte-metrica);
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Formulário */
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  margin-top: 26px;
+}
+
+/* Campos */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.campo label,
+.campo>span {
+  font-size: var(--fonte-pequena);
+  line-height: var(--lh-compacto);
+  color: #222222;
+}
+
+.campo input {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #BBBBBB;
+  background-color: #FFFFFF;
+  font-size: var(--fonte-compacta);
+  line-height: var(--lh-compacto);
+}
+
+.campo input:focus {
+  outline: 2px solid #E87A11;
+  border-color: transparent;
+}
+
+/* Seleção de cargo */
+.cargos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.cargo,
+.cargoSelecionado {
+  min-height: 40px;
+  padding: 6px 8px;
+
+  border: 1px solid #BBBBBB;
+  cursor: pointer;
+
+  font-size: var(--fonte-pequena);
+  line-height: var(--lh-compacto);
+}
+
+.cargo {
+  background-color: #FFFFFF;
+  color: #333333;
+}
+
+.cargoSelecionado {
+  background-color: #ffd2a8;
+  color: var(--laranja);
+  border-color: var(--laranja);
+}
+
+/* Botões inferiores */
+.acoes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  margin-top: auto;
+  padding-top: 35px;
+}
+
+.botaoCancelar,
+.botaoCriar {
+  min-height: 44px;
+  padding: 8px 14px;
+
+  border: none;
+  cursor: pointer;
+
+  font-size: var(--fonte-compacta);
+  font-weight: 600;
+  line-height: var(--lh-compacto);
+}
+
+.botaoCancelar {
+  background-color: #FFFFFF;
+  color: #333333;
+}
+
+.botaoCriar {
+  background-color: #E87A11;
+  color: #FFFFFF;
+}
+
+/* Ajuste para telas pequenas */
+@media (max-width: 480px) {
+  .modal {
+    width: 100%;
+    min-height: 540px;
+    padding: 25px 20px;
+  }
+
+  .cargos {
+    gap: 8px;
+  }
+
+  .cargo,
+  .cargoSelecionado {
+    font-size: var(--fonte-micro);
+  }
+}

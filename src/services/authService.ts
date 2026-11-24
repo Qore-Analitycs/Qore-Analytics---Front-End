@@ -1,0 +1,35 @@
+import secureLocalStorage from "react-secure-storage";
+import { api } from "../services/api";
+import { toastSucesso } from "@/utils/toast";
+
+export async function login(email: string, senha: string) {
+    try {
+        const response = await api.post("Autenticacao/login", { email, senha });
+
+        console.log(response.data)
+
+        const token = response.data.token;
+        secureLocalStorage.setItem("Token", token);
+    }
+    catch (error: any) {
+        throw new Error("Email ou senha inválidos");
+    }
+}
+
+export async function logout() {
+    try {
+        secureLocalStorage.removeItem("Token");
+        toastSucesso("Logout realizado com sucesso!");
+    }catch (error: any) {
+        throw new Error("Erro ao fazer logout");
+    }
+}
+
+export async function validarSenhaAtual(email: string, senhaAtual: string): Promise<boolean> {
+    try {
+        await api.post("Autenticacao/login", { email, senha: senhaAtual });
+        return true;
+    } catch {
+        return false;
+    }
+}

@@ -31,18 +31,16 @@ const ResultStepList = ({ passos, filtroAtivo }: ResultStepListProps) => {
                 return (
                     <li
                         key={passo.id}
-                        className={`${styles.cardPasso} ${
-                            passou ? styles.cardSucesso : styles.cardFalha
-                        }`}
+                        className={`${styles.cardPasso} ${passou ? styles.cardSucesso : styles.cardFalha
+                            }`}
                     >
                         <div className={styles.linhaPrincipal}>
                             <div className={styles.infoEsquerda}>
                                 <span
-                                    className={`${styles.iconeStatus} ${
-                                        passou
+                                    className={`${styles.iconeStatus} ${passou
                                             ? styles.iconeSucesso
                                             : styles.iconeFalha
-                                    }`}
+                                        }`}
                                     aria-hidden="true"
                                 >
                                     {passou ? (
@@ -52,23 +50,32 @@ const ResultStepList = ({ passos, filtroAtivo }: ResultStepListProps) => {
                                     )}
                                 </span>
 
-                                <h3 className={styles.tituloPasso}>
-                                    #{numeroFormatado} - {passo.titulo}
-                                </h3>
+                                <div className={styles.textosPassoWrapper}>
+                                    <h3 className={styles.tituloPasso}>
+                                        #{numeroFormatado} - {passo.titulo}
+                                    </h3>
+                                    {passo.descricao && (
+                                        <p className={styles.descricaoPasso}>
+                                            {passo.descricao}
+                                        </p>
+                                    )}
+                                </div>
                             </div>
 
                             <div className={styles.infoDireita}>
                                 <span className={styles.tempoExecucao}>
                                     <Clock size={13} aria-hidden="true" />
-                                    <span>{passo.tempoExecucaoMs}ms</span>
+                                    <span>
+                                        {passo.tempoExecucaoLabel ||
+                                            `${passo.tempoExecucaoMs}ms`}
+                                    </span>
                                 </span>
 
                                 <span
-                                    className={`${styles.badgeStatus} ${
-                                        passou
+                                    className={`${styles.badgeStatus} ${passou
                                             ? styles.badgePassou
                                             : styles.badgeNaoPassou
-                                    }`}
+                                        }`}
                                 >
                                     {passou ? "PASSOU" : "NÃO PASSOU"}
                                 </span>
@@ -95,11 +102,10 @@ const ResultStepList = ({ passos, filtroAtivo }: ResultStepListProps) => {
                                         {passo.tags.map((tag, index) => (
                                             <span
                                                 key={`${passo.id}-tag-${index}`}
-                                                className={`${styles.tag} ${
-                                                    index === 0
+                                                className={`${styles.tag} ${index === 0
                                                         ? styles.tagDestaque
                                                         : styles.tagCritico
-                                                }`}
+                                                    }`}
                                             >
                                                 {tag}
                                             </span>
@@ -116,4 +122,3 @@ const ResultStepList = ({ passos, filtroAtivo }: ResultStepListProps) => {
 };
 
 export default ResultStepList;
-

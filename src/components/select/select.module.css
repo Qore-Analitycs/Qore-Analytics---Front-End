@@ -9,6 +9,7 @@
     font-family: "Montserrat", sans-serif;
     font-size: var(--fonte-padrao);
     font-weight: var(--peso-500);
+    line-height: var(--lh-compacto);
     color: inherit;
 }
 
@@ -21,7 +22,7 @@
 /* Caixa principal do Select (Fechado) */
 .selectTrigger {
     width: 100%;
-    height: 50px;
+    min-height: 52px;
     background-color: var(--branco);
     border-radius: 6px;
     box-shadow: inset 0px 2px 6px rgba(0, 0, 0, 0.22), var(--sombra);
@@ -35,6 +36,7 @@
     font-family: "Montserrat", sans-serif;
     font-size: var(--fonte-padrao);
     font-weight: var(--peso-500);
+    line-height: var(--lh-compacto);
     color: var(--cinza-escuro);
     transition: border-radius 0.15s ease;
 }
@@ -59,7 +61,7 @@
     align-items: center;
     justify-content: center;
     color: var(--cinza-escuro);
-    font-size: 20px;
+    font-size: 1.25rem;
     transition: transform 0.2s ease;
 }
 
@@ -107,8 +109,9 @@
     width: 100%;
     padding: 12px 18px;
     font-family: "Montserrat", sans-serif;
-    font-size: var(--fonte-normal);
+    font-size: var(--fonte-padrao);
     font-weight: var(--peso-500);
+    line-height: var(--lh-compacto);
     color: var(--cinza-escuro);
     cursor: pointer;
     transition: background-color 0.15s ease;
@@ -126,21 +129,35 @@
 }
 
 /* =========================================================
-   VARIANTE COMPACTA (Para cards, tabelas e barras de ferramentas)
+   VARIANTE COMPACTA (42px de altura para Filtros e Barras)
    ========================================================= */
 
+.containerCompacto {
+    gap: 6px;
+}
+
+.labelCompacto {
+    font-size: var(--fonte-pequena);
+    font-weight: var(--peso-semibold);
+    line-height: var(--lh-compacto);
+    letter-spacing: 0.02em;
+}
+
 .triggerCompacto {
-    height: 38px;
-    padding: 0 12px;
-    font-size: 13px;
+    min-height: 42px;
+    height: 42px;
+    padding: 0 14px;
+    font-size: var(--fonte-compacta);
+    line-height: var(--lh-compacto);
     border-radius: 6px;
 }
 
 .triggerCompacto .iconeSeta {
-    font-size: 14px;
+    font-size: var(--fonte-compacta);
 }
 
 .opcaoCompacto {
-    padding: 8px 12px;
-    font-size: 13px;
+    padding: 10px 14px;
+    font-size: var(--fonte-pequena);
+    line-height: var(--lh-compacto);
 }
