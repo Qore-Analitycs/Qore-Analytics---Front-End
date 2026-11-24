@@ -47,6 +47,7 @@ export default function VideoPlayerMock({
     const [estaReproduzindo, setEstaReproduzindo] = useState(false);
     const [velocidadeAtiva, setVelocidadeAtiva] = useState("1x");
     const [marcadorAtivo, setMarcadorAtivo] = useState("m3");
+
     return (
         <section
             className={styles.cardPlayer}
@@ -198,11 +199,10 @@ export default function VideoPlayerMock({
                                 <button
                                     key={item.id}
                                     type="button"
-                                    className={`${styles.marcadorItem} ${
-                                        item.id === marcadorAtivo
+                                    className={`${styles.marcadorItem} ${marcadorAtivo === item.id
                                             ? styles.marcadorItemAtivo
                                             : ""
-                                    }`}
+                                        }`}
                                     onClick={() => setMarcadorAtivo(item.id)}
                                 >
                                     {item.tempo} {item.rotulo}
@@ -270,11 +270,10 @@ export default function VideoPlayerMock({
                                     <button
                                         key={vel}
                                         type="button"
-                                        className={`${styles.btnVelocidade} ${
-                                            vel === velocidadeAtiva
+                                        className={`${styles.btnVelocidade} ${vel === velocidadeAtiva
                                                 ? styles.btnVelocidadeAtiva
                                                 : ""
-                                        }`}
+                                            }`}
                                         onClick={() => setVelocidadeAtiva(vel)}
                                     >
                                         {vel}
