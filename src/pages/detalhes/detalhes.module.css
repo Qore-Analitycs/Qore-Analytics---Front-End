@@ -524,8 +524,12 @@
   background-color: #FF2200;
 }
 
+.sideBarResponse {
+  display: none;
+}
+
 /* Responsividade para telas menores */
-@media (max-width: 1024px) {
+@media (max-width: 640px) {
   .gridInferior {
     grid-template-columns: 1fr;
   }
@@ -533,7 +537,21 @@
     grid-template-columns: 1fr;
   }
 
-  .sideBarResponsa {
+  .sideBar {
     display: none;
+  }
+
+  .actionButtons {
+    flex-direction: row;
+    margin-top: 8px;
+  }
+
+  .headerRow {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sideBarResponse {
+    display: block;
   }
 }

@@ -4,6 +4,7 @@ import Head from 'next/head';
 import styles from './detalhes.module.css';
 
 import SideBar from "../../components/sideBar/sideBar";
+import SideBarResponse from "../../components/sideBarResponse/sideBarResponse";
 // Componente responsável por renderizar os ícones
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -30,7 +31,9 @@ export default function DetalhesPage() {
         {/* ==========================================
            BARRA LATERAL
         ========================================== */}
-      <div className={styles.sideBarResponsa}  ><SideBar/></div>
+      <div className={styles.sideBar}  ><SideBar/></div>
+
+      <div className={styles.sideBarResponse}><SideBarResponse/></div>
       
         
 
