@@ -22,6 +22,8 @@ export default function DetalhesPage() {
         <title>Detalhe do Teste - Qore Analytics</title>
       </Head>
 
+      <div className={styles.sideBarResponse}><SideBarResponse/></div>
+
       {/* ==========================================
           CONTAINER PRINCIPAL
       ========================================== */}
@@ -33,7 +35,7 @@ export default function DetalhesPage() {
         ========================================== */}
       <div className={styles.sideBar}  ><SideBar/></div>
 
-      <div className={styles.sideBarResponse}><SideBarResponse/></div>
+      
       
         
 
