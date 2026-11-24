@@ -5,15 +5,21 @@ import styles from "./promptCenario.module.css";
 
 export type DadosPromptCenario = {
     urlPullRequest: string;
+    branch: string;
+    commit: string;
     descricaoFluxo: string;
 };
 
-type PromptCenarioProps = {
+export type PromptCenarioProps = {
     titulo?: string;
     textoBotao?: string;
     urlInicial?: string;
+    branchInicial?: string;
+    commitInicial?: string;
     descricaoInicial?: string;
     erroUrl?: string;
+    erroBranch?: string;
+    erroCommit?: string;
     erroDescricao?: string;
     carregando?: boolean;
     onGerarRoteiro?: (dados: DadosPromptCenario) => void;
@@ -23,23 +29,33 @@ const PromptCenario = ({
     titulo = "Prompt de Geração de Cenários",
     textoBotao = "Gerar Roteiro",
     urlInicial = "",
+    branchInicial = "",
+    commitInicial = "",
     descricaoInicial = "",
     erroUrl,
+    erroBranch,
+    erroCommit,
     erroDescricao,
     carregando = false,
     onGerarRoteiro,
 }: PromptCenarioProps) => {
     const [urlPullRequest, setUrlPullRequest] = useState(urlInicial);
+    const [branch, setBranch] = useState(branchInicial);
+    const [commit, setCommit] = useState(commitInicial);
     const [descricaoFluxo, setDescricaoFluxo] = useState(descricaoInicial);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (onGerarRoteiro) {
-            onGerarRoteiro({
-                urlPullRequest,
-                descricaoFluxo,
-            });
+        if (carregando || !onGerarRoteiro) {
+            return;
         }
+
+        onGerarRoteiro({
+            urlPullRequest: urlPullRequest.trim(),
+            branch: branch.trim(),
+            commit: commit.trim(),
+            descricaoFluxo: descricaoFluxo.trim(),
+        });
     };
 
     return (
@@ -47,15 +63,41 @@ const PromptCenario = ({
             <h2 className={styles.titulo}>{titulo}</h2>
 
             <div className={styles.camposContainer}>
-                <Input
-                    id="url-pull-request"
-                    label="Url da pull request"
-                    placeholder="https://github.com/exemple/Pull...."
-                    temIcone={false}
-                    value={urlPullRequest}
-                    onChange={(e) => setUrlPullRequest(e.target.value)}
-                    erro={erroUrl}
-                />
+                <div className={styles.inputUrlGroup}>
+                    <Input
+                        id="url-pull-request"
+                        label="Url da pull request"
+                        placeholder="https://github.com/exemple/Pull...."
+                        temIcone={false}
+                        value={urlPullRequest}
+                        onChange={(e) => setUrlPullRequest(e.target.value)}
+                        erro={erroUrl}
+                        disabled={carregando}
+                    />
+                    <div className={styles.containerInputUrl}>
+                        <Input
+                            id="branch"
+                            label="Branch"
+                            placeholder="feature/...."
+                            temIcone={false}
+                            value={branch}
+                            onChange={(e) => setBranch(e.target.value)}
+                            erro={erroBranch}
+                            disabled={carregando}
+                        />
+
+                        <Input
+                            id="commit"
+                            label="Commit"
+                            placeholder="XXXXXXX"
+                            temIcone={false}
+                            value={commit}
+                            onChange={(e) => setCommit(e.target.value)}
+                            erro={erroCommit}
+                            disabled={carregando}
+                        />
+                    </div>
+                </div>
 
                 <Input
                     id="descricao-fluxo"
@@ -67,6 +109,7 @@ const PromptCenario = ({
                     value={descricaoFluxo}
                     onChange={(e) => setDescricaoFluxo(e.target.value)}
                     erro={erroDescricao}
+                    disabled={carregando}
                 />
             </div>
 
