@@ -47,15 +47,38 @@ const PromptCenario = ({
             <h2 className={styles.titulo}>{titulo}</h2>
 
             <div className={styles.camposContainer}>
-                <Input
-                    id="url-pull-request"
-                    label="Url da pull request"
-                    placeholder="https://github.com/exemple/Pull...."
-                    temIcone={false}
-                    value={urlPullRequest}
-                    onChange={(e) => setUrlPullRequest(e.target.value)}
-                    erro={erroUrl}
-                />
+                <div className={styles.inputUrlGroup}>
+                    <Input
+                        id="url-pull-request"
+                        label="Url da pull request"
+                        placeholder="https://github.com/exemple/Pull...."
+                        temIcone={false}
+                        value={urlPullRequest}
+                        onChange={(e) => setUrlPullRequest(e.target.value)}
+                        erro={erroUrl}
+                    />
+                    <div className={styles.containerInputUrl}>
+                        <Input
+                            id="branch"
+                            label="Branch"
+                            placeholder="feature/...."
+                            temIcone={false}
+                            // value={branchPullRequest}
+                            onChange={(e) => setUrlPullRequest(e.target.value)}
+                        // erro={erroBranch}
+                        />
+
+                        <Input
+                            id="commit-pull-request"
+                            label="Commit"
+                            placeholder="XXXXXXX"
+                            temIcone={false}
+                            // value={commitPullRequest}
+                            onChange={(e) => setUrlPullRequest(e.target.value)}
+                        // erro={erroCommit}
+                        />
+                    </div>
+                </div>
 
                 <Input
                     id="descricao-fluxo"
