@@ -70,7 +70,7 @@ const Item = ({ page, usuario, itemHistorico }: ItemProps) => {
     const alvo = e.target as HTMLElement | null;
     if (
       alvo?.closest(
-        "a, button, input, select, textarea, [role='button'], [data-no-row-nav='true']"
+        "a, button, input, select, textarea, [role='button'], [data-no-row-nav='true']",
       )
     ) {
       return;
@@ -107,9 +107,7 @@ const Item = ({ page, usuario, itemHistorico }: ItemProps) => {
           }
         >
           <td className={styles.celulaId}>{dadosHistorico.id}</td>
-          <td className={styles.celulaCasoTeste}>
-            {dadosHistorico.casoTeste}
-          </td>
+          <td className={styles.celulaCasoTeste}>{dadosHistorico.casoTeste}</td>
           <td>
             <span className={styles.celulaTipo}>
               {dadosHistorico.tipo === "Web" ? (
