@@ -2,17 +2,22 @@ import { AtualizarUsuario, CriarUsuario, Usuario } from "@/@types/usuario";
 import { api } from "@/services/api";
 import { toastErro } from "@/utils/toast";
 
+type RespostaListaUsuarios = {
+    itens: Usuario[];
+};
+
 export const UsuarioService = {
     async listar(): Promise<Usuario[]> {
-        const resposta = await api.get<Usuario[]>("usuarios");
+        const resposta = await api.get<RespostaListaUsuarios>("usuarios");
 
-        return resposta.data
+        return resposta.data.itens;
     },
 
     async cadastrar(dados: CriarUsuario): Promise<Usuario> {
         const payload = {
             nome: dados.nome,
             email: dados.email,
+            ...(dados.empresa ? { empresa: dados.empresa } : {}),
             senha: dados.senha,
             perfilId: dados.perfilId,
         };
@@ -24,11 +29,10 @@ export const UsuarioService = {
 
     async atualizar(id: string, dados: AtualizarUsuario) {
         if (!id) {
-            toastErro("Erro ao buscar id de usuario")
+            toastErro("Erro ao buscar id de usuario");
             throw new Error("ID do usuário não informado.");
         }
 
-        // OPÇÃO A: Se o backend espera FormData ([FromForm] no C#)
         const formData = new FormData();
 
         if (dados.Nome) formData.append("Nome", dados.Nome);
@@ -47,8 +51,8 @@ export const UsuarioService = {
     },
 
     async getMe() {
-        const resposta = await api.get('Autenticacao/me')
+        const resposta = await api.get("Autenticacao/me");
 
         return resposta.data;
-    }
-}
+    },
+};

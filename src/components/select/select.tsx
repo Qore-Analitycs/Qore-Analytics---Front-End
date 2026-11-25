@@ -1,5 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useEffect, useId, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import styles from "./select.module.css";
 
@@ -8,34 +9,52 @@ export type OpcaoSelect = {
     texto: string;
 };
 
-type SelectProps = {
+export type SelectProps = {
+    id?: string;
     label?: string;
     placeholder?: string;
     opcoes?: OpcaoSelect[];
+    value?: string;
     valor?: string;
     onChange?: (novoValor: string) => void;
+    icone?: IconDefinition;
+    erro?: string;
     disabled?: boolean;
     tamanho?: "padrao" | "compacto";
+    className?: string;
 };
 
 const Select = ({
+    id,
     label,
     placeholder = "Todos os Tipos",
     opcoes = [],
+    value,
     valor,
     onChange,
+    icone,
+    erro,
     disabled = false,
     tamanho = "padrao",
+    className = "",
 }: SelectProps) => {
     const [aberto, setAberto] = useState(false);
     const [valorInterno, setValorInterno] = useState("");
     const wrapperRef = useRef<HTMLDivElement>(null);
+    const triggerRef = useRef<HTMLButtonElement>(null);
+    const generatedId = useId();
+    const triggerId = id || `select-${generatedId}`;
+    const listboxId = `${triggerId}-listbox`;
 
-    // Se vier controlado via props 'valor', usa ele; senão usa o estado interno
-    const valorAtual = valor !== undefined ? valor : valorInterno;
+    // Aceita tanto 'value' quanto 'valor' para manter compatibilidade com os consumidores existentes
+    const valorControlado = value !== undefined ? value : valor;
+    const valorAtual =
+        valorControlado !== undefined ? valorControlado : valorInterno;
 
-    // Fecha o dropdown automaticamente se o usuário clicar fora dele
+    // Fecha o dropdown ao clicar fora (mousedown) ou pressionar Escape
     useEffect(() => {
+        if (!aberto) return;
+
         const fecharAoClicarFora = (event: MouseEvent) => {
             if (
                 wrapperRef.current &&
@@ -45,39 +64,72 @@ const Select = ({
             }
         };
 
+        const fecharAoPressionarEsc = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                event.stopImmediatePropagation();
+                setAberto(false);
+                triggerRef.current?.focus();
+            }
+        };
+
         document.addEventListener("mousedown", fecharAoClicarFora);
+        document.addEventListener("keydown", fecharAoPressionarEsc);
         return () => {
             document.removeEventListener("mousedown", fecharAoClicarFora);
+            document.removeEventListener("keydown", fecharAoPressionarEsc);
         };
-    }, []);
+    }, [aberto]);
 
     const opcaoAtual = opcoes.find((op) => op.valor === valorAtual);
 
     const handleSelecionar = (novoValor: string) => {
-        setValorInterno(novoValor);
-        if (onChange) {
-            onChange(novoValor);
+        if (valorControlado === undefined) {
+            setValorInterno(novoValor);
         }
+        onChange?.(novoValor);
         setAberto(false);
     };
 
-    const classeTamanhoTrigger =
-        tamanho === "compacto" ? styles.triggerCompacto : "";
-    const classeTamanhoOpcao =
-        tamanho === "compacto" ? styles.opcaoCompacto : "";
-    const classeTamanhoContainer =
-        tamanho === "compacto" ? styles.containerCompacto : "";
-    const classeTamanhoLabel =
-        tamanho === "compacto" ? styles.labelCompacto : "";
+    const ehCompacto = tamanho === "compacto";
+    const classeTamanhoTrigger = ehCompacto ? styles.triggerCompacto : "";
+    const classeTamanhoOpcao = ehCompacto ? styles.opcaoCompacto : "";
+    const classeTamanhoContainer = ehCompacto ? styles.containerCompacto : "";
+    const classeTamanhoLabel = ehCompacto ? styles.labelCompacto : "";
 
     return (
-        <>
-            <div className={`${styles.container} ${classeTamanhoContainer}`}>
-                {label && (
-                    <label className={`${styles.label} ${classeTamanhoLabel}`}>
-                        {label}
-                    </label>
-                )}
+        <div
+            className={`${styles.container} ${classeTamanhoContainer} ${className}`.trim()}
+        >
+            {label && (
+                <label
+                    htmlFor={triggerId}
+                    className={`${styles.label} ${classeTamanhoLabel}`}
+                >
+                    {label}
+                </label>
+            )}
+
+            <div className={styles.selectWrapper} ref={wrapperRef}>
+                {/* Gatilho customizado com o mesmo padrão visual do Input */}
+                <button
+                    ref={triggerRef}
+                    id={triggerId}
+                    type="button"
+                    disabled={disabled}
+                    aria-haspopup="listbox"
+                    aria-expanded={aberto}
+                    aria-controls={listboxId}
+                    className={`${styles.selectTrigger} ${
+                        aberto ? styles.selectTriggerAberto : ""
+                    } ${erro ? styles.selectErro : ""} ${classeTamanhoTrigger}`}
+                    onClick={() => !disabled && setAberto((prev) => !prev)}
+                >
+                    <span className={styles.conteudoEsquerda}>
+                        {icone && (
+                            <span className={styles.icone} aria-hidden="true">
+                                <FontAwesomeIcon icon={icone} />
+                            </span>
+                        )}
 
                 <div className={styles.selectWrapper} ref={wrapperRef}>
                     {/* Botão principal do Select */}
@@ -97,6 +149,7 @@ const Select = ({
                         >
                             {opcaoAtual ? opcaoAtual.texto : placeholder}
                         </span>
+                    </span>
 
                         <span
                             className={`${styles.iconeSeta} ${aberto ? styles.iconeSetaAberto : ""
@@ -132,7 +185,9 @@ const Select = ({
                     )}
                 </div>
             </div>
-        </>
+
+            {erro && <span className={styles.mensagemErro}>{erro}</span>}
+        </div>
     );
 };
 

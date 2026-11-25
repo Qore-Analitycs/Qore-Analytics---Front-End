@@ -27,19 +27,25 @@
     width: 100%;
 }
 
+/* Padroniza 2 colunas iguais (50% / 50%) */
 .inputUrlGroup {
     display: grid;
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
     align-items: start;
     width: 100%;
 }
 
+/* Padroniza Branch e Commit em 2 colunas iguais dentro da metade esquerda */
 .containerInputUrl {
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
     align-items: start;
+    width: 100%;
+}
+
+.containerInput {
     width: 100%;
 }
 
@@ -50,7 +56,6 @@
     margin-top: 4px;
 }
 
-/* Controla a largura do Botao (que ocupa 100% do pai por padrão) */
 .botaoWrapper {
     width: 260px;
 }

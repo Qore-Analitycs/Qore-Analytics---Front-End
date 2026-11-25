@@ -1,4 +1,3 @@
-
 import { useUsuario } from "@/hooks/useUsuario";
 import Item, { ItemHistorico } from "../item/item";
 import styles from "./lista.module.css";
@@ -166,9 +165,7 @@ export default function Lista(props: ListaProps) {
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th className={styles.thAlinhadoEsquerda}>
-                    Case de Teste
-                  </th>
+                  <th className={styles.thAlinhadoEsquerda}>Case de Teste</th>
                   <th>Tipo</th>
                   <th>Responsável</th>
                   <th>Data</th>
@@ -196,19 +193,15 @@ export default function Lista(props: ListaProps) {
             <table className={styles.tabelaLista}>
               <thead>
                 <tr>
-                  <th className={styles.thAlinhadoEsquerda}>
-                    Usuário
-                  </th>
-                  <th className={styles.thAlinhadoEsquerda}>
-                    Cargo
-                  </th>
+                  <th className={styles.thAlinhadoEsquerda}>Usuário</th>
+                  <th className={styles.thAlinhadoEsquerda}>Cargo</th>
                   <th>Empresa</th>
                   <th>Status</th>
                 </tr>
               </thead>
 
               <tbody>
-                {listaUsuarios.map((usuario) => (
+                {u.map((usuario) => (
                   <Item
                     key={usuario.id}
                     page="usuarioPermissoes"

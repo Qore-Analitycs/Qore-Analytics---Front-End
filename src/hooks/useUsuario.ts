@@ -1,7 +1,6 @@
 import { AtualizarUsuario, CriarUsuario, Usuario } from "@/@types/usuario";
 import { UsuarioService } from "@/services/usuarioService";
 import { toastErro, toastSucesso } from "@/utils/toast";
-import { get } from "http";
 import { useEffect, useState } from "react";
 
 export function useUsuario() {
@@ -11,8 +10,13 @@ export function useUsuario() {
     async function listarU() {
         try {
             const dados = await UsuarioService.listar();
+
             setU(dados);
+
+            console.log("Usuários recebidos:", dados);
         } catch (error) {
+            console.error("Erro ao listar usuários:", error);
+            toastErro("Erro ao listar usuários");
         }
     }
 
@@ -20,12 +24,10 @@ export function useUsuario() {
         try {
             const dados = await UsuarioService.getMe();
 
-            console.log('teste');
-            console.log(dados)
-
             setMe(dados);
-        } catch (e) {
-            toastErro("Erro ao buscar usuario logado");
+        } catch (error) {
+            console.error(error);
+            toastErro("Erro ao buscar usuário logado");
         }
     }
 
@@ -33,10 +35,12 @@ export function useUsuario() {
         try {
             const novoU = await UsuarioService.cadastrar(dados);
 
-            setU((antigos) => [novoU, ...antigos])
-            return novoU
+            setU((antigos) => [novoU, ...antigos]);
+
+            return novoU;
         } catch (error) {
-            toastErro("Deu erro, problema ao cadastrar")
+            toastErro("Erro ao cadastrar usuário");
+            return;
         }
     }
 
@@ -44,20 +48,23 @@ export function useUsuario() {
         try {
             await UsuarioService.atualizar(id, dados);
 
+            await listarU();
+
             toastSucesso("Perfil atualizado com sucesso!");
 
             return true;
         } catch (error: any) {
-            console.error("Erro detalhado ao atualizar:", error.response || error);
+            console.error("Erro ao atualizar:", error.response?.data || error);
 
             const mensagemApi =
                 typeof error.response?.data === "string"
                     ? error.response.data
                     : error.response?.data?.message ||
-                    error.response?.data?.title ||
-                    "Erro ao atualizar perfil";
+                      error.response?.data?.title ||
+                      "Erro ao atualizar perfil";
 
-            console.log(mensagemApi);
+            toastErro(mensagemApi);
+
             return false;
         }
     }
@@ -65,13 +72,14 @@ export function useUsuario() {
     useEffect(() => {
         listarU();
         getMe();
-    }, [])
+    }, []);
 
     return {
         u,
         cadastrarU,
         atualizarU,
         me,
-        getMe
+        getMe,
+        listarU,
     };
 }
