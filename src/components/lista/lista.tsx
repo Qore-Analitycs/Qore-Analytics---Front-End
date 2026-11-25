@@ -2,11 +2,51 @@ import { useUsuario } from "@/hooks/useUsuario";
 import Item, { ItemHistorico } from "../item/item";
 import styles from "./lista.module.css";
 import { Usuario } from "@/@types/usuario";
+import type { ColunaTabelaProjeto, ProjetoItem } from "@/@types/projeto";
 
-type ListaProps = {
-  page?: string;
+export type ListaVariante = "listaHistorico" | "usuarioPermissoes" | "projetos";
+
+export const COLUNAS_LISTA_PROJETOS: ColunaTabelaProjeto[] = [
+  { key: "projeto", label: "Projeto", align: "left" },
+  { key: "empresa", label: "Empresa", align: "left" },
+  { key: "nUsuarios", label: "N Ususario", align: "center" },
+  { key: "status", label: "Status", align: "center" },
+];
+
+export type ListaHistoricoProps = {
+  page: "listaHistorico";
+  variant?: never;
   itensHistorico?: ItemHistorico[];
+  projetos?: never;
+  isLoading?: never;
+  emptyMessage?: never;
+  onProjetoClick?: never;
 };
+
+export type ListaUsuariosProps = {
+  page: "usuarioPermissoes";
+  variant?: never;
+  itensHistorico?: never;
+  projetos?: never;
+  isLoading?: never;
+  emptyMessage?: never;
+  onProjetoClick?: never;
+};
+
+export type ListaProjetosProps = {
+  page?: "projetos";
+  variant?: "projetos";
+  projetos: ProjetoItem[];
+  isLoading?: boolean;
+  emptyMessage?: string;
+  onProjetoClick?: (projeto: ProjetoItem) => void;
+  itensHistorico?: never;
+};
+
+export type ListaProps =
+  | ListaHistoricoProps
+  | ListaUsuariosProps
+  | ListaProjetosProps;
 
 const ITENS_HISTORICO_PADRAO: ItemHistorico[] = [
   {
@@ -102,15 +142,23 @@ const USUARIOS_PADRAO: Usuario[] = [
   },
 ];
 
-export default function Lista({
-  page,
-  itensHistorico = ITENS_HISTORICO_PADRAO,
-}: ListaProps) {
+export default function Lista(props: ListaProps) {
   const { u } = useUsuario();
+
+  const listaUsuarios =
+    u && u.length > 0 ? u : USUARIOS_PADRAO;
+
+  const itensHistorico =
+    props.page === "listaHistorico"
+      ? props.itensHistorico ?? ITENS_HISTORICO_PADRAO
+      : ITENS_HISTORICO_PADRAO;
+
+  const ehProjetos =
+    props.page !== "listaHistorico" && props.page !== "usuarioPermissoes";
 
   return (
     <>
-      {page === "listaHistorico" && (
+      {props.page === "listaHistorico" && (
         <section className={styles.section}>
           <div className={styles.tabelaWrapper}>
             <table className={styles.tabelaLista}>
@@ -139,7 +187,7 @@ export default function Lista({
         </section>
       )}
 
-      {page === "usuarioPermissoes" && (
+      {props.page === "usuarioPermissoes" && (
         <section className={styles.section}>
           <div className={styles.tabelaWrapper}>
             <table className={styles.tabelaLista}>
@@ -160,6 +208,63 @@ export default function Lista({
                     usuario={usuario}
                   />
                 ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
+      {ehProjetos && (
+        <section className={styles.section}>
+          <div className={styles.tabelaWrapper}>
+            <table className={styles.tabelaLista}>
+              <thead>
+                <tr>
+                  {COLUNAS_LISTA_PROJETOS.map((coluna) => (
+                    <th
+                      key={coluna.key}
+                      className={
+                        coluna.align === "left"
+                          ? styles.thAlinhadoEsquerda
+                          : undefined
+                      }
+                    >
+                      {coluna.label}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+
+              <tbody>
+                {props.isLoading ? (
+                  <tr className={styles.linhaEstado}>
+                    <td
+                      colSpan={COLUNAS_LISTA_PROJETOS.length}
+                      className={styles.celulaEstado}
+                    >
+                      Carregando projetos...
+                    </td>
+                  </tr>
+                ) : props.projetos.length === 0 ? (
+                  <tr className={styles.linhaEstado}>
+                    <td
+                      colSpan={COLUNAS_LISTA_PROJETOS.length}
+                      className={styles.celulaEstado}
+                    >
+                      {props.emptyMessage ??
+                        "Nenhum projeto encontrado para os filtros selecionados."}
+                    </td>
+                  </tr>
+                ) : (
+                  props.projetos.map((projeto) => (
+                    <Item
+                      key={projeto.id}
+                      page="projetos"
+                      itemProjeto={projeto}
+                      onClick={props.onProjetoClick}
+                    />
+                  ))
+                )}
               </tbody>
             </table>
           </div>

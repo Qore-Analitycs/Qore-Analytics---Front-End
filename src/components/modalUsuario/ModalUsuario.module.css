@@ -79,14 +79,20 @@
 .fechar {
   position: absolute;
   top: -6px;
-  right: 0;
+  right: -4px;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: none;
+  border-radius: 8px;
   background: transparent;
-  color: var(--cinza-escuro, #2D3133);
+  color: var(--cinza-escuro);
   font-size: var(--fonte-metrica);
   line-height: 1;
   cursor: pointer;
-  transition: color 0.15s ease;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .fechar:hover {

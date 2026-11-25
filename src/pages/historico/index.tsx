@@ -17,12 +17,7 @@ export default function HistoricoTeste() {
         {/* 1. Cabeçalho Superior com Título e Ações */}
         <header className={styles.superior}>
           <div className={styles.superiorTexto}>
-            <span className={styles.categoriaMenor}>Listagem de Testes</span>
             <h1 className={styles.titulo}>Histórico de Testes</h1>
-            <p className={styles.descricaoPagina}>
-              Repositório unificado de auditoria, execuções automatizadas
-              (Web E2E &amp; APIs) e rastreabilidade contínua de suítes de teste.
-            </p>
           </div>
           <div className={styles.botoes}>
             <div className={styles.containerBotao}>

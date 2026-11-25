@@ -131,6 +131,15 @@ const Select = ({
                             </span>
                         )}
 
+                <div className={styles.selectWrapper} ref={wrapperRef}>
+                    {/* Botão principal do Select */}
+                    <button
+                        type="button"
+                        disabled={disabled}
+                        className={`${styles.selectTrigger} ${aberto ? styles.selectTriggerAberto : ""
+                            } ${classeTamanhoTrigger}`}
+                        onClick={() => setAberto(!aberto)}
+                    >
                         <span
                             className={
                                 opcaoAtual
@@ -142,47 +151,39 @@ const Select = ({
                         </span>
                     </span>
 
-                    <span
-                        className={`${styles.iconeSeta} ${
-                            aberto ? styles.iconeSetaAberto : ""
-                        }`}
-                        aria-hidden="true"
-                    >
-                        <FontAwesomeIcon icon={faChevronDown} />
-                    </span>
-                </button>
+                        <span
+                            className={`${styles.iconeSeta} ${aberto ? styles.iconeSetaAberto : ""
+                                }`}
+                        >
+                            <FontAwesomeIcon icon={faChevronDown} />
+                        </span>
+                    </button>
 
-                {/* Lista suspensa com mesma largura, borda e sombra do campo */}
-                {aberto && (
-                    <ul
-                        id={listboxId}
-                        role="listbox"
-                        aria-labelledby={label ? triggerId : undefined}
-                        className={styles.dropdownLista}
-                    >
-                        {opcoes.map((opcao) => {
-                            const estaSelecionada = opcao.valor === valorAtual;
+                    {/* Lista do Dropdown colada e 100% alinhada embaixo */}
+                    {aberto && (
+                        <ul className={styles.dropdownLista}>
+                            {opcoes.map((opcao) => {
+                                const estaSelecionada =
+                                    opcao.valor === valorAtual;
 
-                            return (
-                                <li
-                                    key={opcao.valor}
-                                    role="option"
-                                    aria-selected={estaSelecionada}
-                                    className={`${styles.opcao} ${
-                                        estaSelecionada
-                                            ? styles.opcaoSelecionada
-                                            : ""
-                                    } ${classeTamanhoOpcao}`}
-                                    onClick={() =>
-                                        handleSelecionar(opcao.valor)
-                                    }
-                                >
-                                    {opcao.texto}
-                                </li>
-                            );
-                        })}
-                    </ul>
-                )}
+                                return (
+                                    <li
+                                        key={opcao.valor}
+                                        className={`${styles.opcao} ${estaSelecionada
+                                                ? styles.opcaoSelecionada
+                                                : ""
+                                            } ${classeTamanhoOpcao}`}
+                                        onClick={() =>
+                                            handleSelecionar(opcao.valor)
+                                        }
+                                    >
+                                        {opcao.texto}
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    )}
+                </div>
             </div>
 
             {erro && <span className={styles.mensagemErro}>{erro}</span>}
