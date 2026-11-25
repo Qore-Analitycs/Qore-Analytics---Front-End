@@ -17,6 +17,7 @@ export const UsuarioService = {
         const payload = {
             nome: dados.nome,
             email: dados.email,
+            ...(dados.empresa ? { empresa: dados.empresa } : {}),
             senha: dados.senha,
             perfilId: dados.perfilId,
         };
