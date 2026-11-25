@@ -2,7 +2,7 @@
   width: 100%;
   height: 70px;
 
-  background-color: green;
+  background-color: #2D3133;
 
   display: flex;
   justify-content: space-between;
@@ -25,7 +25,25 @@
   width: 40px;
   height: 40px;
 
-  background-color: orange;
 
-  flex-shrink: 0;
+
+  /* background-color: orange; */
+
+  display: flex;
+
+  align-items: center;
+  
+
+  /* flex-shrink: 0; */
+}
+
+.iconeMenu {
+  font-size: 50px;
+  color: aliceblue;
+}
+
+.barraLaranja {
+  width: 100vw;
+  height: 48px;
+  background-color: var(--laranja, #E87A11);
 }

@@ -529,7 +529,7 @@
 }
 
 /* Responsividade para telas menores */
-@media (max-width: 640px) {
+@media (max-width: 750px) {
   .gridInferior {
     grid-template-columns: 1fr;
   }

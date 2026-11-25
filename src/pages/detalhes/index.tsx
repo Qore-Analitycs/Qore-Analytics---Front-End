@@ -71,37 +71,6 @@ export default function DetalhesPage() {
             </div>
 
 
-            {/* Botões de cima*/}
-
-            <div className={styles.actionButtons}>
-
-              <button type="button" className={styles.btnCompartilhar}>
-
-                <FontAwesomeIcon
-                  icon={faShareNodes}
-                  className={styles.gaugeSmall}
-                  aria-hidden="true"
-                />
-
-                Compartilhar
-
-              </button>
-
-
-              <button type="button" className={styles.btnVideo}>
-
-                <FontAwesomeIcon
-                  icon={faDownload}
-                  className={styles.gaugeSmall}
-                  aria-hidden="true"
-                />
-
-                Vídeo.(mp4)
-
-              </button>
-
-            </div>
-
           </div>
 
 
