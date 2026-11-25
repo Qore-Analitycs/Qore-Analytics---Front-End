@@ -47,7 +47,9 @@
   min-height: 230px;
   background-color: #2D3133;
   display: flex;
-  justify-content: center;
+  flex-direction: column; /* Mudei para deixar a lista em cima */
+  align-items: center;    
+  gap: 20px;             
   padding: 24px 20px;
   box-sizing: border-box;
 }
@@ -64,4 +66,11 @@
 
 .itemMenu {
   cursor: pointer;
+}
+
+.iconeAbaixoLista {
+  color: var(--branco, #FFFFFF);
+  font-size: var(--fonte-pequena, 12px);
+  opacity: 0.9;
+  text-align: center;
 }

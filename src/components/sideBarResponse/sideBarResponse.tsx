@@ -75,6 +75,9 @@ export default function SideBarResponse() {
               );
             })}
             </ol>
+            <p className={styles.iconeAbaixoLista}>
+            A
+          </p>
           </div>
         // <div className={styles.barraLaranja}>
         //   <ol className={styles.listaMenu}>
