@@ -43,7 +43,25 @@
 }
 
 .barraLaranja {
-  width: 100vw;
-  height: 48px;
-  background-color: var(--laranja, #E87A11);
+  width: 100%;
+  min-height: 230px;
+  background-color: #2D3133;
+  display: flex;
+  justify-content: center;
+  padding: 24px 20px;
+  box-sizing: border-box;
+}
+
+.listaMenu {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Espaço entre cada linha */
+  color: var(--branco, #FFFFFF);
+  font-size: var(--fonte-padrao, 16px);
+  font-weight: var(--peso-semibold, 600);
+}
+
+.itemMenu {
+  cursor: pointer;
 }

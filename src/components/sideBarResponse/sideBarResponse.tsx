@@ -9,8 +9,32 @@ import styles from "./sideBarResponse.module.css";
 import { faBars, faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+const ITENS_NAVEGACAO = [
+  {
+    id: "painel",
+    label: "Painel",
+    href: "/dashboard",
+  },
+  {
+    id: "criacaoDeTeste",
+    label: "Criar Teste",
+    href: "/criacaoDeTeste",
+  },
+  {
+    id: "historico",
+    label: "Histórico",
+    href: "/historico",
+  },
+  {
+    id: "usuarioPermissoes",
+    label: "Usuário",
+    href: "/usuarioPermissoes",
+  },
+];
+
 export default function SideBarResponse() {
   const [menuAberto, setMenuAberto] = useState(false);
+  const router = useRouter();
 
   return (
     <>
@@ -30,7 +54,37 @@ export default function SideBarResponse() {
         </div>
       </div>
 
-      {menuAberto && <div className={styles.barraLaranja} />}
+        {menuAberto && (
+          <div className={styles.barraLaranja}>
+            <ol className={styles.listaMenu}>
+              {ITENS_NAVEGACAO.map((item) => {
+                const ehAtivo = router.pathname === item.href;
+
+                return (
+                  <li key={item.id} className={styles.itemMenu}>
+                    <Link
+                      href={item.href}
+                      onClick={() => setMenuAberto(false)}
+                      className={`${styles.linkMenu} ${
+                        ehAtivo ? styles.linkAtivo : ""
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
+            </ol>
+          </div>
+        // <div className={styles.barraLaranja}>
+        //   <ol className={styles.listaMenu}>
+        //     <li className={styles.itemMenu}>Painel</li>
+        //     <li className={styles.itemMenu}>Criar Teste</li>
+        //     <li className={styles.itemMenu}>Historico</li>
+        //     <li className={styles.itemMenu}>Usuario</li>
+        //   </ol>
+        // </div>
+      )}
     </>
   );
 }
