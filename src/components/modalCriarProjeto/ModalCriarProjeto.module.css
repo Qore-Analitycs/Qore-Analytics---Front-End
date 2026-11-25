@@ -1,0 +1,158 @@
+/* Fundo externo do modal */
+.fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow-y: auto;
+  background-color: rgba(45, 49, 51, 0.45);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+/* Caixa principal (largura fixa de 680px em desktop 1920px) */
+.modal {
+  position: relative;
+  width: min(680px, 100%);
+  border: 2px solid var(--laranja);
+  border-radius: 15px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--cor-fundo);
+  color: var(--cinza-escuro);
+  box-shadow: var(--sombra);
+  box-sizing: border-box;
+}
+
+/* Cabeçalho */
+.cabecalho {
+  position: relative;
+  padding-right: 36px;
+}
+
+.subtitulo {
+  display: block;
+  color: var(--laranja);
+  font-family: "Montserrat", sans-serif;
+  font-size: var(--fonte-padrao);
+  font-weight: var(--peso-semibold);
+  line-height: var(--lh-compacto);
+}
+
+.cabecalho h2 {
+  margin: 2px 0 6px;
+  color: var(--cinza-escuro);
+  font-family: "Montserrat", sans-serif;
+  font-size: var(--fonte-subtitulo);
+  font-weight: var(--peso-bold);
+  line-height: var(--lh-titulo);
+}
+
+.cabecalho p {
+  margin: 0;
+  color: #475E7C;
+  font-family: "Montserrat", sans-serif;
+  font-size: var(--fonte-pequena);
+  line-height: var(--lh-compacto);
+}
+
+/* Botão de fechar */
+.fechar {
+  position: absolute;
+  top: -6px;
+  right: -4px;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--cinza-escuro);
+  font-size: var(--fonte-metrica);
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.fechar:hover {
+  background-color: rgba(45, 49, 51, 0.08);
+  color: var(--laranja);
+}
+
+.fechar:focus-visible {
+  outline: 2px solid var(--laranja);
+  outline-offset: 2px;
+}
+
+/* Formulário */
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 26px;
+}
+
+.campoSelect {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.campoSelect button {
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease, border-radius 0.15s ease;
+}
+
+.campoSelect button:focus-visible {
+  border-color: var(--laranja);
+}
+
+.campoSelectErro button {
+  border-color: var(--vermelho);
+}
+
+.mensagemErro {
+  font-family: "Montserrat", sans-serif;
+  font-size: var(--fonte-pequena);
+  line-height: var(--lh-compacto);
+  color: var(--vermelho);
+}
+
+.erroGeral {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--vermelho);
+  background-color: rgba(255, 0, 0, 0.08);
+  color: var(--vermelho);
+  font-family: "Montserrat", sans-serif;
+  font-size: var(--fonte-pequena);
+  line-height: var(--lh-compacto);
+}
+
+/* Botões inferiores */
+.acoes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 8px;
+  padding-top: 12px;
+}
+
+@media (max-width: 640px) {
+  .modal {
+    padding: 26px 20px;
+  }
+
+  .acoes {
+    grid-template-columns: 1fr;
+  }
+}

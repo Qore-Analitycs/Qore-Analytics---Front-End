@@ -207,7 +207,7 @@ export default function ModalPerfil({ aberto, onFechar }: ModalPerfilProps) {
         <div className={styles.content}>
           <button
             type="button"
-            className={styles.closeButton}
+            className={styles.fechar}
             onClick={onFechar}
             aria-label="Fechar modal"
           >

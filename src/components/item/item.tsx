@@ -2,6 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import styles from "./item.module.css";
 import { Usuario } from "@/@types/usuario";
+import type { ProjetoItem } from "@/@types/projeto";
 
 export type ItemHistorico = {
   id: string;
@@ -12,11 +13,32 @@ export type ItemHistorico = {
   status: "Sucesso" | "Falha" | "Em execução";
 };
 
-type ItemProps = {
-  page?: string;
-  usuario?: Usuario;
+export type ItemHistoricoProps = {
+  page: "listaHistorico";
   itemHistorico?: ItemHistorico;
+  usuario?: never;
+  itemProjeto?: never;
 };
+
+export type ItemUsuarioProps = {
+  page: "usuarioPermissoes";
+  usuario?: Usuario;
+  itemHistorico?: never;
+  itemProjeto?: never;
+};
+
+export type ItemProjetoProps = {
+  page: "projetos";
+  itemProjeto: ProjetoItem;
+  onClick?: (projeto: ProjetoItem) => void;
+  usuario?: never;
+  itemHistorico?: never;
+};
+
+export type ItemProps =
+  | ItemHistoricoProps
+  | ItemUsuarioProps
+  | ItemProjetoProps;
 
 const MAPA_CLASSES_STATUS: Record<string, string> = {
   Sucesso: styles.badgeSucesso,
@@ -40,17 +62,20 @@ const formatarCargo = (cargo: unknown): string => {
   return String(cargo);
 };
 
-const Item = ({ page, usuario, itemHistorico }: ItemProps) => {
+const Item = (props: ItemProps) => {
   const router = useRouter();
+  const page = props.page;
+  const usuario = props.page === "usuarioPermissoes" ? props.usuario : undefined;
 
-  const dadosHistorico: ItemHistorico = itemHistorico ?? {
-    id: "#01",
-    casoTeste: "Teste Front-end Commit #003",
-    tipo: "Web",
-    responsavel: "Raphael - Dev",
-    data: "20/10/2026",
-    status: "Sucesso",
-  };
+  const dadosHistorico: ItemHistorico =
+    (props.page === "listaHistorico" ? props.itemHistorico : undefined) ?? {
+      id: "#01",
+      casoTeste: "Teste Front-end Commit #003",
+      tipo: "Web",
+      responsavel: "Raphael - Dev",
+      data: "20/10/2026",
+      status: "Sucesso",
+    };
 
   const classeBadgeHistorico =
     MAPA_CLASSES_STATUS[dadosHistorico.status] || styles.badgeSucesso;
@@ -151,6 +176,49 @@ const Item = ({ page, usuario, itemHistorico }: ItemProps) => {
               }`}
             >
               {usuario.ativo ? "Ativo" : "Inativo"}
+            </span>
+          </td>
+        </tr>
+      )}
+
+      {props.page === "projetos" && (
+        <tr
+          className={`${styles.trCard} ${
+            props.onClick ? styles.trCardClicavel : ""
+          }`}
+          onClick={
+            props.onClick
+              ? () => props.onClick?.(props.itemProjeto)
+              : undefined
+          }
+          onKeyDown={
+            props.onClick
+              ? (event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    props.onClick?.(props.itemProjeto);
+                  }
+                }
+              : undefined
+          }
+          tabIndex={props.onClick ? 0 : undefined}
+        >
+          <td className={styles.celulaProjeto}>{props.itemProjeto.projeto}</td>
+          <td className={styles.celulaEmpresaTexto}>
+            {props.itemProjeto.empresa}
+          </td>
+          <td className={styles.celulaNUsuarios}>
+            {props.itemProjeto.nUsuarios}
+          </td>
+          <td>
+            <span
+              className={`${styles.badgeStatus} ${
+                props.itemProjeto.status === "Ativo"
+                  ? styles.badgeSucesso
+                  : styles.badgeInativo
+              }`}
+            >
+              {props.itemProjeto.status}
             </span>
           </td>
         </tr>

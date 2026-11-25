@@ -22,14 +22,9 @@ export default function UsuarioPermissoes() {
         <AppLayout maxWidth="1520px" containerClassName={styles.container}>
           <header className={styles.containerTexto}>
             <div className={styles.texto}>
-              <span className={styles.categoriaMenor}>Usuário e Permissões</span>
               <h1 className={styles.titulo}>
-                Gerenciamento de Usuário &amp; Controle de Acesso
+                Gerenciamento de Usuário
               </h1>
-              <p className={styles.descricaoPagina}>
-                Administração centralizada de acessos, papéis corporativos e
-                atribuição de privilégios de auditoria e execução.
-              </p>
             </div>
             <div
               className={styles.containerBotao}

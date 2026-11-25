@@ -98,6 +98,34 @@
     text-align: center;
 }
 
+/* 2.1 Colunas Gerenciamento de Projetos */
+.celulaProjeto {
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-corpo);
+    font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
+    color: #2D3133;
+    text-align: left !important;
+}
+
+.celulaEmpresaTexto {
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-corpo);
+    font-weight: var(--peso-normal, 400);
+    line-height: var(--lh-compacto);
+    color: #3C3F40;
+    text-align: left !important;
+}
+
+.celulaNUsuarios {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: var(--fonte-corpo);
+    font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
+    color: #475E7C;
+    text-align: center;
+}
+
 /* 3. Badges de Status Unificados */
 .badgeStatus {
     display: inline-flex;

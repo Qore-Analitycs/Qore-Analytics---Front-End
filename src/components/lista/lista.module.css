@@ -64,3 +64,18 @@
 .linhaDivisoria {
     display: none;
 }
+
+.linhaEstado td {
+    border: 1px dashed #CBD5E1 !important;
+    border-radius: 8px;
+    background-color: #F8FAFC;
+}
+
+.celulaEstado {
+    padding: 32px 16px !important;
+    text-align: center;
+    color: #64748B !important;
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-corpo);
+    line-height: var(--lh-corpo);
+}

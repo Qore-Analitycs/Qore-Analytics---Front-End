@@ -156,9 +156,6 @@ export default function CriacaoTestePage() {
             <AppLayout maxWidth="1520px" containerClassName={styles.conteudoLimitado}>
                 {/* Topo da Página */}
                 <header className={styles.topoPagina}>
-                    <p className={styles.tituloPagina}>
-                        Criação e execução de teste
-                    </p>
                     <h1 className={styles.tituloSecaoPrincipal}>
                         Criação de Teste E2E
                     </h1>

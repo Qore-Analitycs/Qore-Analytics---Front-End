@@ -84,9 +84,8 @@ const Select = ({
                     <button
                         type="button"
                         disabled={disabled}
-                        className={`${styles.selectTrigger} ${
-                            aberto ? styles.selectTriggerAberto : ""
-                        } ${classeTamanhoTrigger}`}
+                        className={`${styles.selectTrigger} ${aberto ? styles.selectTriggerAberto : ""
+                            } ${classeTamanhoTrigger}`}
                         onClick={() => setAberto(!aberto)}
                     >
                         <span
@@ -100,9 +99,8 @@ const Select = ({
                         </span>
 
                         <span
-                            className={`${styles.iconeSeta} ${
-                                aberto ? styles.iconeSetaAberto : ""
-                            }`}
+                            className={`${styles.iconeSeta} ${aberto ? styles.iconeSetaAberto : ""
+                                }`}
                         >
                             <FontAwesomeIcon icon={faChevronDown} />
                         </span>
@@ -113,16 +111,15 @@ const Select = ({
                         <ul className={styles.dropdownLista}>
                             {opcoes.map((opcao) => {
                                 const estaSelecionada =
-                                    opcao.valor === valorInterno;
+                                    opcao.valor === valorAtual;
 
                                 return (
                                     <li
                                         key={opcao.valor}
-                                        className={`${styles.opcao} ${
-                                            estaSelecionada
+                                        className={`${styles.opcao} ${estaSelecionada
                                                 ? styles.opcaoSelecionada
                                                 : ""
-                                        } ${classeTamanhoOpcao}`}
+                                            } ${classeTamanhoOpcao}`}
                                         onClick={() =>
                                             handleSelecionar(opcao.valor)
                                         }

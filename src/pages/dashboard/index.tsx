@@ -18,17 +18,9 @@ export default function DashboardPage() {
             <AppLayout maxWidth="1520px">
                 {/* 1. Cabeçalho da Página */}
                 <header className={styles.cabecalhoPagina}>
-                    <span className={styles.categoriaMenor}>
-                        Dashboard
-                    </span>
                     <h1 className={styles.tituloPrincipal}>
                         Painel de Monitoramento
                     </h1>
-                    <p className={styles.descricaoPagina}>
-                        Repositório unificado de auditoria, execuções
-                        automatizadas (Web E2E &amp; APIs) e
-                        rastreabilidade contínua de suítes de teste.
-                    </p>
                 </header>
 
                 {/* 2. Grid Principal de Monitoramento (Coluna Esquerda 2/3 + Coluna Direita 1/3) */}

@@ -83,7 +83,6 @@ export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
         aria-labelledby="titulo-modal"
       >
         <header className={styles.cabecalho}>
-          <span className={styles.subtitulo}>Novo Usuário</span>
 
           <button
             type="button"
@@ -96,10 +95,6 @@ export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
 
           <h2 id="titulo-modal">Crie uma conta corporativa</h2>
 
-          <p>
-            Preencha os dados abaixo. O acesso é liberado com uma senha
-            provisória.
-          </p>
         </header>
 
         <form className={styles.formulario} onSubmit={handleSalvar}>
