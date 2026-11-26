@@ -84,6 +84,7 @@ export default function SideBarResponse() {
                       <i className={item.icone}/>
                     </span>
 
+                    {/*Texto de cada opção da lista*/}
                     <span className={styles.textoMenu}>
                       {item.label}
                     </span>
@@ -102,11 +103,21 @@ export default function SideBarResponse() {
               );
             })}
           </ol>
+
+          <button
+            type="button"
+            className={styles.botaoFechaMenu}
+            onClick={() => setMenuAberto(false)}
+            aria-label="Fechar menu"
+            tabIndex={menuAberto ? 0 : -1}
+            disabled={!menuAberto}
+          >
           <FontAwesomeIcon
             icon={faChevronUp}
             className={styles.iconeFimMenu}
             onClick={() => setMenuAberto(false)}
           />  
+          </button>
         </div>
         </>
   );
