@@ -36,7 +36,8 @@ export function useUsuario() {
             const novoU = await UsuarioService.cadastrar(dados);
 
             setU((antigos) => [novoU, ...antigos]);
-
+            toastSucesso("Usuário cadastrado com sucesso");
+            
             return novoU;
         } catch (error) {
             toastErro("Erro ao cadastrar usuário");

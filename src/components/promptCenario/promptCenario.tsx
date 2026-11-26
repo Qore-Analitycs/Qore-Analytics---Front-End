@@ -3,11 +3,7 @@ import Input from "../input/input";
 import Botao from "../botao/botao";
 import styles from "./promptCenario.module.css";
 import Select from "../select/select";
-
-export type OpcaoProjeto = {
-  label: string;
-  value: number | string;
-};
+import { useProjeto } from "@/hooks/useProjeto";
 
 export type DadosPromptCenario = {
   projetoId: number;
@@ -21,7 +17,6 @@ export type DadosPromptCenario = {
 export type PromptCenarioProps = {
   titulo?: string;
   textoBotao?: string;
-  projetos?: OpcaoProjeto[]; // <-- 1. Adicionado aqui
   urlInicial?: string;
   urlAlvoInicial?: string;
   branchInicial?: string;
@@ -40,7 +35,6 @@ export type PromptCenarioProps = {
 const PromptCenario = ({
   titulo = "Prompt de Geração de Cenários",
   textoBotao = "Gerar Roteiro",
-  projetos = [], // <-- 2. Desestruturado aqui com valor padrão
   urlInicial = "",
   urlAlvoInicial = "",
   branchInicial = "",
@@ -55,12 +49,21 @@ const PromptCenario = ({
   carregando = false,
   onGerarRoteiro,
 }: PromptCenarioProps) => {
+  const { projetos, carregandoProjetos } = useProjeto();
+
   const [urlPullRequest, setUrlPullRequest] = useState(urlInicial);
   const [urlAlvo, setUrlAlvo] = useState(urlAlvoInicial);
   const [branch, setBranch] = useState(branchInicial);
   const [commit, setCommit] = useState(commitInicial);
   const [projetoId, setProjetoId] = useState<number>(projetoInicial);
   const [descricaoFluxo, setDescricaoFluxo] = useState(descricaoInicial);
+
+  // Transforma o array de Projeto[] vindo da API no formato esperado pelo Select
+  // Ajuste "p.nome" e "p.id" se os nomes dos campos em @/@types/projeto forem diferentes
+  const opcoesProjetos = projetos.map((p) => ({
+    label: p.nome,
+    value: String(p.id),
+  }));
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -111,6 +114,16 @@ const PromptCenario = ({
           </div>
 
           <div className={styles.containerInputUrl}>
+
+            <Select
+              label="Projeto"
+              placeholder={carregandoProjetos ? "Carregando..." : "Número do projeto"}
+              value={projetoId ? String(projetoId) : ""}
+              onChange={(e: any) =>
+                setProjetoId(Number(e.target ? e.target.value : e))
+            }
+              disabled={carregando || carregandoProjetos}
+            />
             <Input
               id="branch"
               label="Branch"
@@ -120,11 +133,6 @@ const PromptCenario = ({
               onChange={(e) => setBranch(e.target.value)}
               erro={erroBranch}
               disabled={carregando}
-            />
-
-            <Select
-              label="Projeto"
-              placeholder="Número do projeto"
             />
           </div>
 
