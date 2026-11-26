@@ -1,4 +1,4 @@
-export type Projeto = IProjeto[]
+export type Projeto = IProjeto;
 
 export interface IProjeto {
   id: number

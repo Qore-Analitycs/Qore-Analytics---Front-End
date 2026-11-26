@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import styles from "./sideBar.module.css";
 import ModalPerfil from "../ModalPerfil/ModalPerfil";
+import { UsuarioService } from "@/services/usuarioService";
+import { toast } from "react-toastify";
 
 export type SideBarProps = {
   expandida?: boolean;
@@ -11,6 +13,8 @@ export type SideBarProps = {
   avatarUrl?: string;
   nomeUsuario?: string;
   cargoUsuario?: string;
+  aberto?: boolean;
+  onFechar?: () => void;
 };
 
 const ITENS_NAVEGACAO = [
@@ -47,24 +51,36 @@ const ITENS_NAVEGACAO = [
 ];
 
 const obterIniciais = (nome: string) => {
-  const partes = nome.trim().split(/\s+/);
-  if (partes.length === 0) return "QA";
+  const nomeLimpo = nome.trim();
+  if (!nomeLimpo) return "QA";
+  const partes = nomeLimpo.split(/\s+/);
   if (partes.length === 1) return partes[0].slice(0, 2).toUpperCase();
   return `${partes[0][0]}${partes[partes.length - 1][0]}`.toUpperCase();
+};
+
+const formatarCargo = (cargo: unknown): string => {
+  if (!cargo) return "";
+  if (typeof cargo === "object" && "nome" in cargo) {
+    return String((cargo as { nome?: string }).nome || "");
+  }
+  return String(cargo);
 };
 
 export default function SideBar({
   expandida,
   onExpandidaChange,
   avatarUrl,
-  nomeUsuario = "Marina Silva",
-  cargoUsuario = "QA Lead",
+  nomeUsuario = "",
+  cargoUsuario = "",
 }: SideBarProps) {
   const router = useRouter();
   const [expandidaInterna, setExpandidaInterna] = useState(false);
   const [fixada, setFixada] = useState(false);
-
+  const [nome, setNome] = useState<string>(nomeUsuario);
+  const [cargo, setCargo] = useState<string>(cargoUsuario);
+  const [pathFoto, setPathFoto] = useState<string | null>(avatarUrl || null);
   const [modalAberto, setModalAberto] = useState(false);
+  const [carregando, setCarregando] = useState(false);
 
   const estaExpandida = expandida !== undefined ? expandida : expandidaInterna;
 
@@ -92,6 +108,30 @@ export default function SideBar({
     setFixada(proximoEstado);
     definirExpandida(proximoEstado);
   };
+
+  async function getMe() {
+    try {
+      setCarregando(true);
+      const dados = await UsuarioService.getMe();
+
+      setNome(dados.nome || dados.Nome || "");
+      setCargo(formatarCargo(dados.cargo || dados.Cargo));
+      setPathFoto(dados.pathFoto || dados.PathFoto || null);
+    } catch (error) {
+      console.error(error);
+      toast.error("Erro ao carregar os dados do perfil.");
+    } finally {
+      setCarregando(false);
+    }
+  }
+
+  useEffect(() => {
+    getMe();
+  }, []);
+
+  const nomeExibicao = nome || (carregando ? "Carregando..." : "Usuário");
+  const cargoExibicao = cargo || (carregando ? "" : "Cargo não informado");
+  const fotoExibicao = pathFoto || avatarUrl;
 
   return (
     <>
@@ -161,37 +201,43 @@ export default function SideBar({
           </nav>
         </div>
 
-        <div className={styles.containerPerfil} onClick={() => setModalAberto(true)}>
+        <div
+          className={styles.containerPerfil}
+          onClick={() => setModalAberto(true)}
+        >
           <hr className={styles.linhaPerfil} />
           <a
             href="#perfil"
             onClick={(e) => e.preventDefault()}
             className={styles.perfilLink}
-            title={!estaExpandida ? nomeUsuario : undefined}
+            title={!estaExpandida ? nomeExibicao : undefined}
           >
             <div className={styles.perfil}>
-              {avatarUrl ? (
+              {fotoExibicao ? (
                 <img
-                  src={avatarUrl}
-                  alt={nomeUsuario}
+                  src={fotoExibicao}
+                  alt={nomeExibicao}
                   className={styles.avatarImg}
                 />
               ) : (
                 <span className={styles.avatarFallback} aria-hidden="true">
-                  {obterIniciais(nomeUsuario)}
+                  {obterIniciais(nome)}
                 </span>
               )}
             </div>
             <div className={styles.informacoesPerfil}>
-              <span className={styles.nomePerfil}>{nomeUsuario}</span>
-              <span className={styles.cargoPerfil}>{cargoUsuario}</span>
+              <span className={styles.nomePerfil}>{nomeExibicao}</span>
+              <span className={styles.cargoPerfil}>{cargoExibicao}</span>
             </div>
           </a>
         </div>
       </aside>
       <ModalPerfil
         aberto={modalAberto}
-        onFechar={() => setModalAberto(false)}
+        onFechar={() => {
+          setModalAberto(false);
+          getMe();
+        }}
       />
     </>
   );

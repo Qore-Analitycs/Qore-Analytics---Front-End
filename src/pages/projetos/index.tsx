@@ -3,43 +3,11 @@ import Head from "next/head";
 import AppLayout from "@/components/layout/AppLayout";
 import Botao from "@/components/botao/botao";
 import FiltroPesquisa from "@/components/filtroPesquisa/filtroPesquisa";
-import Lista from "@/components/lista/lista";
-// import ModalCriarProjeto from "@/components/modalCriarProjeto/ModalCriarProjeto";
-import { toastSucesso } from "@/utils/toast";
-// import type {
-//   CriarProjetoPayload,
-//   DadosFiltroProjetos,
-//   OpcaoEmpresaProjeto,
-//   ProjetoItem,
-// } from "@/@types/projeto";
 import styles from "./projetos.module.css";
-import { useProjeto } from "@/hooks/useProjeto";
+import Lista from "@/components/lista/lista";
 
 export default function GerenciamentoProjetos() {
-  // const [projetos, setProjetos] = useState<ProjetoItem[]>(PROJETOS_INICIAIS);
   const [modalAberto, setModalAberto] = useState(false);
-  // const [filtrosRascunho, setFiltrosRascunho] =
-    // useState<DadosFiltroProjetos>(FILTROS_INICIAIS);
-  // const [filtrosAplicados, setFiltrosAplicados] =
-    // useState<DadosFiltroProjetos>(FILTROS_INICIAIS);
-
-  const {projetos, carregandoProjetos} = useProjeto()
-
-  // const handleCriarProjeto = (dados: CriarProjetoPayload) => {
-  //   const novoProjeto: ProjetoItem = {
-  //     id: `proj-${Date.now()}`,
-  //     projeto: dados.projeto,
-  //     empresa: dados.empresa,
-  //     nUsuarios: dados.nUsuarios ?? 0,
-  //     status: dados.status ?? "Ativo",
-  //   };
-
-  //   setProjetos((prev) => [novoProjeto, ...prev]);
-  //   setFiltrosRascunho(FILTROS_INICIAIS);
-  //   setFiltrosAplicados(FILTROS_INICIAIS);
-  //   setModalAberto(false);
-  //   toastSucesso(`Projeto "${dados.projeto}" criado com sucesso!`);
-  // }
 
   return (
     <>
@@ -70,9 +38,7 @@ export default function GerenciamentoProjetos() {
           />
 
           <Lista
-            variant="projetos"
-            projetos={projetos}
-            emptyMessage="Nenhum projeto encontrado para os filtros aplicados."
+            page="projetos"
           />
         </AppLayout>
       </main>
