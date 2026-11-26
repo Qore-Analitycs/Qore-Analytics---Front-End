@@ -12,27 +12,24 @@ import SelecoesCargos from "../selecaoCargo/selecoesCargo";
 import { useUsuario } from "@/hooks/useUsuario";
 import { toastErro, toastSucesso } from "@/utils/toast";
 import { CriarUsuario } from "@/@types/usuario";
-import Select, { OpcaoSelect } from "../select/select";
+import Select from "../select/select";
+import { useEmpresa } from "@/hooks/useEmpresa";
 
 interface ModalUsuarioProps {
   aberto: boolean;
   onFechar: () => void;
 }
 
-const EMPRESAS_MOCK: OpcaoSelect[] = [
-  { valor: "alfaSolucoes", texto: "Alfa Soluções" },
-  { valor: "betaSistemas", texto: "Beta Sistemas" },
-  { valor: "gamaTecnologia", texto: "Gama Tecnologia" },
-];
-
 export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
   const { cadastrarU } = useUsuario();
+  const { empresa } = useEmpresa();
+
   const [nomeUsuario, setNomeUsuario] = useState<string>("");
-  const [empresa, setEmpresa] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
   const [cargoSelecionado, setCargoSelecionado] = useState<number>();
   const [enviando, setEnviando] = useState<boolean>(false);
+  const [empresaSelecionado, setEmpresaSelecionado] = useState<number>();
 
   if (!aberto) {
     return null;
@@ -45,7 +42,7 @@ export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
     if (
       !nomeUsuario.trim() ||
       !email.trim() ||
-      !empresa.trim() ||
+      empresaSelecionado === undefined ||
       !senha.trim() ||
       !cargoSelecionado
     ) {
@@ -56,7 +53,7 @@ export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
     const novoU: CriarUsuario = {
       nome: nomeUsuario.trim(),
       email: email.trim(),
-      empresa,
+      empresa: empresaSelecionado,
       senha,
       perfilId: cargoSelecionado,
     };
@@ -69,7 +66,7 @@ export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
       toastSucesso("Cadastro de Usuário realizado com sucesso");
       setNomeUsuario("");
       setEmail("");
-      setEmpresa("");
+      setEmpresaSelecionado(undefined);
       setCargoSelecionado(undefined);
       setSenha("");
     }
@@ -132,17 +129,24 @@ export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
               label="Empresa"
               placeholder="Selecione uma empresa"
               icone={faBuilding}
-              opcoes={EMPRESAS_MOCK}
-              value={empresa}
-              onChange={(valor) => setEmpresa(valor)}
+              opcoes={empresa.map((item) => ({
+                valor: String(item.id),
+                texto: item.value,
+              }))}
+              value={
+                empresaSelecionado !== undefined
+                  ? String(empresaSelecionado)
+                  : ""
+              }
+              onChange={(valor) => {
+                setEmpresaSelecionado(valor !== "" ? Number(valor) : undefined);
+              }}
               disabled={enviando}
             />
           </div>
 
           <SelecoesCargos
-            cargoSelecionado={
-              cargoSelecionado ? String(cargoSelecionado) : ""
-            }
+            cargoSelecionado={cargoSelecionado ? String(cargoSelecionado) : ""}
             onSelect={(id) => setCargoSelecionado(Number(id))}
           />
 
