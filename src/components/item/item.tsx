@@ -62,6 +62,14 @@ const formatarCargo = (cargo: unknown): string => {
   return String(cargo);
 };
 
+const formatarEmpresa = (empresa?: Usuario["empresa"]): string => {
+  if (!empresa) return "Empresa Matriz";
+  if (typeof empresa === "object" && "nome" in empresa) {
+    return empresa.nome?.trim() || "Empresa Matriz";
+  }
+  return String(empresa);
+};
+
 const Item = (props: ItemProps) => {
   const router = useRouter();
   const page = props.page;
@@ -166,7 +174,9 @@ const Item = (props: ItemProps) => {
             </div>
           </td>
           <td className={styles.celulaCargo}>{formatarCargo(usuario.cargo)}</td>
-          <td className={styles.celulaEmpresa}>Empresa Matriz</td>
+          <td className={styles.celulaEmpresa}>
+            {formatarEmpresa(usuario.empresa)}
+          </td>
           <td>
             <span
               className={`${styles.badgeStatus} ${

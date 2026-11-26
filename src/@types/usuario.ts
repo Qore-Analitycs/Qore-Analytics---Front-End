@@ -4,13 +4,36 @@ export type Cargo = {
   nome: string;
 };
 
+export type EmpresaUsuario = {
+  id: number;
+  nome: string;
+};
+
 export type Usuario = {
   id: string;
   nome: string;
   email: string;
   ativo: boolean;
   cargo: Cargo | null;
+  empresa?: EmpresaUsuario | string | null;
   imagem: string;
+};
+
+/**
+ * Filtros aceitos pelo endpoint GET /api/usuarios.
+ */
+export type FiltrosUsuario = {
+  nome?: string;
+  cargo?: number;
+  status?: boolean;
+  empresa?: number;
+};
+
+/**
+ * Estrutura de resposta retornada por GET /api/usuarios.
+ */
+export type RespostaListaUsuarios = {
+  itens: Usuario[];
 };
 export type CriarUsuario = {
     nome: string;

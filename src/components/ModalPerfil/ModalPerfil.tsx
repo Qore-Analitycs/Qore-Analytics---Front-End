@@ -20,7 +20,10 @@ interface ModalPerfilProps {
 
 export default function ModalPerfil({ aberto, onFechar }: ModalPerfilProps) {
   const router = useRouter();
-  const { atualizarU } = useUsuario();
+  const { atualizarU } = useUsuario({
+    carregarAutomaticamente: false,
+    buscarPerfilLogado: false,
+  });
 
   const [usuarioId, setUsuarioId] = useState("");
   const [nome, setNome] = useState<string>("");

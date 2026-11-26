@@ -1,16 +1,114 @@
-import { AtualizarUsuario, CriarUsuario, Usuario } from "@/@types/usuario";
+import {
+    AtualizarUsuario,
+    CriarUsuario,
+    FiltrosUsuario,
+    RespostaListaUsuarios,
+    Usuario,
+} from "@/@types/usuario";
 import { api } from "@/services/api";
 import { toastErro } from "@/utils/toast";
 
-type RespostaListaUsuarios = {
-    itens: Usuario[];
+export type FiltrosUsuarioFormulario = {
+    busca?: string;
+    cargo?: string;
+    status?: string;
+    empresa?: string;
+};
+
+const parseInteiroPositivo = (valor?: string): number | undefined => {
+    if (!valor) return undefined;
+    const limpo = valor.trim();
+    if (!limpo) return undefined;
+    const numero = Number(limpo);
+    return Number.isInteger(numero) && numero > 0 ? numero : undefined;
+};
+
+const parseStatusBooleano = (valor?: string): boolean | undefined => {
+    if (!valor) return undefined;
+    const normalizado = valor.trim().toLowerCase();
+    if (normalizado === "ativo" || normalizado === "true") return true;
+    if (normalizado === "inativo" || normalizado === "false") return false;
+    return undefined;
+};
+
+/**
+ * Converte os valores em string coletados pelo FiltroPesquisa para os tipos
+ * esperados por GET /api/usuarios, omitindo opções padrão ou vazias.
+ */
+export function converterFiltrosUsuarioParaApi(
+    filtros: FiltrosUsuarioFormulario
+): FiltrosUsuario {
+    const nomeLimpo = filtros.busca?.trim();
+    const cargoId =
+        filtros.cargo && filtros.cargo !== "todos"
+            ? parseInteiroPositivo(filtros.cargo)
+            : undefined;
+    const statusBool = parseStatusBooleano(filtros.status);
+    const empresaId =
+        filtros.empresa && filtros.empresa !== "nenhuma"
+            ? parseInteiroPositivo(filtros.empresa)
+            : undefined;
+
+    return {
+        ...(nomeLimpo ? { nome: nomeLimpo } : {}),
+        ...(cargoId !== undefined ? { cargo: cargoId } : {}),
+        ...(statusBool !== undefined ? { status: statusBool } : {}),
+        ...(empresaId !== undefined ? { empresa: empresaId } : {}),
+    };
+}
+
+/**
+ * Monta apenas os query params válidos de filtro para GET /api/usuarios,
+ * omitindo chaves com valor undefined ou inválido.
+ */
+const montarQueryUsuarios = (
+    filtros?: FiltrosUsuario
+): Record<string, string | number | boolean> => {
+    if (!filtros) return {};
+
+    const query: Record<string, string | number | boolean> = {};
+
+    const nomeLimpo = filtros.nome?.trim();
+    if (nomeLimpo) {
+        query.nome = nomeLimpo;
+    }
+
+    if (
+        typeof filtros.cargo === "number" &&
+        Number.isInteger(filtros.cargo) &&
+        filtros.cargo > 0
+    ) {
+        query.cargo = filtros.cargo;
+    }
+
+    if (typeof filtros.status === "boolean") {
+        query.status = filtros.status;
+    }
+
+    if (
+        typeof filtros.empresa === "number" &&
+        Number.isInteger(filtros.empresa) &&
+        filtros.empresa > 0
+    ) {
+        query.empresa = filtros.empresa;
+    }
+
+    return query;
 };
 
 export const UsuarioService = {
-    async listar(): Promise<Usuario[]> {
-        const resposta = await api.get<RespostaListaUsuarios>("usuarios");
+    async listar(filtros?: FiltrosUsuario): Promise<Usuario[]> {
+        const query = montarQueryUsuarios(filtros);
+        const resposta = await api.get<RespostaListaUsuarios | Usuario[]>(
+            "usuarios",
+            { params: query }
+        );
 
-        return resposta.data.itens;
+        if (Array.isArray(resposta.data)) {
+            return resposta.data;
+        }
+
+        return Array.isArray(resposta.data?.itens) ? resposta.data.itens : [];
     },
 
     async cadastrar(dados: CriarUsuario): Promise<Usuario> {

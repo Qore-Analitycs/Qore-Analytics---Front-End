@@ -26,10 +26,12 @@ export type ListaHistoricoProps = {
 export type ListaUsuariosProps = {
   page: "usuarioPermissoes";
   variant?: never;
+  usuarios?: Usuario[];
+  carregando?: boolean;
+  emptyMessage?: string;
   itensHistorico?: never;
   projetos?: never;
   isLoading?: never;
-  emptyMessage?: never;
   onProjetoClick?: never;
 };
 
@@ -99,54 +101,24 @@ const ITENS_HISTORICO_PADRAO: ItemHistorico[] = [
   },
 ];
 
-const USUARIOS_PADRAO: Usuario[] = [
-  {
-    id: "usr-1",
-    nome: "Marina Silva",
-    email: "marina.silva@qore.io",
-    cargo: { id: 1, nome: "QA Lead" },
-    ativo: true,
-    imagem: "",
-  },
-  {
-    id: "usr-2",
-    nome: "Allan Barbosa",
-    email: "allan.barbosa@qore.io",
-    cargo: { id: 2, nome: "Tech Lead" },
-    ativo: true,
-    imagem: "",
-  },
-  {
-    id: "usr-3",
-    nome: "Raphael Oliveira",
-    email: "raphael.dev@qore.io",
-    cargo: { id: 3, nome: "Desenvolvedor" },
-    ativo: true,
-    imagem: "",
-  },
-  {
-    id: "usr-4",
-    nome: "Lucas Andrade",
-    email: "lucas.andrade@qore.io",
-    cargo: { id: 4, nome: "Engenheiro de QA" },
-    ativo: true,
-    imagem: "",
-  },
-  {
-    id: "usr-5",
-    nome: "Beatriz Santos",
-    email: "beatriz.santos@qore.io",
-    cargo: { id: 3, nome: "Desenvolvedor" },
-    ativo: false,
-    imagem: "",
-  },
-];
-
 export default function Lista(props: ListaProps) {
-  const { u } = useUsuario();
+  const usaHookInternoUsuarios =
+    props.page === "usuarioPermissoes" && props.usuarios === undefined;
+
+  const { u: usuariosInternos, carregando: carregandoInterno } = useUsuario({
+    carregarAutomaticamente: usaHookInternoUsuarios,
+    buscarPerfilLogado: false,
+  });
 
   const listaUsuarios =
-    u && u.length > 0 ? u : USUARIOS_PADRAO;
+    props.page === "usuarioPermissoes" && props.usuarios !== undefined
+      ? props.usuarios
+      : usuariosInternos;
+
+  const carregandoUsuarios =
+    props.page === "usuarioPermissoes"
+      ? props.carregando ?? (usaHookInternoUsuarios ? carregandoInterno : false)
+      : false;
 
   const itensHistorico =
     props.page === "listaHistorico"
@@ -201,13 +173,28 @@ export default function Lista(props: ListaProps) {
               </thead>
 
               <tbody>
-                {u.map((usuario) => (
-                  <Item
-                    key={usuario.id}
-                    page="usuarioPermissoes"
-                    usuario={usuario}
-                  />
-                ))}
+                {carregandoUsuarios ? (
+                  <tr className={styles.linhaEstado}>
+                    <td colSpan={4} className={styles.celulaEstado}>
+                      Carregando usuários...
+                    </td>
+                  </tr>
+                ) : listaUsuarios.length === 0 ? (
+                  <tr className={styles.linhaEstado}>
+                    <td colSpan={4} className={styles.celulaEstado}>
+                      {props.emptyMessage ??
+                        "Nenhum usuário encontrado para os filtros aplicados."}
+                    </td>
+                  </tr>
+                ) : (
+                  listaUsuarios.map((usuario) => (
+                    <Item
+                      key={usuario.id}
+                      page="usuarioPermissoes"
+                      usuario={usuario}
+                    />
+                  ))
+                )}
               </tbody>
             </table>
           </div>

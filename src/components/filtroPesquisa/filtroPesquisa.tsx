@@ -95,9 +95,9 @@ const OPCOES_RESPONSAVEL_PADRAO: OpcaoSelect[] = [
 
 const OPCOES_CARGO_PADRAO: OpcaoSelect[] = [
     { valor: "todos", texto: "Todos os Cargos" },
-    { valor: "techlead", texto: "Tech Lead" },
-    { valor: "dev", texto: "Desenvolvedor" },
-    { valor: "qa", texto: "QA" },
+    { valor: "3", texto: "Admin" },
+    { valor: "1", texto: "Desenvolvedor" },
+    { valor: "2", texto: "QA" },
 ];
 
 const OPCOES_EMPRESA_PADRAO: OpcaoSelect[] = [

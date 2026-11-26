@@ -17,6 +17,7 @@ import Select, { OpcaoSelect } from "../select/select";
 interface ModalUsuarioProps {
   aberto: boolean;
   onFechar: () => void;
+  onUsuarioCriado?: () => void;
 }
 
 const EMPRESAS_MOCK: OpcaoSelect[] = [
@@ -25,8 +26,15 @@ const EMPRESAS_MOCK: OpcaoSelect[] = [
   { valor: "gamaTecnologia", texto: "Gama Tecnologia" },
 ];
 
-export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
-  const { cadastrarU } = useUsuario();
+export default function ModalUsuario({
+  aberto,
+  onFechar,
+  onUsuarioCriado,
+}: ModalUsuarioProps) {
+  const { cadastrarU } = useUsuario({
+    carregarAutomaticamente: false,
+    buscarPerfilLogado: false,
+  });
   const [nomeUsuario, setNomeUsuario] = useState<string>("");
   const [empresa, setEmpresa] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -72,6 +80,7 @@ export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
       setEmpresa("");
       setCargoSelecionado(undefined);
       setSenha("");
+      onUsuarioCriado?.();
     }
   }
 
