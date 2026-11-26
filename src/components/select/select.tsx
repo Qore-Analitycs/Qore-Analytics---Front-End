@@ -96,6 +96,8 @@ const Select = ({
     const classeTamanhoContainer = ehCompacto ? styles.containerCompacto : "";
     const classeTamanhoLabel = ehCompacto ? styles.labelCompacto : "";
 
+    const errorId = erro ? `${triggerId}-erro` : undefined;
+
     return (
         <div
             className={`${styles.container} ${classeTamanhoContainer} ${className}`.trim()}
@@ -119,6 +121,7 @@ const Select = ({
                     aria-haspopup="listbox"
                     aria-expanded={aberto}
                     aria-controls={listboxId}
+                    aria-describedby={errorId}
                     className={`${styles.selectTrigger} ${
                         aberto ? styles.selectTriggerAberto : ""
                     } ${erro ? styles.selectErro : ""} ${classeTamanhoTrigger}`}
@@ -131,15 +134,6 @@ const Select = ({
                             </span>
                         )}
 
-                <div className={styles.selectWrapper} ref={wrapperRef}>
-                    {/* Botão principal do Select */}
-                    <button
-                        type="button"
-                        disabled={disabled}
-                        className={`${styles.selectTrigger} ${aberto ? styles.selectTriggerAberto : ""
-                            } ${classeTamanhoTrigger}`}
-                        onClick={() => setAberto(!aberto)}
-                    >
                         <span
                             className={
                                 opcaoAtual
@@ -151,42 +145,54 @@ const Select = ({
                         </span>
                     </span>
 
-                        <span
-                            className={`${styles.iconeSeta} ${aberto ? styles.iconeSetaAberto : ""
-                                }`}
-                        >
-                            <FontAwesomeIcon icon={faChevronDown} />
-                        </span>
-                    </button>
+                    <span
+                        className={`${styles.iconeSeta} ${
+                            aberto ? styles.iconeSetaAberto : ""
+                        }`}
+                        aria-hidden="true"
+                    >
+                        <FontAwesomeIcon icon={faChevronDown} />
+                    </span>
+                </button>
 
-                    {/* Lista do Dropdown colada e 100% alinhada embaixo */}
-                    {aberto && (
-                        <ul className={styles.dropdownLista}>
-                            {opcoes.map((opcao) => {
-                                const estaSelecionada =
-                                    opcao.valor === valorAtual;
+                {/* Lista do Dropdown colada e 100% alinhada embaixo */}
+                {aberto && (
+                    <ul
+                        id={listboxId}
+                        role="listbox"
+                        aria-labelledby={triggerId}
+                        className={styles.dropdownLista}
+                    >
+                        {opcoes.map((opcao) => {
+                            const estaSelecionada = opcao.valor === valorAtual;
 
-                                return (
-                                    <li
-                                        key={opcao.valor}
-                                        className={`${styles.opcao} ${estaSelecionada
-                                                ? styles.opcaoSelecionada
-                                                : ""
-                                            } ${classeTamanhoOpcao}`}
-                                        onClick={() =>
-                                            handleSelecionar(opcao.valor)
-                                        }
-                                    >
-                                        {opcao.texto}
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                    )}
-                </div>
+                            return (
+                                <li
+                                    key={opcao.valor}
+                                    role="option"
+                                    aria-selected={estaSelecionada}
+                                    className={`${styles.opcao} ${
+                                        estaSelecionada
+                                            ? styles.opcaoSelecionada
+                                            : ""
+                                    } ${classeTamanhoOpcao}`}
+                                    onClick={() =>
+                                        handleSelecionar(opcao.valor)
+                                    }
+                                >
+                                    {opcao.texto}
+                                </li>
+                            );
+                        })}
+                    </ul>
+                )}
             </div>
 
-            {erro && <span className={styles.mensagemErro}>{erro}</span>}
+            {erro && (
+                <span id={errorId} className={styles.mensagemErro}>
+                    {erro}
+                </span>
+            )}
         </div>
     );
 };
