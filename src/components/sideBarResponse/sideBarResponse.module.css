@@ -35,6 +35,8 @@
   
 
   /* flex-shrink: 0; */
+
+  cursor: pointer;
 }
 
 .iconeMenu {
@@ -44,21 +46,32 @@
 
 .barraLaranja {
   width: 100%;
-  min-height: 230px;
   background-color: #2D3133;
   display: flex;
-  flex-direction: column; /* Mudei para deixar a lista em cima */
-  align-items: center;    
-  gap: 20px;             
-  padding: 24px 20px;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 0 20px;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
   box-sizing: border-box;
+  transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.35s ease;
+}
+
+.barraAberta {
+  max-height: 400px;
+  opacity: 1;
+  padding: 24px 20px;
+  pointer-events: auto;
 }
 
 .listaMenu {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 16px; /* Espaço entre cada linha */
+  gap: 16px; /* Espaço entre cada linha do menu em cima quando fica responsivo */
   color: var(--branco, #FFFFFF);
   font-size: var(--fonte-padrao, 16px);
   font-weight: var(--peso-semibold, 600);
@@ -68,9 +81,26 @@
   cursor: pointer;
 }
 
-.iconeAbaixoLista {
+.iconeFimMenu {
   color: var(--branco, #FFFFFF);
   font-size: var(--fonte-pequena, 12px);
   opacity: 0.9;
   text-align: center;
+}
+
+.botaoMenu {
+  cursor: pointer;
+}
+
+.iconeCoberto {
+  width: 24px;
+  font-size: 19px;
+  color: #FFFFFF;
+  margin: 10px;
+}
+
+/* Estiliza o texto */
+.textoMenu {
+  color: #FFFFFF;
+  font-size: 16px;
 }

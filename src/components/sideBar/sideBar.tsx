@@ -4,7 +4,10 @@ import { useRouter } from "next/router";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import styles from "./sideBar.module.css";
 
-export type SideBarProps = {
+//Molde para implementar o menu hamburguer responsivo
+//Falta icones e reestruturar texto no menu hamburguer responsivo
+//Info q componente recebe --> props. Escolhas da construcao
+export type SideBarProps = { 
     expandida?: boolean;
     onExpandidaChange?: (expandida: boolean) => void;
     avatarUrl?: string;
@@ -12,6 +15,8 @@ export type SideBarProps = {
     cargoUsuario?: string;
 };
 
+//Lista de info para padronizaÇao
+//Aqui tao os dados que vao ser usados no map
 const ITENS_NAVEGACAO = [
     {
         id: "painel",
@@ -39,6 +44,7 @@ const ITENS_NAVEGACAO = [
     },
 ];
 
+//Funçao que mexe nas iniciais do usuario
 const obterIniciais = (nome: string) => {
     const partes = nome.trim().split(/\s+/);
     if (partes.length === 0) return "QA";
@@ -46,6 +52,9 @@ const obterIniciais = (nome: string) => {
     return `${partes[0][0]}${partes[partes.length - 1][0]}`.toUpperCase();
 };
 
+//****** * Componente SIDEBAR********************
+//      Aqui recebe os PROPS, inicio da consturcao do sidebar
+//********************************************** */ 
 export default function SideBar({
     expandida,
     onExpandidaChange,

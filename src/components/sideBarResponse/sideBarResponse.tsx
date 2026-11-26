@@ -6,7 +6,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import styles from "./sideBarResponse.module.css";
 
-import { faBars, faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faCheck, faTrash, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ITENS_NAVEGACAO = [
@@ -14,21 +14,25 @@ const ITENS_NAVEGACAO = [
     id: "painel",
     label: "Painel",
     href: "/dashboard",
+    icone: "fa-solid fa-chart-line",
   },
   {
     id: "criacaoDeTeste",
     label: "Criar Teste",
     href: "/criacaoDeTeste",
+    icone: "fa-solid fa-clipboard",
   },
   {
     id: "historico",
     label: "Histórico",
     href: "/historico",
+    icone: "fa-solid fa-list",
   },
   {
     id: "usuarioPermissoes",
     label: "Usuário",
     href: "/usuarioPermissoes",
+    icone: "fa-solid fa-users",
   },
 ];
 
@@ -43,6 +47,7 @@ export default function SideBarResponse() {
           <button
             type="button"
             aria-label="Alternar barra"
+            className={styles.botaoMenu}
             onClick={() => setMenuAberto((estadoAtual) => !estadoAtual)}
           >
             <FontAwesomeIcon icon={faBars} className={styles.iconeMenu} />
@@ -54,7 +59,59 @@ export default function SideBarResponse() {
         </div>
       </div>
 
-        {menuAberto && (
+        <div
+          className={`${styles.barraLaranja} ${
+            menuAberto ? styles.barraAberta : ""
+          }`}
+          aria-hidden={!menuAberto}
+        >
+          <ol className={styles.listaMenu}>
+            {ITENS_NAVEGACAO.map((item) => {
+              const ehAtivo = router.pathname === item.href;
+
+              return (
+                <li key={item.id} className={styles.itemMenu}>
+                  <Link
+                    href={item.href}
+                    tabIndex={menuAberto ? 0 : -1}
+                    onClick={() => setMenuAberto(false)}
+                    className={`${styles.listMenu} ${
+                      ehAtivo ? styles.linkAtivo : ""
+                    }`}
+                  >
+                    {/*Adicionei isto, este bloco que corrige a exibiçao dos icones*/}
+                    <span className={styles.iconeCoberto} aria-hidden="true">
+                      <i className={item.icone}/>
+                    </span>
+
+                    <span className={styles.textoMenu}>
+                      {item.label}
+                    </span>
+                  </Link>
+                  {/* <Link
+                    href={item.href}
+                    tabIndex={menuAberto ? 0 : -1}
+                    onClick={() => setMenuAberto(false)}
+                    className={`${styles.linkMenu} ${
+                      ehAtivo ? styles.linkAtivo : ""
+                    }`}
+                  >
+                    {item.label}
+                  </Link> */}
+                </li>
+              );
+            })}
+          </ol>
+          <FontAwesomeIcon
+            icon={faChevronUp}
+            className={styles.iconeFimMenu}
+            onClick={() => setMenuAberto(false)}
+          />  
+        </div>
+        </>
+  );
+}
+        {/* {menuAberto && (
           <div className={styles.barraLaranja}>
             <ol className={styles.listaMenu}>
               {ITENS_NAVEGACAO.map((item) => {
@@ -75,19 +132,14 @@ export default function SideBarResponse() {
               );
             })}
             </ol>
-            <p className={styles.iconeAbaixoLista}>
-            A
-          </p>
-          </div>
-        // <div className={styles.barraLaranja}>
+            <FontAwesomeIcon icon={faChevronUp} className={styles.iconeFimMenu} />
+          </div> */}
+
+        {/* // <div className={styles.barraLaranja}>
         //   <ol className={styles.listaMenu}>
         //     <li className={styles.itemMenu}>Painel</li>
         //     <li className={styles.itemMenu}>Criar Teste</li>
         //     <li className={styles.itemMenu}>Historico</li>
         //     <li className={styles.itemMenu}>Usuario</li>
         //   </ol>
-        // </div>
-      )}
-    </>
-  );
-}
+        // </div> */}
