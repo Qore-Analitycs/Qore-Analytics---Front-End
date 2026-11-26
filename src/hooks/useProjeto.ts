@@ -27,6 +27,5 @@ export function useProjeto() {
     return {
         projetos,
         carregandoProjetos,
-        listarProjetos,
     };
 }
