@@ -124,46 +124,48 @@ export default function EmpresasPage() {
   };
 
   return (
-    <AppLayout maxWidth="1520px" containerClassName={styles.container}>
-      <main className={modalAberto ? styles.mainBlur : undefined}>
-        <header className={styles.cabecalho}>
-          <h1 className={styles.titulo}>Gerenciamento de Empresa</h1>
+    <>
+      <div className={modalAberto ? styles.mainBlur : undefined}>
+        <AppLayout maxWidth="1520px" containerClassName={styles.container}>
+          <header className={styles.cabecalho}>
+            <h1 className={styles.titulo}>Gerenciamento de Empresa</h1>
 
-          <div className={styles.containerBotao}>
-            <Botao
-              variante="laranja"
-              tamanho="compacto"
-              aria-label="Criar novo Empresa"
-              onPress={() => {
-                setErroCriacao(null);
-                setModalAberto(true);
-              }}
-            >
-              <span className={styles.conteudoBotaoCriar}>
-                <span aria-hidden="true">+</span>
-                <span>Criar novo Empresa</span>
-              </span>
-            </Botao>
+            <div className={styles.containerBotao}>
+              <Botao
+                variante="laranja"
+                tamanho="compacto"
+                aria-label="Criar novo Empresa"
+                onPress={() => {
+                  setErroCriacao(null);
+                  setModalAberto(true);
+                }}
+              >
+                <span className={styles.conteudoBotaoCriar}>
+                  <span aria-hidden="true">+</span>
+                  <span>Criar novo Empresa</span>
+                </span>
+              </Botao>
+            </div>
+          </header>
+
+          <div className={styles.conteudo}>
+            <FiltroPesquisa
+              variant="empresas"
+              buscaRapida={filtrosDigitados.buscaRapida}
+              status={filtrosDigitados.status}
+              opcoesStatus={OPCOES_STATUS_EMPRESA}
+              onChange={handleAlterarFiltros}
+              onSearch={setFiltrosAplicados}
+            />
+
+            <Lista
+              page="empresas"
+              empresas={empresasFiltradas}
+              emptyMessage="Nenhuma empresa encontrada para os filtros informados."
+            />
           </div>
-        </header>
-
-        <div className={styles.conteudo}>
-          <FiltroPesquisa
-            variant="empresas"
-            buscaRapida={filtrosDigitados.buscaRapida}
-            status={filtrosDigitados.status}
-            opcoesStatus={OPCOES_STATUS_EMPRESA}
-            onChange={handleAlterarFiltros}
-            onSearch={setFiltrosAplicados}
-          />
-
-          <Lista
-            page="empresas"
-            empresas={empresasFiltradas}
-            emptyMessage="Nenhuma empresa encontrada para os filtros informados."
-          />
-        </div>
-      </main>
+        </AppLayout>
+      </div>
 
       <ModalCriarEmpresa
         isOpen={modalAberto}
@@ -174,6 +176,6 @@ export default function EmpresasPage() {
         onCreate={handleCriarEmpresa}
         errorMessage={erroCriacao}
       />
-    </AppLayout>
+    </>
   );
 }

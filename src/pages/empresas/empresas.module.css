@@ -1,7 +1,9 @@
 .container {
+  width: 100%;
+  max-width: 1520px;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  gap: 28px;
 }
 
 .mainBlur {
@@ -15,15 +17,17 @@
   justify-content: space-between;
   align-items: center;
   gap: 24px;
-  margin-bottom: 24px;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 .titulo {
+  font-family: "Montserrat", sans-serif;
+  font-size: var(--fonte-titulo);
+  font-weight: var(--peso-bold, 700);
+  line-height: var(--lh-justo);
+  color: #2D3133;
   margin: 0;
-  font-size: var(--fonte-titulo-secao);
-  line-height: var(--lh-titulo);
-  font-weight: var(--peso-bold);
-  color: var(--cinza-escuro);
 }
 
 .containerBotao {
@@ -41,7 +45,7 @@
 .conteudo {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 28px;
   width: 100%;
 }
 
