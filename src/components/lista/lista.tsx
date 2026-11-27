@@ -3,8 +3,13 @@ import Item, { ItemHistorico } from "../item/item";
 import styles from "./lista.module.css";
 import { Usuario } from "@/@types/usuario";
 import type { ColunaTabelaProjeto, ProjetoItem } from "@/@types/projeto";
+import type { ColunaTabelaEmpresa, EmpresaItem } from "@/@types/empresa";
 
-export type ListaVariante = "listaHistorico" | "usuarioPermissoes" | "projetos";
+export type ListaVariante =
+  | "listaHistorico"
+  | "usuarioPermissoes"
+  | "projetos"
+  | "empresas";
 
 export const COLUNAS_LISTA_PROJETOS: ColunaTabelaProjeto[] = [
   { key: "projeto", label: "Projeto", align: "left" },
@@ -13,24 +18,36 @@ export const COLUNAS_LISTA_PROJETOS: ColunaTabelaProjeto[] = [
   { key: "status", label: "Status", align: "center" },
 ];
 
+export const COLUNAS_LISTA_EMPRESAS: ColunaTabelaEmpresa[] = [
+  { key: "empresa", label: "Empresa", align: "left" },
+  { key: "nProjetos", label: "N Projeto", align: "center" },
+  { key: "status", label: "Status", align: "center" },
+];
+
 export type ListaHistoricoProps = {
   page: "listaHistorico";
   variant?: never;
   itensHistorico?: ItemHistorico[];
   projetos?: never;
+  empresas?: never;
   isLoading?: never;
   emptyMessage?: never;
   onProjetoClick?: never;
+  onEmpresaClick?: never;
 };
 
 export type ListaUsuariosProps = {
   page: "usuarioPermissoes";
   variant?: never;
+  usuarios?: Usuario[];
+  carregando?: boolean;
+  emptyMessage?: string;
   itensHistorico?: never;
   projetos?: never;
+  empresas?: never;
   isLoading?: never;
-  emptyMessage?: never;
   onProjetoClick?: never;
+  onEmpresaClick?: never;
 };
 
 export type ListaProjetosProps = {
@@ -41,12 +58,37 @@ export type ListaProjetosProps = {
   emptyMessage?: string;
   onProjetoClick?: (projeto: ProjetoItem) => void;
   itensHistorico?: never;
+  empresas?: never;
+  onEmpresaClick?: never;
+};
+
+export type ListaEmpresasProps = {
+  page?: "empresas";
+  variant?: "empresas";
+  empresas: EmpresaItem[];
+  isLoading?: boolean;
+  emptyMessage?: string;
+  onEmpresaClick?: (empresa: EmpresaItem) => void;
+  itensHistorico?: never;
+  projetos?: never;
+  onProjetoClick?: never;
 };
 
 export type ListaProps =
   | ListaHistoricoProps
   | ListaUsuariosProps
-  | ListaProjetosProps;
+  | ListaProjetosProps
+  | ListaEmpresasProps;
+
+const ehListaProjetos = (props: ListaProps): props is ListaProjetosProps =>
+  props.page === "projetos" ||
+  props.variant === "projetos" ||
+  ("projetos" in props && props.projetos !== undefined);
+
+const ehListaEmpresas = (props: ListaProps): props is ListaEmpresasProps =>
+  props.page === "empresas" ||
+  props.variant === "empresas" ||
+  ("empresas" in props && props.empresas !== undefined);
 
 const ITENS_HISTORICO_PADRAO: ItemHistorico[] = [
   {
@@ -99,62 +141,86 @@ const ITENS_HISTORICO_PADRAO: ItemHistorico[] = [
   },
 ];
 
-const USUARIOS_PADRAO: Usuario[] = [
-  {
-    id: "usr-1",
-    nome: "Marina Silva",
-    email: "marina.silva@qore.io",
-    cargo: { id: 1, nome: "QA Lead" },
-    ativo: true,
-    imagem: "",
-  },
-  {
-    id: "usr-2",
-    nome: "Allan Barbosa",
-    email: "allan.barbosa@qore.io",
-    cargo: { id: 2, nome: "Tech Lead" },
-    ativo: true,
-    imagem: "",
-  },
-  {
-    id: "usr-3",
-    nome: "Raphael Oliveira",
-    email: "raphael.dev@qore.io",
-    cargo: { id: 3, nome: "Desenvolvedor" },
-    ativo: true,
-    imagem: "",
-  },
-  {
-    id: "usr-4",
-    nome: "Lucas Andrade",
-    email: "lucas.andrade@qore.io",
-    cargo: { id: 4, nome: "Engenheiro de QA" },
-    ativo: true,
-    imagem: "",
-  },
-  {
-    id: "usr-5",
-    nome: "Beatriz Santos",
-    email: "beatriz.santos@qore.io",
-    cargo: { id: 3, nome: "Desenvolvedor" },
-    ativo: false,
-    imagem: "",
-  },
-];
-
 export default function Lista(props: ListaProps) {
-  const { u } = useUsuario();
+  const usaHookInternoUsuarios =
+    props.page === "usuarioPermissoes" && props.usuarios === undefined;
+
+  const { u: usuariosInternos, carregando: carregandoInterno } = useUsuario({
+    carregarAutomaticamente: usaHookInternoUsuarios,
+    buscarPerfilLogado: false,
+  });
 
   const listaUsuarios =
-    u && u.length > 0 ? u : USUARIOS_PADRAO;
+    props.page === "usuarioPermissoes" && props.usuarios !== undefined
+      ? props.usuarios
+      : usuariosInternos;
+
+  const carregandoUsuarios =
+    props.page === "usuarioPermissoes"
+      ? props.carregando ?? (usaHookInternoUsuarios ? carregandoInterno : false)
+      : false;
 
   const itensHistorico =
     props.page === "listaHistorico"
       ? props.itensHistorico ?? ITENS_HISTORICO_PADRAO
       : ITENS_HISTORICO_PADRAO;
 
-  const ehProjetos =
-    props.page !== "listaHistorico" && props.page !== "usuarioPermissoes";
+  const renderizarTabelaCatalogo = ({
+    colunas,
+    isLoading,
+    loadingMessage,
+    emptyMessage,
+    isEmpty,
+    children,
+  }: {
+    colunas: readonly { key: string; label: string; align?: "left" | "center" }[];
+    isLoading?: boolean;
+    loadingMessage: string;
+    emptyMessage: string;
+    isEmpty: boolean;
+    children: React.ReactNode;
+  }) => (
+    <section className={styles.section}>
+      <div className={styles.tabelaWrapper}>
+        <table className={styles.tabelaLista}>
+          <thead>
+            <tr>
+              {colunas.map((coluna) => (
+                <th
+                  key={coluna.key}
+                  className={
+                    coluna.align === "left"
+                      ? styles.thAlinhadoEsquerda
+                      : undefined
+                  }
+                >
+                  {coluna.label}
+                </th>
+              ))}
+            </tr>
+          </thead>
+
+          <tbody>
+            {isLoading ? (
+              <tr className={styles.linhaEstado}>
+                <td colSpan={colunas.length} className={styles.celulaEstado}>
+                  {loadingMessage}
+                </td>
+              </tr>
+            ) : isEmpty ? (
+              <tr className={styles.linhaEstado}>
+                <td colSpan={colunas.length} className={styles.celulaEstado}>
+                  {emptyMessage}
+                </td>
+              </tr>
+            ) : (
+              children
+            )}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
 
   return (
     <>
@@ -201,67 +267,25 @@ export default function Lista(props: ListaProps) {
               </thead>
 
               <tbody>
-                {u.map((usuario) => (
-                  <Item
-                    key={usuario.id}
-                    page="usuarioPermissoes"
-                    usuario={usuario}
-                  />
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      )}
-
-      {ehProjetos && (
-        <section className={styles.section}>
-          <div className={styles.tabelaWrapper}>
-            <table className={styles.tabelaLista}>
-              <thead>
-                <tr>
-                  {COLUNAS_LISTA_PROJETOS.map((coluna) => (
-                    <th
-                      key={coluna.key}
-                      className={
-                        coluna.align === "left"
-                          ? styles.thAlinhadoEsquerda
-                          : undefined
-                      }
-                    >
-                      {coluna.label}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-
-              <tbody>
-                {props.isLoading ? (
+                {carregandoUsuarios ? (
                   <tr className={styles.linhaEstado}>
-                    <td
-                      colSpan={COLUNAS_LISTA_PROJETOS.length}
-                      className={styles.celulaEstado}
-                    >
-                      Carregando projetos...
+                    <td colSpan={4} className={styles.celulaEstado}>
+                      Carregando usuários...
                     </td>
                   </tr>
-                ) : props.projetos.length === 0 ? (
+                ) : listaUsuarios.length === 0 ? (
                   <tr className={styles.linhaEstado}>
-                    <td
-                      colSpan={COLUNAS_LISTA_PROJETOS.length}
-                      className={styles.celulaEstado}
-                    >
+                    <td colSpan={4} className={styles.celulaEstado}>
                       {props.emptyMessage ??
-                        "Nenhum projeto encontrado para os filtros selecionados."}
+                        "Nenhum usuário encontrado para os filtros aplicados."}
                     </td>
                   </tr>
                 ) : (
-                  props.projetos.map((projeto) => (
+                  listaUsuarios.map((usuario) => (
                     <Item
-                      key={projeto.id}
-                      page="projetos"
-                      itemProjeto={projeto}
-                      onClick={props.onProjetoClick}
+                      key={usuario.id}
+                      page="usuarioPermissoes"
+                      usuario={usuario}
                     />
                   ))
                 )}
@@ -270,6 +294,44 @@ export default function Lista(props: ListaProps) {
           </div>
         </section>
       )}
+
+      {ehListaProjetos(props) &&
+        renderizarTabelaCatalogo({
+          colunas: COLUNAS_LISTA_PROJETOS,
+          isLoading: props.isLoading,
+          loadingMessage: "Carregando projetos...",
+          emptyMessage:
+            props.emptyMessage ??
+            "Nenhum projeto encontrado para os filtros selecionados.",
+          isEmpty: props.projetos.length === 0,
+          children: props.projetos.map((projeto) => (
+            <Item
+              key={projeto.id}
+              page="projetos"
+              itemProjeto={projeto}
+              onClick={props.onProjetoClick}
+            />
+          )),
+        })}
+
+      {ehListaEmpresas(props) &&
+        renderizarTabelaCatalogo({
+          colunas: COLUNAS_LISTA_EMPRESAS,
+          isLoading: props.isLoading,
+          loadingMessage: "Carregando empresas...",
+          emptyMessage:
+            props.emptyMessage ??
+            "Nenhuma empresa encontrada para os filtros selecionados.",
+          isEmpty: props.empresas.length === 0,
+          children: props.empresas.map((empresa) => (
+            <Item
+              key={empresa.id}
+              page="empresas"
+              itemEmpresa={empresa}
+              onClick={props.onEmpresaClick}
+            />
+          )),
+        })}
     </>
   );
 }

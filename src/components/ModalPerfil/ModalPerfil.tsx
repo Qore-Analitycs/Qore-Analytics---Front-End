@@ -20,7 +20,10 @@ interface ModalPerfilProps {
 
 export default function ModalPerfil({ aberto, onFechar }: ModalPerfilProps) {
   const router = useRouter();
-  const { atualizarU } = useUsuario();
+  const { atualizarU } = useUsuario({
+    carregarAutomaticamente: false,
+    buscarPerfilLogado: false,
+  });
 
   const [usuarioId, setUsuarioId] = useState("");
   const [nome, setNome] = useState<string>("");
@@ -205,18 +208,20 @@ export default function ModalPerfil({ aberto, onFechar }: ModalPerfilProps) {
 
         {/* ÁREA PRINCIPAL */}
         <div className={styles.content}>
-          <button
-            type="button"
-            className={styles.fechar}
-            onClick={onFechar}
-            aria-label="Fechar modal"
-          >
-            ×
-          </button>
+          <header className={styles.cabecalho}>
+            <button
+              type="button"
+              className={styles.fechar}
+              onClick={onFechar}
+              aria-label="Fechar modal"
+            >
+              ×
+            </button>
 
-          <p className={styles.eyebrow}>Meu perfil</p>
+            <p className={styles.eyebrow}>Meu perfil</p>
 
-          <h1 id="titulo-modal">Edite seu perfil</h1>
+            <h1 id="titulo-modal">Edite seu perfil</h1>
+          </header>
 
           {/* FORMULÁRIO */}
           <form className={styles.form} onSubmit={handleSubmit} noValidate>

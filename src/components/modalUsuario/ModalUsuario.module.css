@@ -49,7 +49,7 @@
 /* Cabeçalho */
 .cabecalho {
   position: relative;
-  padding-right: 32px;
+  padding-right: 36px;
 }
 
 .subtitulo {
@@ -96,7 +96,13 @@
 }
 
 .fechar:hover {
-  color: var(--laranja, #E87A11);
+  background-color: rgba(45, 49, 51, 0.08);
+  color: var(--laranja);
+}
+
+.fechar:focus-visible {
+  outline: 2px solid var(--laranja);
+  outline-offset: 2px;
 }
 
 /* Formulário */

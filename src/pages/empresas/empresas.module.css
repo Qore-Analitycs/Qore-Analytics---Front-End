@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.mainBlur {
+  filter: blur(5px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.titulo {
+  margin: 0;
+  font-size: var(--fonte-titulo-secao);
+  line-height: var(--lh-titulo);
+  font-weight: var(--peso-bold);
+  color: var(--cinza-escuro);
+}
+
+.containerBotao {
+  flex-shrink: 0;
+  min-width: 220px;
+}
+
+.conteudoBotaoCriar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .cabecalho {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .containerBotao {
+    width: 100%;
+    min-width: 0;
+  }
+}

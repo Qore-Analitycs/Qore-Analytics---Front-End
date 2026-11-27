@@ -7,9 +7,10 @@ import type {
     DadosFiltroProjetos,
     OpcaoEmpresaProjeto,
 } from "@/@types/projeto";
+import type { DadosFiltroEmpresas } from "@/@types/empresa";
 import styles from "./filtroPesquisa.module.css";
 
-export type FiltroVariante = "padrao" | "usuarios" | "projetos";
+export type FiltroVariante = "padrao" | "usuarios" | "projetos" | "empresas";
 
 export type DadosFiltro = {
     busca: string;
@@ -66,10 +67,32 @@ export type FiltroPesquisaProjetosProps = FiltroPesquisaBaseProps & {
     opcoesResponsavel?: never;
 };
 
+/**
+ * Variação de props do FiltroPesquisa para Gerenciamento de Empresas.
+ * Exibe BUSCA RÁPIDA e STATUS + botão Buscar.
+ */
+export type FiltroPesquisaEmpresasProps = FiltroPesquisaBaseProps & {
+    variante?: "empresas";
+    variant?: "empresas";
+    context?: "empresas";
+    buscaRapida?: string;
+    status?: string;
+    onChange?: (filtros: DadosFiltroEmpresas) => void;
+    onSearch?: (filtros: DadosFiltroEmpresas) => void;
+    onBuscar?: (filtros: DadosFiltroEmpresas) => void;
+    opcoesEmpresa?: never;
+    opcoesCargo?: never;
+    opcoesTipo?: never;
+    opcoesPeriodo?: never;
+    opcoesResponsavel?: never;
+    empresa?: never;
+};
+
 export type FiltroPesquisaProps =
     | FiltroPesquisaPadraoProps
     | FiltroPesquisaUsuariosProps
-    | FiltroPesquisaProjetosProps;
+    | FiltroPesquisaProjetosProps
+    | FiltroPesquisaEmpresasProps;
 
 const OPCOES_TIPO_PADRAO: OpcaoSelect[] = [
     { valor: "todos", texto: "Todos os Tipos" },
@@ -95,9 +118,9 @@ const OPCOES_RESPONSAVEL_PADRAO: OpcaoSelect[] = [
 
 const OPCOES_CARGO_PADRAO: OpcaoSelect[] = [
     { valor: "todos", texto: "Todos os Cargos" },
-    { valor: "techlead", texto: "Tech Lead" },
-    { valor: "dev", texto: "Desenvolvedor" },
-    { valor: "qa", texto: "QA" },
+    { valor: "3", texto: "Admin" },
+    { valor: "1", texto: "Desenvolvedor" },
+    { valor: "2", texto: "QA" },
 ];
 
 const OPCOES_EMPRESA_PADRAO: OpcaoSelect[] = [
@@ -111,6 +134,13 @@ const ehFiltroProjetos = (
     props.variant === "projetos" ||
     props.context === "projetos";
 
+const ehFiltroEmpresas = (
+    props: FiltroPesquisaProps
+): props is FiltroPesquisaEmpresasProps =>
+    props.variante === "empresas" ||
+    props.variant === "empresas" ||
+    props.context === "empresas";
+
 const normalizarOpcoesEmpresa = (
     opcoes?: OpcaoEmpresaProjeto[]
 ): OpcaoSelect[] => {
@@ -123,20 +153,23 @@ const normalizarOpcoesEmpresa = (
 const FiltroPesquisa = (props: FiltroPesquisaProps) => {
     const tamanho = props.tamanho ?? "compacto";
     const ehVarianteProjetos = ehFiltroProjetos(props);
+    const ehVarianteEmpresas = ehFiltroEmpresas(props);
     const ehVarianteUsuarios =
-        !ehVarianteProjetos && props.variante === "usuarios";
+        !ehVarianteProjetos &&
+        !ehVarianteEmpresas &&
+        props.variante === "usuarios";
 
     const opcoesStatus = props.opcoesStatus ?? OPCOES_STATUS_PADRAO;
     const opcoesTipo =
-        !ehVarianteProjetos && !ehVarianteUsuarios
+        !ehVarianteProjetos && !ehVarianteEmpresas && !ehVarianteUsuarios
             ? props.opcoesTipo ?? OPCOES_TIPO_PADRAO
             : OPCOES_TIPO_PADRAO;
     const opcoesPeriodo =
-        !ehVarianteProjetos && !ehVarianteUsuarios
+        !ehVarianteProjetos && !ehVarianteEmpresas && !ehVarianteUsuarios
             ? props.opcoesPeriodo ?? OPCOES_PERIODO_PADRAO
             : OPCOES_PERIODO_PADRAO;
     const opcoesResponsavel =
-        !ehVarianteProjetos && !ehVarianteUsuarios
+        !ehVarianteProjetos && !ehVarianteEmpresas && !ehVarianteUsuarios
             ? props.opcoesResponsavel ?? OPCOES_RESPONSAVEL_PADRAO
             : OPCOES_RESPONSAVEL_PADRAO;
     const opcoesCargo = ehVarianteUsuarios
@@ -148,13 +181,18 @@ const FiltroPesquisa = (props: FiltroPesquisaProps) => {
             ? props.opcoesEmpresa ?? OPCOES_EMPRESA_PADRAO
             : OPCOES_EMPRESA_PADRAO;
 
-    const [busca, setBusca] = useState(
-        ehVarianteProjetos ? props.buscaRapida ?? "" : ""
-    );
+    const buscaProp =
+        ehVarianteProjetos || ehVarianteEmpresas
+            ? props.buscaRapida
+            : undefined;
+    const statusProp =
+        ehVarianteProjetos || ehVarianteEmpresas
+            ? props.status
+            : undefined;
+
+    const [busca, setBusca] = useState(buscaProp ?? "");
     const [tipo, setTipo] = useState("");
-    const [status, setStatus] = useState(
-        ehVarianteProjetos ? props.status ?? "" : ""
-    );
+    const [status, setStatus] = useState(statusProp ?? "");
     const [periodo, setPeriodo] = useState("");
     const [responsavel, setResponsavel] = useState("");
     const [cargo, setCargo] = useState("");
@@ -162,9 +200,9 @@ const FiltroPesquisa = (props: FiltroPesquisaProps) => {
         ehVarianteProjetos ? props.empresa ?? "" : ""
     );
 
-    const buscaAtual = ehVarianteProjetos ? props.buscaRapida ?? busca : busca;
+    const buscaAtual = buscaProp ?? busca;
     const empresaAtual = ehVarianteProjetos ? props.empresa ?? empresa : empresa;
-    const statusAtual = ehVarianteProjetos ? props.status ?? status : status;
+    const statusAtual = statusProp ?? status;
 
     const handleBuscaChange = (novoValor: string) => {
         setBusca(novoValor);
@@ -172,6 +210,11 @@ const FiltroPesquisa = (props: FiltroPesquisaProps) => {
             props.onChange?.({
                 buscaRapida: novoValor,
                 empresa: empresaAtual,
+                status: statusAtual,
+            });
+        } else if (ehFiltroEmpresas(props)) {
+            props.onChange?.({
+                buscaRapida: novoValor,
                 status: statusAtual,
             });
         }
@@ -183,6 +226,11 @@ const FiltroPesquisa = (props: FiltroPesquisaProps) => {
             props.onChange?.({
                 buscaRapida: buscaAtual,
                 empresa: empresaAtual,
+                status: novoValor,
+            });
+        } else if (ehFiltroEmpresas(props)) {
+            props.onChange?.({
+                buscaRapida: buscaAtual,
                 status: novoValor,
             });
         }
@@ -211,6 +259,16 @@ const FiltroPesquisa = (props: FiltroPesquisaProps) => {
             return;
         }
 
+        if (ehFiltroEmpresas(props)) {
+            const payloadEmpresas: DadosFiltroEmpresas = {
+                buscaRapida: buscaAtual,
+                status: statusAtual,
+            };
+            props.onSearch?.(payloadEmpresas);
+            props.onBuscar?.(payloadEmpresas);
+            return;
+        }
+
         if (!props.onBuscar) return;
 
         if (ehVarianteUsuarios) {
@@ -231,13 +289,28 @@ const FiltroPesquisa = (props: FiltroPesquisaProps) => {
         }
     };
 
+    const renderSelectStatus = () => (
+        <div className={styles.campo}>
+            <Select
+                label="STATUS"
+                placeholder="Todos os status"
+                opcoes={opcoesStatus}
+                valor={statusAtual}
+                tamanho={tamanho}
+                onChange={handleStatusChange}
+            />
+        </div>
+    );
+
     return (
         <>
             <div className={styles.container}>
-                {/* 1. Input de Busca Rápida (Mais largo nas variantes de usuários e projetos) */}
+                {/* 1. Input de Busca Rápida */}
                 <div
                     className={
-                        ehVarianteUsuarios || ehVarianteProjetos
+                        ehVarianteUsuarios ||
+                        ehVarianteProjetos ||
+                        ehVarianteEmpresas
                             ? styles.campoBuscaLargo
                             : styles.campo
                     }
@@ -258,7 +331,12 @@ const FiltroPesquisa = (props: FiltroPesquisaProps) => {
                     />
                 </div>
 
-                {ehVarianteUsuarios ? (
+                {ehVarianteEmpresas ? (
+                    <>
+                        {/* Variante 4 (Empresas): STATUS */}
+                        {renderSelectStatus()}
+                    </>
+                ) : ehVarianteUsuarios ? (
                     <>
                         {/* Variante 2 (Usuários): CARGO + STATUS + EMPRESA */}
                         <div className={styles.campo}>
@@ -272,16 +350,7 @@ const FiltroPesquisa = (props: FiltroPesquisaProps) => {
                             />
                         </div>
 
-                        <div className={styles.campo}>
-                            <Select
-                                label="STATUS"
-                                placeholder="Todos os status"
-                                opcoes={opcoesStatus}
-                                valor={statusAtual}
-                                tamanho={tamanho}
-                                onChange={handleStatusChange}
-                            />
-                        </div>
+                        {renderSelectStatus()}
 
                         <div className={styles.campo}>
                             <Select
@@ -308,16 +377,7 @@ const FiltroPesquisa = (props: FiltroPesquisaProps) => {
                             />
                         </div>
 
-                        <div className={styles.campo}>
-                            <Select
-                                label="STATUS"
-                                placeholder="Todos os status"
-                                opcoes={opcoesStatus}
-                                valor={statusAtual}
-                                tamanho={tamanho}
-                                onChange={handleStatusChange}
-                            />
-                        </div>
+                        {renderSelectStatus()}
                     </>
                 ) : (
                     <>
@@ -333,16 +393,7 @@ const FiltroPesquisa = (props: FiltroPesquisaProps) => {
                             />
                         </div>
 
-                        <div className={styles.campo}>
-                            <Select
-                                label="STATUS"
-                                placeholder="Todos os status"
-                                opcoes={opcoesStatus}
-                                valor={statusAtual}
-                                tamanho={tamanho}
-                                onChange={handleStatusChange}
-                            />
-                        </div>
+                        {renderSelectStatus()}
 
                         <div className={styles.campo}>
                             <Select
@@ -369,7 +420,13 @@ const FiltroPesquisa = (props: FiltroPesquisaProps) => {
                 )}
 
                 {/* Botão Buscar */}
-                <div className={styles.areaBotao}>
+                <div
+                    className={
+                        ehVarianteEmpresas
+                            ? styles.areaBotaoCompacta
+                            : styles.areaBotao
+                    }
+                >
                     <Botao
                         variante="laranja"
                         texto="Buscar"

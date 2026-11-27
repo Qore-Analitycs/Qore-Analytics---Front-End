@@ -18,6 +18,7 @@ import { useEmpresa } from "@/hooks/useEmpresa";
 interface ModalUsuarioProps {
   aberto: boolean;
   onFechar: () => void;
+  onUsuarioCriado?: () => void;
 }
 
 export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
@@ -69,6 +70,7 @@ export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
       setEmpresaSelecionado(undefined);
       setCargoSelecionado(undefined);
       setSenha("");
+      onUsuarioCriado?.();
     }
   }
 
@@ -93,6 +95,7 @@ export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
             type="button"
             className={styles.fechar}
             onClick={onFechar}
+            disabled={enviando}
             aria-label="Fechar modal"
           >
             ×

@@ -44,6 +44,12 @@ const ITENS_NAVEGACAO = [
     href: "/projetos",
     icone: "fa-solid fa-diagram-project",
   },
+  {
+    id: "empresas",
+    label: "Empresas",
+    href: "/empresas",
+    icone: "fa-solid fa-building",
+  },
 ];
 
 const obterIniciais = (nome: string) => {

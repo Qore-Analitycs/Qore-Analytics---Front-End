@@ -122,9 +122,8 @@ const Select = ({
                     aria-expanded={aberto}
                     aria-controls={listboxId}
                     aria-describedby={errorId}
-                    className={`${styles.selectTrigger} ${
-                        aberto ? styles.selectTriggerAberto : ""
-                    } ${erro ? styles.selectErro : ""} ${classeTamanhoTrigger}`}
+                    className={`${styles.selectTrigger} ${aberto ? styles.selectTriggerAberto : ""
+                        } ${erro ? styles.selectErro : ""} ${classeTamanhoTrigger}`}
                     onClick={() => !disabled && setAberto((prev) => !prev)}
                 >
                     <span className={styles.conteudoEsquerda}>
@@ -146,9 +145,8 @@ const Select = ({
                     </span>
 
                     <span
-                        className={`${styles.iconeSeta} ${
-                            aberto ? styles.iconeSetaAberto : ""
-                        }`}
+                        className={`${styles.iconeSeta} ${aberto ? styles.iconeSetaAberto : ""
+                            }`}
                         aria-hidden="true"
                     >
                         <FontAwesomeIcon icon={faChevronDown} />
@@ -171,11 +169,10 @@ const Select = ({
                                     key={opcao.valor}
                                     role="option"
                                     aria-selected={estaSelecionada}
-                                    className={`${styles.opcao} ${
-                                        estaSelecionada
+                                    className={`${styles.opcao} ${estaSelecionada
                                             ? styles.opcaoSelecionada
                                             : ""
-                                    } ${classeTamanhoOpcao}`}
+                                        } ${classeTamanhoOpcao}`}
                                     onClick={() =>
                                         handleSelecionar(opcao.valor)
                                     }

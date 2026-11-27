@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import styles from "./item.module.css";
 import { Usuario } from "@/@types/usuario";
 import type { ProjetoItem } from "@/@types/projeto";
+import type { EmpresaItem } from "@/@types/empresa";
 
 export type ItemHistorico = {
   id: string;
@@ -18,6 +19,7 @@ export type ItemHistoricoProps = {
   itemHistorico?: ItemHistorico;
   usuario?: never;
   itemProjeto?: never;
+  itemEmpresa?: never;
 };
 
 export type ItemUsuarioProps = {
@@ -25,6 +27,7 @@ export type ItemUsuarioProps = {
   usuario?: Usuario;
   itemHistorico?: never;
   itemProjeto?: never;
+  itemEmpresa?: never;
 };
 
 export type ItemProjetoProps = {
@@ -33,12 +36,23 @@ export type ItemProjetoProps = {
   onClick?: (projeto: ProjetoItem) => void;
   usuario?: never;
   itemHistorico?: never;
+  itemEmpresa?: never;
+};
+
+export type ItemEmpresaProps = {
+  page: "empresas";
+  itemEmpresa: EmpresaItem;
+  onClick?: (empresa: EmpresaItem) => void;
+  usuario?: never;
+  itemHistorico?: never;
+  itemProjeto?: never;
 };
 
 export type ItemProps =
   | ItemHistoricoProps
   | ItemUsuarioProps
-  | ItemProjetoProps;
+  | ItemProjetoProps
+  | ItemEmpresaProps;
 
 const MAPA_CLASSES_STATUS: Record<string, string> = {
   Sucesso: styles.badgeSucesso,
@@ -60,6 +74,14 @@ const formatarCargo = (cargo: unknown): string => {
     return String((cargo as { nome?: string }).nome || "Não informado");
   }
   return String(cargo);
+};
+
+const formatarEmpresa = (empresa?: Usuario["empresa"]): string => {
+  if (!empresa) return "Empresa Matriz";
+  if (typeof empresa === "object" && "nome" in empresa) {
+    return empresa.nome?.trim() || "Empresa Matriz";
+  }
+  return String(empresa);
 };
 
 const Item = (props: ItemProps) => {
@@ -166,7 +188,9 @@ const Item = (props: ItemProps) => {
             </div>
           </td>
           <td className={styles.celulaCargo}>{formatarCargo(usuario.cargo)}</td>
-          <td className={styles.celulaEmpresa}>Empresa Matriz</td>
+          <td className={styles.celulaEmpresa}>
+            {formatarEmpresa(usuario.empresa)}
+          </td>
           <td>
             <span
               className={`${styles.badgeStatus} ${
@@ -180,27 +204,7 @@ const Item = (props: ItemProps) => {
       )}
 
       {props.page === "projetos" && (
-        <tr
-          className={`${styles.trCard} ${
-            props.onClick ? styles.trCardClicavel : ""
-          }`}
-          onClick={
-            props.onClick
-              ? () => props.onClick?.(props.itemProjeto)
-              : undefined
-          }
-          onKeyDown={
-            props.onClick
-              ? (event) => {
-                  if (event.key === "Enter" || event.key === " ") {
-                    event.preventDefault();
-                    props.onClick?.(props.itemProjeto);
-                  }
-                }
-              : undefined
-          }
-          tabIndex={props.onClick ? 0 : undefined}
-        >
+        <tr {...criarEventosLinhaCatalogo(props.itemProjeto, props.onClick)}>
           <td className={styles.celulaProjeto}>{props.itemProjeto.projeto}</td>
           <td className={styles.celulaEmpresaTexto}>
             {props.itemProjeto.empresa}
@@ -209,20 +213,56 @@ const Item = (props: ItemProps) => {
             {props.itemProjeto.nUsuarios}
           </td>
           <td>
-            <span
-              className={`${styles.badgeStatus} ${
-                props.itemProjeto.status === "Ativo"
-                  ? styles.badgeSucesso
-                  : styles.badgeInativo
-              }`}
-            >
-              {props.itemProjeto.status}
-            </span>
+            <BadgeStatusCatalogo status={props.itemProjeto.status} />
+          </td>
+        </tr>
+      )}
+
+      {props.page === "empresas" && (
+        <tr {...criarEventosLinhaCatalogo(props.itemEmpresa, props.onClick)}>
+          <td className={styles.celulaEmpresaNome}>
+            {props.itemEmpresa.empresa}
+          </td>
+          <td className={styles.celulaNProjetos}>
+            {props.itemEmpresa.nProjetos}
+          </td>
+          <td>
+            <BadgeStatusCatalogo status={props.itemEmpresa.status} />
           </td>
         </tr>
       )}
     </>
   );
 };
+
+function criarEventosLinhaCatalogo<T>(item: T, onClick?: (item: T) => void) {
+  if (!onClick) {
+    return { className: styles.trCard };
+  }
+
+  return {
+    className: `${styles.trCard} ${styles.trCardClicavel}`,
+    tabIndex: 0,
+    onClick: () => onClick(item),
+    onKeyDown: (event: { key: string; preventDefault: () => void }) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        onClick(item);
+      }
+    },
+  };
+}
+
+function BadgeStatusCatalogo({ status }: { status: "Ativo" | "Inativo" }) {
+  return (
+    <span
+      className={`${styles.badgeStatus} ${
+        status === "Ativo" ? styles.badgeSucesso : styles.badgeInativo
+      }`}
+    >
+      {status}
+    </span>
+  );
+}
 
 export default Item;
