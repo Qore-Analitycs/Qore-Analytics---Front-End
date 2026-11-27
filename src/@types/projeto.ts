@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import type { OpcaoSelect } from "@/components/select/select";
 
 export type { OpcaoSelect };
@@ -79,4 +80,19 @@ export interface ModalCriarProjetoProps {
   empresas: OpcaoEmpresaProjeto[];
   isSubmitting?: boolean;
   errorMessage?: string | null;
+=======
+export interface Projeto {
+    id: number
+    criadoEm: string
+    nome: string
+    urlAlvo: string
+    urlSwagger?: string
+    usuarios: Usuario[]
+}
+
+export interface Usuario {
+    id: string
+    nome: string
+    email: string
+>>>>>>> feature/consumoCriarUsuario
 }
