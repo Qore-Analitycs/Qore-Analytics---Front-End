@@ -1,47 +1,48 @@
-import { use, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import styles from "./ModalUsuario.module.css";
 import Botao from "../botao/botao";
 import Input from "../input/input";
 import {
+  faBuilding,
   faEnvelope,
   faLock,
-  faShield,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import SelecaoCargo from "../selecaoCargo/selecaoCargo";
 import SelecoesCargos from "../selecaoCargo/selecoesCargo";
 import { useUsuario } from "@/hooks/useUsuario";
-import { toast } from "react-toastify";
 import { toastErro, toastSucesso } from "@/utils/toast";
 import { CriarUsuario } from "@/@types/usuario";
+import Select from "../select/select";
+import { useEmpresa } from "@/hooks/useEmpresa";
 
 interface ModalUsuarioProps {
   aberto: boolean;
   onFechar: () => void;
 }
 
-const cargos = [
-  { nome: "Admin", icone: "/admin.png" },
-  { nome: "Dev", icone: "/dev.png" },
-  { nome: "QA", icone: "/qa.png" },
-];
-
 export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
   const { cadastrarU } = useUsuario();
+  const { empresa } = useEmpresa();
 
   const [nomeUsuario, setNomeUsuario] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
   const [cargoSelecionado, setCargoSelecionado] = useState<number>();
+  const [enviando, setEnviando] = useState<boolean>(false);
+  const [empresaSelecionado, setEmpresaSelecionado] = useState<number>();
 
   if (!aberto) {
     return null;
   }
+
   async function handleSalvar(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (enviando) return;
+
     if (
       !nomeUsuario.trim() ||
       !email.trim() ||
+      empresaSelecionado === undefined ||
       !senha.trim() ||
       !cargoSelecionado
     ) {
@@ -50,32 +51,36 @@ export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
     }
 
     const novoU: CriarUsuario = {
-      nome: nomeUsuario,
-      email: email,
-      senha: senha,
+      nome: nomeUsuario.trim(),
+      email: email.trim(),
+      empresa: empresaSelecionado,
+      senha,
       perfilId: cargoSelecionado,
     };
 
-    console.log(email);
-    console.log(senha);
-    console.log(cargoSelecionado);
-    console.log(nomeUsuario);
-
+    setEnviando(true);
     const sucesso = await cadastrarU(novoU);
-
-    toastSucesso("Cadastro de Usuário realizado com sucesso");
+    setEnviando(false);
 
     if (sucesso) {
+      toastSucesso("Cadastro de Usuário realizado com sucesso");
       setNomeUsuario("");
-      setCargoSelecionado(0);
       setEmail("");
+      setEmpresaSelecionado(undefined);
+      setCargoSelecionado(undefined);
       setSenha("");
-
     }
   }
 
   return (
-    <div className={styles.fundo}>
+    <div
+      className={styles.fundo}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) {
+          onFechar();
+        }
+      }}
+    >
       <section
         className={styles.modal}
         role="dialog"
@@ -83,7 +88,6 @@ export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
         aria-labelledby="titulo-modal"
       >
         <header className={styles.cabecalho}>
-          <span className={styles.subtitulo}>Novo Usuário</span>
 
           <button
             type="button"
@@ -96,58 +100,79 @@ export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
 
           <h2 id="titulo-modal">Crie uma conta corporativa</h2>
 
-          <p>
-            Preencha os dados abaixo. O acesso é liberado com uma senha
-            provisória.
-          </p>
         </header>
 
         <form className={styles.formulario} onSubmit={handleSalvar}>
           <Input
+            id="nome-usuario"
             label="Nome"
-            tamanho="compacto"
             icone={faUser}
             placeholder="Nome completo"
             value={nomeUsuario}
             onChange={(event) => setNomeUsuario(event.target.value)}
+            disabled={enviando}
           />
+
           <Input
+            id="email-usuario"
             icone={faEnvelope}
-            tamanho="compacto"
             label="Email"
             placeholder="email@email.com"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
+            disabled={enviando}
           />
 
+          <div className={styles.campoEmpresa}>
+            <Select
+              id="empresa-usuario"
+              label="Empresa"
+              placeholder="Selecione uma empresa"
+              icone={faBuilding}
+              opcoes={empresa.map((item) => ({
+                valor: String(item.id),
+                texto: item.value,
+              }))}
+              value={
+                empresaSelecionado !== undefined
+                  ? String(empresaSelecionado)
+                  : ""
+              }
+              onChange={(valor) => {
+                setEmpresaSelecionado(valor !== "" ? Number(valor) : undefined);
+              }}
+              disabled={enviando}
+            />
+          </div>
+
           <SelecoesCargos
-            cargoSelecionado={
-              cargoSelecionado ? String(cargoSelecionado) : undefined
-            }
+            cargoSelecionado={cargoSelecionado ? String(cargoSelecionado) : ""}
             onSelect={(id) => setCargoSelecionado(Number(id))}
           />
 
           <Input
+            id="senha-usuario"
             icone={faLock}
             label="Senha provisória"
             placeholder="••••••••••••••••••••"
             type="password"
-            tamanho="compacto"
             value={senha}
             onChange={(event) => setSenha(event.target.value)}
+            disabled={enviando}
           />
 
           <div className={styles.acoes}>
             <Botao
+              type="button"
               onClick={onFechar}
               texto="Cancelar"
               variante="cancelar"
-              tamanho="compacto"
+              disabled={enviando}
             />
             <Botao
-              texto="Criar novo usuário"
-              tamanho="compacto"
+              texto={enviando ? "Criando..." : "Criar novo usuário"}
               type="submit"
+              disabled={enviando}
             />
           </div>
         </form>

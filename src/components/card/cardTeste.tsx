@@ -82,22 +82,6 @@ export default function CardTeste({
             </div>
 
             <strong className={styles.valor}>{valorFinal}</strong>
-
-            {(porcentagemFinal || comparacaoFinal) && (
-                <div className={styles.parametros}>
-                    {iconeTendenciaFinal && (
-                        <span className={styles.iconeTendencia} aria-hidden="true">
-                            {iconeTendenciaFinal}
-                        </span>
-                    )}
-                    {porcentagemFinal && (
-                        <span className={styles.porcentagem}>{porcentagemFinal}</span>
-                    )}
-                    {comparacaoFinal && (
-                        <span className={styles.comparacao}>{comparacaoFinal}</span>
-                    )}
-                </div>
-            )}
         </article>
     );
 }

@@ -30,28 +30,29 @@
 
 .categoriaPagina {
     font-family: "Montserrat", sans-serif;
-    font-size: 14px;
+    font-size: var(--fonte-compacta);
     font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
     color: #475E7C;
     margin: 0;
 }
 
 .tituloRelatorio {
     font-family: "Montserrat", sans-serif;
-    font-size: var(--fonte-titulo, 36px);
+    font-size: var(--fonte-titulo);
     font-weight: var(--peso-bold, 700);
     color: #2D3133;
     margin: 0;
-    line-height: 1.18;
+    line-height: var(--lh-justo);
 }
 
 .descricaoRelatorio {
     font-family: "Montserrat", sans-serif;
-    font-size: 15px;
+    font-size: var(--fonte-padrao);
     font-weight: var(--peso-normal, 400);
     color: #475569;
     margin: 0;
-    line-height: 1.5;
+    line-height: var(--lh-corpo);
 }
 
 .acoesCabecalho {
@@ -63,19 +64,20 @@
 }
 
 .btnCompartilhar {
-    height: 40px;
+    min-height: 42px;
     background-color: var(--branco, #FFFFFF);
     color: #2D3133;
     border: 1.5px solid #D5DCE4;
     border-radius: 8px;
-    padding: 0 20px;
+    padding: 8px 20px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     font-family: "Montserrat", sans-serif;
-    font-size: 14px;
+    font-size: var(--fonte-compacta);
     font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
     box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
     cursor: pointer;
     transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
@@ -93,19 +95,20 @@
 }
 
 .btnVideo {
-    height: 40px;
+    min-height: 42px;
     background-color: var(--laranja, #E87A11);
     color: #FFFFFF;
     border: none;
     border-radius: 8px;
-    padding: 0 20px;
+    padding: 8px 20px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     font-family: "Montserrat", sans-serif;
-    font-size: 14px;
+    font-size: var(--fonte-compacta);
     font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
     box-shadow: 0 2px 6px rgba(232, 122, 17, 0.25);
     cursor: pointer;
     transition: filter 0.15s ease, transform 0.15s ease;
@@ -141,6 +144,6 @@
     }
 
     .tituloRelatorio {
-        font-size: 26px;
+        font-size: 1.875rem;
     }
 }

@@ -57,8 +57,9 @@
 
 .titulo {
     font-family: "Montserrat", sans-serif;
-    font-size: 11.5px;
+    font-size: var(--fonte-pequena);
     font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
     color: #475E7C;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -78,18 +79,19 @@
 
 .valor {
     font-family: "Montserrat", sans-serif;
-    font-size: 30px;
+    font-size: var(--fonte-metrica);
     font-weight: var(--peso-bold, 700);
     color: #2D3133;
-    line-height: 1.15;
+    line-height: var(--lh-justo);
     margin: 2px 0 0 0;
     letter-spacing: -0.02em;
 }
 
 .descricao {
     font-family: "Montserrat", sans-serif;
-    font-size: 12px;
+    font-size: var(--fonte-pequena);
     font-weight: var(--peso-normal, 400);
+    line-height: var(--lh-compacto);
     color: #64748B;
     margin: 0;
     white-space: nowrap;

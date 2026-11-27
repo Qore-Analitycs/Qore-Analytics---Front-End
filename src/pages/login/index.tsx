@@ -167,7 +167,7 @@ export default function Login() {
 
             <div className={styles.botoes}>
               <div className={styles.botaoAlternativo}>
-                <Botao variante="alternativo" texto="Google"/>
+                <Botao variante="alternativo" texto="Google" />
               </div>
               <div className={styles.botaoAlternativo}>
                 <Botao variante="alternativo" texto="GitHub" />

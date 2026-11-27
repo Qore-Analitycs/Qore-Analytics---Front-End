@@ -38,6 +38,12 @@ const ITENS_NAVEGACAO = [
     href: "/usuarioPermissoes",
     icone: "fa-solid fa-users",
   },
+  {
+    id: "projetos",
+    label: "Projetos",
+    href: "/projetos",
+    icone: "fa-solid fa-diagram-project",
+  },
 ];
 
 const obterIniciais = (nome: string) => {

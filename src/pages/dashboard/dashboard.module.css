@@ -10,28 +10,29 @@
 
 .categoriaMenor {
     font-family: "Montserrat", sans-serif;
-    font-size: 14px;
+    font-size: var(--fonte-compacta);
     font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
     color: #475E7C;
     margin: 0;
 }
 
 .tituloPrincipal {
     font-family: "Montserrat", sans-serif;
-    font-size: var(--fonte-titulo, 40px);
+    font-size: var(--fonte-titulo);
     font-weight: var(--peso-bold, 700);
     color: #2D3133;
     margin: 0;
-    line-height: 1.15;
+    line-height: var(--lh-justo);
 }
 
 .descricaoPagina {
     font-family: "Montserrat", sans-serif;
-    font-size: 15px;
+    font-size: var(--fonte-padrao);
     font-weight: var(--peso-normal, 400);
     color: #475569;
     margin: 0;
-    line-height: 1.5;
+    line-height: var(--lh-corpo);
 }
 
 /* ==========================================
@@ -69,6 +70,6 @@
 
 @media (max-width: 768px) {
     .tituloPrincipal {
-        font-size: 28px;
+        font-size: 1.875rem;
     }
 }

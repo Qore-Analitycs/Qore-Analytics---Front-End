@@ -7,8 +7,9 @@
 
 .titulo {
     font-family: "Montserrat", sans-serif;
-    font-size: 22px;
+    font-size: var(--fonte-card-titulo);
     font-weight: var(--peso-semibold);
+    line-height: var(--lh-titulo);
     color: #0F172A;
     margin: 0;
 }
@@ -57,17 +58,18 @@
 
 .rotulo {
     font-family: "Montserrat", sans-serif;
-    font-size: 14px;
+    font-size: var(--fonte-compacta);
     font-weight: var(--peso-semibold);
+    line-height: var(--lh-compacto);
     color: #64748B;
 }
 
 .valor {
     font-family: "Montserrat", sans-serif;
-    font-size: 22px;
+    font-size: var(--fonte-subtitulo);
     font-weight: var(--peso-bold);
     color: #0F172A;
-    line-height: 1.25;
+    line-height: var(--lh-justo);
 }
 
 .barraProgresso {
@@ -96,4 +98,3 @@
         grid-template-columns: 1fr;
     }
 }
-

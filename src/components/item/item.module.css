@@ -7,6 +7,20 @@
     background-color: #FAFBFD;
 }
 
+.trCardClicavel {
+    cursor: pointer;
+}
+
+.trCardClicavel:hover {
+    background-color: #F4F7FA;
+}
+
+.trCardClicavel:focus-visible {
+    outline: 2px solid var(--laranja, #E87A11);
+    outline-offset: -2px;
+    background-color: #FFF9F2;
+}
+
 /* 1. Colunas Histórico de Testes */
 .celulaId {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -42,7 +56,8 @@
 .celulaData {
     color: #64748B;
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 13px;
+    font-size: var(--fonte-compacta);
+    line-height: var(--lh-compacto);
 }
 
 /* 2. Colunas Usuário e Permissões */
@@ -53,20 +68,22 @@
 .infoUsuario {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 3px;
     align-items: flex-start;
 }
 
 .nomeUsuario {
     font-family: "Montserrat", sans-serif;
-    font-size: 14px;
+    font-size: var(--fonte-corpo);
     font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
     color: #2D3133;
 }
 
 .emailUsuario {
     font-family: "Montserrat", sans-serif;
-    font-size: 12px;
+    font-size: var(--fonte-pequena);
+    line-height: var(--lh-compacto);
     color: #64748B;
 }
 
@@ -81,16 +98,45 @@
     text-align: center;
 }
 
+/* 2.1 Colunas Gerenciamento de Projetos */
+.celulaProjeto {
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-corpo);
+    font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
+    color: #2D3133;
+    text-align: left !important;
+}
+
+.celulaEmpresaTexto {
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-corpo);
+    font-weight: var(--peso-normal, 400);
+    line-height: var(--lh-compacto);
+    color: #3C3F40;
+    text-align: left !important;
+}
+
+.celulaNUsuarios {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: var(--fonte-corpo);
+    font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
+    color: #475E7C;
+    text-align: center;
+}
+
 /* 3. Badges de Status Unificados */
 .badgeStatus {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
-    padding: 4px 12px;
+    padding: 5px 14px;
     border-radius: 999px;
-    font-size: 12px;
+    font-size: var(--fonte-pequena);
     font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
     white-space: nowrap;
 }
 

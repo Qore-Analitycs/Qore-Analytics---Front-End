@@ -13,8 +13,9 @@
 
 .titulo {
     font-family: "Montserrat", sans-serif;
-    font-size: var(--fonte-subtitulo, 24px);
+    font-size: var(--fonte-subtitulo);
     font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-titulo);
     color: #FFFFFF;
     margin: 0;
 }
@@ -26,6 +27,28 @@
     width: 100%;
 }
 
+/* Padroniza 2 colunas iguais (50% / 50%) */
+.inputUrlGroup {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+    width: 100%;
+}
+
+/* Padroniza Branch e Commit em 2 colunas iguais dentro da metade esquerda */
+.containerInputUrl {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    align-items: start;
+    width: 100%;
+}
+
+.containerInput {
+    width: 100%;
+}
+
 .rodapeBotao {
     display: flex;
     justify-content: flex-end;
@@ -33,14 +56,25 @@
     margin-top: 4px;
 }
 
-/* Controla a largura do Botao (que ocupa 100% do pai por padrão) */
 .botaoWrapper {
-    width: 240px;
+    width: 260px;
+}
+
+@media (max-width: 1024px) {
+    .inputUrlGroup {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
 }
 
 @media (max-width: 768px) {
     .container {
         padding: 24px 20px;
+    }
+
+    .containerInputUrl {
+        grid-template-columns: 1fr;
+        gap: 18px;
     }
 
     .botaoWrapper {

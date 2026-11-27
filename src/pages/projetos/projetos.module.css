@@ -1,0 +1,76 @@
+.mainBlur {
+    filter: blur(5px);
+}
+
+.container {
+    width: 100%;
+    max-width: 1520px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.cabecalhoTexto {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 280px;
+}
+
+.categoriaMenor {
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-compacta);
+    font-weight: var(--peso-semibold, 600);
+    line-height: var(--lh-compacto);
+    color: #475E7C;
+    margin: 0;
+}
+
+.titulo {
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-titulo);
+    font-weight: var(--peso-bold, 700);
+    line-height: var(--lh-justo);
+    color: #2D3133;
+    margin: 0;
+}
+
+.descricaoPagina {
+    font-family: "Montserrat", sans-serif;
+    font-size: var(--fonte-padrao);
+    font-weight: var(--peso-normal, 400);
+    line-height: var(--lh-corpo);
+    color: #475569;
+    margin: 0;
+    max-width: 800px;
+}
+
+.containerBotao {
+    min-width: 220px;
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .cabecalho {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .titulo {
+        font-size: 1.875rem;
+    }
+
+    .containerBotao {
+        width: 100%;
+    }
+}

@@ -1,17 +1,23 @@
-import { CriarUsuario, Usuario } from "@/@types/usuario";
+import { AtualizarUsuario, CriarUsuario, Usuario } from "@/@types/usuario";
 import { api } from "@/services/api";
+import { toastErro } from "@/utils/toast";
+
+type RespostaListaUsuarios = {
+    itens: Usuario[];
+};
 
 export const UsuarioService = {
     async listar(): Promise<Usuario[]> {
-        const resposta = await api.get<Usuario[]>("usuarios");
+        const resposta = await api.get<RespostaListaUsuarios>("usuarios");
 
-        return resposta.data
+        return resposta.data.itens;
     },
 
     async cadastrar(dados: CriarUsuario): Promise<Usuario> {
         const payload = {
             nome: dados.nome,
             email: dados.email,
+            ...(dados.empresa ? { empresa: dados.empresa } : {}),
             senha: dados.senha,
             perfilId: dados.perfilId,
         };
@@ -19,5 +25,34 @@ export const UsuarioService = {
         const resposta = await api.post<Usuario>("usuarios", payload);
 
         return resposta.data;
-    }
-}
+    },
+
+    async atualizar(id: string, dados: AtualizarUsuario) {
+        if (!id) {
+            toastErro("Erro ao buscar id de usuario");
+            throw new Error("ID do usuário não informado.");
+        }
+
+        const formData = new FormData();
+
+        if (dados.Nome) formData.append("Nome", dados.Nome);
+        if (dados.Email) formData.append("Email", dados.Email);
+        if (dados.SenhaAtual) formData.append("SenhaAtual", dados.SenhaAtual);
+        if (dados.NovaSenha) formData.append("NovaSenha", dados.NovaSenha);
+        if (dados.ConfirmarNovaSenha) {
+            formData.append("ConfirmarNovaSenha", dados.ConfirmarNovaSenha);
+        }
+
+        await api.patch(`usuarios/alterar/${id}`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+    },
+
+    async getMe() {
+        const resposta = await api.get("Autenticacao/me");
+
+        return resposta.data;
+    },
+};
