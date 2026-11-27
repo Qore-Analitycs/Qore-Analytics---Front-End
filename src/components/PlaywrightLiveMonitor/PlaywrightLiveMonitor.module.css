@@ -1,0 +1,398 @@
+.container {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cabecalhoEsquerda {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.badgeLive {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.badgeLiveAtivo {
+  background: #fff7ed;
+  color: #ea580c;
+  border: 1px solid #fdba74;
+}
+
+.badgeLiveSucesso {
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+
+.badgeLiveFalha {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.pontoLive {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.badgeLiveAtivo .pontoLive {
+  animation: pulsar 1.3s ease-in-out infinite;
+}
+
+@keyframes pulsar {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+}
+
+.titulos {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.titulo {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.urlAlvo {
+  font-size: 12px;
+  color: #64748b;
+  word-break: break-all;
+}
+
+.cabecalhoDireita {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.progressoTexto {
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.linkDetalhes {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  color: #1e293b;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.linkDetalhes:hover {
+  border-color: #ff6a00;
+  color: #ff6a00;
+  background: #fff7ed;
+}
+
+.alertaErro {
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.gridConteudo {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+.painelViewport {
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0f172a;
+  display: flex;
+  flex-direction: column;
+}
+
+.barraNavegador {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #1e293b;
+  color: #cbd5e1;
+}
+
+.bolinhas {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bolinhaVermelha,
+.bolinhaAmarela,
+.bolinhaVerde {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.bolinhaVermelha {
+  background: #ef4444;
+}
+
+.bolinhaAmarela {
+  background: #f59e0b;
+}
+
+.bolinhaVerde {
+  background: #10b981;
+}
+
+.barraUrl {
+  flex: 1;
+  font-size: 12px;
+  color: #e2e8f0;
+  background: #0f172a;
+  padding: 4px 10px;
+  border-radius: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tagLive {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fb923c;
+}
+
+.palcoImagem {
+  min-height: 320px;
+  max-height: 460px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #090d16;
+}
+
+.imagemAoVivo {
+  width: 100%;
+  height: 100%;
+  max-height: 460px;
+  object-fit: contain;
+  display: block;
+}
+
+.estadoAguardando {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 36px 20px;
+  color: #94a3b8;
+  font-size: 13px;
+  text-align: center;
+}
+
+.spinner {
+  animation: girar 1s linear infinite;
+}
+
+@keyframes girar {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.painelLateral {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.blocoPassos,
+.blocoLogs {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.subtitulo {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #334155;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.vazio {
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.listaPassos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.itemPasso {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+.passoAprovado {
+  border-color: #a7f3d0;
+  background: #f0fdf4;
+}
+
+.passoAprovado .iconePasso {
+  color: #059669;
+}
+
+.passoFalho {
+  border-color: #fecaca;
+  background: #fef2f2;
+}
+
+.passoFalho .iconePasso {
+  color: #dc2626;
+}
+
+.passoExecutando {
+  border-color: #fdba74;
+  background: #fff7ed;
+}
+
+.passoExecutando .iconePasso {
+  color: #ea580c;
+}
+
+.passoPendente .iconePasso {
+  color: #94a3b8;
+}
+
+.iconePasso {
+  display: inline-flex;
+  padding-top: 2px;
+}
+
+.textoPasso {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.nomePasso {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  word-break: break-word;
+}
+
+.statusPassoLabel {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.caixaLogs {
+  background: #0f172a;
+  color: #cbd5e1;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11.5px;
+  line-height: 1.5;
+  max-height: 150px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.linhaLog {
+  margin: 0;
+  word-break: break-word;
+}
+
+.logVazio {
+  color: #64748b;
+}
+
+@media (max-width: 1024px) {
+  .gridConteudo {
+    grid-template-columns: 1fr;
+  }
+}

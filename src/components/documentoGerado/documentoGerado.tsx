@@ -3,7 +3,7 @@ import ScriptHeader from "./ScriptHeader/ScriptHeader";
 import TestMetadata from "./TestMetadata/TestMetadata";
 import ConditionList from "./ConditionList/ConditionList";
 import ValidationTable from "./ValidationTable/ValidationTable";
-import { ItemCondicao, PassoValidacao, ResumoRoteiro } from "./types";
+import { DadosRoteiro, ItemCondicao, PassoValidacao, ResumoRoteiro } from "./types";
 import styles from "./documentoGerado.module.css";
 
 const MOCK_PRE_CONDICOES: ItemCondicao[] = [
@@ -72,8 +72,8 @@ type DocumentoGeradoProps = {
     carregandoIA?: boolean;
     readOnly?: boolean;
     mode?: "edit" | "view";
-    onAssinarRoteiro?: (passos: PassoValidacao[]) => void;
-    onExecutarTesteIA?: (passos: PassoValidacao[]) => void;
+    onAssinarRoteiro?: (passos: PassoValidacao[], dadosRoteiro?: DadosRoteiro) => void;
+    onExecutarTesteIA?: (passos: PassoValidacao[], dadosRoteiro?: DadosRoteiro) => void;
 };
 
 const DocumentoGerado = ({
@@ -97,6 +97,17 @@ const DocumentoGerado = ({
     const [preCondicoes, setPreCondicoes] = useState<ItemCondicao[]>(preCondicoesIniciais);
     const [criterios, setCriterios] = useState<ItemCondicao[]>(criteriosIniciais);
     const [passos, setPassos] = useState<PassoValidacao[]>(passosIniciais);
+
+    const montarDadosRoteiro = (): DadosRoteiro => ({
+        titulo,
+        commit: commitInicial,
+        autor: autorInicial,
+        data: dataInicial,
+        resumo,
+        preCondicoes,
+        criteriosAceitacao: criterios,
+        passos,
+    });
 
     if (isReadOnly) {
         return (
@@ -148,8 +159,8 @@ const DocumentoGerado = ({
                 carregandoIA={carregandoIA}
                 readOnly={isReadOnly}
                 mode={mode}
-                onAssinarRoteiro={() => onAssinarRoteiro?.(passos)}
-                onExecutarTesteIA={() => onExecutarTesteIA?.(passos)}
+                onAssinarRoteiro={() => onAssinarRoteiro?.(passos, montarDadosRoteiro())}
+                onExecutarTesteIA={() => onExecutarTesteIA?.(passos, montarDadosRoteiro())}
             />
         </article>
     );

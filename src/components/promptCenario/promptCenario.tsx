@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Input from "../input/input";
 import Botao from "../botao/botao";
-import styles from "./promptCenario.module.css";
-import Select from "../select/select";
+import Select, { OpcaoSelect } from "../select/select";
 import { useProjeto } from "@/hooks/useProjeto";
+import type {
+  GitHubInspecaoEstado,
+  GitHubInspecaoRespostaDto,
+} from "@/@types/geracaoPrompt";
+import styles from "./promptCenario.module.css";
 
 export type DadosPromptCenario = {
   projetoId: number;
@@ -29,8 +33,20 @@ export type PromptCenarioProps = {
   erroCommit?: string;
   erroDescricao?: string;
   carregando?: boolean;
+  inspecaoGitHub?: GitHubInspecaoEstado;
+  onInspecionarGitHub?: (
+    url: string,
+    branch?: string
+  ) => Promise<GitHubInspecaoRespostaDto | null>;
+  onLimparInspecaoGitHub?: () => void;
+  onDadosChange?: (dados: DadosPromptCenario) => void;
   onGerarRoteiro?: (dados: DadosPromptCenario) => void;
 };
+
+const pareceUrlGitHub = (valor: string): boolean =>
+  /(?:https?:\/\/)?(?:www\.)?github\.com\/[^/\s]+\/[^/\s]+/i.test(
+    valor.trim()
+  );
 
 const PromptCenario = ({
   titulo = "Prompt de Geração de Cenários",
@@ -47,6 +63,10 @@ const PromptCenario = ({
   erroCommit,
   erroDescricao,
   carregando = false,
+  inspecaoGitHub = { status: "idle" },
+  onInspecionarGitHub,
+  onLimparInspecaoGitHub,
+  onDadosChange,
   onGerarRoteiro,
 }: PromptCenarioProps) => {
   const { projetos, carregandoProjetos } = useProjeto();
@@ -58,12 +78,101 @@ const PromptCenario = ({
   const [projetoId, setProjetoId] = useState<number>(projetoInicial);
   const [descricaoFluxo, setDescricaoFluxo] = useState(descricaoInicial);
 
-  // Transforma o array de Projeto[] vindo da API no formato esperado pelo Select
-  // Ajuste "p.nome" e "p.id" se os nomes dos campos em @/@types/projeto forem diferentes
-  const opcoesProjetos = projetos.map((p) => ({
-    label: p.nome,
-    value: String(p.id),
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const ultimaUrlInspecionadaRef = useRef<string>("");
+
+  const opcoesProjetos: OpcaoSelect[] = projetos.map((p) => ({
+    texto: p.nome,
+    valor: String(p.id),
   }));
+
+  const emitirMudanca = (parcial: Partial<DadosPromptCenario>) => {
+    onDadosChange?.({
+      projetoId: parcial.projetoId ?? Number(projetoId),
+      urlPullRequest: (parcial.urlPullRequest ?? urlPullRequest).trim(),
+      urlAlvo: (parcial.urlAlvo ?? urlAlvo).trim(),
+      branch: (parcial.branch ?? branch).trim(),
+      commit: (parcial.commit ?? commit).trim(),
+      descricaoFluxo: (parcial.descricaoFluxo ?? descricaoFluxo).trim(),
+    });
+  };
+
+  useEffect(() => {
+    return () => {
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+      }
+    };
+  }, []);
+
+  const executarInspecaoGitHub = async (url: string, branchAlvo?: string) => {
+    if (!onInspecionarGitHub) return;
+    const resposta = await onInspecionarGitHub(url, branchAlvo);
+    if (!resposta) return;
+
+    const novaBranch = resposta.branchSelecionada || branchAlvo || "";
+    const novoCommit = resposta.commitSelecionado || "";
+
+    setBranch(novaBranch);
+    setCommit(novoCommit);
+    emitirMudanca({
+      urlPullRequest: url,
+      branch: novaBranch,
+      commit: novoCommit,
+    });
+  };
+
+  const handleUrlPullRequestChange = (novaUrl: string) => {
+    setUrlPullRequest(novaUrl);
+    emitirMudanca({ urlPullRequest: novaUrl });
+
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
+    }
+
+    const urlLimpa = novaUrl.trim();
+    if (!urlLimpa) {
+      ultimaUrlInspecionadaRef.current = "";
+      onLimparInspecaoGitHub?.();
+      return;
+    }
+
+    if (!onInspecionarGitHub || !pareceUrlGitHub(urlLimpa)) {
+      return;
+    }
+
+    debounceRef.current = setTimeout(() => {
+      if (ultimaUrlInspecionadaRef.current === urlLimpa) return;
+      ultimaUrlInspecionadaRef.current = urlLimpa;
+      void executarInspecaoGitHub(urlLimpa);
+    }, 550);
+  };
+
+  const handleBranchSelect = (novaBranch: string) => {
+    setBranch(novaBranch);
+    emitirMudanca({ branch: novaBranch });
+
+    const urlLimpa = urlPullRequest.trim();
+    if (urlLimpa && onInspecionarGitHub) {
+      void executarInspecaoGitHub(urlLimpa, novaBranch);
+    }
+  };
+
+  const handleProjetoChange = (novoValor: string) => {
+    const novoId = Number(novoValor);
+    setProjetoId(novoId);
+
+    const projetoSelecionado = projetos.find((p) => p.id === novoId);
+    const urlDoProjeto = projetoSelecionado?.urlAlvo?.trim() || "";
+    const proximaUrlAlvo =
+      !urlAlvo.trim() && urlDoProjeto ? urlDoProjeto : urlAlvo;
+
+    if (!urlAlvo.trim() && urlDoProjeto) {
+      setUrlAlvo(urlDoProjeto);
+    }
+
+    emitirMudanca({ projetoId: novoId, urlAlvo: proximaUrlAlvo });
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,6 +190,23 @@ const PromptCenario = ({
     });
   };
 
+  const dadosGitHub =
+    inspecaoGitHub.status === "success" ? inspecaoGitHub.dados : null;
+
+  const opcoesBranches: OpcaoSelect[] = dadosGitHub
+    ? dadosGitHub.branches.map((b) => ({ valor: b, texto: b }))
+    : [];
+
+  const opcoesCommits: OpcaoSelect[] = dadosGitHub
+    ? dadosGitHub.commits.map((c) => ({
+        valor: c.sha,
+        texto: `${c.shortSha} — ${c.titulo}`,
+      }))
+    : [];
+
+  const erroGitHub =
+    inspecaoGitHub.status === "error" ? inspecaoGitHub.mensagem : undefined;
+
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
       <h2 className={styles.titulo}>{titulo}</h2>
@@ -90,63 +216,112 @@ const PromptCenario = ({
           <div className={styles.containerInput}>
             <Input
               id="url-pull-request"
-              label="Url da pull request"
-              placeholder="https://github.com/exemple/Pull...."
+              label="Url da pull request ou repositório GitHub"
+              placeholder="https://github.com/owner/repo ou /pull/12"
               temIcone={false}
               value={urlPullRequest}
-              onChange={(e) => setUrlPullRequest(e.target.value)}
-              erro={erroUrl}
+              onChange={(e) => handleUrlPullRequestChange(e.target.value)}
+              erro={erroUrl || erroGitHub}
               disabled={carregando}
             />
+            {inspecaoGitHub.status === "loading" && (
+              <p className={styles.statusGitHub}>
+                Buscando branches e commits do repositório...
+              </p>
+            )}
+            {dadosGitHub && (
+              <p className={styles.statusGitHubSucesso}>
+                Repositório: {dadosGitHub.owner}/{dadosGitHub.repositorio} •{" "}
+                {dadosGitHub.branches.length} branch(es) e{" "}
+                {dadosGitHub.commits.length} commit(s)
+              </p>
+            )}
           </div>
 
           <div className={styles.containerInput}>
             <Input
               id="url-alvo"
               label="Url da onde vai ser testado"
-              placeholder="https://Site no ar que sera testeado"
+              placeholder="https://site-alvo.com.br"
               temIcone={false}
               value={urlAlvo}
-              onChange={(e) => setUrlAlvo(e.target.value)}
+              onChange={(e) => {
+                setUrlAlvo(e.target.value);
+                emitirMudanca({ urlAlvo: e.target.value });
+              }}
               erro={erroUrlAlvo}
               disabled={carregando}
             />
           </div>
 
           <div className={styles.containerInputUrl}>
-
             <Select
               label="Projeto"
-              placeholder={carregandoProjetos ? "Carregando..." : "Número do projeto"}
+              placeholder={
+                carregandoProjetos ? "Carregando..." : "Selecione o projeto"
+              }
+              opcoes={opcoesProjetos}
               value={projetoId ? String(projetoId) : ""}
-              onChange={(e: any) =>
-                setProjetoId(Number(e.target ? e.target.value : e))
-            }
+              onChange={handleProjetoChange}
               disabled={carregando || carregandoProjetos}
             />
-            <Input
-              id="branch"
-              label="Branch"
-              placeholder="feature/...."
-              temIcone={false}
-              value={branch}
-              onChange={(e) => setBranch(e.target.value)}
-              erro={erroBranch}
-              disabled={carregando}
-            />
+
+            {opcoesBranches.length > 0 ? (
+              <Select
+                label="Branch"
+                placeholder="Selecione a branch"
+                opcoes={opcoesBranches}
+                value={branch}
+                erro={erroBranch}
+                onChange={handleBranchSelect}
+                disabled={carregando || inspecaoGitHub.status === "loading"}
+              />
+            ) : (
+              <Input
+                id="branch"
+                label="Branch"
+                placeholder="feature/...."
+                temIcone={false}
+                value={branch}
+                onChange={(e) => {
+                  setBranch(e.target.value);
+                  emitirMudanca({ branch: e.target.value });
+                }}
+                erro={erroBranch}
+                disabled={carregando}
+              />
+            )}
           </div>
 
           <div className={styles.containerInput}>
-            <Input
-              id="commit"
-              label="Commit"
-              placeholder="XXXXXXX"
-              temIcone={false}
-              value={commit}
-              onChange={(e) => setCommit(e.target.value)}
-              erro={erroCommit}
-              disabled={carregando}
-            />
+            {opcoesCommits.length > 0 ? (
+              <Select
+                label="Commit"
+                placeholder="Selecione o commit"
+                opcoes={opcoesCommits}
+                value={commit}
+                erro={erroCommit}
+                onChange={(novoCommit) => {
+                  setCommit(novoCommit);
+                  emitirMudanca({ commit: novoCommit });
+                }}
+                disabled={carregando || inspecaoGitHub.status === "loading"}
+              />
+            ) : (
+              <Input
+                id="commit"
+                label="Commit"
+                placeholder="SHA do commit (opcional)"
+                temIcone={false}
+                value={commit}
+                onChange={(e) => {
+                  setCommit(e.target.value);
+                  emitirMudanca({ commit: e.target.value });
+                }}
+                erro={erroCommit}
+                disabled={carregando}
+              />
+            )}
           </div>
         </div>
 
@@ -158,7 +333,10 @@ const PromptCenario = ({
           multiline
           rows={5}
           value={descricaoFluxo}
-          onChange={(e) => setDescricaoFluxo(e.target.value)}
+          onChange={(e) => {
+            setDescricaoFluxo(e.target.value);
+            emitirMudanca({ descricaoFluxo: e.target.value });
+          }}
           erro={erroDescricao}
           disabled={carregando}
         />
@@ -168,7 +346,7 @@ const PromptCenario = ({
         <div className={styles.botaoWrapper}>
           <Botao
             type="submit"
-            texto={carregando ? "Gerando..." : textoBotao}
+            texto={carregando ? "Gerando Roteiro..." : textoBotao}
             variante="laranja"
             disabled={carregando}
           />

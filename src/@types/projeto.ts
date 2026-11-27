@@ -1,22 +1,11 @@
-<<<<<<< HEAD
 import type { OpcaoSelect } from "@/components/select/select";
 
 export type { OpcaoSelect };
 
-/**
- * Status possíveis de um projeto exibido na tela de Gerenciamento de Projetos.
- */
 export type StatusProjeto = "Ativo" | "Inativo";
 
-/**
- * Opção de empresa aceita nos seletores de filtro e criação de projeto.
- */
 export type OpcaoEmpresaProjeto = string | OpcaoSelect;
 
-/**
- * Entidade de projeto exibida como linha na tabela de Gerenciamento de Projetos
- * (colunas: "Projeto", "Empresa", "N Ususario" e "Status").
- */
 export interface ProjetoItem {
   id: string;
   projeto: string;
@@ -25,14 +14,26 @@ export interface ProjetoItem {
   status: StatusProjeto;
 }
 
-/**
- * Alias de compatibilidade para a entidade Projeto.
- */
-export type Projeto = ProjetoItem;
+export interface Usuario {
+  id: string;
+  nome: string;
+  email: string;
+}
 
-/**
- * Chaves e configuração das colunas esperadas na variação de Projetos da Lista.
- */
+export interface Projeto {
+  id: number;
+  criadoEm: string;
+  nome: string;
+  empresaId?: number;
+  empresa?: string;
+  ativo?: boolean;
+  status?: StatusProjeto;
+  totalUsuarios?: number;
+  urlAlvo?: string;
+  urlSwagger?: string;
+  usuarios: Usuario[];
+}
+
 export type ColunaTabelaProjetoKey =
   | "projeto"
   | "empresa"
@@ -45,24 +46,14 @@ export interface ColunaTabelaProjeto {
   align?: "left" | "center";
 }
 
-/**
- * Valores dos filtros específicos da tela de Gerenciamento de Projetos
- * ("BUSCA RÁPIDA", "EMPRESA" e "STATUS", sem campo Cargo).
- */
 export interface DadosFiltroProjetos {
   buscaRapida: string;
   empresa: string;
   status: string;
 }
 
-/**
- * Alias de compatibilidade para o estado de filtros de Projetos.
- */
 export type FiltrosProjeto = DadosFiltroProjetos;
 
-/**
- * Payload enviado ao criar um novo projeto via modal.
- */
 export interface CriarProjetoPayload {
   projeto: string;
   empresa: string;
@@ -70,9 +61,6 @@ export interface CriarProjetoPayload {
   status?: StatusProjeto;
 }
 
-/**
- * Props do modal de criação de projeto.
- */
 export interface ModalCriarProjetoProps {
   isOpen: boolean;
   onClose: () => void;
@@ -80,19 +68,4 @@ export interface ModalCriarProjetoProps {
   empresas: OpcaoEmpresaProjeto[];
   isSubmitting?: boolean;
   errorMessage?: string | null;
-=======
-export interface Projeto {
-    id: number
-    criadoEm: string
-    nome: string
-    urlAlvo: string
-    urlSwagger?: string
-    usuarios: Usuario[]
-}
-
-export interface Usuario {
-    id: string
-    nome: string
-    email: string
->>>>>>> feature/consumoCriarUsuario
 }
