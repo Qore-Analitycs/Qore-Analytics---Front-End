@@ -47,3 +47,66 @@
     z-index: 30;
     transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+.topoMobile {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .topoMobile {
+        display: block;
+        width: 100%;
+    }
+
+    .sidebarContainer {
+        display: none;
+    }
+
+    .main {
+        flex-direction: column;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .ladoDireito {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .container {
+        width: 92%;
+        margin-top: 16px;
+        margin-bottom: 24px;
+    }
+
+    .superior {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .superiorTexto {
+        width: 100%;
+    }
+
+    .titulo {
+        font-size: 28px;
+        line-height: 1.2;
+        margin: 4px 0 8px;
+    }
+
+    .botoes {
+        width: 100%;
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+        justify-content: flex-start;
+    }
+
+    .containerBotao {
+        width: 100%;
+    }
+
+    :global(.cards) {
+        display: none;
+    }
+}

@@ -10,6 +10,11 @@ export default function HistoricoTeste() {
 
   return (
     <>
+
+      <div className={styles.topoMobile}>
+        {/* <SideBarResponse /> */}
+      </div>
+
       <main className={styles.main}>
         <div className={styles.sidebarContainer}>
           <SideBar
