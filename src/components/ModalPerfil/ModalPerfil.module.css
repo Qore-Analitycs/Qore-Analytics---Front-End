@@ -175,6 +175,12 @@
     background-color: #E7E9ED;
 }
 
+/* Cabeçalho da área principal */
+.cabecalho {
+    position: relative;
+    padding-right: 36px;
+}
+
 /* Botão X */
 .fechar {
     position: absolute;
@@ -193,6 +199,16 @@
     line-height: 1;
     cursor: pointer;
     transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.fechar:hover {
+    background-color: rgba(45, 49, 51, 0.08);
+    color: var(--laranja);
+}
+
+.fechar:focus-visible {
+    outline: 2px solid var(--laranja);
+    outline-offset: 2px;
 }
 
 /* Pequeno título laranja */

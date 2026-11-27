@@ -3,8 +3,13 @@ import Item, { ItemHistorico } from "../item/item";
 import styles from "./lista.module.css";
 import { Usuario } from "@/@types/usuario";
 import type { ColunaTabelaProjeto, ProjetoItem } from "@/@types/projeto";
+import type { ColunaTabelaEmpresa, EmpresaItem } from "@/@types/empresa";
 
-export type ListaVariante = "listaHistorico" | "usuarioPermissoes" | "projetos";
+export type ListaVariante =
+  | "listaHistorico"
+  | "usuarioPermissoes"
+  | "projetos"
+  | "empresas";
 
 export const COLUNAS_LISTA_PROJETOS: ColunaTabelaProjeto[] = [
   { key: "projeto", label: "Projeto", align: "left" },
@@ -13,14 +18,22 @@ export const COLUNAS_LISTA_PROJETOS: ColunaTabelaProjeto[] = [
   { key: "status", label: "Status", align: "center" },
 ];
 
+export const COLUNAS_LISTA_EMPRESAS: ColunaTabelaEmpresa[] = [
+  { key: "empresa", label: "Empresa", align: "left" },
+  { key: "nProjetos", label: "N Projeto", align: "center" },
+  { key: "status", label: "Status", align: "center" },
+];
+
 export type ListaHistoricoProps = {
   page: "listaHistorico";
   variant?: never;
   itensHistorico?: ItemHistorico[];
   projetos?: never;
+  empresas?: never;
   isLoading?: never;
   emptyMessage?: never;
   onProjetoClick?: never;
+  onEmpresaClick?: never;
 };
 
 export type ListaUsuariosProps = {
@@ -31,8 +44,10 @@ export type ListaUsuariosProps = {
   emptyMessage?: string;
   itensHistorico?: never;
   projetos?: never;
+  empresas?: never;
   isLoading?: never;
   onProjetoClick?: never;
+  onEmpresaClick?: never;
 };
 
 export type ListaProjetosProps = {
@@ -43,12 +58,37 @@ export type ListaProjetosProps = {
   emptyMessage?: string;
   onProjetoClick?: (projeto: ProjetoItem) => void;
   itensHistorico?: never;
+  empresas?: never;
+  onEmpresaClick?: never;
+};
+
+export type ListaEmpresasProps = {
+  page?: "empresas";
+  variant?: "empresas";
+  empresas: EmpresaItem[];
+  isLoading?: boolean;
+  emptyMessage?: string;
+  onEmpresaClick?: (empresa: EmpresaItem) => void;
+  itensHistorico?: never;
+  projetos?: never;
+  onProjetoClick?: never;
 };
 
 export type ListaProps =
   | ListaHistoricoProps
   | ListaUsuariosProps
-  | ListaProjetosProps;
+  | ListaProjetosProps
+  | ListaEmpresasProps;
+
+const ehListaProjetos = (props: ListaProps): props is ListaProjetosProps =>
+  props.page === "projetos" ||
+  props.variant === "projetos" ||
+  ("projetos" in props && props.projetos !== undefined);
+
+const ehListaEmpresas = (props: ListaProps): props is ListaEmpresasProps =>
+  props.page === "empresas" ||
+  props.variant === "empresas" ||
+  ("empresas" in props && props.empresas !== undefined);
 
 const ITENS_HISTORICO_PADRAO: ItemHistorico[] = [
   {
@@ -125,8 +165,62 @@ export default function Lista(props: ListaProps) {
       ? props.itensHistorico ?? ITENS_HISTORICO_PADRAO
       : ITENS_HISTORICO_PADRAO;
 
-  const ehProjetos =
-    props.page !== "listaHistorico" && props.page !== "usuarioPermissoes";
+  const renderizarTabelaCatalogo = ({
+    colunas,
+    isLoading,
+    loadingMessage,
+    emptyMessage,
+    isEmpty,
+    children,
+  }: {
+    colunas: readonly { key: string; label: string; align?: "left" | "center" }[];
+    isLoading?: boolean;
+    loadingMessage: string;
+    emptyMessage: string;
+    isEmpty: boolean;
+    children: React.ReactNode;
+  }) => (
+    <section className={styles.section}>
+      <div className={styles.tabelaWrapper}>
+        <table className={styles.tabelaLista}>
+          <thead>
+            <tr>
+              {colunas.map((coluna) => (
+                <th
+                  key={coluna.key}
+                  className={
+                    coluna.align === "left"
+                      ? styles.thAlinhadoEsquerda
+                      : undefined
+                  }
+                >
+                  {coluna.label}
+                </th>
+              ))}
+            </tr>
+          </thead>
+
+          <tbody>
+            {isLoading ? (
+              <tr className={styles.linhaEstado}>
+                <td colSpan={colunas.length} className={styles.celulaEstado}>
+                  {loadingMessage}
+                </td>
+              </tr>
+            ) : isEmpty ? (
+              <tr className={styles.linhaEstado}>
+                <td colSpan={colunas.length} className={styles.celulaEstado}>
+                  {emptyMessage}
+                </td>
+              </tr>
+            ) : (
+              children
+            )}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
 
   return (
     <>
@@ -201,62 +295,43 @@ export default function Lista(props: ListaProps) {
         </section>
       )}
 
-      {ehProjetos && (
-        <section className={styles.section}>
-          <div className={styles.tabelaWrapper}>
-            <table className={styles.tabelaLista}>
-              <thead>
-                <tr>
-                  {COLUNAS_LISTA_PROJETOS.map((coluna) => (
-                    <th
-                      key={coluna.key}
-                      className={
-                        coluna.align === "left"
-                          ? styles.thAlinhadoEsquerda
-                          : undefined
-                      }
-                    >
-                      {coluna.label}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
+      {ehListaProjetos(props) &&
+        renderizarTabelaCatalogo({
+          colunas: COLUNAS_LISTA_PROJETOS,
+          isLoading: props.isLoading,
+          loadingMessage: "Carregando projetos...",
+          emptyMessage:
+            props.emptyMessage ??
+            "Nenhum projeto encontrado para os filtros selecionados.",
+          isEmpty: props.projetos.length === 0,
+          children: props.projetos.map((projeto) => (
+            <Item
+              key={projeto.id}
+              page="projetos"
+              itemProjeto={projeto}
+              onClick={props.onProjetoClick}
+            />
+          )),
+        })}
 
-              <tbody>
-                {props.isLoading ? (
-                  <tr className={styles.linhaEstado}>
-                    <td
-                      colSpan={COLUNAS_LISTA_PROJETOS.length}
-                      className={styles.celulaEstado}
-                    >
-                      Carregando projetos...
-                    </td>
-                  </tr>
-                ) : props.projetos.length === 0 ? (
-                  <tr className={styles.linhaEstado}>
-                    <td
-                      colSpan={COLUNAS_LISTA_PROJETOS.length}
-                      className={styles.celulaEstado}
-                    >
-                      {props.emptyMessage ??
-                        "Nenhum projeto encontrado para os filtros selecionados."}
-                    </td>
-                  </tr>
-                ) : (
-                  props.projetos.map((projeto) => (
-                    <Item
-                      key={projeto.id}
-                      page="projetos"
-                      itemProjeto={projeto}
-                      onClick={props.onProjetoClick}
-                    />
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      )}
+      {ehListaEmpresas(props) &&
+        renderizarTabelaCatalogo({
+          colunas: COLUNAS_LISTA_EMPRESAS,
+          isLoading: props.isLoading,
+          loadingMessage: "Carregando empresas...",
+          emptyMessage:
+            props.emptyMessage ??
+            "Nenhuma empresa encontrada para os filtros selecionados.",
+          isEmpty: props.empresas.length === 0,
+          children: props.empresas.map((empresa) => (
+            <Item
+              key={empresa.id}
+              page="empresas"
+              itemEmpresa={empresa}
+              onClick={props.onEmpresaClick}
+            />
+          )),
+        })}
     </>
   );
 }

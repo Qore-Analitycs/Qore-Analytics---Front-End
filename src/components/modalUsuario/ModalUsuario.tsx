@@ -105,6 +105,7 @@ export default function ModalUsuario({
             type="button"
             className={styles.fechar}
             onClick={onFechar}
+            disabled={enviando}
             aria-label="Fechar modal"
           >
             ×

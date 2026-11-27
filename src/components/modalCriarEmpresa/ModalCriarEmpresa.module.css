@@ -1,0 +1,109 @@
+.fundo {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 17, 19, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 1200;
+}
+
+.modal {
+  position: relative;
+  width: min(680px, 100%);
+  background-color: var(--cor-fundo);
+  color: var(--cinza-escuro);
+  border: 2px solid var(--laranja);
+  border-radius: 15px;
+  padding: 36px;
+  box-sizing: border-box;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+}
+
+/* Botão de fechar */
+.fechar {
+  position: absolute;
+  top: -6px;
+  right: -4px;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--cinza-escuro);
+  font-size: var(--fonte-metrica);
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.fechar:hover {
+  background-color: rgba(45, 49, 51, 0.08);
+  color: var(--laranja);
+}
+
+.fechar:focus-visible {
+  outline: 2px solid var(--laranja);
+  outline-offset: 2px;
+}
+
+.cabecalho {
+  position: relative;
+  padding-right: 36px;
+  margin-bottom: 24px;
+}
+
+.titulo {
+  margin: 0;
+  font-size: var(--fonte-subtitulo);
+  line-height: var(--lh-titulo);
+  font-weight: var(--peso-bold);
+  color: var(--cinza-escuro);
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.grupoCampo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.erroServidor {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background-color: rgba(255, 0, 0, 0.08);
+  border: 1px solid rgba(255, 0, 0, 0.28);
+  color: #b91c1c;
+  font-size: var(--fonte-pequena);
+  line-height: var(--lh-compacto);
+  font-weight: var(--peso-500);
+}
+
+.acoes {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+@media (max-width: 640px) {
+  .modal {
+    padding: 24px 20px;
+  }
+
+  .acoes {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+}

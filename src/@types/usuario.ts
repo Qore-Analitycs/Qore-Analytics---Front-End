@@ -19,9 +19,6 @@ export type Usuario = {
   imagem: string;
 };
 
-/**
- * Filtros aceitos pelo endpoint GET /api/usuarios.
- */
 export type FiltrosUsuario = {
   nome?: string;
   cargo?: number;
@@ -29,18 +26,16 @@ export type FiltrosUsuario = {
   empresa?: number;
 };
 
-/**
- * Estrutura de resposta retornada por GET /api/usuarios.
- */
 export type RespostaListaUsuarios = {
   itens: Usuario[];
 };
+
 export type CriarUsuario = {
-    nome: string;
-    email: string;
-    empresa?: string;
-    senha: string;
-    perfilId: number;
+  nome: string;
+  email: string;
+  empresa?: string;
+  senha: string;
+  perfilId: number;
 };
 
 export type AtualizarUsuario = {

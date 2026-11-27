@@ -98,8 +98,9 @@
     text-align: center;
 }
 
-/* 2.1 Colunas Gerenciamento de Projetos */
-.celulaProjeto {
+/* 2.1 Colunas Gerenciamento de Projetos e Empresas */
+.celulaProjeto,
+.celulaEmpresaNome {
     font-family: "Montserrat", sans-serif;
     font-size: var(--fonte-corpo);
     font-weight: var(--peso-semibold, 600);
@@ -117,7 +118,8 @@
     text-align: left !important;
 }
 
-.celulaNUsuarios {
+.celulaNUsuarios,
+.celulaNProjetos {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: var(--fonte-corpo);
     font-weight: var(--peso-semibold, 600);
