@@ -201,11 +201,6 @@ a {
   background: color-mix(in srgb, var(--destructive) 100%, transparent 0%) !important;
 }
 
-body[data-modal-aberto="true"] .app-wrapper {
-  filter: blur(5px);
-  transition: filter 0.2s ease;
-}
-
 :root {
   --toastify-z-index: 99999;
 }
@@ -216,6 +211,11 @@ body[data-modal-aberto="true"] .app-wrapper {
 .Toastify__toast-container--success,
 .Toastify__toast-container--error {
   z-index: 99999 !important;
+}
+
+.Toastify__toast-container {
+  position: fixed !important;
+  z-index: 999999 !important;
 }
 
 /* Toast */
@@ -229,9 +229,4 @@ body[data-modal-aberto="true"] .app-wrapper {
 
 .main {
   transition: filter 0.25s ease-in-out;
-}
-
-body[data-modal-aberto="true"] #__next {
-  filter: blur(5px);
-  transition: filter 0.2s ease;
 }

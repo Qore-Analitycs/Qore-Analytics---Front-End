@@ -10,12 +10,13 @@ export type Usuario = {
   email: string;
   ativo: boolean;
   cargo: Cargo | null;
+  projeto: number;
   imagem: string;
 };
 export type CriarUsuario = {
     nome: string;
     email: string;
-    empresa?: number;
+    projeto?: number;
     senha: string;
     perfilId: number;
 };

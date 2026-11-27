@@ -4,6 +4,7 @@ import { Usuario } from "@/@types/usuario";
 import Item from "../item/item";
 import { ProjetoService } from "@/services/projetoService";
 import { useProjeto } from "@/hooks/useProjeto";
+import { useEffect } from "react";
 
 type ListaProps = {
   page?: string;
@@ -56,10 +57,11 @@ export default function Lista({ page }: ListaProps) {
                   <th>Status</th>
                 </tr>
               </thead>
-              {projetos.map((projeto) => (
-                <Item key={projeto.id} page="projetos" projeto={projeto} />
-              ))}
-              <tbody></tbody>
+              <tbody>
+                {projetos.map((projeto) => (
+                  <Item key={projeto.id} page="projetos" projeto={projeto} />
+                ))}
+              </tbody>
             </table>
           </div>
         </section>
@@ -72,7 +74,7 @@ export default function Lista({ page }: ListaProps) {
                 <tr>
                   <th className={styles.thAlinhadoEsquerda}>Usuário</th>
                   <th className={styles.thAlinhadoEsquerda}>Cargo</th>
-                  <th>Empresa</th>
+                  <th>Projeto</th>
                   <th>Status</th>
                 </tr>
               </thead>

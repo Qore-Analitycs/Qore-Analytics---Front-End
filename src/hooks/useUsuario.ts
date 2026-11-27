@@ -3,7 +3,7 @@ import { UsuarioService } from "@/services/usuarioService";
 import { toastErro, toastSucesso } from "@/utils/toast";
 import { useEffect, useState } from "react";
 
-export function useUsuario() {
+export function useUsuario(autoFetch = false) {
     const [u, setU] = useState<Usuario[]>([]);
     const [me, setMe] = useState<Usuario | null>(null);
 
@@ -37,7 +37,7 @@ export function useUsuario() {
 
             setU((antigos) => [novoU, ...antigos]);
             toastSucesso("Usuário cadastrado com sucesso");
-            
+
             return novoU;
         } catch (error) {
             toastErro("Erro ao cadastrar usuário");
@@ -61,8 +61,8 @@ export function useUsuario() {
                 typeof error.response?.data === "string"
                     ? error.response.data
                     : error.response?.data?.message ||
-                      error.response?.data?.title ||
-                      "Erro ao atualizar perfil";
+                    error.response?.data?.title ||
+                    "Erro ao atualizar perfil";
 
             toastErro(mensagemApi);
 
@@ -71,8 +71,13 @@ export function useUsuario() {
     }
 
     useEffect(() => {
+        if (autoFetch) {
+            getMe();
+        }
+    }, [autoFetch]);
+
+       useEffect(() => {
         listarU();
-        getMe();
     }, []);
 
     return {

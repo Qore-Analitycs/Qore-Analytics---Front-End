@@ -50,7 +50,6 @@ export default function ModalPerfil({ aberto, onFechar }: ModalPerfilProps) {
       setPathFoto(dados.pathFoto || dados.PathFoto || null);
     } catch (error) {
       console.error(error);
-      toast.error("Erro ao carregar os dados do perfil.");
     } finally {
       setCarregando(false);
     }

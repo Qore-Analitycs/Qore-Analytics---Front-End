@@ -3,7 +3,7 @@ import styles from "./ModalUsuario.module.css";
 import Botao from "../botao/botao";
 import Input from "../input/input";
 import {
-  faBuilding,
+  faDiagramProject,
   faEnvelope,
   faLock,
   faUser,
@@ -13,7 +13,7 @@ import { useUsuario } from "@/hooks/useUsuario";
 import { toastErro, toastSucesso } from "@/utils/toast";
 import { CriarUsuario } from "@/@types/usuario";
 import Select from "../select/select";
-import { useEmpresa } from "@/hooks/useEmpresa";
+import { useProjeto } from "@/hooks/useProjeto";
 
 interface ModalUsuarioProps {
   aberto: boolean;
@@ -22,14 +22,14 @@ interface ModalUsuarioProps {
 
 export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
   const { cadastrarU } = useUsuario();
-  const { empresa } = useEmpresa();
+  const { projetos } = useProjeto();
 
   const [nomeUsuario, setNomeUsuario] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
   const [cargoSelecionado, setCargoSelecionado] = useState<number>();
   const [enviando, setEnviando] = useState<boolean>(false);
-  const [empresaSelecionado, setEmpresaSelecionado] = useState<number>();
+  const [projetoSelecionado, setProjetoSelecionado] = useState<number>();
 
   if (!aberto) {
     return null;
@@ -42,7 +42,7 @@ export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
     if (
       !nomeUsuario.trim() ||
       !email.trim() ||
-      empresaSelecionado === undefined ||
+      projetoSelecionado === undefined ||
       !senha.trim() ||
       !cargoSelecionado
     ) {
@@ -53,22 +53,26 @@ export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
     const novoU: CriarUsuario = {
       nome: nomeUsuario.trim(),
       email: email.trim(),
-      empresa: empresaSelecionado,
+      projeto: projetoSelecionado,
       senha,
       perfilId: cargoSelecionado,
     };
 
     setEnviando(true);
-    const sucesso = await cadastrarU(novoU);
-    setEnviando(false);
+    try {
+      const sucesso = await cadastrarU(novoU);
 
-    if (sucesso) {
-      toastSucesso("Cadastro de Usuário realizado com sucesso");
-      setNomeUsuario("");
-      setEmail("");
-      setEmpresaSelecionado(undefined);
-      setCargoSelecionado(undefined);
-      setSenha("");
+      if (sucesso) {
+        toastSucesso("Cadastro de Usuário realizado com sucesso");
+        setNomeUsuario("");
+        setEmail("");
+        setProjetoSelecionado(undefined);
+        setCargoSelecionado(undefined);
+        setSenha("");
+        onFechar();
+      }
+    } finally {
+      setEnviando(false);
     }
   }
 
@@ -88,7 +92,6 @@ export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
         aria-labelledby="titulo-modal"
       >
         <header className={styles.cabecalho}>
-
           <button
             type="button"
             className={styles.fechar}
@@ -99,7 +102,6 @@ export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
           </button>
 
           <h2 id="titulo-modal">Crie uma conta corporativa</h2>
-
         </header>
 
         <form className={styles.formulario} onSubmit={handleSalvar}>
@@ -125,21 +127,21 @@ export default function ModalUsuario({ aberto, onFechar }: ModalUsuarioProps) {
 
           <div className={styles.campoEmpresa}>
             <Select
-              id="empresa-usuario"
-              label="Empresa"
-              placeholder="Selecione uma empresa"
-              icone={faBuilding}
-              opcoes={empresa.map((item) => ({
+              id="projeto-usuario"
+              label="Projeto"
+              placeholder="Selecione um projeto"
+              icone={faDiagramProject}
+              opcoes={projetos.map((item) => ({
                 valor: String(item.id),
-                texto: item.value,
+                texto: item.nome,
               }))}
               value={
-                empresaSelecionado !== undefined
-                  ? String(empresaSelecionado)
+                projetoSelecionado !== undefined
+                  ? String(projetoSelecionado)
                   : ""
               }
               onChange={(valor) => {
-                setEmpresaSelecionado(valor !== "" ? Number(valor) : undefined);
+                setProjetoSelecionado(valor !== "" ? Number(valor) : undefined);
               }}
               disabled={enviando}
             />

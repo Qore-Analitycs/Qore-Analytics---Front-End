@@ -8,7 +8,7 @@ import { ToastContainer } from "react-toastify";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <ToastContainer position="top-right" />
+      <ToastContainer position="top-right" style={{ zIndex: 99999 }} />
       <div className="app-wrapper">
         <Component {...pageProps} />
       </div>

@@ -5,6 +5,7 @@ import Botao from "@/components/botao/botao";
 import FiltroPesquisa from "@/components/filtroPesquisa/filtroPesquisa";
 import styles from "./projetos.module.css";
 import Lista from "@/components/lista/lista";
+import ModalCriarProjetoConteudo from "@/components/modalCriarProjeto/ModalCriarProjeto";
 
 export default function GerenciamentoProjetos() {
   const [modalAberto, setModalAberto] = useState(false);
@@ -32,23 +33,16 @@ export default function GerenciamentoProjetos() {
             </div>
           </header>
 
-          <FiltroPesquisa
-            variant="projetos"
-            tamanho="compacto"
-          />
+          <FiltroPesquisa variant="projetos" tamanho="compacto" />
 
-          <Lista
-            page="projetos"
-          />
+          <Lista page="projetos" />
         </AppLayout>
       </main>
 
-      {/* <ModalCriarProjeto
-        isOpen={modalAberto}
-        onClose={() => setModalAberto(false)}
-        onCreate={handleCriarProjeto}
-        empresas={empresasDisponiveis}
-      /> */}
+      <ModalCriarProjetoConteudo
+        aberto={modalAberto}
+        onFechar={() => setModalAberto(false)}
+      />
     </>
   );
 }

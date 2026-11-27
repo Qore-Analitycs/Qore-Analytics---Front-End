@@ -1,6 +1,6 @@
-import { Projeto } from "@/@types/projeto";
+import { CriarProjeto, Projeto } from "@/@types/projeto";
 import { ProjetoService } from "@/services/projetoService";
-import { toastErro } from "@/utils/toast";
+import { toastErro, toastSucesso } from "@/utils/toast";
 import { useEffect, useState } from "react";
 
 export function useProjeto() {
@@ -20,6 +20,20 @@ export function useProjeto() {
         }
     }
 
+    async function cadastrarProjeto(dados: CriarProjeto) {
+        try {
+            const novoProjeto = await ProjetoService.cadastrar(dados);
+
+            setProjetos((antigos) => [novoProjeto, ...antigos]);
+
+            return novoProjeto;
+        } catch(error) {
+            toastErro("Erro ao cadastrar projeto");
+            console.log(error);
+            return;
+        }
+    }
+
     useEffect(() => {
         listarProjetos();
     }, []);
@@ -27,5 +41,6 @@ export function useProjeto() {
     return {
         projetos,
         carregandoProjetos,
+        cadastrarProjeto
     };
 }

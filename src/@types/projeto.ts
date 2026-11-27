@@ -4,7 +4,7 @@ export interface IProjeto {
   id: number
   criadoEm: string
   nome: string
-  empresaId: number
+  projetoId: number
   empresa: string
   ativo: boolean
   status: string
@@ -20,4 +20,9 @@ export interface Usuario {
   empresaId: number
   empresa: string
   ativo: boolean
+}
+
+export interface CriarProjeto {
+  nome: string;
+  empresa?: number;
 }

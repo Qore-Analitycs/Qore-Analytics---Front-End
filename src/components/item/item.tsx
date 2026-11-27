@@ -57,7 +57,7 @@ const Item = ({ page, usuario, projeto}: ItemProps) => {
             </div>
           </td>
           <td className={styles.celulaCargo}>{formatarCargo(usuario.cargo)}</td>
-          <td className={styles.celulaEmpresa}>Empresa Matriz</td>
+          <td className={styles.celulaEmpresa}>{usuario.projeto}</td>
           <td>
             <span
               className={`${styles.badgeStatus} ${
