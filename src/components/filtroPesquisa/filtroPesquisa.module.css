@@ -28,9 +28,35 @@
     min-width: 140px;
 }
 
+.campoBusca {
+    flex: 1.2;
+    min-width: 160px;
+}
+
 /* Responsividade: em telas menores (tablets/notebooks pequenos), quebra linha sem esmagar os campos */
 @media (max-width: 1100px) {
     .container {
         flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 14px 16px;
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0;
+        color: black;
+    }
+
+    .campo,
+    .areaBotao {
+        display: none;
+    }
+
+    .campoBusca {
+        flex: none;
+        width: 100%;
+        min-width: 0;
     }
 }

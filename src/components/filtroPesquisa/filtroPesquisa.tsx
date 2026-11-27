@@ -108,6 +108,16 @@ const FiltroPesquisa = ({
                     />
                 </div>
 
+                <div className={styles.campoBusca}>
+    <Input
+        label="BUSCA RÁPIDA"
+        placeholder="Buscar..."
+        icone={faMagnifyingGlass}
+        value={busca}
+        onChange={(e) => setBusca(e.target.value)}
+    />
+</div>
+
                 {ehVarianteUsuarios ? (
                     <>
                         {/* Variante 2 (Imagem Nova): CARGO + STATUS + EMPRESA */}
