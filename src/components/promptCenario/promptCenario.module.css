@@ -49,6 +49,18 @@
     width: 100%;
 }
 
+.statusGitHub {
+    margin: 6px 0 0;
+    font-size: 12px;
+    color: #93c5fd;
+}
+
+.statusGitHubSucesso {
+    margin: 6px 0 0;
+    font-size: 12px;
+    color: #86efac;
+}
+
 .rodapeBotao {
     display: flex;
     justify-content: flex-end;
